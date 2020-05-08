@@ -1,9 +1,13 @@
-import React from 'react'
+import React from 'react';
+import {GlobalProvider} from '../../Context/GlobalState.js';
+import Feed from '../Components/Feed.js';
 
-export default function Timeline() {
+export default function Timeline( ) {
+
     return (
-        <div>
-            
-        </div>
+        <GlobalProvider>
+            <Feed></Feed>
+        </GlobalProvider>
+        
     )
 }

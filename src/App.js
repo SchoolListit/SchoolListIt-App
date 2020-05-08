@@ -4,26 +4,35 @@ import './App.css';
 import Timeline from './Components/Pages/Timeline.js';
 import About from './Components/Pages/About.js';
 import Classroom from './Components/Pages/Classroom.js';
-import Page_404 from './Components/Pages/Page-404.js';
+import School from './Components/Pages/School.js';
+import PageFourOFour from './Components/Pages/PageFourOFour.js';
+import Header from './Components/Components/Header.js';
+import { GlobalProvider } from './Context/GlobalState.js';
+
 
 
 const routes = {
   '/': () => <Timeline />,
   '/about': () => <About />,
-  '/products': () => <Classroom />,
+  '/:school': ({school}) => () => <School school={school}/>,
+  '/classrooms/:slug': ({slug}) => () => <Classroom slug={slug}/>,
 };
   
 const MyApp = () => {
   const routeResult = useRoutes(routes);
-  
-  return routeResult || <Page_404 />;
+  return routeResult || <PageFourOFour />;
 }
 
 function App() {
   return (
-    <React.Fragment>
-      <MyApp />
-    </React.Fragment>
+      <React.Fragment>
+          <GlobalProvider>
+            <Header>
+              </Header>
+          </GlobalProvider>
+          <MyApp />
+      </React.Fragment>
+      
   );
 }
 

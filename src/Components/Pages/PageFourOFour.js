@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Page_404() {
+export default function PageFourOFour() {
     return (
         <div>
-            
+            404 page
         </div>
     )
 }

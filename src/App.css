@@ -1,1 +1,312 @@
+/*
+https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@400;600;700&display=swap
+*/
+@import url(https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+/*
+DareToLearn Colors:
+light headline color: #00998F
+dark green: #003745
+body: #666
 
+*/
+* {
+  font-size: 16px;
+  font-family: 'Quicksand', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.dark-green{
+  color: #003745;
+}
+
+/*
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h2 {
+  font-weight: bold;
+  color: #003745;
+  line-height: 1.5rem;
+}
+
+h3 {
+  line-height: 1.5rem;
+  color: #00998F;
+  font-weight: bold;
+}
+*/
+
+@media (min-width: 480px) {                             
+
+  .MuiContainer-root {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+}
+
+.MuiCard-root{
+  flex-basis: 30%
+}
+
+
+.content-page {
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.content-page .grid-2 {
+  flex-basis: 70%;
+}
+.content-page .grid-1 {
+  flex-basis: 30%;
+  align-self: flex-start;
+}
+
+.content-page p {
+  margin: 10px 0;
+}
+
+.content-page h2 {
+  margin: 10px 0;
+  color: #00998F;
+  font-size: 1.3rem;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #003745;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/*=======================*/
+
+/* header */
+
+header div {
+  font-size: 2em;
+  align-self: center;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f9f9f9;
+  padding: 0 30px;
+}
+
+header button, header a, header span > img {
+  font-size: 2rem;
+  border: none;
+  padding: none;
+  background: transparent;
+}
+
+header div > img {
+  max-height: 50px;
+}
+
+header .primary-menu-icons > * {
+  margin: 0 10px;
+}
+
+
+
+
+
+
+
+
+/* masonry layout */
+.my-masonry-grid {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  margin-left: -30px; /* gutter size offset */
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 30px; /* gutter size */
+  background-clip: padding-box;
+}
+
+.my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
+  margin-bottom: 30px;
+}
+
+.flex-container-space-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+.checklist-container {
+  margin: 0 auto;
+  border: 1px solid #e5e5e5;
+  min-height: 150px;
+}
+
+.entry-header {
+  background-color:#bdbdbd
+  ;
+  text-transform: capitalize;
+  padding: 10px;
+}
+
+.entry-content {
+  padding: 10px;
+}
+
+.checklist-container h2{
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.checklist {
+  padding: 20px;
+}
+
+.checklist > .todo-item {
+  border-bottom: 1px dashed #404040;
+}
+
+.checklist > .todo-item:last-child {
+  border-bottom: none;
+}
+
+.checklist > .todo-item {
+  padding: 20px 0
+}
+
+
+
+/* 
+=================
+for the form 
+=================*/
+/*
+form {
+  margin: 20px auto;
+  display: block;
+}
+
+input {
+  line-height: 2em;
+  margin: 0 auto;
+  width: 90%;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+box-sizing: border-box;
+font-family: inherit;
+overflow: visible;
+display: block;
+width: 100%;
+padding: .375rem .75rem;
+font-size: 1rem;
+line-height: 1.5;
+color: #495057;
+background-color: #fff;
+background-clip: padding-box;
+border: 1px solid #ced4da;
+border-radius: .25rem;
+transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+input[type="checkbox"] {
+  display: inline;
+  width: 20px;
+}
+
+input[type="file"]{
+box-sizing: border-box;
+overflow: visible;
+display: block;
+width: 100%;
+}
+
+.btn {
+--breakpoint-xs: 0;
+--breakpoint-sm: 576px;
+--breakpoint-md: 768px;
+--breakpoint-lg: 992px;
+--breakpoint-xl: 1200px;
+--font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+--font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+box-sizing: border-box;
+margin: 0;
+font-family: inherit;
+overflow: visible;
+text-transform: capitalize;
+display: inline-block;
+font-weight: 400;
+text-align: center;
+white-space: nowrap;
+vertical-align: middle;
+user-select: none;
+border: 1px solid transparent;
+padding: .375rem .75rem;
+font-size: 1rem;
+line-height: 1.5;
+border-radius: .25rem;
+transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+color: #fff;
+background-color: #003744;
+border-color: #003744;
+-webkit-appearance: button;
+cursor: pointer;
+}
+
+label {
+  line-height: 1em;
+  font-weight: bold;
+  font-size: 1.2 em;
+  margin-bottom: 5px;
+  margin-top: 20px;
+}
+*/
+/* profile wizard */
+
+
+/* ends form styling */
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+blockquote p {
+  display: inline;
+}
+
+@media screen and (min-width: 767px) {
+
+}
