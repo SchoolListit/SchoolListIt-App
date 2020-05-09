@@ -8,7 +8,7 @@ Meet people in their comfort zone instead of force feeding complex enterprise te
 
 ## Public Education Should Be Open Source
 
-Teachers in Iowa, North Carolina, and Mumbai are all creating lessons for thier students essentially teaching the same material. An open source to all those lessons and a central repository could boost learning for children worldwide.
+Teachers in Iowa, North Carolina, and Mumbai are all creating lessons for thier students essentially teaching the same material. A central repository and an open source toolset for all those lessons could boost learning for children worldwide.
 
 __What if our teachers could focus on the Students rather than content creation?__**
 
