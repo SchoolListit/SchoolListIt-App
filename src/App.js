@@ -1,7 +1,5 @@
-import React from 'react';
-import './App.css';
+import React, { useContext } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { GlobalProvider } from './Context/GlobalState.js';
 import Header from './Components/Components/Header.js';
 import Timeline from './Components/Pages/Timeline.js';
 import About from './Components/Pages/About.js';
@@ -9,9 +7,21 @@ import Classroom from './Components/Pages/Classroom.js';
 import School from './Components/Pages/School.js';
 import PageFourOFour from './Components/Pages/PageFourOFour.js';
 
+import './App.css';
+import { ContextController } from "./Context/Context.js";
+
 const App = () => {
+
+  const sections = [
+    {
+      teachers: 'Wayne Hooper',
+      Grades: '4th',
+      Subject: 'Math',
+    }
+  ]
+
   return (
-    <GlobalProvider>
+    <ContextController>
       <Router>
           <Header></Header>
           <div style={{display: 'flex', flexWrap: 'wrap'}}>
@@ -21,7 +31,7 @@ const App = () => {
             </Switch>
           </div>
       </Router>
-    </GlobalProvider>
+    </ContextController>
   )
 };
 
