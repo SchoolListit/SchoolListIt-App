@@ -1,16 +1,16 @@
 *This project is in active development (not production ready)*
 
-#SchlistIt
+# SchlistIt
 
-##Optimizing the Remote Learning Experience
+## Optimizing the Remote Learning Experience
 
 Meet people in their comfort zone instead of force feeding complex enterprise technology and methodology that is expensive and will soon be obsolete.  Developed by a frustrated parent getting information on her different children in different classes from numerous teachers is overwhelming.  The outcome is an application that lives on your computer, phone or other device and only reaches out to the internet for information as needed.  Teachers can easy upload weekly lesson checklists in almost any format to share with parents and students.  If desired, teachers can make their schedules, checklists, lesson plans, and other educational collateral shareable, which can rapidly create an online opensource educational resource repository opening the door to new ideas and innovations from educators all over the World.
 
-##Public Education Should Be Open Source
+## Public Education Should Be Open Source
 
 Teachers in Iowa, North Carolina, and Mumbai are all creating lessons for thier students essentially teaching the same material. An open source to all those lessons and a central repository could boost learning for children worldwide.
 
-*What if our teachers could focus on the Students rather than content creation?*
+__What if our teachers could focus on the Students rather than content creation?__**
 
 1) Avoid Reinventing the Wheel - Use of powerful pre-existing platforms
 2) Communication Consolidation - Log in using your platform of choice: Facebook, Google, Pinterest
