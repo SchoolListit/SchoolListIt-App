@@ -1,4 +1,4 @@
-import React, { useContext, useState }  from 'react';
+import React, { useContext, useState, useEffect }  from 'react';
 import {Context} from '../../Context/Context.js';
 import { FormControl, Dialog, DialogTitle, Button, TextField, Select, FormHelperText, MenuItem, DialogActions } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,7 +13,7 @@ const useStyles = makeStyles(() => ({
 }));//make styles
 
 export default function SetUpForm () {
-    //contect
+    //context
     const classes = useStyles();
     const [state, setState] = useContext(Context);
     const { profileUserType, profileStudents } = state; 
@@ -23,18 +23,22 @@ export default function SetUpForm () {
     const [localStudents, setLocalStudents] = useState([]);
 
 
-
+    useEffect ( () => {
+      localStudents.map( student => {
+        profileStudents.push(student)
+      })
+      setState({
+        profileStudents: profileStudents
+      })
+    }, []);
 
     const onSelectUserType = (event) => {
+        let usertype = event.target.value
         setState({
-          profileUserType: event.target.value
+          profileUserType: usertype
         })
         localStorage.setItem('scholistit_userType', event.target.value)
       }; 
-     
-     const openDialog = () => {
-        setDialogOpen(true);        
-     } 
 
      const grades = [
        'Pre-K', 'K', '1st', '2nd', '3rd', '4th', 
@@ -42,30 +46,39 @@ export default function SetUpForm () {
        '10th', '11th', '12th', 'Undergraduate', 'Graduate'
      ]
 
-     const onEntered = () => {
-       console.log(localStudents)
+    const openDialog = () => {
+        setDialogOpen(true);        
+      } 
+
+    const closeDialog = () => {
+          setDialogOpen(false);        
+      }
+
+     const onClose = () => {
+        profileStudents.push(localStudents)
+        setState({
+          profileStudents: profileStudents
+        })
+        console.log(profileStudents)
      }
 
-     const onEntering = () => {
-      console.log(profileStudents)
-     }
-
-     const saveStudent = () => {
+    const saveStudent = () => {
       //save student
       let student = {
         name: document.getElementById('add-student').value,
         grade: document.getElementById('grade').value
       }
-      console.log(localStudents);
-      ////in state, in context, and local storage
-     /* setState({
-        profileStudents: state.profileStudents.push(student)
-      })*/
+      localStudents.push(student)
+      //clear form
+      document.getElementById('add-student').value = ''
+      document.getElementById('grade').value = ''
+      closeDialog();
       //localStorage.setItem('scholistit-profileStudents', JSON.stringify(profileStudents))
-   }
+    }
     
     return (
         <React.Fragment>
+          {console.log(profileStudents)}
           <FormControl margin="normal" fullWidth={true}>
             <Select
               labelId="userType"
@@ -82,7 +95,7 @@ export default function SetUpForm () {
           <Button color="primary"  onClick={openDialog}>
               <FontAwesomeIcon icon="plus-square" > 
           </FontAwesomeIcon> Add Student </Button>
-          <Dialog open={dialogOpen} keepMounted={true} onEntered={onEntered} PaperProps={{className: classes.dialogPaper, grades: grades}}>
+          <Dialog open={dialogOpen} onClose={closeDialog} keepMounted={true} PaperProps={{className: classes.dialogPaper, grades: grades}}>
             <DialogTitle>Add Student</DialogTitle>
             <TextField 
                 fullWidth={true}
@@ -109,7 +122,6 @@ export default function SetUpForm () {
               </Button>
             </DialogActions>
           </Dialog>
-            
         </React.Fragment>
     )
 }

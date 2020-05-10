@@ -31,7 +31,7 @@ const useStyles = makeStyles(() => ({
 export default function LandingPage() {
     const classes = useStyles();
     const [state, setState] = useContext(Context);
-    const { profileVerified } = state;
+    const { profileVerified, profileStudents } = state;
 
     return (
         <Container 
