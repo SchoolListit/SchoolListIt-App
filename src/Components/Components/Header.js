@@ -1,22 +1,35 @@
 import React, {useContext} from 'react';
+import { Context } from '../../Context/Context.js';
+import { AppBar, Avatar } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas } from '@fortawesome/free-solid-svg-icons';
-import { GlobalContext } from '../../Context/GlobalState.js';
-import { AppBar, Avatar, IconButton } from '@material-ui/core';
 
-library.add(faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas);
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+        backgroundColor: '#e0e0e0',
+        display: 'flex',
+        justifyContent: 'space-between',
+        padding: '5px 30px',
+    },
+    
+  }));
 
 export default function Header() {
-    const { profileUserName, profileUserPhoto} = useContext(GlobalContext);
+    const [state] = useContext(Context);
+    const { profileIsSaved, profileUserName, profileUserPhoto } = state;
+    const classes = useStyles();
 
+
+    if(profileIsSaved === 'undefined' || !profileIsSaved){
+        return null
+    }
     return (
-        <AppBar position="static">
+        <AppBar className={classes.root} position="static">
             <header id="masthead">
             <div style={{display: 'flex'}}>
             <img alt="dare county schools" src="https://resources.finalsite.net/images/f_auto,q_auto/v1521048827/darek12ncus/fqfcusy7dngivvz8yn6m/DCS_Icon_Full_Color_RGB.png" />
-            <h2 style={{alignSelf: 'center', color: '#003745'}}>Homeschool Checklists</h2>
+            <h2 style={{alignSelf: 'center', color: '#003745'}}>SchoListIt</h2>
             </div>
             <div className="primary-menu-icons" style={{flexBasis: '45%', display: 'flex', justifyContent: 'flex-end'}}>
                 <button >

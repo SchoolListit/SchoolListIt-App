@@ -9,26 +9,41 @@ export function ContextController({children}){
     // Initial state
     let initialState = {
         profileIsSaved: false,
+        loginVerified: false,
         profileUserType: '',
         profileUserEmail: '',
         profileUserPhoto: '',
         profileUserName: '',
         profileStudents: [],
-        showLessonForm: false,
         teachers: [],
         schools: [],
         grades: [],
         subjects: [],
         assignments: [],
         sections: [],
-        uniqueClassrooms: [],
-        lessonPlans: [],
      }
+
+     if (localStorage.getItem('schlistit_userName')) {
+        initialState.profileUserName = localStorage.getItem('schlistit_userName');
+      } 
+      if (localStorage.getItem('schlistit_userEmail')) {
+        initialState.profileUserEmail = localStorage.getItem('schlistit_userEmail');
+      }
+      if (localStorage.getItem('schlistit_userPhoto')) {
+        initialState.profileUserPhoto = localStorage.getItem('schlistit_userPhoto');
+      }
+      if (localStorage.getItem('schlistit_userType')) {
+        initialState.profileUserType = localStorage.getItem('schlistit_userType');
+      }
+      if (localStorage.getItem('schlistit_students')) {
+        initialState.profileStudents =  JSON.parse(localStorage.getItem('schlistit_students'));
+      }
 
      //set the initial state into a use State
      const [state, setState] = useState(initialState);
 
      useEffect ( () => {
+
         //go out to the api
         const promises = [];
         promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/wp/v2/teachers'));
@@ -51,7 +66,16 @@ export function ContextController({children}){
                 grades: grades,
                 subjects: subjects,
                 sections: sections,
+                profileIsSaved: false,
+                loginVerified: false,
+                profileUserType: '',
+                profileUserEmail: '',
+                profileUserPhoto: '',
+                profileUserName: '',
+                profileStudents: [],
             })
+
+            
 
         });
 

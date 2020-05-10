@@ -80,12 +80,6 @@ h3 {
   font-size: 1.3rem;
 }
 
-.page-title {
-  font-size: 2rem;
-  font-weight: 900;
-  color: #003745;
-}
-
 *,
 *:before,
 *:after {
@@ -104,7 +98,6 @@ header div {
 header {
   display: flex;
   justify-content: space-between;
-  background-color: #f9f9f9;
   padding: 0 30px;
 }
 

@@ -1,16 +1,16 @@
 import React, {useContext} from 'react';
-import { GlobalContext } from '../../Context/GlobalState.js'
+import { Context } from '../../Context/Context.js';
 import Feed from '../Components/Feed.js';
+import LandingPage from '../Pages/LandingPage.js';
 
 export default function Timeline( props ) {
+    //pull in context
+    const [state] = useContext(Context);
+    const { profileIsSaved } = state;    
 
-    console.log(useContext(GlobalContext));
-    
-    return (
-        
-        <React.Fragment>
-        
-        </React.Fragment>
-        
-    )
+    if(profileIsSaved){
+        return <Feed></Feed>
+    } else {
+        return <LandingPage></LandingPage>
+    }
 }

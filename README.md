@@ -10,7 +10,7 @@ Meet people in their comfort zone instead of force feeding complex enterprise te
 
 Teachers in Iowa, North Carolina, and Mumbai are all creating lessons for thier students essentially teaching the same material. A central repository and an open source toolset for all those lessons could boost learning for children worldwide.
 
-__What if our teachers could focus on the Students rather than content creation?__**
+__What if our teachers could focus on the Students rather than content creation?__
 
 1) Avoid Reinventing the Wheel - Use of powerful pre-existing platforms
 2) Communication Consolidation - Log in using your platform of choice: Facebook, Google, Pinterest
