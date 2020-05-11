@@ -6,7 +6,7 @@ import GoogleLogin from 'react-google-login';
 
 export default function MyGoogleLogin() {
     const [state, setState] = useContext(Context);
-    const { profileIsSaved, loginVerified  } = state;
+    const { profileIsSaved, loginVerified, profileUserEmail, profileUserName, profileUserPhoto  } = state;
 
     const googleFail = (response) => {
         console.log(response);
@@ -14,17 +14,24 @@ export default function MyGoogleLogin() {
     
 
     const googleSuccess = (response) => {
+        console.log(response)
         let userName = response.profileObj.givenName+ ' '+response.profileObj.familyName;
-        setState( {
-            profileUserEmail: response.profileObj.email,
-            profileUserPhoto: response.profileObj.imageUrl,
-            profileUserName: response.userName,
-            loginVerified: true,
-        });
+        const profile = {
+            name: userName,
+            email: response.profileObj.email,
+            photo: response.profileObj.imageUrl
+        }
+        //context
+        state.profileUserName = profile.name;
+        state.profileUserEmail = profile.email;
+        state.profileUserPhoto = profile.photo;
+        state.profile = profile;
+        state.profileIsSaved = true;
+        setState(state);
+        //localstorage
         localStorage.setItem('scholistit_userEmail', response.profileObj.email);
         localStorage.setItem('scholistit_userName', userName);
         localStorage.setItem('scholistit_userPhoto', response.profileObj.inmageUrl);
-
      } 
 
 
