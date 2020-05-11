@@ -59,7 +59,7 @@ export default function LandingPage() {
                         <h1 style={{textAlign: 'center'}}>ScholistIt</h1>
 
                         <SetUpForm></SetUpForm>
-                        <MyGoogleLogin></MyGoogleLogin>
+                        
                     </Paper>
                 </Grid>
             </Grid>
