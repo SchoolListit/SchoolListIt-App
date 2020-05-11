@@ -8,7 +8,7 @@ export default function Timeline( props ) {
     const [state] = useContext(Context);
     const { profileIsSaved } = state;    
 
-    if(profileIsSaved){
+    if(profileIsSaved === true){
         return <Feed></Feed>
     } else {
         return <LandingPage></LandingPage>
