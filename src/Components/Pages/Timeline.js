@@ -1,16 +1,14 @@
 import React, {useContext} from 'react';
 import { Context } from '../../Context/Context.js';
-import Feed from '../Components/Feed.js';
+import Feed from '../Pages/Feed.js';
 import LandingPage from '../Pages/LandingPage.js';
 
-export default function Timeline( props ) {
+export default function Timeline() {
     //pull in context
     const [state] = useContext(Context);
     const { profileIsSaved } = state;    
 
-    if(profileIsSaved === true){
-        return <Feed></Feed>
-    } else {
-        return <LandingPage></LandingPage>
-    }
+    return (
+        (profileIsSaved === true) ? <Feed></Feed> : <LandingPage></LandingPage>
+    )
 }

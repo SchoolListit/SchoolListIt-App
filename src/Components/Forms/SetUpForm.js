@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect }  from 'react';
+import React, { useContext, useState }  from 'react';
 import {Context} from '../../Context/Context.js';
 import { FormControl, Dialog, DialogTitle, Button, TextField, Select, FormHelperText, MenuItem, DialogActions, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,7 +17,7 @@ export default function SetUpForm () {
     //context
     const classes = useStyles();
     const [state, setState] = useContext(Context);
-    const { profileUserType, profileStudents } = state; 
+    const { profileUserType } = state; 
     //local state
     const [dialogOpen, setDialogOpen] = useState(false);
     const [localStudents, setLocalStudents] = useState([]);

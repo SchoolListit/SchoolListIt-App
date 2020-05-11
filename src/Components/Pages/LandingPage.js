@@ -1,9 +1,6 @@
-import React, {useContext} from 'react';
-import {Context} from '../../Context/Context.js';
+import React from 'react';
 import { Container, Grid, Paper, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import MyGoogleLogin from '../Forms/components/MyGoogleLogin.js';
-import MyFacebookLogin from '../Forms/components/MyFacebookLogin.js';
 import SetUpForm from '../Forms/SetUpForm.js'
 
 const useStyles = makeStyles(() => ({
@@ -30,9 +27,7 @@ const useStyles = makeStyles(() => ({
 
 export default function LandingPage() {
     const classes = useStyles();
-    const [state, setState] = useContext(Context);
-    const { profileVerified, profileStudents } = state;
-
+    
     return (
         <Container 
             fixed={true} 
@@ -57,9 +52,7 @@ export default function LandingPage() {
                 <Grid item xs={12} md={4} >
                     <Paper className={classes.paper}  >
                         <h1 style={{textAlign: 'center'}}>ScholistIt</h1>
-
                         <SetUpForm></SetUpForm>
-                        
                     </Paper>
                 </Grid>
             </Grid>

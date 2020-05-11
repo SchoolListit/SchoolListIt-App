@@ -6,7 +6,6 @@ import GoogleLogin from 'react-google-login';
 
 export default function MyGoogleLogin() {
     const [state, setState] = useContext(Context);
-    const { profileIsSaved, loginVerified, profileUserEmail, profileUserName, profileUserPhoto  } = state;
 
     const googleFail = (response) => {
         console.log(response);
