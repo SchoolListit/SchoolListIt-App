@@ -57,6 +57,7 @@ export default function LandingPage() {
                 <Grid item xs={12} md={4} >
                     <Paper className={classes.paper} style={{textAlign: 'center'}} >
                         <h1>ScholistIt</h1>
+
                         <SetUpForm></SetUpForm>
                         <MyGoogleLogin></MyGoogleLogin>
                     </Paper>

@@ -30,7 +30,7 @@ export default function SetUpForm () {
       setState({
         profileStudents: profileStudents
       })
-    }, []);
+    }, [localStudents, profileStudents, setState]);
 
     const onSelectUserType = (event) => {
         let usertype = event.target.value
@@ -59,7 +59,6 @@ export default function SetUpForm () {
         setState({
           profileStudents: profileStudents
         })
-        console.log(profileStudents)
      }
 
     const saveStudent = () => {
@@ -79,11 +78,12 @@ export default function SetUpForm () {
     return (
         <React.Fragment>
           {console.log(profileStudents)}
+          {console.log(localStudents)}
           <FormControl margin="normal" fullWidth={true}>
             <Select
               labelId="userType"
               id="userType"
-              value={profileUserType}
+              value={profileUserType || ''}
               onChange={onSelectUserType}
               >
               <MenuItem value="parent">Parent</MenuItem>
