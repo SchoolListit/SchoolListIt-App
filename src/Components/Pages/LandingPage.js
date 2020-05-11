@@ -55,8 +55,8 @@ export default function LandingPage() {
                     <p style={{color: '#000'}}>Photo by Robert Collins on Unsplash</p>
                 </Grid>
                 <Grid item xs={12} md={4} >
-                    <Paper className={classes.paper} style={{textAlign: 'center'}} >
-                        <h1>ScholistIt</h1>
+                    <Paper className={classes.paper}  >
+                        <h1 style={{textAlign: 'center'}}>ScholistIt</h1>
 
                         <SetUpForm></SetUpForm>
                         <MyGoogleLogin></MyGoogleLogin>
