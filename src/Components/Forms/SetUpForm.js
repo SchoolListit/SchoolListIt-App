@@ -139,7 +139,6 @@ export default function SetUpForm () {
             </DialogActions>
           </Dialog>
           {(profileUserType !== '') ? <MyGoogleLogin></MyGoogleLogin>: null}
-          {(profileUserType !== '') ? <MyFacebookLogin></MyFacebookLogin>: null}
          
         </React.Fragment>
     )

@@ -1,11 +1,14 @@
-import React, { useContext }  from 'react';
+import React, { useContext, useState }  from 'react';
 import { FormControl } from '@material-ui/core';
 import { Context } from '../../../Context/Context.js';
 import GoogleLogin from 'react-google-login';
+import { Redirect } from 'react-router-dom';
+
 
 
 export default function MyGoogleLogin() {
     const [state, setState] = useContext(Context);
+    const [authenticated, setAuthenticated] = useState(false);
 
     const googleFail = (response) => {
         console.log(response);
@@ -31,6 +34,8 @@ export default function MyGoogleLogin() {
         localStorage.setItem('scholistit_userEmail', response.profileObj.email);
         localStorage.setItem('scholistit_userName', userName);
         localStorage.setItem('scholistit_userPhoto', response.profileObj.inmageUrl);
+        localStorage.setItem('scholistit_loginService', 'google');
+        setAuthenticated(true);
      } 
 
 
@@ -41,6 +46,7 @@ export default function MyGoogleLogin() {
                 onSuccess={googleSuccess}
                 onFailure={googleFail}
             />
+            {(authenticated === true) ? <Redirect exact to="/" /> : null}
         </FormControl>
     )
    

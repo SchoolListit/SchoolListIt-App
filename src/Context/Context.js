@@ -23,20 +23,20 @@ export function ContextController({children}){
         sections: [],
      }
 
-     if (localStorage.getItem('schlistit_userName')) {
-        initialState.profileUserName = localStorage.getItem('schlistit_userName');
+     if (localStorage.getItem('scholistit_userName')) {
+        initialState.profileUserName = localStorage.getItem('scholistit_userName');
       } 
-      if (localStorage.getItem('schlistit_userEmail')) {
-        initialState.profileUserEmail = localStorage.getItem('schlistit_userEmail');
+      if (localStorage.getItem('scholistit_userEmail')) {
+        initialState.profileUserEmail = localStorage.getItem('scholistit_userEmail');
       }
-      if (localStorage.getItem('schlistit_userPhoto')) {
-        initialState.profileUserPhoto = localStorage.getItem('schlistit_userPhoto');
+      if (localStorage.getItem('scholistit_userPhoto')) {
+        initialState.profileUserPhoto = localStorage.getItem('scholistit_userPhoto');
       }
-      if (localStorage.getItem('schlistit_userType')) {
-        initialState.profileUserType = localStorage.getItem('schlistit_userType');
+      if (localStorage.getItem('scholistit_userType')) {
+        initialState.profileUserType = localStorage.getItem('scholistit_userType');
       }
-      if (localStorage.getItem('schlistit_students')) {
-        initialState.profileStudents =  JSON.parse(localStorage.getItem('schlistit_students'));
+      if (localStorage.getItem('scholistit_students')) {
+        initialState.profileStudents =  JSON.parse(localStorage.getItem('scholistit_students'));
       }
 
      //set the initial state into a use State
