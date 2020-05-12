@@ -9,6 +9,7 @@ import { CssBaseline, BottomNavigation } from '@material-ui/core';
 
 import Header from './Components/Components/Header.js';
 import Timeline from './Components/Pages/Timeline.js';
+import LandingPage from './Components/Pages/LandingPage.js';
 import About from './Components/Pages/About.js';
 import Classroom from './Components/Pages/Classroom.js';
 import School from './Components/Pages/School.js';
@@ -51,6 +52,7 @@ const App = () => {
               <Header></Header>
                 <Switch>
                   <Route exact path="/" component={Timeline} />
+                  <Route path="/sign-in" component={LandingPage}/>
                   <Route exact path="/classrooms/:sectionId" component={Classroom} />
                 </Switch>
           </Router>

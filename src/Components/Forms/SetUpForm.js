@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import MyGoogleLogin from './components/MyGoogleLogin.js';
+import MyFacebookLogin from './components/MyFacebookLogin.js';
 
 const useStyles = makeStyles(() => ({
   dialogPaper: {
@@ -32,6 +33,8 @@ export default function SetUpForm () {
         localStudents.push({name: "", grade: ""})
         setLocalStudents(localStudents)
         localStorage.setItem('scholistit_userType', event.target.value)
+        localStorage.setItem('scholistit_students', JSON.stringify(localStudents))
+
       }; 
 
      const grades = [
@@ -135,7 +138,9 @@ export default function SetUpForm () {
               </Button>
             </DialogActions>
           </Dialog>
-          {(profileUserType === 'parent') ? <MyGoogleLogin></MyGoogleLogin>: null}
+          {(profileUserType !== '') ? <MyGoogleLogin></MyGoogleLogin>: null}
+          {(profileUserType !== '') ? <MyFacebookLogin></MyFacebookLogin>: null}
+         
         </React.Fragment>
     )
 }
