@@ -6,8 +6,9 @@ import SetUpForm from '../Forms/SetUpForm.js'
 const useStyles = makeStyles(() => ({
     root: {
         display: 'flex',
-        height: '100vh',
         width: '100vw',
+        minHeight: '100vh',
+        maxHeight: 'none',
         justifyContent: 'flex-end',
         maxWidth: 'none !important',
         overflow: 'auto'

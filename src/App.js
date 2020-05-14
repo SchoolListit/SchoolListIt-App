@@ -43,7 +43,8 @@ const theme = createMuiTheme({
 
 const useStyles = makeStyles(() => ({
   root: {
-    height: '100vh',
+    minHeight: '100vh',
+    maxHeight: 'none',
     width: '100vw',
     backgroundPosition: 'center',
     backgroundSize: 'cover',

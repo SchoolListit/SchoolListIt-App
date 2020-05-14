@@ -9,11 +9,14 @@ const useStyles = makeStyles((theme) => ({
     root: {
         background: 'none',
         backgroundColor: 'rgba(192,192,192, 0.5)',
-        display: 'flex',
-        justifyContent: 'space-between',
-        padding: '5px 30px',
+        overflow: 'hidden'
     },
-    
+    header: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      padding: '5px 30px',
+      flexWrap: 'wrap'
+    }
   }));
 
 export default function Header() {
@@ -28,7 +31,7 @@ export default function Header() {
     }
     return (
         <div className={classes.root} position="static">
-            <header id="masthead">
+            <header id="masthead" className={classes.header}>
             <div style={{display: 'flex', flexWrap: 'wrap'}}>
               <h2 style={{alignSelf: 'center', color: '#ffb74d'}}>SchoListIt</h2>
             </div>

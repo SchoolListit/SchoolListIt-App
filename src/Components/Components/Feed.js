@@ -9,7 +9,8 @@ import ContentCard from './ContentCard.js';
 const useStyles = makeStyles(() => ({
     root: {
         display: 'flex',
-        height: '100vh',
+        minHeight: '100vh',
+        maxHeight: 'none',
         width: '100vw',
         maxWidth: 'none !important',
         overflow: 'auto'

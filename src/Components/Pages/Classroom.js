@@ -14,13 +14,9 @@ const useQuery = () => {
 
 const useStyles = makeStyles(() => ({
     root: {
+        margin: '0',
+        padding: '0',
         display: 'flex',
-        height: '100vh',
-        width: '100vw',
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        background: "url('https://msp-media.org/wp-content/images/robert-collins-tvc5imO5pXk-unsplash.jpg')",
-        maxWidth: 'none !important',
         overflow: 'auto'
     },
   }));
