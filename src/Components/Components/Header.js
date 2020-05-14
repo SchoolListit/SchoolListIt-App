@@ -26,9 +26,9 @@ export default function Header() {
         return null
     }
     return (
-        <AppBar className={classes.root} position="static">
+        <div className={classes.root} position="static">
             <header id="masthead">
-            <div style={{display: 'flex'}}>
+            <div style={{display: 'flex', flexWrap: 'wrap'}}>
             <img alt="dare county schools" src="https://resources.finalsite.net/images/f_auto,q_auto/v1521048827/darek12ncus/fqfcusy7dngivvz8yn6m/DCS_Icon_Full_Color_RGB.png" />
             <h2 style={{alignSelf: 'center', color: '#003745'}}>SchoListIt</h2>
             </div>
@@ -54,6 +54,6 @@ export default function Header() {
             </div> 
             
         </header>
-        </AppBar>
+        </div>
     )
 }

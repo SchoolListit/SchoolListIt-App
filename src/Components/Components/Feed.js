@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { Container, Grid, } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Context } from '../../Context/Context.js';
 import Classrooms from './Classrooms.js';
@@ -7,9 +8,14 @@ import ContentCard from './ContentCard.js';
 
 const useStyles = makeStyles(() => ({
     root: {
-        display: 'flex',  
-        justifyContent: 'spaceEvenly', 
-        flexWrap: 'wrap',
+        display: 'flex',
+        height: '100vh',
+        width: '100vw',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        background: "url('https://msp-media.org/wp-content/images/robert-collins-tvc5imO5pXk-unsplash.jpg')",
+        maxWidth: 'none !important',
+        overflow: 'auto'
     },
   }));
 
@@ -20,10 +26,13 @@ export default function Feed() {
 
     
     return (
-        <div className={classes.root}  >
-        <Classrooms></Classrooms>
-        <AddLessonPlan></AddLessonPlan>
-
-    </div>
+        <Container 
+        fixed={true} 
+        maxWidth={false}
+        className={classes.root}
+        >
+            <Classrooms></Classrooms>
+            <AddLessonPlan></AddLessonPlan>
+        </Container>
     )    
 }

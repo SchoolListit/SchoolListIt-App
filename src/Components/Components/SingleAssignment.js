@@ -6,7 +6,7 @@ import moment from 'moment';
 
 const useStyles = makeStyles(() => ({
     root: {
-        padding: '15px 0',
+        padding: '15px',
     },
     featuredImage: {
         width: '100%'

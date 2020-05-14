@@ -14,7 +14,7 @@ const useStyles = makeStyles(() => ({
     },
   }));
 
-export default function ContentCard( {mainTitle, subTitle, children, icon, iconTo}) {
+export default function ContentCard( {mainTitle, subTitle, children, icon, iconTo, constrain}) {
 
     const [state, setState] = useContext(Context);
     const { profile } = state;
