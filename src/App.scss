@@ -1,0 +1,177 @@
+/*
+https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@400;600;700&display=swap
+*/
+@import url(https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+/*
+DareToLearn Colors:
+light headline color: #00998F
+dark green: #003745
+body: #666
+
+*/
+* {
+  font-size: 16px;
+  font-family: 'Quicksand', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.dark-green{
+  color: #003745;
+}
+
+/*
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h2 {
+  font-weight: bold;
+  color: #003745;
+  line-height: 1.5rem;
+}
+
+h3 {
+  line-height: 1.5rem;
+  color: #00998F;
+  font-weight: bold;
+}
+*/
+
+@media (min-width: 480px) {                             
+
+  .MuiContainer-root {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+}
+
+.MuiCard-root{
+  flex-basis: 30%
+}
+
+
+.content-page {
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.content-page .grid-2 {
+  flex-basis: 70%;
+}
+.content-page .grid-1 {
+  flex-basis: 30%;
+  align-self: flex-start;
+}
+
+.content-page p {
+  margin: 10px 0;
+}
+
+.content-page h2 {
+  margin: 10px 0;
+  color: #00998F;
+  font-size: 1.3rem;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/*=======================*/
+
+/* header */
+
+header div {
+  font-size: 2em;
+  align-self: center;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+
+header button, header a, header span > img {
+  font-size: 2rem;
+  border: none;
+  padding: none;
+  background: transparent;
+}
+
+header div > img {
+  max-height: 50px;
+}
+
+header .primary-menu-icons > * {
+  margin: 0 10px;
+}
+
+
+
+
+
+
+
+
+
+
+.flex-container-space-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+.checklist-container {
+  margin: 0 auto;
+  border: 1px solid #e5e5e5;
+  min-height: 150px;
+}
+
+.entry-header {
+  background-color:#bdbdbd
+  ;
+  text-transform: capitalize;
+  padding: 10px;
+}
+
+.entry-content {
+  padding: 10px;
+}
+
+.checklist-container h2{
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.checklist {
+  padding: 20px;
+}
+
+.checklist > .todo-item {
+  border-bottom: 1px dashed #404040;
+}
+
+.checklist > .todo-item:last-child {
+  border-bottom: none;
+}
+
+.checklist > .todo-item {
+  padding: 20px 0
+}
+
+
+
+/* ends form styling */
+
+@media screen and (min-width: 767px) {
+
+}

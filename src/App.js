@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas } from '@fortawesome/free-solid-svg-icons';
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { faDoorOpen,faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas } from '@fortawesome/free-solid-svg-icons';
+import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import { grey, teal} from '@material-ui/core/colors';
 import { CssBaseline, BottomNavigation } from '@material-ui/core';
 
@@ -16,10 +16,11 @@ import School from './Components/Pages/School.js';
 import PageFourOFour from './Components/Pages/PageFourOFour.js';
 
 import { ContextController } from "./Context/Context.js";
-import './App.css';
+import './App.scss';
 
 
-library.add(faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas);
+library.add(faDoorOpen, faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas);
+
 
 const theme = createMuiTheme({
   typography: {
@@ -38,11 +39,21 @@ const theme = createMuiTheme({
     primary: teal,
     secondary: grey,
   },
-  background: '#e0e0e0'
 });
+const useStyles = makeStyles(() => ({
+  root: {
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    background: "url('https://msp-media.org/wp-content/images/robert-collins-tvc5imO5pXk-unsplash.jpg')",
+  },
+}));
 
 const App = () => {
-
+const classes = useStyles();
+useEffect(() => {
+  localStorage.clear();
+  
+}, [])
 
   return (
       <ContextController>
@@ -53,7 +64,7 @@ const App = () => {
                 <Switch>
                   <Route exact path="/" component={Timeline} />
                   <Route path="/sign-in" component={LandingPage}/>
-                  <Route exact path="/classrooms/:sectionId" component={Classroom} />
+                  <Route exact path="/classrooms/:classArgs" component={Classroom} />
                 </Switch>
           </Router>
         </ThemeProvider>

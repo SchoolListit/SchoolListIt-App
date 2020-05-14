@@ -10,34 +10,21 @@ export function ContextController({children}){
     let initialState = {
         profileIsSaved: false,
         loginVerified: false,
+        wpUserObj: {},
         profileUserType: '',
         profileUserEmail: '',
         profileUserPhoto: '',
         profileUserName: '',
         profileStudents: [],
+        profile: {},
         teachers: [],
         schools: [],
         grades: [],
         subjects: [],
         assignments: [],
         sections: [],
+        currentAssignment: ''
      }
-
-     if (localStorage.getItem('scholistit_userName')) {
-        initialState.profileUserName = localStorage.getItem('scholistit_userName');
-      } 
-      if (localStorage.getItem('scholistit_userEmail')) {
-        initialState.profileUserEmail = localStorage.getItem('scholistit_userEmail');
-      }
-      if (localStorage.getItem('scholistit_userPhoto')) {
-        initialState.profileUserPhoto = localStorage.getItem('scholistit_userPhoto');
-      }
-      if (localStorage.getItem('scholistit_userType')) {
-        initialState.profileUserType = localStorage.getItem('scholistit_userType');
-      }
-      if (localStorage.getItem('scholistit_students')) {
-        initialState.profileStudents =  JSON.parse(localStorage.getItem('scholistit_students'));
-      }
 
      //set the initial state into a use State
      const [state, setState] = useState(initialState);
@@ -51,6 +38,8 @@ export function ContextController({children}){
         promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/wp/v2/grades'));
         promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/wp/v2/subjects'));
         promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/parent-checklist/v2/lesson-plans'));
+        promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/wp/v2/assignments'));
+
 
         Promise.all(promises).then( res => {
 
@@ -59,6 +48,16 @@ export function ContextController({children}){
             let grades =  res[2].data
             let subjects =  res[3].data
             let sections = Object.values(res[4].data.sections);
+            let assignments = res[5].data;
+            let profileStudents = [];
+
+            if (localStorage.getItem('scholistit_students')) {
+              profileStudents =  JSON.parse(localStorage.getItem('scholistit_students'));
+            } 
+            let profile = {};
+            if (localStorage.getItem('scholistit_profile')) {
+              profile =  JSON.parse(localStorage.getItem('scholistit_profile'));
+            } 
 
             setState( {
                 schools: schools,
@@ -66,13 +65,17 @@ export function ContextController({children}){
                 grades: grades,
                 subjects: subjects,
                 sections: sections,
+                assignments: assignments,
+                currentAssignment: '',
                 profileIsSaved: false,
                 loginVerified: false,
+                wpUserObj: {},
                 profileUserType: '',
                 profileUserEmail: '',
                 profileUserPhoto: '',
                 profileUserName: '',
-                profileStudents: [],
+                profileStudents: profileStudents,
+                profile: profile
             })
 
             

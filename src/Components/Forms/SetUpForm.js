@@ -5,7 +5,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import MyGoogleLogin from './components/MyGoogleLogin.js';
-import MyFacebookLogin from './components/MyFacebookLogin.js';
 
 const useStyles = makeStyles(() => ({
   dialogPaper: {
@@ -22,6 +21,7 @@ export default function SetUpForm () {
     //local state
     const [dialogOpen, setDialogOpen] = useState(false);
     const [localStudents, setLocalStudents] = useState([]);
+    
 
 
     const onSelectUserType = (event) => {

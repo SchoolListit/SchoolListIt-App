@@ -4,7 +4,6 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 
 
 export default function ChooseWPTerm(props) {
-    console.log(props.data)
     if(props.data === 'undefined'){
         return null
     } else {

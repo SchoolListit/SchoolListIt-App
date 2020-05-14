@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundColor: '#e0e0e0',
+        backgroundColor: 'rgba(192,192,192, 0.7)',
         display: 'flex',
         justifyContent: 'space-between',
         padding: '5px 30px',
@@ -16,12 +16,13 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 export default function Header() {
-    const [state] = useContext(Context);
-    const { profileIsSaved, profileUserName, profileUserPhoto } = state;
+    const [state, setState] = useContext(Context);
+    const { profile } = state;
     const classes = useStyles();
 
+   
 
-    if(profileIsSaved === 'undefined' || !profileIsSaved){
+    if(profile.email === ''){
         return null
     }
     return (
@@ -44,7 +45,7 @@ export default function Header() {
                     <FontAwesomeIcon icon="globe-americas" ></FontAwesomeIcon>
                 </button>
 
-                <Avatar alt={profileUserName} src={profileUserPhoto}></Avatar>
+                <Avatar alt={profile.name} src={profile.photo}></Avatar>
                 
                 <a href="/about">
                     <FontAwesomeIcon icon="question-circle" ></FontAwesomeIcon>
