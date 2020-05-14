@@ -7,7 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundColor: 'rgba(192,192,192, 0.7)',
+        background: 'none',
+        backgroundColor: 'rgba(192,192,192, 0.5)',
         display: 'flex',
         justifyContent: 'space-between',
         padding: '5px 30px',
@@ -29,8 +30,7 @@ export default function Header() {
         <div className={classes.root} position="static">
             <header id="masthead">
             <div style={{display: 'flex', flexWrap: 'wrap'}}>
-            <img alt="dare county schools" src="https://resources.finalsite.net/images/f_auto,q_auto/v1521048827/darek12ncus/fqfcusy7dngivvz8yn6m/DCS_Icon_Full_Color_RGB.png" />
-            <h2 style={{alignSelf: 'center', color: '#003745'}}>SchoListIt</h2>
+              <h2 style={{alignSelf: 'center', color: '#ffb74d'}}>SchoListIt</h2>
             </div>
             <div className="primary-menu-icons" style={{flexBasis: '45%', display: 'flex', justifyContent: 'flex-end'}}>
                 <button >

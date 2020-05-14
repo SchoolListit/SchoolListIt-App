@@ -9,8 +9,6 @@ export default function Timeline() {
     const { profile } = state;   
 
     return(
-        <React.Fragment>
-            { (profile.email === '') ? <Redirect to="/sign-in" /> : <Feed></Feed> }
-        </React.Fragment>
+        <Feed></Feed>
     )
 }
