@@ -30,7 +30,7 @@ export default function Feed() {
     return (
         <Container 
         maxWidth={false}
-        className="none"
+        style={{padding: '30px 0'}}
         >
             <Grid
                 container 

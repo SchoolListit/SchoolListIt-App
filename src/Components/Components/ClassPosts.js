@@ -50,7 +50,7 @@ export default function ClassPosts( { section, onClickAssignment } ) {
 
         fetchData();
         return () => { ignore = true; }
-    }, []);
+    }, [section.grades, section.subjects, section.teachers]);
 /**
  * Under here is the render.
  */

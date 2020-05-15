@@ -12,7 +12,7 @@ export function ContextController({children}){
             return false;
         }
     })
-
+    let profile;
     // Initial state
     let initialState = {
         profileIsSaved: false,
@@ -23,11 +23,7 @@ export function ContextController({children}){
         profileUserPhoto: '',
         profileUserName: '',
         profileStudents: [],
-        profile: {
-            name: '',
-            email: '',
-            photo: ''
-        },
+        profile: profile,
         teachers: [],
         schools: [],
         grades: [],
@@ -35,7 +31,6 @@ export function ContextController({children}){
         assignments: [],
         sections: [],
         currentAssignment: '',
-        isLoggedIn
      }
 
      //set the initial state into a use State
@@ -71,7 +66,11 @@ export function ContextController({children}){
               profile =  JSON.parse(localStorage.getItem('scholistit_profile'));
             } 
 
-           let loggedIn = isLoggedIn(profile);
+            let loggedIn = true;
+            if( profile === null){
+                loggedIn =  false;
+            }
+        
 
             setState( {
                 schools: schools,
@@ -93,11 +92,9 @@ export function ContextController({children}){
                 loggedIn: loggedIn
             })
 
-            
-
         });
 
-     }, []);
+     }, [initialState.profile]);
 
 
     return(

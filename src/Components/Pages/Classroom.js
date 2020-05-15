@@ -2,11 +2,14 @@ import React, { useContext, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { Container, Grid, } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Context } from '../../Context/Context.js'
+import { Context } from '../../Context/Context.js';
+import Header from '../Components/Header.js';
 import ContentCard from '../Components/ContentCard';
 import ClassPosts from '../Components/ClassPosts.js';
 import AddLessonPlan from '../Forms/AddLessonPlan.js';
 import SingleAssignment from '../Components/SingleAssignment.js';
+import { Redirect } from 'react-router-dom';
+
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -19,14 +22,15 @@ const useStyles = makeStyles(() => ({
         display: 'flex',
         overflow: 'auto'
     },
-  }));
+  })); 
 
 export default function Classroom() {
     const classes = useStyles();
     const { classArgs } = useParams();
     const [state, setState] = useContext(Context);
-    const { assignments, currentAssignment } = state; 
+    const { assignments, currentAssignment, loggedIn } = state; 
     const [singlePostID, setSinglePostID] = useState('');
+    const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     
     
     let query = useQuery();
@@ -53,11 +57,16 @@ export default function Classroom() {
     }
         
     return (
-        <Container 
+        <React.Fragment>
+            <Header></Header>
+            <Container 
             fixed={true} 
             maxWidth={false}
             className="none"
             >
+            {(profile)
+                ?   <Redirect to="/sign-in" exact />
+                : null }    
             <Grid 
                 container 
                 >
@@ -83,6 +92,8 @@ export default function Classroom() {
                 }
             </Grid>
         </Container> 
+        </React.Fragment>
+        
     );
     
 }
