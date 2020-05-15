@@ -24,10 +24,12 @@ const useStyles = makeStyles((theme) => ({
 
   
 
-  export default function Header( {profile}) {
+  export default function Header(  ) {
     const classes = useStyles();
     const [state, setState] = useContext(Context);
     let history = useHistory();
+    const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
+
     
 
     const profileClick = () => {
@@ -40,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
      
     //lets do business  
     if(profile === null){
-        return <Redirect to="/" exact></Redirect>
+        return <Redirect to="/sign-in" exact></Redirect>
     } else {
         return (
             <div className={classes.root} position="static">

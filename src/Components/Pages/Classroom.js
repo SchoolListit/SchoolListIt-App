@@ -62,9 +62,9 @@ export default function Classroom() {
             <Container 
             fixed={true} 
             maxWidth={false}
-            className="none"
+            style={{padding: '30px 0'}}
             >
-            {(profile)
+            {(!profile)
                 ?   <Redirect to="/sign-in" exact />
                 : null }    
             <Grid 
