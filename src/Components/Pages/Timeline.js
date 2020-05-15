@@ -6,9 +6,17 @@ import { Redirect } from 'react-router-dom';
 export default function Timeline() {
     //pull in context
     const [state] = useContext(Context);
-    const { profile } = state;   
+    const { profile, isLoggedIn } = state;   
+
+    
 
     return(
-        <Feed></Feed>
+        <React.Fragment>
+            {(isLoggedIn(profile))
+                ? <Feed></Feed>
+                : <Redirect to="/sign-in" exact />
+            }
+        </React.Fragment>
+       
     )
 }

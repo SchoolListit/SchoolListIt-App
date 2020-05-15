@@ -6,6 +6,13 @@ export const Context = React.createContext();
 
 export function ContextController({children}){
 
+    const isLoggedIn = ( profile => {
+        console.log(profile);
+        if( profile.email === '' || profile.name === '' || profile.photo === ''){
+            return false;
+        }
+    })
+
     // Initial state
     let initialState = {
         profileIsSaved: false,
@@ -16,14 +23,19 @@ export function ContextController({children}){
         profileUserPhoto: '',
         profileUserName: '',
         profileStudents: [],
-        profile: {},
+        profile: {
+            name: '',
+            email: '',
+            photo: ''
+        },
         teachers: [],
         schools: [],
         grades: [],
         subjects: [],
         assignments: [],
         sections: [],
-        currentAssignment: ''
+        currentAssignment: '',
+        isLoggedIn
      }
 
      //set the initial state into a use State
@@ -54,10 +66,12 @@ export function ContextController({children}){
             if (localStorage.getItem('scholistit_students')) {
               profileStudents =  JSON.parse(localStorage.getItem('scholistit_students'));
             } 
-            let profile = {};
+            let profile = initialState.profile;
             if (localStorage.getItem('scholistit_profile')) {
               profile =  JSON.parse(localStorage.getItem('scholistit_profile'));
             } 
+
+           let loggedIn = isLoggedIn(profile);
 
             setState( {
                 schools: schools,
@@ -75,7 +89,8 @@ export function ContextController({children}){
                 profileUserPhoto: '',
                 profileUserName: '',
                 profileStudents: profileStudents,
-                profile: profile
+                profile: profile,
+                loggedIn: loggedIn
             })
 
             

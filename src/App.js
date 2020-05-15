@@ -14,6 +14,8 @@ import About from './Components/Pages/About.js';
 import Classroom from './Components/Pages/Classroom.js';
 import School from './Components/Pages/School.js';
 import PageFourOFour from './Components/Pages/PageFourOFour.js';
+import ScreenOptions from './Components/Components/ScreenOptions.js';
+
 
 import { ContextController } from "./Context/Context.js";
 import './App.scss';
@@ -54,13 +56,9 @@ const useStyles = makeStyles(() => ({
     padding: '0',
   }
 }));
-
+localStorage.clear();
 const App = () => {
 const classes = useStyles();
-useEffect(() => {
-  localStorage.clear();
-  
-}, [])
 
   return (
       <ContextController>
@@ -73,12 +71,15 @@ useEffect(() => {
             >
             <Router>
                 <Header></Header>
-                  <Switch>
+                <div style={{padding: '30px 0'}}>
+                <Switch>
                     <Route exact path="/" component={Timeline} />
                     <Route path="/sign-in" component={LandingPage}/>
-                    <Route exact path="/classrooms/:classArgs" component={Classroom} />
+                    <Route path="/classrooms/:classArgs" component={Classroom} />
                   </Switch>
+                </div>
             </Router>
+            <ScreenOptions></ScreenOptions>
           </Container>
         </ThemeProvider>
       </ContextController>    

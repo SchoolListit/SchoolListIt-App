@@ -8,7 +8,7 @@ import ClassPosts from '../Components/ClassPosts.js';
 import AddLessonPlan from '../Forms/AddLessonPlan.js';
 import SingleAssignment from '../Components/SingleAssignment.js';
 
-const useQuery = () => {
+function useQuery() {
     return new URLSearchParams(useLocation().search);
   }
 
@@ -30,6 +30,7 @@ export default function Classroom() {
     
     
     let query = useQuery();
+    console.log(query.get("pageID"));
     
     let theClass = decodeURIComponent(classArgs).replace(":", "").split("-");
     const section = {
@@ -51,36 +52,38 @@ export default function Classroom() {
         setSinglePostID(postID);
     }
         
-    return (<Container 
-        fixed={true} 
-        maxWidth={false}
-        className={classes.root}
-        >
-        <Grid 
-            container 
+    return (
+        <Container 
+            fixed={true} 
+            maxWidth={false}
+            className="none"
             >
-            <Grid item xs={12} md={4}>
-               
-                <ContentCard
-                    key={classArgs}
-                    mainTitle={section.schools+" "+ section.teachers}
-                    subTitle={section.grades+" "+ section.subjects}
-                    >
-                    <ClassPosts
-                    section={section} onClickAssignment={onClickAssignment}
-                    />
-                </ContentCard>
-                <AddLessonPlan></AddLessonPlan>
+            <Grid 
+                container 
+                >
+                <Grid item xs={12} md={4}>
+                
+                    <ContentCard
+                        key={classArgs}
+                        mainTitle={section.schools+" "+ section.teachers}
+                        subTitle={section.grades+" "+ section.subjects}
+                        >
+                        <ClassPosts
+                        section={section} onClickAssignment={onClickAssignment}
+                        />
+                    </ContentCard>
+                    <AddLessonPlan></AddLessonPlan>
+                </Grid>
+                { (post !== 'undefined')
+                    ?
+                    <Grid item xs={12} md={8} >    
+                        <SingleAssignment postID={singlePostID} ></SingleAssignment>
+                    </Grid>    
+                    : null
+                }
             </Grid>
-            { (post !== 'undefined')
-                ?
-                <Grid item xs={12} md={8} >    
-                    <SingleAssignment postID={singlePostID} ></SingleAssignment>
-                </Grid>    
-                : null
-            }
-        </Grid>
-    </Container> );
+        </Container> 
+    );
     
 }
     

@@ -38,7 +38,7 @@ export default function MyGoogleLogin() {
         state.profile = profile;
         state.loginVerified = true;
         setState(state);
-        //localstorage
+        localStorage.setItem('scholistit_profile', JSON.stringify(profile));
     
         const url = 'http://localhost:8888/parentchecklist/wp-json/parent-checklist-rest/v2/registration';
         //create user
@@ -63,8 +63,9 @@ export default function MyGoogleLogin() {
                 axios.post(url, formdata, {headers: headers})
                 .then( (res) => {
                     state.wpUserObj = res.data.user;
-                    setState(state);
                     profile.wpUserObj = state.wpUserObj;
+                    setState(state);
+
                 })
             });
         //end the whole call to wp for user

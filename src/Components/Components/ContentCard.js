@@ -10,7 +10,9 @@ import { Link } from 'react-router-dom';
 const useStyles = makeStyles(() => ({
     root: {
         maxHeight: '300px',
-        overflow: 'scroll-y'
+        flexBasis: '30%',
+        overflow: 'scroll-y',
+        margin: '0 10px 20px 10px'
     },
   }));
 
@@ -25,7 +27,7 @@ export default function ContentCard( {mainTitle, subTitle, children, icon, iconT
 
     return (
         <React.Fragment>
-            <Card className={classes.root} elevation={3} style={{flexBasis: '300px', flexShrink: '0', margin: '15px'}}>
+            <Card className={classes.root} elevation={3} >
             <div className="entry-header" style={{display: 'flex', justifyContent: 'space-between' }}>
                     <div>
                         <h2 className="entry-title">{mainTitle}</h2>
