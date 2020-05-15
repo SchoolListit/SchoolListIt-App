@@ -3,6 +3,7 @@ import { Context } from '../../Context/Context.js';
 import { Avatar, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Redirect, useHistory } from 'react-router-dom'
 
 
 
@@ -23,21 +24,23 @@ const useStyles = makeStyles((theme) => ({
 
   
 
-  export default function Header() {
+  export default function Header( {profile}) {
     const classes = useStyles();
     const [state, setState] = useContext(Context);
-    const profile = JSON.parse(localStorage.getItem('sholistit_profile'));
+    let history = useHistory();
+    
 
     const profileClick = () => {
         localStorage.removeItem('scholistit_profile');
         let profile;
         state.profile = profile;
         setState(state);
+        history.push("/sign-in");
       }
      
     //lets do business  
     if(profile === null){
-        return null;
+        return <Redirect to="/" exact></Redirect>
     } else {
         return (
             <div className={classes.root} position="static">

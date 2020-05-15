@@ -11,7 +11,7 @@ export default function Timeline() {
     
     return(
         <React.Fragment>
-            <Header></Header>
+            <Header profile={profile}></Header>
             {(profile)
                 ? <Feed></Feed>
                 : <Redirect to="/sign-in" exact />
