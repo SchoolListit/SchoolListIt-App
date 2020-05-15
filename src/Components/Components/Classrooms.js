@@ -9,7 +9,6 @@ export default function Classrooms({ }) {
     const [state, setState] = useContext(Context);
     const { sections } = state;
 
-    
 
     return (
         sections.map( (section, index) => {
