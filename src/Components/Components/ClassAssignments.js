@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import { Context } from '../../Context/Context.js'
-import { List, ListItem, ListItemText, ListItemSecondaryAction, Checkbox, Link} from '@material-ui/core';
+import { List, ListItem, ListItemText, ListItemSecondaryAction, Checkbox, ListItemAvatar, Avatar} from '@material-ui/core';
 
 
 export default function ClassAssignments( { section, link } ) {
@@ -10,18 +10,53 @@ export default function ClassAssignments( { section, link } ) {
     const [checked, setChecked] = useState([1]);
     const [state, setState] = useContext(Context);
     const { currentAssignment } = state; 
+    const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
+    //({ wpUserObj } = profile);
 
     const handleToggle = (value) => () => {
         const currentIndex = checked.indexOf(value);
         const newChecked = [...checked];
 
+        let body = {
+            post_id: value,
+            user_id: profile.wpUserObj.user.ID,
+            action: 'insert' 
+         }
         if (currentIndex === -1) {
-        newChecked.push(value);
+            newChecked.push(value);
         } else {
-        newChecked.splice(currentIndex, 1);
+            newChecked.splice(currentIndex, 1);
+            body.action = 'delete'
         }
-
         setChecked(newChecked);
+        //handle db insert
+        let url = "http://localhost:8888/parentchecklist/wp-json/parent-checklist-rest/v2/mark_complete";
+        
+        
+        axios.get(url, body)
+            .then( (res) => {
+                const salt = res.data['salt'];
+                const key = 'aVdG#D.KRFXw)dr!37}BrpkxdQM8N4';
+                const authHeader = salt+"_"+key;
+                let formdata = new FormData();
+                const headers = {
+                "X-Scholistit-Auth": authHeader,
+                "Content-Type": "multipart/form-data"
+                }
+                for (const property in body) {
+                    formdata.append(property, body[property]);
+                }
+                
+                //make 2nd call
+                axios.post(url, formdata, {headers: headers})
+                .then( (res) => {
+                    //DOIT: now here we need to handle errors
+                });
+                
+            });
+            
+        
+        
     };
 
     
@@ -72,12 +107,15 @@ export default function ClassAssignments( { section, link } ) {
                     return (
                         <React.Fragment key={"fragment"+post.ID}>
                         <ListItem key={post.ID} button >
-                            <Link href={"/classrooms/:"+link+"?postID="+post.ID}>
+                           
+                            <ListItemAvatar>
+                                <Avatar alt="Posted By" src={post.author_avatar}></Avatar>
+                            </ListItemAvatar>
                             <ListItemText>
                                 <h6>{moment(post.post_date).format('MM-DD')}</h6>
                                 <p style={{textTransform: 'capitalize'}}>{post.post_title}</p>
                             </ListItemText>
-                            </Link>
+                           
                             <ListItemSecondaryAction>
                                 <Checkbox
                                     edge="end"

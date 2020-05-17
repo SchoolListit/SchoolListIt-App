@@ -64,14 +64,13 @@ export default function MyGoogleLogin() {
                 axios.post(url, formdata, {headers: headers})
                 .then( (res) => {
                     state.wpUserObj = res.data.user;
-                    profile.wpUserObj = res.data.user;
+                    profile.wpUserObj = res.data;
                     setState(state);
-
+                    //end the whole call to wp for user
+                    localStorage.setItem('scholistit_profile', JSON.stringify(profile));
+                    setAuthenticated(true);
                 })
             });
-        //end the whole call to wp for user
-        localStorage.setItem('scholistit_profile', JSON.stringify(profile));
-        setAuthenticated(true);
      } 
 
 

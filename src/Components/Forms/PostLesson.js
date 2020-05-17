@@ -49,7 +49,8 @@ export default function PostLesson( props ) {
                 subjects: document.getElementById('subjects').value,
                 keywords: document.getElementById('keywords').value,
                 mandatory: mandatory,
-                post_author: profile.email
+                post_author: profile.email,
+                author_avatar: profile.photo
             }
             console.log(body);
              const headers = {
