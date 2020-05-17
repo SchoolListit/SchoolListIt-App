@@ -43,14 +43,15 @@ export default function PostLesson( props ) {
                 post_date: document.getElementById('post_date').value,
                 post_title: document.getElementById('post_title').value,
                 post_excerpt: document.getElementById('post_excerpt').value,
-                grades: props.section.grades,
-                schools: props.section.schools,
-                teachers: props.section.teachers,
-                subjects: props.section.subjects,
+                grades: document.getElementById('grades').value,
+                schools: document.getElementById('schools').value,
+                teachers: document.getElementById('teachers').value,
+                subjects: document.getElementById('subjects').value,
                 keywords: document.getElementById('keywords').value,
                 mandatory: mandatory,
                 post_author: profile.email
             }
+            console.log(body);
              const headers = {
                  "X-Scholistit-Auth": authHeader,
                  "Content-Type": "multipart/form-data"
@@ -76,9 +77,7 @@ export default function PostLesson( props ) {
     }
 
     
-    if(props.section === null || props.section === 'undefined'){
-        return null;
-    } else {
+    
         return (
             <Card style={{margin: '0 10px 20px 10px'}}>
             <div className="entry-header" style={{display: 'flex', justifyContent: 'space-between' }}>
@@ -170,11 +169,31 @@ export default function PostLesson( props ) {
                         onChange={(e) => setFormValues(e)}
                     ></TextField>
                 </FormControl>
+                {(props.section.schools) 
+                    ? <TextField type="hidden" value={props.section.schools} id="schools"></TextField>
+
+                    : null
+                }
+                {(props.section.teachers) 
+                    ? <TextField type="hidden" value={props.section.schools} id="teachers"></TextField>
+
+                    : null
+                }
+                {(props.section.grades) 
+                    ? <TextField type="hidden" value={props.section.schools} id="grades"></TextField>
+
+                    : null
+                }
+                {(props.section.subjects) 
+                    ? <TextField type="hidden" value={props.section.schools} id="subjects"></TextField>
+
+                    : null
+                }
                 <Button type="submit" variant="contained">Submit</Button>
                 </form>
                 </div>
             </Card>
         )
-    }
+    
     
 }
