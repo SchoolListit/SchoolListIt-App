@@ -28,7 +28,8 @@ export default function MyGoogleLogin() {
             wp_creds: {
                 username: userName.replace(' ', '_'),
                 email: response.profileObj.email,
-                password: response.tokenObj.access_token
+                password: response.tokenObj.access_token,
+                photoUrl: response.profileObj.imageUrl
             }
         }
         //context
@@ -63,7 +64,7 @@ export default function MyGoogleLogin() {
                 axios.post(url, formdata, {headers: headers})
                 .then( (res) => {
                     state.wpUserObj = res.data.user;
-                    profile.wpUserObj = state.wpUserObj;
+                    profile.wpUserObj = res.data.user;
                     setState(state);
 
                 })

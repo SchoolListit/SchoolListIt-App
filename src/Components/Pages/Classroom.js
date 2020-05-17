@@ -6,7 +6,7 @@ import { Context } from '../../Context/Context.js';
 import Header from '../Components/Header.js';
 import ContentCard from '../Components/ContentCard';
 import ClassPosts from '../Components/ClassPosts.js';
-import AddLessonPlan from '../Forms/AddLessonPlan.js';
+import PostLesson from '../Forms/PostLesson.js';
 import SingleAssignment from '../Components/SingleAssignment.js';
 import { Redirect } from 'react-router-dom';
 
@@ -34,7 +34,7 @@ export default function Classroom() {
     
     
     let query = useQuery();
-    console.log(query.get("pageID"));
+    //console.log(query.get("pageID"));
     
     let theClass = decodeURIComponent(classArgs).replace(":", "").split("-");
     const section = {
@@ -81,7 +81,7 @@ export default function Classroom() {
                         section={section} onClickAssignment={onClickAssignment}
                         />
                     </ContentCard>
-                    <AddLessonPlan></AddLessonPlan>
+                    <PostLesson section={section}></PostLesson>
                 </Grid>
                 { (post !== 'undefined')
                     ?
