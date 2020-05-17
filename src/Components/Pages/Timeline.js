@@ -7,8 +7,6 @@ import Header from '../Components/Header.js';
 export default function Timeline() {
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     
-
-    
     return(
         <React.Fragment>
             <Header profile={profile}></Header>

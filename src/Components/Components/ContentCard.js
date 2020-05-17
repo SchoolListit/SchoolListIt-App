@@ -1,6 +1,6 @@
 import React, { useContext }  from 'react';
 import { Context } from '../../Context/Context.js';
-import { Card, Avatar, Button } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
@@ -9,10 +9,8 @@ import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
     root: {
-        maxHeight: '300px',
-        flexBasis: '30%',
-        overflow: 'scroll-y',
-        margin: '0 10px 20px 10px'
+        flexBasis: '300px',
+        margin: '0 10px 20px 10px',
     },
   }));
 
@@ -27,7 +25,7 @@ export default function ContentCard( {mainTitle, subTitle, children, icon, iconT
 
     return (
         <React.Fragment>
-            <Card className={classes.root} elevation={3} >
+            <Paper className={classes.root} elevation={3} >
             <div className="entry-header" style={{display: 'flex', justifyContent: 'space-between' }}>
                     <div>
                         <h2 className="entry-title">{mainTitle}</h2>
@@ -38,10 +36,10 @@ export default function ContentCard( {mainTitle, subTitle, children, icon, iconT
                             : null}
                     
                 </div> 
-                <div className="entry-content" style={{maxHeight: '500px', overflow: 'auto', paddingRight: '20px'}}>
+                <div className="entry-content" style={{maxHeight: '500px', paddingRight: '20px', overflowY: 'scroll'}}>
                     {children}
                 </div> 
-            </Card>     
+            </Paper>     
         </React.Fragment>
     )
 }

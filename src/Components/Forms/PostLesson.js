@@ -9,7 +9,7 @@ export default function PostLesson( props ) {
     
     const [userLat, setUserLat] = useState('');
     const [userLng, setUserLng] = useState('');
-    const [mandatory, setMandatory] = useState(false);
+    const [mandatory, setMandatory] = useState(true);
     const url = 'http://localhost:8888/parentchecklist/wp-json/parent-checklist-rest/v2/assignments';
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
 
