@@ -3,28 +3,13 @@ import axios from 'axios';
 import moment from 'moment';
 import { Context } from '../../Context/Context.js'
 import { List, ListItem, ListItemText, ListItemSecondaryAction, Checkbox, Link} from '@material-ui/core';
+import MyCheckbox from './MyCheckBox.js';
 
-
-export default function ClassPosts( { section, onClickAssignment } ) {
+export default function ClassPosts( { section, onClickAssignment} ) {
     const [ lessons, setLessonPlans ] = useState([]);
-    const [checked, setChecked] = useState([1]);
     const [state, setState] = useContext(Context);
-    const { currentAssignment } = state; 
-
-    const handleToggle = (value) => () => {
-        const currentIndex = checked.indexOf(value);
-        const newChecked = [...checked];
-
-        if (currentIndex === -1) {
-        newChecked.push(value);
-        } else {
-        newChecked.splice(currentIndex, 1);
-        }
-
-        setChecked(newChecked);
-    };
-
-
+    const profile = JSON.parse(localStorage.getItem('scholistit_profile'))
+    const { user } = profile.wpUserObj
     /* Make API Call */
     useEffect(() => {
         let ignore = false;
@@ -47,14 +32,14 @@ export default function ClassPosts( { section, onClickAssignment } ) {
             
             if (!ignore) setLessonPlans(result.data.assignments);
         }
-
+        
         fetchData();
         return () => { ignore = true; }
     }, [section.grades, section.subjects, section.teachers]);
 /**
  * Under here is the render.
  */
-    if(lessons === 'undefined' || lessons.length === 0 ){
+    if(lessons === 'undefined' || lessons.length === 0 || state.initialChecked === null ){
         return (
         <React.Fragment>
             <List >
@@ -72,9 +57,19 @@ export default function ClassPosts( { section, onClickAssignment } ) {
                         <ListItem key={post.ID} button onClick={ () => onClickAssignment(post.ID)}>
                             <ListItemText>
                                 <h6>{moment(post.post_date).format('MM-DD')}</h6>
-                                <p style={{textTransform: 'capitalize'}}>{post.post_title}</p>
+                                <p style={{textTransform: 'capitalize'}}>{post.ID+' '+post.post_title}</p>
                             </ListItemText>
                             <ListItemSecondaryAction>
+                                {(state.initialChecked !== 'undefined')
+                                ? <MyCheckbox
+                                    postID = {post.ID}
+                                    userID={user.ID}
+                                    initialChecked = {post.complete}
+                                    ></MyCheckbox>
+                                : null
+                                }
+                            </ListItemSecondaryAction>
+                            {/*<ListItemSecondaryAction>
                                 <Checkbox
                                     edge="end"
                                     onChange={handleToggle(post.ID)}
@@ -82,6 +77,7 @@ export default function ClassPosts( { section, onClickAssignment } ) {
                                     inputProps={{ 'aria-labelledby': post.ID }}
                                 />
                             </ListItemSecondaryAction>
+                            */}
                         </ListItem>
                         </React.Fragment>
                     )

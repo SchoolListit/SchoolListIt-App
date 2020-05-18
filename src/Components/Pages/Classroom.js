@@ -55,6 +55,11 @@ export default function Classroom() {
         console.log(postID);
         setSinglePostID(postID);
     }
+
+    const onAddNew = (postBody) => {
+        console.log(postBody);
+        //setSinglePostID(postID);
+    }
         
     return (
         <React.Fragment>
@@ -78,10 +83,10 @@ export default function Classroom() {
                         subTitle={section.grades+" "+ section.subjects}
                         >
                         <ClassPosts
-                        section={section} onClickAssignment={onClickAssignment}
+                        section={section} onClickAssignment={onClickAssignment} profile={state.profile}
                         />
                     </ContentCard>
-                    <PostLesson section={section}></PostLesson>
+                    <PostLesson section={section} onAddNew={onAddNew}></PostLesson>
                 </Grid>
                 { (post !== 'undefined')
                     ?

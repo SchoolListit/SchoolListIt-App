@@ -6,12 +6,7 @@ export const Context = React.createContext();
 
 export function ContextController({children}){
 
-    const isLoggedIn = ( profile => {
-        console.log(profile);
-        if( profile.email === '' || profile.name === '' || profile.photo === ''){
-            return false;
-        }
-    })
+    
     let profile;
     // Initial state
     let initialState = {
@@ -23,6 +18,7 @@ export function ContextController({children}){
         profileUserPhoto: '',
         profileUserName: '',
         profileStudents: [],
+        initialChecked: null,
         profile: profile,
         teachers: [],
         schools: [],
@@ -37,7 +33,17 @@ export function ContextController({children}){
      const [state, setState] = useState(initialState);
 
      useEffect ( () => {
-
+        let profile = initialState.profile;
+            if (localStorage.getItem('scholistit_profile')) {
+              profile =  JSON.parse(localStorage.getItem('scholistit_profile'));
+            }
+        let body = {
+            user_id: profile.wpUserObj.user.ID,
+        } 
+        let formdata = new FormData();   
+        for (const property in body) {
+            formdata.append(property, body[property]);
+        }
         //go out to the api
         const promises = [];
         promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/wp/v2/teachers'));
@@ -46,8 +52,8 @@ export function ContextController({children}){
         promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/wp/v2/subjects'));
         promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/parent-checklist/v2/lesson-plans'));
         promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/wp/v2/assignments'));
-
-
+        promises.push(axios.post('http://localhost:8888/parentchecklist/wp-json/parent-checklist-rest/v2/user_data', formdata));
+    
         Promise.all(promises).then( res => {
 
             let teachers =  res[0].data
@@ -56,22 +62,13 @@ export function ContextController({children}){
             let subjects =  res[3].data
             let sections = Object.values(res[4].data.sections);
             let assignments = res[5].data;
-            let profileStudents = [];
+            let initialChecked = res[6].data;
 
+            let profileStudents = initialState.profileStudents;
             if (localStorage.getItem('scholistit_students')) {
-              profileStudents =  JSON.parse(localStorage.getItem('scholistit_students'));
+               profileStudents =  JSON.parse(localStorage.getItem('scholistit_students'));
             } 
-            let profile = initialState.profile;
-            if (localStorage.getItem('scholistit_profile')) {
-              profile =  JSON.parse(localStorage.getItem('scholistit_profile'));
-            } 
-
-            let loggedIn = true;
-            if( profile === null){
-                loggedIn =  false;
-            }
-        
-
+            
             setState( {
                 schools: schools,
                 teachers: teachers,
@@ -79,6 +76,7 @@ export function ContextController({children}){
                 subjects: subjects,
                 sections: sections,
                 assignments: assignments,
+                initialChecked: initialChecked,
                 currentAssignment: '',
                 profileIsSaved: false,
                 loginVerified: false,
@@ -89,7 +87,6 @@ export function ContextController({children}){
                 profileUserName: '',
                 profileStudents: profileStudents,
                 profile: profile,
-                loggedIn: loggedIn
             })
 
         });
