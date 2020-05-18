@@ -3,7 +3,7 @@ import { Container, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Context } from '../../Context/Context.js';
 import Classrooms from './Classrooms.js';
-import AddLessonPlan from '../Forms/AddLessonPlan.js'
+import PostLesson from '../Forms/PostLesson.js'
 import ContentCard from './ContentCard.js';
 
 const useStyles = makeStyles(() => ({
@@ -37,7 +37,7 @@ export default function Feed() {
                 spacing={1} 
                 >
                 <Grid item xs={12} md={4} > 
-                    <AddLessonPlan></AddLessonPlan>
+                    <PostLesson section="undefined"></PostLesson>
                 </Grid>
                 <Grid item xs={12} md={8} container > 
                     <Classrooms></Classrooms>

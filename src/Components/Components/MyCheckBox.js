@@ -6,14 +6,7 @@ export default function MyCheckBox( {userID, postID, initialChecked} ) {
     const initialCheck = (initialChecked.indexOf(userID.toString()) !== -1) ? true : false ;
     const [isChecked, setIsChecked] = useState(initialCheck);
 
-    
-
     const handleCheck = (value) => {
-        //we need to toggle the initial check state
-        console.log(value)
-        
-        
-        
         let url = 'http://localhost:8888/parentchecklist/wp-json/parent-checklist-rest/v2/mark_complete';
         //make 2nd call
         axios.post(url)
@@ -36,7 +29,6 @@ export default function MyCheckBox( {userID, postID, initialChecked} ) {
             }    
             axios.post(url, formdata, {headers: headers})
             .then( res => {
-                console.log(res.data);
                 setIsChecked(!value);
             })
 

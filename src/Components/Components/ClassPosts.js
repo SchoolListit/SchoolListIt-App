@@ -60,7 +60,7 @@ export default function ClassPosts( { section, onClickAssignment} ) {
                                 <p style={{textTransform: 'capitalize'}}>{post.ID+' '+post.post_title}</p>
                             </ListItemText>
                             <ListItemSecondaryAction>
-                                {(state.initialChecked !== 'undefined')
+                                {(state.initialChecked !== 'undefined' && user.ID !== 'undefined')
                                 ? <MyCheckbox
                                     postID = {post.ID}
                                     userID={user.ID}

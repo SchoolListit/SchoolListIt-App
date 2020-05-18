@@ -3,6 +3,7 @@ import axios from 'axios';
 import moment from 'moment';
 import { Context } from '../../Context/Context.js'
 import { List, ListItem, ListItemText, ListItemSecondaryAction, Checkbox, ListItemAvatar, Avatar} from '@material-ui/core';
+import MyCheckBox from '../Components/MyCheckBox.js'
 
 
 export default function ClassAssignments( { section, link } ) {
@@ -11,7 +12,7 @@ export default function ClassAssignments( { section, link } ) {
     const [state, setState] = useContext(Context);
     const { currentAssignment } = state; 
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
-    //({ wpUserObj } = profile);
+    const userID = profile.wpUserObj.wp_user.ID
 
     const handleToggle = (value) => () => {
         const currentIndex = checked.indexOf(value);
@@ -103,6 +104,7 @@ export default function ClassAssignments( { section, link } ) {
                 
         return (
             <List>{
+                    
                     posts.map( (post, index) => {
                     return (
                         <React.Fragment key={"fragment"+post.ID}>
@@ -117,12 +119,14 @@ export default function ClassAssignments( { section, link } ) {
                             </ListItemText>
                            
                             <ListItemSecondaryAction>
-                                <Checkbox
-                                    edge="end"
-                                    onChange={handleToggle(post.ID)}
-                                    checked={checked.indexOf(post.ID) !== -1}
-                                    inputProps={{ 'aria-labelledby': post.ID }}
-                                />
+                                {(state.initialChecked !== 'undefined' && userID !== 'undefined')
+                                    ? <MyCheckBox
+                                        postID = {post.ID}
+                                        userID={userID}
+                                        initialChecked = {post.complete}
+                                        ></MyCheckBox>
+                                    : null
+                                }
                             </ListItemSecondaryAction>
                         </ListItem>
                         </React.Fragment>
