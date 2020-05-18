@@ -1,8 +1,17 @@
-import React from 'react';
-
+import React, {useContext} from 'react';
+import { FormControl, TextField, Card, Button, InputLabel, MenuItem, Select  } from '@material-ui/core';
+import { Context } from '../../../Context/Context.js';
+import ChooseWPTerm from './ChooseWPTerm.js';
 
 export default function SectionSubForm( props ) {
-    if(section !== false){
+    const [state, setState] = useContext(Context);
+    const grades = [
+       'Pre-K', 'K', '1st', '2nd', '3rd', '4th', 
+       '5th', '6th', '7th', '8th', '9th',
+       '10th', '11th', '12th', 'Undergraduate', 'Graduate'
+     ]
+
+    if(props.section !== false){
         return (
             <React.Fragment>
                 <TextField type="hidden" value={props.section.schools} id="schools"></TextField>
@@ -14,8 +23,13 @@ export default function SectionSubForm( props ) {
     } else {
         return (
             <React.Fragment>
-
+                <ChooseWPTerm taxonomy="schools" data={state.schools}></ChooseWPTerm>
+                <ChooseWPTerm taxonomy="teachers" data={state.teachers}></ChooseWPTerm>
+                <ChooseWPTerm taxonomy="grades" data={state.grades}></ChooseWPTerm>
+                <ChooseWPTerm taxonomy="subjects" data={state.subjects}></ChooseWPTerm>
             </React.Fragment>
         )
+        
     }
+    
 }

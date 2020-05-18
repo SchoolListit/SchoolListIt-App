@@ -2,6 +2,7 @@ import React, { useContext, useState }  from 'react';
 import { FormControl, TextField, Card, Button, InputLabel, MenuItem, Select  } from '@material-ui/core';
 import { Context } from '../../Context/Context.js';
 import ContentCard from '../Components/ContentCard.js';
+import SectionSubForm from './components/SectionSubForm.js'
 import axios from 'axios';
 
 //here is  the component
@@ -12,8 +13,8 @@ export default function PostLesson( props ) {
     const [mandatory, setMandatory] = useState(true);
     const url = 'http://localhost:8888/parentchecklist/wp-json/parent-checklist-rest/v2/assignments';
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
-
-    console.log(profile);
+    const [state] = useContext(Context);
+    const [localState, setLocalState] = useState([]);
 
     const onFocusInput = () => {
             navigator.geolocation.getCurrentPosition((position) => {
@@ -83,9 +84,17 @@ export default function PostLesson( props ) {
             <Card style={{margin: '0 10px 20px 10px'}}>
             <div className="entry-header" style={{display: 'flex', justifyContent: 'space-between' }}>
                 <div>
-                    <h2 className="entry-title">Post New Lesson</h2>
-                    <h3 className="entry-subtitle">{props.section.schools+" "+props.section.teachers}</h3>
-                    <h3 className="entry-subtitle">{props.section.grades+" "+props.section.subjects}</h3>
+                    <h2 className="entry-title">Post A New Lesson</h2>
+                    {  (props.section !== true) 
+                        ? <React.Fragment>
+                            <h3 className="entry-subtitle">for any class</h3>
+                        </React.Fragment>
+                        : 
+                        <React.Fragment>
+                            <h3 className="entry-subtitle">{props.section.schools+" "+props.section.teachers}</h3>
+                            <h3 className="entry-subtitle">{props.section.grades+" "+props.section.subjects}</h3>
+                        </React.Fragment>
+                    }
                 </div>    
                     
             </div> 
@@ -170,26 +179,7 @@ export default function PostLesson( props ) {
                         onChange={(e) => setFormValues(e)}
                     ></TextField>
                 </FormControl>
-                {(props.section.schools) 
-                    ? <TextField type="hidden" value={props.section.schools} id="schools"></TextField>
-
-                    : null
-                }
-                {(props.section.teachers) 
-                    ? <TextField type="hidden" value={props.section.schools} id="teachers"></TextField>
-
-                    : null
-                }
-                {(props.section.grades) 
-                    ? <TextField type="hidden" value={props.section.schools} id="grades"></TextField>
-
-                    : null
-                }
-                {(props.section.subjects) 
-                    ? <TextField type="hidden" value={props.section.schools} id="subjects"></TextField>
-
-                    : null
-                }
+                <SectionSubForm section={props.section} sections={props.sections}></SectionSubForm>
                 <Button type="submit" variant="contained">Submit</Button>
                 </form>
                 </div>

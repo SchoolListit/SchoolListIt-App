@@ -37,7 +37,13 @@ export default function Feed() {
                 spacing={1} 
                 >
                 <Grid item xs={12} md={4} > 
-                    <PostLesson section="undefined"></PostLesson>
+                    <PostLesson 
+                        section={false} 
+                        grades={state.grades} 
+                        teachers={state.teachers}
+                        subjects={state.subjects}
+                        schools={state.schools}
+                        ></PostLesson>
                 </Grid>
                 <Grid item xs={12} md={8} container > 
                     <Classrooms></Classrooms>

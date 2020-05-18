@@ -35,15 +35,16 @@ export function ContextController({children}){
      useEffect ( () => {
         let profile = initialState.profile;
             if (localStorage.getItem('scholistit_profile')) {
-              profile =  JSON.parse(localStorage.getItem('scholistit_profile'));
+                profile =  JSON.parse(localStorage.getItem('scholistit_profile'));
+                let body = {
+                    user_id: profile.wpUserObj.user.ID,
+                    } 
+                const formdata = new FormData();   
+                for (const property in body) {
+                    formdata.append(property, body[property]);
+                }
             }
-        let body = {
-            user_id: profile.wpUserObj.user.ID,
-        } 
-        let formdata = new FormData();   
-        for (const property in body) {
-            formdata.append(property, body[property]);
-        }
+        
         //go out to the api
         const promises = [];
         promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/wp/v2/teachers'));
@@ -52,7 +53,9 @@ export function ContextController({children}){
         promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/wp/v2/subjects'));
         promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/parent-checklist/v2/lesson-plans'));
         promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/wp/v2/assignments'));
-        promises.push(axios.post('http://localhost:8888/parentchecklist/wp-json/parent-checklist-rest/v2/user_data', formdata));
+        /*if(formdata !== 'undefined') {
+            promises.push(axios.post('http://localhost:8888/parentchecklist/wp-json/parent-checklist-rest/v2/user_data', formdata))
+        }*/
     
         Promise.all(promises).then( res => {
 
@@ -62,7 +65,7 @@ export function ContextController({children}){
             let subjects =  res[3].data
             let sections = Object.values(res[4].data.sections);
             let assignments = res[5].data;
-            let initialChecked = res[6].data;
+            //let initialChecked = res[6].data;
 
             let profileStudents = initialState.profileStudents;
             if (localStorage.getItem('scholistit_students')) {
@@ -76,7 +79,7 @@ export function ContextController({children}){
                 subjects: subjects,
                 sections: sections,
                 assignments: assignments,
-                initialChecked: initialChecked,
+                initialChecked: null,
                 currentAssignment: '',
                 profileIsSaved: false,
                 loginVerified: false,
