@@ -54,7 +54,7 @@ export default function ClassAssignments( { section, link } ) {
                     posts.map( (post, index) => {
                     return (
                         <React.Fragment key={"fragment"+post.ID}>
-                        <ListItem key={post.ID} button >
+                        <ListItem key={post.ID}  >
                            
                             <ListItemAvatar>
                                 <Avatar alt="Posted By" src={post.author_avatar}></Avatar>

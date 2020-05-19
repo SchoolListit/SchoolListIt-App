@@ -28,9 +28,22 @@ export default function PostLesson( props ) {
     //submit the form
     const onSubmit = (e) =>{
         e.preventDefault();
-
+        let body = {
+            due_date: document.getElementById('due_date').value,
+            post_date: document.getElementById('post_date').value,
+            post_title: document.getElementById('post_title').value,
+            post_excerpt: document.getElementById('post_excerpt').value,
+            grades: document.getElementById('grades').value,
+            schools: document.getElementById('schools').value,
+            teachers: document.getElementById('teachers').value,
+            subjects: document.getElementById('subjects').value,
+            keywords: document.getElementById('keywords').value,
+            mandatory: mandatory,
+            post_author: profile.email,
+            author_avatar: profile.photo
+        }
          //create post
-         axios.get(url)
+         axios.get(url, body)
          .then( (res) => {
              const salt = res.data['salt'];
              const key = 'aVdG#D.KRFXw)dr!37}BrpkxdQM8N4';
@@ -39,20 +52,7 @@ export default function PostLesson( props ) {
              //now we have to set up the formdata and send headers, etc
              //set up form data
              let formdata = new FormData();                     
-             let body = {
-                due_date: document.getElementById('due_date').value,
-                post_date: document.getElementById('post_date').value,
-                post_title: document.getElementById('post_title').value,
-                post_excerpt: document.getElementById('post_excerpt').value,
-                grades: document.getElementById('grades').value,
-                schools: document.getElementById('schools').value,
-                teachers: document.getElementById('teachers').value,
-                subjects: document.getElementById('subjects').value,
-                keywords: document.getElementById('keywords').value,
-                mandatory: mandatory,
-                post_author: profile.email,
-                author_avatar: profile.photo
-            }
+             
             console.log(body);
              const headers = {
                  "X-Scholistit-Auth": authHeader,
