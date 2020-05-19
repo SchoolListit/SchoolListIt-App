@@ -36,13 +36,6 @@ export function ContextController({children}){
         let profile = initialState.profile;
             if (localStorage.getItem('scholistit_profile')) {
                 profile =  JSON.parse(localStorage.getItem('scholistit_profile'));
-                let body = {
-                    user_id: profile.wpUserObj.user.ID,
-                    } 
-                const formdata = new FormData();   
-                for (const property in body) {
-                    formdata.append(property, body[property]);
-                }
             }
         
         //go out to the api
@@ -94,7 +87,7 @@ export function ContextController({children}){
 
         });
 
-     }, [initialState.profile]);
+     }, []);
 
 
     return(

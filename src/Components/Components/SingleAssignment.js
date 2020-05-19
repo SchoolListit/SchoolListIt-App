@@ -48,7 +48,7 @@ export default function SingleAssignment( {postID} ) {
                     <div className="wp-post-content">
                         {(post.imageUrl !== false)
                             ?
-                            <img src={post.imageUrl} className={classes.featuredImage}/>
+                            <img src={post.imageUrl} alt={"image of"+post.title.rendered} className={classes.featuredImage}/>
                             :
                             null
                         } 

@@ -37,6 +37,7 @@ export default function Classroom() {
     //console.log(query.get("pageID"));
     
     let theClass = decodeURIComponent(classArgs).replace(":", "").split("-");
+    
     const section = {
         schools: theClass[0],
         teachers: theClass[1],
@@ -45,9 +46,14 @@ export default function Classroom() {
         key: theClass
     }
 
+    console.log(section)
+    
+
    const post = assignments.map( post => {
         if(currentAssignment === post.id){
             return post;
+        } else {
+            return null;
         }
     })
 

@@ -11,23 +11,21 @@ export default function Classrooms({ }) {
 
 
     return (
-        sections.map( (section, index) => {
-            let link = encodeURI(section.schools+'-'+section.teachers+'-'+section.subjects+'-'+section.grades);
-            console.log(link);
-            return (
-                <ContentCard
-                    key={index}
-                    mainTitle={section.schools+" "+ section.teachers}
-                    subTitle={section.grades+" "+ section.subjects}
-                    icon="door-open"
-                    iconTo={"/classrooms/:"+link}
-                    >
-                    <ClassAssignments 
-                    section={section} link={link}
-                    />
-                </ContentCard>
-            )
-        })
-    )
-   
+            sections.map( (section, index) => {
+                let link = encodeURI(section.schools+'-'+section.teachers+'-'+section.subjects+'-'+section.grades);
+                return (
+                    <ContentCard
+                        key={index}
+                        mainTitle={section.schools+" "+ section.teachers}
+                        subTitle={section.grades+" "+ section.subjects}
+                        icon="door-open"
+                        iconTo={"/classrooms/:"+link}
+                        >
+                        <ClassAssignments 
+                        section={section} link={link}
+                        />
+                    </ContentCard>
+                )
+            })
+        )
 }
