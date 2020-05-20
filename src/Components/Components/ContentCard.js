@@ -4,12 +4,13 @@ import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import  ListActions from '../Components/ListActions.js';
 
 
 
 const useStyles = makeStyles(() => ({
     root: {
-        flexBasis: '350px',
+        
         margin: '0 10px 20px 10px',
     },
   }));
@@ -39,6 +40,7 @@ export default function ContentCard( {mainTitle, subTitle, children, icon, iconT
                 <div className="entry-content" style={{ overflowX: 'hidden', overflowY: 'scroll', maxHeight: '500px'}}>
                     {children}
                 </div> 
+                <ListActions></ListActions>
             </Paper>     
         </React.Fragment>
     )
