@@ -3,15 +3,18 @@ import axios from 'axios';
 import moment from 'moment';
 import { Context } from '../../Context/Context.js'
 import { List, ListItem, ListItemText, ListItemSecondaryAction, ListItemAvatar, Avatar} from '@material-ui/core';
-import MyCheckBox from '../Components/MyCheckBox.js'
+import MyCheckBox from '../Components/MyCheckBox.js';
+import TheAssignment from '../Components/TheAssignment.js'
 
 
-export default function ClassAssignments( { section, link } ) {
+export default function ClassAssignments( { section, link, newPost, showNewPost, newSection, ShowNewSection } ) {
     const [ lessons, setLessonPlans ] = useState([]);
-    const [state] = useContext(Context);
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const userID = profile.wpUserObj.wp_user.ID
 
+    const onClickAssignment = () => {
+        
+    }
     
     /* Make API Call */
     useEffect(() => {
@@ -49,33 +52,11 @@ export default function ClassAssignments( { section, link } ) {
         const { posts } = lessons.assignments;
                 
         return (
-            <List>{
+            <List style={{paddingTop: '0px'}}>{
                     
                     posts.map( (post, index) => {
                     return (
-                        <React.Fragment key={"fragment"+post.ID}>
-                        <ListItem key={post.ID}  >
-                           
-                            <ListItemAvatar>
-                                <Avatar alt="Posted By" src={post.author_avatar}></Avatar>
-                            </ListItemAvatar>
-                            <ListItemText>
-                                <h6>{moment(post.post_date).format('MM-DD')}</h6>
-                                <p style={{textTransform: 'capitalize'}}>{post.post_title}</p>
-                            </ListItemText>
-                           
-                            <ListItemSecondaryAction>
-                                {(state.initialChecked !== 'undefined' && userID !== 'undefined')
-                                    ? <MyCheckBox
-                                        postID = {post.ID}
-                                        userID={userID}
-                                        initialChecked = {post.complete}
-                                        ></MyCheckBox>
-                                    : null
-                                }
-                            </ListItemSecondaryAction>
-                        </ListItem>
-                        </React.Fragment>
+                        <TheAssignment key={post.ID} post={post} userID={userID} onClickAssignment={onClickAssignment}></TheAssignment>
                     )
                  })
                 }

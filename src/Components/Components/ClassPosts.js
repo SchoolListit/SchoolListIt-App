@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import { Context } from '../../Context/Context.js'
 import { List, ListItem, ListItemText, ListItemSecondaryAction, ListItemAvatar, Avatar} from '@material-ui/core';
 import MyCheckbox from './MyCheckBox.js';
+import ListItemAssignment from './ListItemAssignment.js'
 
 export default function ClassPosts( { section, onClickAssignment} ) {
     const [ lessons, setLessonPlans ] = useState([]);
-    const [state, setState] = useContext(Context);
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const userID = profile.wpUserObj.wp_user.ID
     /* Make API Call */
@@ -53,30 +53,7 @@ export default function ClassPosts( { section, onClickAssignment} ) {
             <List>{
                     posts.map( (post, index) => {
                     return (
-                        <React.Fragment key={"fragment"+post.ID}>
-                        <ListItem key={post.ID} button onClick={ () => onClickAssignment(post.ID)}>
-                            <ListItemAvatar>
-                                <Avatar alt="Posted By" src={post.author_avatar}></Avatar>
-                            </ListItemAvatar>
-                            <ListItemText>
-                                <h6>{moment(post.post_date).format('MM-DD')}</h6>
-                                <p style={{textTransform: 'capitalize'}}>{post.ID+' '+post.post_title}</p>
-                            </ListItemText>
-                            <ListItemSecondaryAction>
-                            {console.log(userID)}
-                                {(userID !== 'undefined' )
-                                ? <MyCheckbox
-                                postID = {post.ID}
-                                userID={userID}
-                                initialChecked = {post.complete}
-                            ></MyCheckbox>
-                                    
-                                : null
-                                }
-                            </ListItemSecondaryAction>
-                            
-                        </ListItem>
-                        </React.Fragment>
+                        <ListItemAssignment key={post.ID} post={post} onClickAssignment={onClickAssignment} userID={userID}></ListItemAssignment>
                     )
                  })
                 }

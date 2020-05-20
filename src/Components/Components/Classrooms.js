@@ -5,7 +5,7 @@ import ClassAssignments from './ClassAssignments.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
-export default function Classrooms({ }) {
+export default function Classrooms({ newPost, showNewPost, newSection, showNewSection}) {
     const [state, setState] = useContext(Context);
     const { sections } = state;
 
@@ -22,7 +22,7 @@ export default function Classrooms({ }) {
                         iconTo={"/classrooms/:"+link}
                         >
                         <ClassAssignments 
-                        section={section} link={link}
+                        section={section} link={link} showNewPost={showNewPost} newPost={newPost} newSection={newSection} showNewSection={showNewSection}
                         />
                     </ContentCard>
                 )

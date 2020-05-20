@@ -14,7 +14,8 @@ export default function PostLesson( props ) {
     const url = 'http://localhost:8888/parentchecklist/wp-json/parent-checklist-rest/v2/assignments';
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const [state] = useContext(Context);
-    const [localState, setLocalState] = useState([]);
+    const [newPost, setNewPost] = useState("");
+    const { showNewPost, showNewSection } = props;
 
     const onFocusInput = () => {
             navigator.geolocation.getCurrentPosition((position) => {
@@ -23,12 +24,16 @@ export default function PostLesson( props ) {
                 setUserLng(position.coords.longitude)
               });   
     }
+
+    const clearForm = () => {
+        
+    }
     
 
     //submit the form
     const onSubmit = (e) =>{
         e.preventDefault();
-        let body = {
+        const body = {
             due_date: document.getElementById('due_date').value,
             post_date: document.getElementById('post_date').value,
             post_title: document.getElementById('post_title').value,
@@ -42,6 +47,8 @@ export default function PostLesson( props ) {
             post_author: profile.email,
             author_avatar: profile.photo
         }
+        clearForm();
+        
          //create post
          axios.get(url, body)
          .then( (res) => {
@@ -52,8 +59,6 @@ export default function PostLesson( props ) {
              //now we have to set up the formdata and send headers, etc
              //set up form data
              let formdata = new FormData();                     
-             
-            console.log(body);
              const headers = {
                  "X-Scholistit-Auth": authHeader,
                  "Content-Type": "multipart/form-data"
@@ -64,8 +69,9 @@ export default function PostLesson( props ) {
              //make 2nd call
              axios.post(url, formdata, {headers: headers})
              .then( (res) => {
-                 //lets do some business
-                 console.log(res.data);
+                //showNewPost(res.data.post);
+                //showNewSection(body.newSection);
+                //console.log(res.data);
              })
          });
     }
@@ -98,7 +104,7 @@ export default function PostLesson( props ) {
                 </div>    
                     
             </div> 
-            <div className="entry-content" style={{overflow: 'auto', paddingRight: '20px'}}>
+            <div className="entry-content" style={{overflowX: 'auto', overflowY: 'scroll', maxHeight: '500px', padding: '20px'}}>
                 <form onSubmit={(e) => onSubmit(e)} >
                 <FormControl margin="normal" fullWidth={true}>
                     <TextField

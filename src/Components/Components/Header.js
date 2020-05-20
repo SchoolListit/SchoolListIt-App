@@ -56,21 +56,15 @@ const useStyles = makeStyles((theme) => ({
                         </Link>
                     </button>
                     
-                    <button >
-                        <FontAwesomeIcon icon="school" ></FontAwesomeIcon>
-                    </button>
-    
-                    <button >
-                        <FontAwesomeIcon icon="globe-americas" ></FontAwesomeIcon>
-                    </button>
-    
+                    <Button>
+                        <Link to="/about">
+                            <FontAwesomeIcon icon="question-circle" ></FontAwesomeIcon>
+                        </Link>
+                    </Button>
+                        
                     <Button onClick={ () => profileClick()}>
                         <Avatar alt={profile.name} src={profile.photo}></Avatar>
                     </Button>
-                    
-                    <a href="/about">
-                        <FontAwesomeIcon icon="question-circle" ></FontAwesomeIcon>
-                    </a>
                     
                 </div> 
                 

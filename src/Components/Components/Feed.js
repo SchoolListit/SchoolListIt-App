@@ -23,10 +23,21 @@ const useStyles = makeStyles(() => ({
 
 export default function Feed() {
     const [state, setState] = useContext(Context);
+    const [newPostData, setNewPostData] = useState('');
+    const [newSectionData, setNewSectionData] = useState('');
     const { assignments } = state;
     const classes = useStyles();
 
-    
+    const showNewPostData = (newPost) => {
+        setNewPostData(newPost);
+        console.log(newPostData)
+    }
+
+    const showNewSection = (newSection) => {
+        setNewSectionData(newSection);
+        console.log(newSectionData)
+    }
+
     return (
         <Container 
         maxWidth={false}
@@ -36,17 +47,19 @@ export default function Feed() {
                 container 
                 spacing={1} 
                 >
-                <Grid item xs={12} md={4} > 
+                <Grid item xs={12} md={3} > 
                     <PostLesson 
                         section={false} 
                         grades={state.grades} 
                         teachers={state.teachers}
                         subjects={state.subjects}
                         schools={state.schools}
+                        showNewPost={showNewPostData}
+                        showNewSection={showNewSection}
                         ></PostLesson>
                 </Grid>
-                <Grid item xs={12} md={8} container > 
-                    <Classrooms></Classrooms>
+                <Grid item xs={12} md={9} container > 
+                    <Classrooms newPost={newPostData} showNewPost={showNewPostData} newSection={newSectionData} showNewSection={showNewSection}></Classrooms>
                 </Grid>
             </Grid>
         </Container>

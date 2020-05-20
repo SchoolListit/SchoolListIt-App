@@ -1,8 +1,19 @@
 import React, { useState } from 'react';
 import { List, ListItem, ListItemText, ListItemSecondaryAction, Checkbox, Link, ListItemIcon} from '@material-ui/core';
-import axios from 'axios'
+import axios from 'axios';
+import { makeStyles } from '@material-ui/core/styles';
+
+
+
+
+const useStyles = makeStyles(() => ({
+    root: {
+        minWidth: '0',
+    }
+  }));
 
 export default function MyCheckBox( {userID, postID, initialChecked} ) {
+    const classes = useStyles();
     const initialCheck = (initialChecked.indexOf(userID.toString()) !== -1) ? true : false ;
     const [isChecked, setIsChecked] = useState(initialCheck);
 
@@ -40,9 +51,8 @@ export default function MyCheckBox( {userID, postID, initialChecked} ) {
     } else {
         return (
                 <React.Fragment>
-                    <ListItemIcon key={postID} onClick={() => handleCheck(isChecked)}>
+                    <ListItemIcon className={classes.root} key={postID} onClick={() => handleCheck(isChecked)}>
                         <Checkbox
-                        edge="end"
                         checked={isChecked}
                         inputProps={{ 'aria-labelledby': postID }}
                         />

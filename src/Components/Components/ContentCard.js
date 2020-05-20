@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
     root: {
-        flexBasis: '300px',
+        flexBasis: '350px',
         margin: '0 10px 20px 10px',
     },
   }));
@@ -36,7 +36,7 @@ export default function ContentCard( {mainTitle, subTitle, children, icon, iconT
                             : null}
                     
                 </div> 
-                <div className="entry-content" style={{maxHeight: '500px', paddingRight: '20px', overflowY: 'scroll'}}>
+                <div className="entry-content" style={{ overflowX: 'hidden', overflowY: 'scroll', maxHeight: '500px'}}>
                     {children}
                 </div> 
             </Paper>     

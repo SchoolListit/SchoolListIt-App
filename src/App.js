@@ -35,11 +35,13 @@ const theme = createMuiTheme({
         '@font-face': 'Quicksand',
       },
     },
+    
   },
   palette: {
     primary: teal,
     secondary: grey,
   },
+  
 });
 
 const useStyles = makeStyles(() => ({

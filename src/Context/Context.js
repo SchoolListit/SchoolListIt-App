@@ -45,7 +45,7 @@ export function ContextController({children}){
         promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/wp/v2/grades'));
         promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/wp/v2/subjects'));
         promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/parent-checklist/v2/lesson-plans'));
-        promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/wp/v2/assignments'));
+        //promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/wp/v2/assignments'));
         /*if(formdata !== 'undefined') {
             promises.push(axios.post('http://localhost:8888/parentchecklist/wp-json/parent-checklist-rest/v2/user_data', formdata))
         }*/
@@ -57,7 +57,7 @@ export function ContextController({children}){
             let grades =  res[2].data
             let subjects =  res[3].data
             let sections = Object.values(res[4].data.sections);
-            let assignments = res[5].data;
+            //let assignments = res[5].data;
             //let initialChecked = res[6].data;
 
             let profileStudents = initialState.profileStudents;
@@ -71,7 +71,7 @@ export function ContextController({children}){
                 grades: grades,
                 subjects: subjects,
                 sections: sections,
-                assignments: assignments,
+                //assignments: assignments,
                 initialChecked: null,
                 currentAssignment: '',
                 profileIsSaved: false,

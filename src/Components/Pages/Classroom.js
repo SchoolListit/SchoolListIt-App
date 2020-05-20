@@ -6,6 +6,7 @@ import { Context } from '../../Context/Context.js';
 import Header from '../Components/Header.js';
 import ContentCard from '../Components/ContentCard';
 import ClassPosts from '../Components/ClassPosts.js';
+import NewAssignments from '../Components/NewAssignments.js';
 import PostLesson from '../Forms/PostLesson.js';
 import SingleAssignment from '../Components/SingleAssignment.js';
 import { Redirect } from 'react-router-dom';
@@ -30,6 +31,7 @@ export default function Classroom() {
     const [state, setState] = useContext(Context);
     const { assignments, currentAssignment, loggedIn } = state; 
     const [singlePostID, setSinglePostID] = useState('');
+    const [newPostData, setNewPostData] = useState('');
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     
     
@@ -46,16 +48,12 @@ export default function Classroom() {
         key: theClass
     }
 
-    console.log(section)
     
 
-   const post = assignments.map( post => {
-        if(currentAssignment === post.id){
-            return post;
-        } else {
-            return null;
-        }
-    })
+    const showNewPostData = (newPost) => {
+        setNewPostData(newPost);
+    }
+
 
     const onClickAssignment = (postID) => {
         console.log(postID);
@@ -64,43 +62,35 @@ export default function Classroom() {
 
     const onAddNew = (postBody) => {
         console.log(postBody);
-        //setSinglePostID(postID);
     }
         
     return (
         <React.Fragment>
             <Header></Header>
             <Container 
-            fixed={true} 
             maxWidth={false}
-            style={{padding: '30px 0'}}
+            style={{padding: '30px 20px'}}
             >
             {(!profile)
                 ?   <Redirect to="/sign-in" exact />
                 : null }    
-            <Grid 
-                container 
-                >
+            <Grid container style={{margintop: "0"}}>
                 <Grid item xs={12} md={4}>
-                
                     <ContentCard
                         key={classArgs}
                         mainTitle={section.schools+" "+ section.teachers}
                         subTitle={section.grades+" "+ section.subjects}
                         >
+                        <NewAssignments style={{listStyle: 'none'}} post={newPostData} onClickAssignment={onClickAssignment} profile={state.profile}></NewAssignments>
                         <ClassPosts
                         section={section} onClickAssignment={onClickAssignment} profile={state.profile}
                         />
                     </ContentCard>
-                    <PostLesson section={section} onAddNew={onAddNew}></PostLesson>
+                    <PostLesson section={section} onAddNew={onAddNew} showNewPost={showNewPostData}></PostLesson>
                 </Grid>
-                { (post !== 'undefined')
-                    ?
-                    <Grid item xs={12} md={8} >    
-                        <SingleAssignment postID={singlePostID} ></SingleAssignment>
-                    </Grid>    
-                    : null
-                }
+                <Grid item xs={12} md={8} >    
+                    <SingleAssignment postID={singlePostID} ></SingleAssignment>
+                </Grid>    
             </Grid>
         </Container> 
         </React.Fragment>
