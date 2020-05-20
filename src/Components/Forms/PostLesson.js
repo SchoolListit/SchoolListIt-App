@@ -45,7 +45,13 @@ export default function PostLesson( props ) {
             keywords: document.getElementById('keywords').value,
             mandatory: mandatory,
             post_author: profile.email,
-            author_avatar: profile.photo
+            author_avatar: profile.photo,
+            newSection: {
+                grades: document.getElementById('grades').value,
+                schools: document.getElementById('schools').value,
+                teachers: document.getElementById('teachers').value,
+                subjects: document.getElementById('subjects').value
+            }
         }
         clearForm();
         
@@ -69,9 +75,8 @@ export default function PostLesson( props ) {
              //make 2nd call
              axios.post(url, formdata, {headers: headers})
              .then( (res) => {
-                //showNewPost(res.data.post);
-                //showNewSection(body.newSection);
-                //console.log(res.data);
+                showNewPost(res.data.post);
+                showNewSection(body.newSection);
              })
          });
     }

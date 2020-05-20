@@ -4,13 +4,13 @@ import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import  ListActions from '../Components/ListActions.js';
+import  ListActions from '../Components/ListActions.js'
 
 
 
 const useStyles = makeStyles(() => ({
     root: {
-        
+        flexBasis: '350px',
         margin: '0 10px 20px 10px',
     },
   }));

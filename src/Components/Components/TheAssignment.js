@@ -29,7 +29,7 @@ export default function TheAssignment( {post, onClickAssignment, userID }) {
             <React.Fragment key={"post_"+post.ID}>
             <ListItem key={"post-"+post.ID} button onClick={ () => onClickAssignment(post.ID)} className={classes.listItemRoot}>
                 
-                <Typography variant="subtitle2" style={{fontWeight: '700', marginBottom: '5px'}}>
+                <Typography variant="subtitle2" style={{fontWeight: '700'}}>
                     
                     {moment(post.assigned_date).format('MM-DD dddd ')+" "} 
                     {(post.mandatory === 'false')
@@ -42,12 +42,12 @@ export default function TheAssignment( {post, onClickAssignment, userID }) {
                         : null
                     }   
                 </Typography> 
-                <Grid container justify="space-between" flexwrap="nowrap" alignItems="center" spacing={2}>
+                <Typography variant="body1" style={{textTransform: 'capitalize'}} >{post.post_title}</Typography>
+                <Grid container justify="space-between" flexwrap="nowrap" alignItems="flex-start" spacing={2}>
                     <Grid item xs={2} >
                         <Avatar alt="Posted By" src={post.author_avatar}></Avatar>
                     </Grid>
                     <Grid item xs={8}>
-                        <Typography variant="body1" style={{textTransform: 'capitalize'}} >{post.post_title}</Typography>
                         <Typography variant="body2"  >{post.post_excerpt}</Typography>
                     </Grid>
                     <Grid item xs={2} zeroMinWidth style={{paddingLeft: '5px'}}>

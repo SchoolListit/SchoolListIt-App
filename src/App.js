@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faBars, faSearch, faDoorOpen,faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faCommentAlt, faShare, faBars, faSearch, faDoorOpen,faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas } from '@fortawesome/free-solid-svg-icons';
 import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import { grey, teal} from '@material-ui/core/colors';
 import { CssBaseline, Container } from '@material-ui/core';
@@ -16,11 +16,11 @@ import School from './Components/Pages/School.js';
 import PageFourOFour from './Components/Pages/PageFourOFour.js';
 import ScreenOptions from './Components/Components/ScreenOptions.js';
 
-import { ContextController, Context } from "./Context/Context.js";
+import {  ContextController, Context } from "./Context/Context.js";
 import './App.scss';
 
 
-library.add(faBars, faSearch, faDoorOpen, faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas);
+library.add(faThumbsUp, faCommentAlt, faShare, faBars, faSearch, faDoorOpen, faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas);
 
 
 const theme = createMuiTheme({

@@ -50,7 +50,8 @@ export default function ClassPosts( { section, onClickAssignment} ) {
         const { posts } = lessons.assignments;
                 
         return (
-            <List>{
+            <List>
+                { 
                     posts.map( (post, index) => {
                     return (
                         <ListItemAssignment key={post.ID} post={post} onClickAssignment={onClickAssignment} userID={userID}></ListItemAssignment>
