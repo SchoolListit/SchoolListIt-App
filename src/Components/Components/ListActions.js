@@ -21,9 +21,9 @@ export default function ListActions( props ) {
 
     return (
         <Grid className={classes.root} container justify="space-between" alignItems="flex-start">
-            <Grid item onClick={() => onClickAdd(section)}>
+            {/*<Grid item onClick={() => onClickAdd(section)}>
                 <Typography><FontAwesomeIcon icon="plus-square"></FontAwesomeIcon> Add</Typography>
-            </Grid>
+    </Grid>*/}
             <Grid item >
                 <Typography><FontAwesomeIcon icon="thumbs-up"></FontAwesomeIcon> Follow</Typography>
             </Grid>

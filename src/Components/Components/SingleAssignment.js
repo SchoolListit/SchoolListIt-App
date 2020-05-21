@@ -1,13 +1,15 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Context } from '../../Context/Context.js'
-import { Container, Grid, Paper, Typography} from '@material-ui/core';
+import { Container, Grid, Paper, Typography, Button} from '@material-ui/core';
 import axios from 'axios';
 import moment from 'moment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const useStyles = makeStyles(() => ({
     root: {
-        padding: ' 0 20px 20px 20px',
+        padding: '0',
+        margin: '0',
         overflow: 'auto'
     },
     featuredImage: {
@@ -19,16 +21,15 @@ const useStyles = makeStyles(() => ({
         padding: '10px 20px'
     },
     due: {
-        background: "#616161",
+        background: "#ffc400",
         padding: '0 20px',
-        color: '#eeeeee'
     }
 
     
 
   }));
 
-export default function SingleAssignment( {postID} ) {
+export default function SingleAssignment( {postID, toggleIsOpen} ) {
     const classes = useStyles();
     const [state, setState] = useContext(Context);
     const [post, setPost] = useState("");
@@ -52,18 +53,26 @@ export default function SingleAssignment( {postID} ) {
             let excerpt = <div dangerouslySetInnerHTML={{__html: post.excerpt.rendered}}></div>
             let postContent = <div dangerouslySetInnerHTML={{__html: post.content.rendered}}></div>
             return (
-                <Container className={classes.root}>
+                <Container className={classes.root} maxWidth={false}>
                     <Paper>
                         <Grid className={classes.due} container wrap="nowrap" justify="space-between" >
                             <Grid item >
-                                <Typography variant="subtitle2" style={{fontWeight: 'bold', color: '#eeeeee'}}>Date: {moment(post.date).format('dddd MM-DD-YYYY')}</Typography>
-                            </Grid>
-                            <Grid item >
-                            {(post.mandatory === 'true')
-                                ? <Typography variant="subtitle2" style={{fontWeight: 'bold', color: '#eeeeee'}}>Due On: {moment(post.due_date).format('MM-DD-YYYY')}</Typography>
+                                <Typography variant="h6" style={{fontWeight: 'bold'}}>Date: {moment(post.date).format('dddd MM-DD-YYYY')}
+                                {(post.mandatory === 'true')
+                                    ? <React.Fragment>
+                                         {"Due On: "+moment(post.due_date).format('MM-DD-YYYY')}
+                                        </React.Fragment>
 
-                                : <Typography variant="subtitle2" style={{fontWeight: 'bold', color: '#eeeeee'}}>Optional</Typography>
-                            }
+                                    : <React.Fragment>
+                                         {" Optional"}
+                                    </React.Fragment>
+                                }
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Button onClick={() => toggleIsOpen()} >
+                                    <FontAwesomeIcon icon="window-close"></FontAwesomeIcon>
+                                </Button>
                             </Grid>
                         </Grid>
                         <div className={classes.header} >

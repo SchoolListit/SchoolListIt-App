@@ -1,6 +1,6 @@
 import React, { useContext }  from 'react';
 import { Context } from '../../Context/Context.js';
-import { Paper } from '@material-ui/core';
+import { Paper, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
@@ -31,10 +31,11 @@ export default function ContentCard( {mainTitle, subTitle, children, icon, iconT
                     <div>
                         <h2 className="entry-title">{mainTitle}</h2>
                         <h3 className="entry-subtitle">{subTitle}</h3>
-                        </div>    
+                    </div> 
                         {(icon) 
-                            ? <Link to={iconTo}><FontAwesomeIcon icon={icon} style={{fontSize: '2em'}}></FontAwesomeIcon></Link>
+                            ? <Button href={iconTo} ><FontAwesomeIcon icon={icon} style={{fontSize: '2em'}}></FontAwesomeIcon></Button>
                             : null}
+                        
                     
                 </div> 
                 <div className="entry-content" >

@@ -18,8 +18,7 @@ const useStyles = makeStyles(() => ({
         paddingTop: '20px',
         margin: '30px'
     },
-    muiGridContainerRoot: {
-    }
+    
     
   }));
 
@@ -38,14 +37,14 @@ export default function LandingPage() {
                 alignItems="center"
                 justify="space-around"
                 >
-                <Grid item xs={12} md={8} style={{color: '#eeeeee'}}>
+                <Grid item xs={12} md={8} >
                     <Typography variant="h1" component="h2"  style={{fontWeight: 700, color: '#ffb74d'}}>
                         It takes a village.
                     </Typography>
-                    <Typography variant="h3" gutterBottom style={{color: '#eeeeee'}}>
+                    <Typography variant="h3" gutterBottom >
                         contribute, collaborate, communicate
                     </Typography>
-                    <p style={{color: '#000'}}>Photo by Robert Collins on Unsplash</p>
+                    {/*<p style={{color: '#'}}>Photo by Robert Collins on Unsplash</p>*/}
                 </Grid>
                 <Grid item xs={12} md={4} >
                     <Paper className={classes.paper}  >

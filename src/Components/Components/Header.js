@@ -1,31 +1,37 @@
 import React, {useContext } from 'react';
 import { Context } from '../../Context/Context.js';
-import { Avatar, Typography, Button } from '@material-ui/core';
+import { Grid, Avatar, Typography, Button, IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Redirect, useHistory } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import SearchBar from './SearchBar.js';
 
 
 
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        background: 'none',
-        backgroundColor: 'rgba(192,192,192, 0.5)',
-        overflow: 'hidden'
-    },
-    header: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      padding: '0 30px',
-      flexWrap: 'wrap'
-    }
-  }));
+    const useStyles = makeStyles((theme) => ({
+        root: {
+            background: 'none',
+            position: 'fixed',
+            position: '0',
+            backgroundColor: '#ffca28',
+            overflow: 'hidden',
+            padding: '5px 30px',
+
+        },
+        menuIcon: {
+            fontSize: '2em'
+        }
+        
+    }));
+
+    const goHere = (location) => {
+        console.log(location)
+    }  
 
   
 
-  export default function Header(  ) {
+  export default function Header( {openGlobalForm} ) {
     const classes = useStyles();
     const [state, setState] = useContext(Context);
     let history = useHistory();
@@ -46,30 +52,31 @@ const useStyles = makeStyles((theme) => ({
         return <Redirect to="/sign-in" exact></Redirect>
     } else {
         return (
-            <div className={classes.root} position="static">
-                <header id="masthead" className={classes.header}>
-                    <Typography style={{alignSelf: 'center', color: '#ffb74d', fontWeight: '700'}} variant="h6" component="h1">SchoListIt</Typography>
-                <div className="primary-menu-icons" style={{flexBasis: '45%', display: 'flex', justifyContent: 'flex-end'}}>
-                    <button >
-                        <Link to="/">
-                            <FontAwesomeIcon icon="home" ></FontAwesomeIcon>
-                        </Link>
-                    </button>
-                    
-                    <Button>
-                        <Link to="/about">
-                            <FontAwesomeIcon icon="question-circle" ></FontAwesomeIcon>
-                        </Link>
-                    </Button>
+                <Grid container className={classes.root} justify="space-between" alignItems="center" alignContent="center">
+                    <Grid item xs={12} md={3} >
+                        <Typography style={{ color: '#424242', fontWeight: '700'}} variant="h6" component="h1">SchoListIt</Typography>
+                    </Grid>
+                    <Grid item xs={12} md={3} >
+                        <SearchBar></SearchBar>
+                    </Grid>
+                    <Grid container item xs={12} md={3} justify="flex-end" className="primary-menu-icons" >
+                            <Grid item xs={3} className={classes.menuIcon}>
+                                <FontAwesomeIcon icon="home" onClick={() => goHere("/")}></FontAwesomeIcon>
+                            </Grid >
+                            <Grid item xs={3} className={classes.menuIcon}>
+                                <FontAwesomeIcon icon="plus-square" onClick={ () => openGlobalForm()}></FontAwesomeIcon>
+                            </Grid>
+                            <Grid item  xs={3} className={classes.menuIcon}>
+                                <FontAwesomeIcon icon="question-circle" ></FontAwesomeIcon>
+                            </Grid>
+                            <Grid item xs={3} className={classes.menuIcon}>
+                                <Avatar onClick={ () => profileClick()} alt={profile.name} src={profile.photo}></Avatar>
+                            </Grid>
                         
-                    <Button onClick={ () => profileClick()}>
-                        <Avatar alt={profile.name} src={profile.photo}></Avatar>
-                    </Button>
-                    
-                </div> 
-                
-            </header>
-            </div>
+                    {/** end icons */}    
+                    </Grid> 
+             {/** end header grid */}   
+            </Grid>
         )
     }
     

@@ -1,9 +1,11 @@
 import React, { useContext, useState }  from 'react';
-import { FormControl, TextField, Card, Button, Typography, MenuItem, Select  } from '@material-ui/core';
+import { Grid, FormControl, TextField, Card, Button, Typography, MenuItem, Select  } from '@material-ui/core';
 import { Context } from '../../Context/Context.js';
 import ContentCard from '../Components/ContentCard.js';
 import SectionSubForm from './components/SectionSubForm.js'
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 //here is  the component
 export default function AddLesson( props ) {
@@ -15,7 +17,7 @@ export default function AddLesson( props ) {
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const [state] = useContext(Context);
     const [newPost, setNewPost] = useState("");
-    const { showNewPost, showNewSectionPost, section } = props;
+    const { showNewPost, showNewSection, section, onClickHideForm } = props;
 
     const onFocusInput = () => {
             navigator.geolocation.getCurrentPosition((position) => {
@@ -23,10 +25,6 @@ export default function AddLesson( props ) {
                 setUserLat(position.coords.latitude)
                 setUserLng(position.coords.longitude)
               });   
-    }
-
-    const clearForm = () => {
-        
     }
     
 
@@ -81,6 +79,10 @@ export default function AddLesson( props ) {
                 post.avatar = profile.photo;
                 post.section = section;
                 showNewPost(post);
+                if(showNewSection !== false){
+                    showNewSection(body.newSection);
+                    onClickHideForm()
+                }
              })
          });
     }
@@ -98,7 +100,14 @@ export default function AddLesson( props ) {
         return (
 
             <div style={{padding: '20px 20px 30px 20px'}} >
-                <Typography variant="h6" style={{fontWeight: '700'}}>Add a lesson</Typography>
+                <Grid container justify="space-between">
+                    <Grid item>
+                        <Typography variant="h6" style={{fontWeight: '700'}}>Add a lesson</Typography>
+                    </Grid>
+                    <Grid item>
+                        <Button onClick={() => onClickHideForm()}><FontAwesomeIcon icon="window-close"></FontAwesomeIcon></Button>
+                    </Grid>
+                </Grid>
                 <form id="AddLessonForm" onSubmit={(e) => onSubmit(e)} >
                 <FormControl margin="normal" fullWidth={true}>
                     <TextField

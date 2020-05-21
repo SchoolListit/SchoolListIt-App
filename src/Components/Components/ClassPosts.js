@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { List, Button, Typography} from '@material-ui/core';
+import { List, Button, Typography, Grid, } from '@material-ui/core';
 import TheAssignment from '../Components/TheAssignment.js';
 import AddLesson from '../Forms/AddLesson.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 
 
-export default function ClassPosts( { section, onClickAssignment, showForm, showNewPost} ) {
+
+export default function ClassPosts( { section, onClickAssignment, showForm, showNewPost, onClickAdd} ) {
     const [ lessons, setLessonPlans ] = useState([]);
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const userID = profile.wpUserObj.wp_user.ID
 
     const showMore = () => {
         console.log('sow more')
+    }
+
+    const link = {
+
     }
 
     const morePosts = () => {
@@ -85,7 +91,6 @@ export default function ClassPosts( { section, onClickAssignment, showForm, show
                 
         return (
             <List>
-                {console.log(objsEqual(showForm, section))}
                 {(showForm !== 'undefined' && objsEqual(showForm, section))
                                 ? <AddLesson 
                                     section={section} 
@@ -104,16 +109,26 @@ export default function ClassPosts( { section, onClickAssignment, showForm, show
                     )
                  })
                 }
+                <Grid container justify="space-between" style={{padding: '10px'}}>
+                    <Grid item>
+                        <Button onClick={() => onClickAdd(section)} variant="outlined" size="small" color="primary">
+                            <Typography>
+                                <FontAwesomeIcon icon="plus-square"></FontAwesomeIcon>
+                                {" Add"}
+                            </Typography>
+                        </Button>
+                    </Grid>
                 {(morePosts() !== false)
-                    ? <div style={{textAlign: "right", padding: '10px'}}>
-                            <Button onClick={() => showMore()} variant="outlined" size="small" color="primary">
-                                <Typography >
-                                    {morePosts()+" more"}
-                                </Typography>
-                            </Button>
-                      </div>
+                    ? <Grid item>
+                        <Button href={"/classrooms/:"+link} variant="outlined" size="small" color="primary">
+                            <Typography >
+                                {morePosts()+" more"}
+                            </Typography>
+                        </Button>
+                      </Grid>
                     : null
                 }
+                </Grid>
             </List>
         )
     }

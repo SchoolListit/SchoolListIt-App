@@ -1,43 +1,31 @@
-import React, { useContext, useState } from 'react';
-import { Container, Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useEffect, useContext, useState  } from 'react';
+import { Dialog } from '@material-ui/core';
 import { Context } from '../../Context/Context.js';
 import Classrooms from './Classrooms.js';
-import PostLesson from '../Forms/PostLesson.js'
-import ContentCard from './ContentCard.js';
-
-const useStyles = makeStyles(() => ({
-    root: {
-        minHeight: '100vh',
-        maxHeight: '100vh',
-        width: '100vw',
-        maxWidth: 'none !important',
-        overflow: 'scrollY'
-    }
-  }));
+import AddLesson from '../Forms/AddLesson.js';
 
 
-
- 
-
-export default function Feed() {
+export default function Feed( {showGlobalForm, onCloseGlobalForm} ) {
     const [state, setState] = useContext(Context);
     const [newPost, setNewPost] = useState('');
-    const [newSection, setNewSection] = useState('');
-    const { assignments } = state;
-    const classes = useStyles();
+    const [newSection, setNewSection] = useState("undefined");
 
     
+    const showNewPost = (newPost) => {
+        setNewPost(newPost);
+    }
 
-    const onClickAssignment = () => {
-        //do nothing
+    const showNewSection = (section) => {
+        setNewSection(section);
     }
 
     return (
-        <Container>
-            <Classrooms onClickAssignment={onClickAssignment} newPost={newPost} newSection={newSection}></Classrooms>
-        </Container>
-        
-        
+        <React.Fragment>
+            <Classrooms  newPost={newPost} newSection={newSection} showNewPost={showNewPost} ></Classrooms> 
+            <Dialog open={showGlobalForm} onClose={(e) => onCloseGlobalForm()} disablePortal={true}>
+                <AddLesson section={false} onClickHideForm={onCloseGlobalForm} showNewPost={showNewPost} showNewSection={showNewSection}></AddLesson>
+            </Dialog> 
+        </React.Fragment>
+         
     )    
 }

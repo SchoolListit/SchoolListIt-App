@@ -5,8 +5,11 @@ import ContentCard from '../Components/ContentCard.js';
 import SectionSubForm from './components/SectionSubForm.js'
 import axios from 'axios';
 
-//here is  the component
-export default function PostLesson( props ) {
+/**
+ * 
+ * THIS COMPONENT IS DEPRECATED!!!!!
+ */
+export default function DEP_PostLesson( props ) {
     
     const [userLat, setUserLat] = useState('');
     const [userLng, setUserLng] = useState('');

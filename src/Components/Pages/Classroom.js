@@ -54,7 +54,7 @@ export default function Classroom() {
         teachers: theClass[1],
         subjects: theClass[2],
         grades: theClass[3],
-        key: theClass
+        key: theClass,
     }
 
     const showNewSection = (newPost) => {
@@ -73,7 +73,7 @@ export default function Classroom() {
 
     const onClickAssignment = (postID) => {
         console.log(postID);
-        setSinglePostID(postID);
+        //setSinglePostID(postID);
     }
 
     const onAddNew = (postBody) => {
@@ -92,7 +92,7 @@ export default function Classroom() {
             {(!profile)
                 ?   <Redirect to="/sign-in" exact />
                 : null }    
-            <Grid container style={{margintop: "0"}}>
+            <Grid container >
                 <Grid item xs={12} md={4}>
                     <ContentCard
                         key={classArgs}
@@ -107,11 +107,9 @@ export default function Classroom() {
                             onClickAssignment={onClickAssignment} 
                             profile={profile}
                             showForm={showForm}
+                            onClickAdd = {onClickAdd}
                         />
                     </ContentCard>
-                </Grid>
-                <Grid item xs={12} md={8} >    
-                    <SingleAssignment postID={singlePostID} ></SingleAssignment>
                 </Grid>    
             </Grid>
         </Container> 

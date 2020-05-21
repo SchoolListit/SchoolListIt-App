@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { List, Button, Typography} from '@material-ui/core';
+import { List, Button, Typography, Grid} from '@material-ui/core';
 import TheAssignment from '../Components/TheAssignment.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
-export default function ClassAssignments( { section, link, newPost, showNewPost, newSection, ShowNewSection } ) {
+
+export default function ClassAssignments( { section, link, onClickAdd, onCLickHideForm } ) {
     const [ lessons, setLessonPlans ] = useState([]);
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const userID = profile.wpUserObj.wp_user.ID
@@ -32,7 +34,7 @@ export default function ClassAssignments( { section, link, newPost, showNewPost,
                 teachers: section.teachers,
                 grades: section.grades,
                 subjects: section.subjects,
-                number: "5"
+                number: "2"
             }
             let formdata = new FormData();
             for (const property in body) {
@@ -63,22 +65,31 @@ export default function ClassAssignments( { section, link, newPost, showNewPost,
                 <List style={{paddingTop: '0px'}}>
                     {posts.map( (post, index) => {
                         return (
-                            <TheAssignment key={post.ID} post={post} userID={userID} onClickAssignment={onClickAssignment}></TheAssignment>
+                            <TheAssignment key={post.ID} post={post} userID={userID}></TheAssignment>
                             )
                         })
                     }
                 </List>
+                <Grid container justify="space-between" style={{padding: '10px'}}>
+                    <Grid item>
+                        <Button onClick={() => onClickAdd(section)} variant="outlined" size="small" color="primary">
+                            <Typography>
+                                <FontAwesomeIcon icon="plus-square"></FontAwesomeIcon>
+                                {" Add"}
+                            </Typography>
+                        </Button>
+                    </Grid>
                 {(morePosts() !== false)
-                    ? <div style={{textAlign: "right", padding: '10px'}}>
-                            <Button href={"/classrooms/:"+link} variant="outlined" size="small" color="primary">
-                                <Typography >
-                                    {morePosts()+" more"}
-                                </Typography>
-                            </Button>
-                      </div>
+                    ? <Grid item>
+                        <Button href={"/classrooms/:"+link} variant="outlined" size="small" color="primary">
+                            <Typography >
+                                {morePosts()+" more"}
+                            </Typography>
+                        </Button>
+                      </Grid>
                     : null
                 }
-                
+                </Grid>
             </React.Fragment>
             
         )

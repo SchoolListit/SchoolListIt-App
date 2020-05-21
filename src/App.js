@@ -2,8 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faThumbsUp, faCommentAlt, faShare, faBars, faSearch, faDoorOpen,faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas } from '@fortawesome/free-solid-svg-icons';
-import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import { faWindowClose, faThumbsUp, faCommentAlt, faShare, faBars, faSearch, faDoorOpen,faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas } from '@fortawesome/free-solid-svg-icons';
+import { ThemeProvider, createMuiTheme, makeStyles, responsiveFontSizes } from '@material-ui/core/styles';
 import { grey, amber} from '@material-ui/core/colors';
 import { CssBaseline, Container } from '@material-ui/core';
 
@@ -20,14 +20,14 @@ import {  ContextController, Context } from "./Context/Context.js";
 import './App.scss';
 
 
-library.add(faThumbsUp, faCommentAlt, faShare, faBars, faSearch, faDoorOpen, faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas);
+library.add(faWindowClose, faThumbsUp, faCommentAlt, faShare, faBars, faSearch, faDoorOpen, faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas);
 
 
-const theme = createMuiTheme({
+let theme = createMuiTheme({
   typography: {
     fontFamily: 'Quicksand, Arial',
-    fontWeight: '400',
-    color: '#333',
+    fontWeight: '500'
+    
   },
   overrides: {
     MuiCssBaseline: {
@@ -44,15 +44,13 @@ const theme = createMuiTheme({
   
 });
 
+theme = responsiveFontSizes(theme);
+
 const useStyles = makeStyles(() => ({
   root: {
-    minHeight: '100vh',
-    maxHeight: 'none',
-    width: '100vw',
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     //background: "url('https://msp-media.org/wp-content/images/robert-collins-tvc5imO5pXk-unsplash.jpg')",
-    maxWidth: 'none !important',
     margin: '0',
     padding: '0',
   }
@@ -68,8 +66,7 @@ const classes = useStyles();
       <ContextController>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Container 
-            fixed={true} 
+          <Container  
             maxWidth={false}
             className={classes.root}
             >
