@@ -9,59 +9,35 @@ import ContentCard from './ContentCard.js';
 const useStyles = makeStyles(() => ({
     root: {
         minHeight: '100vh',
-        maxHeight: 'none',
+        maxHeight: '100vh',
         width: '100vw',
         maxWidth: 'none !important',
-        overflow: 'auto'
-    },
-    classGrid: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'flex-start'
+        overflow: 'scrollY'
     }
   }));
 
+
+
+ 
+
 export default function Feed() {
     const [state, setState] = useContext(Context);
-    const [newPostData, setNewPostData] = useState('');
-    const [newSectionData, setNewSectionData] = useState('');
+    const [newPost, setNewPost] = useState('');
+    const [newSection, setNewSection] = useState('');
     const { assignments } = state;
     const classes = useStyles();
 
-    const showNewPostData = (newPost) => {
-        setNewPostData(newPost);
-        console.log(newPostData)
-    }
+    
 
-    const showNewSection = (newSection) => {
-        setNewSectionData(newSection);
-        console.log(newSectionData)
+    const onClickAssignment = () => {
+        //do nothing
     }
 
     return (
-        <Container 
-        maxWidth={false}
-        style={{padding: '30px'}}
-        >
-            <Grid
-                container 
-                spacing={1} 
-                >
-                <Grid item xs={12} md={3} > 
-                    <PostLesson 
-                        section={false} 
-                        grades={state.grades} 
-                        teachers={state.teachers}
-                        subjects={state.subjects}
-                        schools={state.schools}
-                        showNewPost={showNewPostData}
-                        showNewSection={showNewSection}
-                        ></PostLesson>
-                </Grid>
-                <Grid item xs={12} md={9} container > 
-                    <Classrooms newPost={newPostData} showNewPost={showNewPostData} newSection={newSectionData} showNewSection={showNewSection}></Classrooms>
-                </Grid>
-            </Grid>
+        <Container>
+            <Classrooms onClickAssignment={onClickAssignment} newPost={newPost} newSection={newSection}></Classrooms>
         </Container>
+        
+        
     )    
 }

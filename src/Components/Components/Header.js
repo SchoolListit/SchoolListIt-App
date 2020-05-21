@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     header: {
       display: 'flex',
       justifyContent: 'space-between',
-      padding: '5px 30px',
+      padding: '0 30px',
       flexWrap: 'wrap'
     }
   }));

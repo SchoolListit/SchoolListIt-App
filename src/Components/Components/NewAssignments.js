@@ -1,45 +1,50 @@
 import React, { useEffect, useState, useContext } from 'react';
-import axios from 'axios';
-import moment from 'moment';
-import { Context } from '../../Context/Context.js'
-import { List, ListItem, ListItemText, ListItemSecondaryAction, ListItemAvatar, Avatar} from '@material-ui/core';
-import MyCheckbox from './MyCheckBox.js';
+import TheAssignment from '../Components/TheAssignment.js';
+
 
 export default function NewAssignments( props ) {
 
-    const { post, onClickAssignment } = props;
-    const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
-    const userID = profile.wpUserObj.wp_user.ID
+    const { post, onClickAssignment, profile, section } = props;
+    const {user} = profile.wpUserObj
+    let userID = user.ID
+
+
+    const objsEqual = (a, b) => {
+        var aProps = Object.getOwnPropertyNames(a);
+        var bProps = Object.getOwnPropertyNames(b);
+        if (aProps.length != bProps.length) {
+            return false;
+        }
+        for (var i = 0; i < aProps.length; i++) {
+            var propName = aProps[i];
+            if (a[propName] !== b[propName]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    const show = (post, section) => {
+        if(post === ""){
+            return false;
+        }
+        if(post.complete === 'undefined'){
+            return false;
+        }
+        if(post.section !== 'undefined' && objsEqual(section, post.section) === false){
+            return false;
+        }
+        return true;
+    }
     
     
-    if(post === ""){
+    if(show(post, section) === false){
         return null
     } else {
         return (
             <React.Fragment key={"fragment"+post.ID}>
-                            <ListItem key={post.ID} button onClick={ () => onClickAssignment(post.ID)}>
-                                <ListItemAvatar>
-                                    <Avatar alt="Posted By" src={post.author_avatar}></Avatar>
-                                </ListItemAvatar>
-                                <ListItemText>
-                                    <h6>{moment(post.post_date).format('MM-DD')}</h6>
-                                    <p style={{textTransform: 'capitalize'}}>{post.ID+' '+post.post_title}</p>
-                                </ListItemText>
-                                <ListItemSecondaryAction>
-                          
-                                {(userID !== 'undefined' )
-                                ? <MyCheckbox
-                                postID = {post.ID}
-                                userID={userID}
-                                initialChecked = {[]}
-                            ></MyCheckbox>
-                                    
-                                : null
-                                }
-                                </ListItemSecondaryAction>
-                                
-                            </ListItem>
-                            </React.Fragment>
+                <TheAssignment key={post.ID} post={post} userID={userID} onClickAssignment={onClickAssignment}></TheAssignment>
+            </React.Fragment>
         )
     }
     

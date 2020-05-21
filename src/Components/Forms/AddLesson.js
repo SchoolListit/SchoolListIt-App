@@ -1,12 +1,12 @@
 import React, { useContext, useState }  from 'react';
-import { FormControl, TextField, Card, Button, InputLabel, MenuItem, Select  } from '@material-ui/core';
+import { FormControl, TextField, Card, Button, Typography, MenuItem, Select  } from '@material-ui/core';
 import { Context } from '../../Context/Context.js';
 import ContentCard from '../Components/ContentCard.js';
 import SectionSubForm from './components/SectionSubForm.js'
 import axios from 'axios';
 
 //here is  the component
-export default function PostLesson( props ) {
+export default function AddLesson( props ) {
     
     const [userLat, setUserLat] = useState('');
     const [userLng, setUserLng] = useState('');
@@ -15,7 +15,7 @@ export default function PostLesson( props ) {
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const [state] = useContext(Context);
     const [newPost, setNewPost] = useState("");
-    const { showNewPost, showNewSection } = props;
+    const { showNewPost, showNewSectionPost, section } = props;
 
     const onFocusInput = () => {
             navigator.geolocation.getCurrentPosition((position) => {
@@ -53,7 +53,8 @@ export default function PostLesson( props ) {
                 subjects: document.getElementById('subjects').value
             }
         }
-        clearForm();
+            document.getElementById("AddLessonForm").reset();
+
         
          //create post
          axios.get(url, body)
@@ -75,12 +76,11 @@ export default function PostLesson( props ) {
              //make 2nd call
              axios.post(url, formdata, {headers: headers})
              .then( (res) => {
-                console.log(body.newSection);
                 let post = res.data.post;
                 post.complete = [];
                 post.avatar = profile.photo;
+                post.section = section;
                 showNewPost(post);
-                showNewSection(body.newSection);
              })
          });
     }
@@ -96,25 +96,23 @@ export default function PostLesson( props ) {
     
     
         return (
-            <Card style={{margin: '0 10px 20px 10px'}}>
-            <div className="entry-header" style={{display: 'flex', justifyContent: 'space-between' }}>
-                <div>
-                    <h2 className="entry-title">Post A New Lesson</h2>
-                    {  (props.section !== true) 
-                        ? <React.Fragment>
-                            <h3 className="entry-subtitle">for any class</h3>
-                        </React.Fragment>
-                        : 
-                        <React.Fragment>
-                            <h3 className="entry-subtitle">{props.section.schools+" "+props.section.teachers}</h3>
-                            <h3 className="entry-subtitle">{props.section.grades+" "+props.section.subjects}</h3>
-                        </React.Fragment>
-                    }
-                </div>    
-                    
-            </div> 
-            <div className="entry-content" style={{overflowX: 'auto', overflowY: 'scroll', maxHeight: '500px', padding: '20px'}}>
-                <form onSubmit={(e) => onSubmit(e)} >
+
+            <div style={{padding: '20px 20px 30px 20px'}} >
+                <Typography variant="h6" style={{fontWeight: '700'}}>Add a lesson</Typography>
+                <form id="AddLessonForm" onSubmit={(e) => onSubmit(e)} >
+                <FormControl margin="normal" fullWidth={true}>
+                    <TextField
+                        fullWidth={true}
+                        required
+                        id="post_date"
+                        label="Assignment Date"
+                        type="Date"
+                        onChange={(e) => setFormValues(e)}
+                        InputLabelProps={{
+                            shrink: true,
+                            }}
+                    ></TextField>
+                </FormControl>
                 <FormControl margin="normal" fullWidth={true}>
                     <TextField
                             onFocus={onFocusInput}
@@ -130,19 +128,7 @@ export default function PostLesson( props ) {
                         ></TextField>
                 </FormControl>
 
-                <FormControl margin="normal" fullWidth={true}>
-                    <TextField
-                        fullWidth={true}
-                        required
-                        id="post_date"
-                        label="Assignment Date"
-                        type="Date"
-                        onChange={(e) => setFormValues(e)}
-                        InputLabelProps={{
-                            shrink: true,
-                            }}
-                    ></TextField>
-                </FormControl>
+                
                 <TextField type="hidden" value={userLat} id="userLat"></TextField>
                 <TextField type="hidden" value={userLng} id="userLng"></TextField>
 
@@ -197,8 +183,7 @@ export default function PostLesson( props ) {
                 <SectionSubForm section={props.section} sections={props.sections}></SectionSubForm>
                 <Button type="submit" variant="contained">Submit</Button>
                 </form>
-                </div>
-            </Card>
+            </div>
         )
     
     

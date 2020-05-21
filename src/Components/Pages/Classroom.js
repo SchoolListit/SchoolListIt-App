@@ -25,14 +25,23 @@ const useStyles = makeStyles(() => ({
     },
   })); 
 
+  const initialShowForm = {
+    teachers: '',
+    grades: '',
+    schools: '',
+    subjects: ''
+}   
+
 export default function Classroom() {
     const classes = useStyles();
     const { classArgs } = useParams();
     const [state, setState] = useContext(Context);
     const { assignments, currentAssignment, loggedIn } = state; 
     const [singlePostID, setSinglePostID] = useState('');
-    const [newPostData, setNewPostData] = useState('');
+    const [newPost, setNewPost] = useState('');
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
+    const [showForm, setShowForm] = useState(initialShowForm);
+
     
     
     let query = useQuery();
@@ -48,10 +57,17 @@ export default function Classroom() {
         key: theClass
     }
 
-    
+    const showNewSection = (newPost) => {
+        //do nothing
+    }
 
-    const showNewPostData = (newPost) => {
-        setNewPostData(newPost);
+    const showNewPost = (newPost) => {
+        setNewPost(newPost);
+    }
+
+    const onClickAdd = (section) => {
+        console.log(section)
+        setShowForm(section);
     }
 
 
@@ -63,6 +79,8 @@ export default function Classroom() {
     const onAddNew = (postBody) => {
         console.log(postBody);
     }
+
+    
         
     return (
         <React.Fragment>
@@ -80,13 +98,17 @@ export default function Classroom() {
                         key={classArgs}
                         mainTitle={section.schools+" "+ section.teachers}
                         subTitle={section.grades+" "+ section.subjects}
+                        onClickAdd={onClickAdd}
+                        section={section}
                         >
-                        <NewAssignments style={{listStyle: 'none'}} post={newPostData} onClickAssignment={onClickAssignment} profile={state.profile}></NewAssignments>
+                        <NewAssignments style={{listStyle: 'none'}} post={newPost} onClickAssignment={onClickAssignment} profile={profile}></NewAssignments>
                         <ClassPosts
-                        section={section} onClickAssignment={onClickAssignment} profile={state.profile}
+                            section={section} 
+                            onClickAssignment={onClickAssignment} 
+                            profile={profile}
+                            showForm={showForm}
                         />
                     </ContentCard>
-                    <PostLesson section={section} onAddNew={onAddNew} showNewPost={showNewPostData}></PostLesson>
                 </Grid>
                 <Grid item xs={12} md={8} >    
                     <SingleAssignment postID={singlePostID} ></SingleAssignment>

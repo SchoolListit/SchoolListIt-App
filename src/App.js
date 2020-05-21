@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faThumbsUp, faCommentAlt, faShare, faBars, faSearch, faDoorOpen,faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas } from '@fortawesome/free-solid-svg-icons';
 import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
-import { grey, teal} from '@material-ui/core/colors';
+import { grey, amber} from '@material-ui/core/colors';
 import { CssBaseline, Container } from '@material-ui/core';
 
 import Header from './Components/Components/Header.js';
@@ -38,7 +38,7 @@ const theme = createMuiTheme({
     
   },
   palette: {
-    primary: teal,
+    primary: amber,
     secondary: grey,
   },
   
@@ -51,7 +51,7 @@ const useStyles = makeStyles(() => ({
     width: '100vw',
     backgroundPosition: 'center',
     backgroundSize: 'cover',
-    background: "url('https://msp-media.org/wp-content/images/robert-collins-tvc5imO5pXk-unsplash.jpg')",
+    //background: "url('https://msp-media.org/wp-content/images/robert-collins-tvc5imO5pXk-unsplash.jpg')",
     maxWidth: 'none !important',
     margin: '0',
     padding: '0',

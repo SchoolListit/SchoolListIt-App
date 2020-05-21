@@ -7,31 +7,31 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const useStyles = makeStyles(() => ({
     root: {
-        background: '#eeeeee',
+        background: '#e0e0e0',
         padding: '15px',
         fontSize: '1.5em'
     },
   }));
 
 
-export default function ListActions() {
+
+export default function ListActions( props ) {
     const classes = useStyles();
-
-
+    const {section, onClickAdd} = props
 
     return (
         <Grid className={classes.root} container justify="space-between" alignItems="flex-start">
+            <Grid item onClick={() => onClickAdd(section)}>
+                <Typography><FontAwesomeIcon icon="plus-square"></FontAwesomeIcon> Add</Typography>
+            </Grid>
             <Grid item >
-                <Typography><FontAwesomeIcon icon="thumbs-up"></FontAwesomeIcon> Like</Typography>
-                
+                <Typography><FontAwesomeIcon icon="thumbs-up"></FontAwesomeIcon> Follow</Typography>
             </Grid>
             <Grid item >
                 <Typography><FontAwesomeIcon icon="comment-alt"></FontAwesomeIcon> Comment</Typography>
-                
             </Grid>
             <Grid item >
                 <Typography><FontAwesomeIcon icon="share"></FontAwesomeIcon> Share</Typography>
-                
             </Grid>
         </Grid>
     )

@@ -7,6 +7,7 @@ import { Grid, ListItem, ListItemText, ListItemSecondaryAction, ListItemAvatar, 
 import MyCheckbox from './MyCheckBox.js';
 
 
+
 const useStyles = makeStyles(() => ({
     listItemRoot: {
         display: 'block !important',
@@ -21,7 +22,9 @@ const useStyles = makeStyles(() => ({
 export default function TheAssignment( {post, onClickAssignment, userID }) {
     const classes = useStyles();
     const assignmentRequired = (post.mandatory === true) ? "requiredAssignment" : "optionalAssignment" ;
+    const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
 
+    
     if(post === 'undefined'){
         return null
     } else {
@@ -37,7 +40,7 @@ export default function TheAssignment( {post, onClickAssignment, userID }) {
                         : null}
                     {(post.mandatory === 'true')
                         ? <React.Fragment>
-                            Due On {moment(post.due_date).format('MM-DD')}
+                            due on {moment(post.due_date).format('MM-DD')}
                         </React.Fragment> 
                         : null
                     }   
@@ -45,7 +48,7 @@ export default function TheAssignment( {post, onClickAssignment, userID }) {
                 <Typography variant="body1" style={{textTransform: 'capitalize'}} >{post.post_title}</Typography>
                 <Grid container justify="space-between" flexwrap="nowrap" alignItems="flex-start" spacing={2}>
                     <Grid item xs={2} >
-                        <Avatar alt="Posted By" src={post.author_avatar}></Avatar>
+                         <Avatar alt="Posted By" src={post.author_avatar}></Avatar>
                     </Grid>
                     <Grid item xs={8}>
                         <Typography variant="body2"  >{post.post_excerpt}</Typography>

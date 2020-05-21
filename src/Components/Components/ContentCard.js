@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
     },
   }));
 
-export default function ContentCard( {mainTitle, subTitle, children, icon, iconTo, constrain}) {
+export default function ContentCard( {mainTitle, subTitle, children, icon, iconTo, onClickAdd, section}) {
 
     const [state, setState] = useContext(Context);
     const { profile } = state;
@@ -37,10 +37,10 @@ export default function ContentCard( {mainTitle, subTitle, children, icon, iconT
                             : null}
                     
                 </div> 
-                <div className="entry-content" style={{ overflowX: 'hidden', overflowY: 'scroll', maxHeight: '500px'}}>
+                <div className="entry-content" >
                     {children}
                 </div> 
-                <ListActions></ListActions>
+                <ListActions onClickAdd={onClickAdd} section={section}></ListActions>
             </Paper>     
         </React.Fragment>
     )

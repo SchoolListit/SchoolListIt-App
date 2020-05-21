@@ -1,10 +1,7 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import moment from 'moment';
-import { Context } from '../../Context/Context.js'
-import { List, ListItem, ListItemText, ListItemSecondaryAction, ListItemAvatar, Avatar} from '@material-ui/core';
-import MyCheckBox from '../Components/MyCheckBox.js';
-import TheAssignment from '../Components/TheAssignment.js'
+import { List, Button, Typography} from '@material-ui/core';
+import TheAssignment from '../Components/TheAssignment.js';
 
 
 export default function ClassAssignments( { section, link, newPost, showNewPost, newSection, ShowNewSection } ) {
@@ -14,6 +11,15 @@ export default function ClassAssignments( { section, link, newPost, showNewPost,
 
     const onClickAssignment = () => {
         
+    }
+
+    const morePosts = () => {
+        let query = lessons.assignments;
+        //console.log(query);
+        let diff = parseInt(query.total_posts) - parseInt(query.returned_posts);
+        return (diff > 0)
+            ? diff
+            : false
     }
     
     /* Make API Call */
@@ -25,7 +31,8 @@ export default function ClassAssignments( { section, link, newPost, showNewPost,
                 show_assignments: true,
                 teachers: section.teachers,
                 grades: section.grades,
-                subjects: section.subjects
+                subjects: section.subjects,
+                number: "5"
             }
             let formdata = new FormData();
             for (const property in body) {
@@ -52,15 +59,28 @@ export default function ClassAssignments( { section, link, newPost, showNewPost,
         const { posts } = lessons.assignments;
                 
         return (
-            <List style={{paddingTop: '0px'}}>{
-                    
-                    posts.map( (post, index) => {
-                    return (
-                        <TheAssignment key={post.ID} post={post} userID={userID} onClickAssignment={onClickAssignment}></TheAssignment>
-                    )
-                 })
+            <React.Fragment>
+                <List style={{paddingTop: '0px'}}>
+                    {posts.map( (post, index) => {
+                        return (
+                            <TheAssignment key={post.ID} post={post} userID={userID} onClickAssignment={onClickAssignment}></TheAssignment>
+                            )
+                        })
+                    }
+                </List>
+                {(morePosts() !== false)
+                    ? <div style={{textAlign: "right", padding: '10px'}}>
+                            <Button href={"/classrooms/:"+link} variant="outlined" size="small" color="primary">
+                                <Typography >
+                                    {morePosts()+" more"}
+                                </Typography>
+                            </Button>
+                      </div>
+                    : null
                 }
-            </List>
+                
+            </React.Fragment>
+            
         )
     }
 }
