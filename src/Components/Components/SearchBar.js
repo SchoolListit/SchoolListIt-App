@@ -38,7 +38,7 @@ export default function GoogleMaps() {
   if (typeof window !== 'undefined' && !loaded.current) {
     if (!document.querySelector('#google-maps')) {
       loadScript(
-        'https://maps.googleapis.com/maps/api/js?key=AIzaSyAf0N0VK9DiOxa-NRNFxaBG7lZ9iz23oWk&libraries=places',
+        'https://maps.googleapis.com/maps/api/js?&libraries=places',
         document.querySelector('head'),
         'google-maps',
       );
