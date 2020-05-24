@@ -1,18 +1,24 @@
-import React from 'react'
-import { Grid, Button } from '@material-ui/core'
+import React, {useState} from 'react'
+import { Grid, Button, TextField } from '@material-ui/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import SectionSubForm from '../../Forms/components/SectionSubForm'
 
 
 export default function ShareButtons( props) {
     const {section, shareLink} = props;
+    const [hasCopied, setHasCopied] = useState(false)
     const emailLink = () => {
         let link = "mailto:?";
         link += "subject=Follow Classes on http://schoolistit.com";
         link += "&body=The easiest way to manage and track your schoolwork http://schoolistit.com/classrooms"+shareLink;
         return encodeURI(link);
-        //link += "subject=Follow "++
-        //body=Check out this site http://www.website.com."
+    }
+
+    const clickShare = () => {
+        const theLink = "http://schoolistit.com/classrooms"+shareLink;
+        const el = document.getElementById("theLinkToCopy");
+        el.select()
+        document.execCommand("copy");
     }
 
     return (
@@ -29,9 +35,10 @@ export default function ShareButtons( props) {
                     </Button>
                 </Grid>
                 <Grid item xs={3}>
-                    <Button>
+                    <Button onClick={() => clickShare()}>
                         <FontAwesomeIcon icon="copy"></FontAwesomeIcon>
                     </Button>
+                    <TextField id="theLinkToCopy" defaultValue={"http://schoolistit.com"+shareLink} style={{position: "absolute", top: "-99999px", left: "-9999px", color: "#000"}}></TextField>
                 </Grid>
             </Grid>
         </React.Fragment>
