@@ -28,9 +28,6 @@ export default function EditListItem( props ) {
         setDeleteOpen(!deleteOpen);
     }
 
-    
-    
-
     //submit the form
     const onSubmit = (e) =>{
        if(typeof(e.preventDefault) === 'function'){
@@ -58,8 +55,7 @@ export default function EditListItem( props ) {
                 subjects: document.getElementById('subjects').value
             }
         }   
-            console.log(body)
-            document.getElementById("AddLessonForm").reset();
+        document.getElementById("AddLessonForm").reset();
 
         
          //create post
@@ -82,8 +78,12 @@ export default function EditListItem( props ) {
              //make 2nd call
              axios.post(url, formdata, {headers: headers})
              .then( (res) => {
-                let post = res.data.post;
-                //do something to make the assignment disappear from the feed or class
+                if(res.data.deleted == 'true'){
+                    console.log('deleted');
+                }
+                if(res.data.edit == 'true'){
+                    console.log('edited');
+                }
                 
              })
          });

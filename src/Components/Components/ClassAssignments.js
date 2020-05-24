@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function ClassAssignments( { section, link, onClickAdd, onCLickHideForm } ) {
     const [ lessons, setLessonPlans ] = useState([]);
+    const [ changed, setChanged ] = useState([]);
+
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const userID = profile.wpUserObj.wp_user.ID
     
