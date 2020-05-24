@@ -43,7 +43,7 @@ export default function NewAssignments( props ) {
     } else {
         return (
             <React.Fragment key={"fragment"+post.ID}>
-                <TheAssignment key={post.ID} post={post} userID={userID} onClickAssignment={onClickAssignment}></TheAssignment>
+                <TheAssignment key={post.ID} section={section} post={post} userID={userID} onClickAssignment={onClickAssignment}></TheAssignment>
             </React.Fragment>
         )
     }

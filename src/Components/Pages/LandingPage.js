@@ -11,7 +11,9 @@ const useStyles = makeStyles(() => ({
         maxHeight: 'none',
         justifyContent: 'flex-end',
         maxWidth: 'none !important',
-        overflow: 'auto'
+        overflow: 'auto',
+        backgroundImage: "url('https://msp-media.org/wp-content/images/robert-collins-tvc5imO5pXk-unsplash.jpg')",
+        backgroundSize: "cover"
     },
     paper: {
         padding: '10px',
@@ -41,7 +43,7 @@ export default function LandingPage() {
                     <Typography variant="h1" component="h2"  style={{fontWeight: 700, color: '#ffb74d'}}>
                         It takes a village.
                     </Typography>
-                    <Typography variant="h3" gutterBottom >
+                    <Typography variant="h3" gutterBottom style={{color: '#eeeeee'}}>
                         contribute, collaborate, communicate
                     </Typography>
                     {/*<p style={{color: '#'}}>Photo by Robert Collins on Unsplash</p>*/}

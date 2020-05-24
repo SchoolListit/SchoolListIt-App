@@ -52,9 +52,9 @@ import SearchBar from './SearchBar.js';
         return <Redirect to="/sign-in" exact></Redirect>
     } else {
         return (
-                <Grid container className={classes.root} justify="space-between" alignItems="center" alignContent="center">
+                <Grid container className={classes.root} justify="space-between" alignItems="center" alignContent="flex-start">
                     <Grid item xs={12} md={3} >
-                        <Typography style={{ color: '#424242', fontWeight: '700'}} variant="h6" component="h1">SchoListIt</Typography>
+                        <Typography style={{ color: '#424242', fontWeight: '700', textAlign: 'center'}} variant="h6" component="h1">SchooListIt</Typography>
                     </Grid>
                     <Grid item xs={12} md={3} >
                         <SearchBar></SearchBar>

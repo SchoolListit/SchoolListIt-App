@@ -62,7 +62,7 @@ export default function ClassPosts( { section, onClickAssignment, showForm, show
                 teachers: section.teachers,
                 grades: section.grades,
                 subjects: section.subjects,
-                number: '10'
+                number: "-1"
             }
             let formdata = new FormData();
             for (const property in body) {
@@ -105,7 +105,7 @@ export default function ClassPosts( { section, onClickAssignment, showForm, show
                 { 
                     posts.map( (post, index) => {
                     return (
-                        <TheAssignment key={post.ID} post={post} userID={userID} onClickAssignment={onClickAssignment}></TheAssignment>
+                        <TheAssignment key={post.ID} section={section} post={post} userID={userID} onClickAssignment={onClickAssignment}></TheAssignment>
                     )
                  })
                 }

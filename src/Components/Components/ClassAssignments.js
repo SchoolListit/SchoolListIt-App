@@ -10,7 +10,7 @@ export default function ClassAssignments( { section, link, onClickAdd, onCLickHi
     const [ lessons, setLessonPlans ] = useState([]);
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const userID = profile.wpUserObj.wp_user.ID
-
+    
     const onClickAssignment = () => {
         
     }
@@ -34,7 +34,7 @@ export default function ClassAssignments( { section, link, onClickAdd, onCLickHi
                 teachers: section.teachers,
                 grades: section.grades,
                 subjects: section.subjects,
-                number: "2"
+                number: "-1"
             }
             let formdata = new FormData();
             for (const property in body) {
@@ -65,7 +65,7 @@ export default function ClassAssignments( { section, link, onClickAdd, onCLickHi
                 <List style={{paddingTop: '0px'}}>
                     {posts.map( (post, index) => {
                         return (
-                            <TheAssignment key={post.ID} post={post} userID={userID}></TheAssignment>
+                            <TheAssignment key={post.ID} post={post} userID={userID} section={section}></TheAssignment>
                             )
                         })
                     }

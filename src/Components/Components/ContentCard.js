@@ -3,8 +3,7 @@ import { Context } from '../../Context/Context.js';
 import { Paper, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
-import  ListActions from '../Components/ListActions.js'
+import  ListActions from '../Components/ListActions.js';
 
 
 
@@ -15,11 +14,9 @@ const useStyles = makeStyles(() => ({
     },
   }));
 
-export default function ContentCard( {mainTitle, subTitle, children, icon, iconTo, onClickAdd, section}) {
-
-    const [state, setState] = useContext(Context);
-    const { profile } = state;
+export default function ContentCard( {mainTitle, subTitle, children, icon, iconTo, section} ) {
     const classes = useStyles();
+    const profile = JSON.parse(localStorage.getItem("scholistic_profile"));
 
 //<Avatar alt={profile.name} src={profile.photo} style={{marginRight: '10px'}}></Avatar>
 
@@ -33,7 +30,9 @@ export default function ContentCard( {mainTitle, subTitle, children, icon, iconT
                         <h3 className="entry-subtitle">{subTitle}</h3>
                     </div> 
                         {(icon) 
-                            ? <Button href={iconTo} ><FontAwesomeIcon icon={icon} style={{fontSize: '2em'}}></FontAwesomeIcon></Button>
+                            ? <Button href={iconTo} >
+                                <FontAwesomeIcon icon={icon} style={{fontSize: '2em'}}></FontAwesomeIcon>
+                              </Button>
                             : null}
                         
                     
@@ -41,7 +40,8 @@ export default function ContentCard( {mainTitle, subTitle, children, icon, iconT
                 <div className="entry-content" >
                     {children}
                 </div> 
-                <ListActions onClickAdd={onClickAdd} section={section}></ListActions>
+                
+                <ListActions section={section} profile={profile} shareLink={iconTo}></ListActions>
             </Paper>     
         </React.Fragment>
     )

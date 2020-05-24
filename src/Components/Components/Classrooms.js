@@ -40,8 +40,9 @@ export default function Classrooms({ newSection, onClickAssignment, showNewPost 
         setShowForm(initialShowForm);
     }
 
-    const link = (theSection) => {
-        return encodeURI(theSection.schools+'-'+theSection.teachers+'-'+theSection.subjects+'-'+theSection.grades);
+    let theLink = ( theSection ) => {
+        let link = encodeURI(theSection.schools+'-'+theSection.teachers+'-'+theSection.subjects+'-'+theSection.grades)
+        return link;
     }
 
     const objsEqual = (a, b) => {
@@ -86,7 +87,7 @@ export default function Classrooms({ newSection, onClickAssignment, showNewPost 
                             mainTitle={newSection.schools+" "+ newSection.teachers}
                             subTitle={newSection.grades+" "+ newSection.subjects}
                             icon="door-open"
-                            iconTo={"/classrooms/:"+link(newSection)}
+                            iconTo={"/classrooms/:"+theLink(newSection)}
                             onClickAdd={onClickAdd}
                             section={newSection}
                             > 
@@ -127,7 +128,7 @@ export default function Classrooms({ newSection, onClickAssignment, showNewPost 
                             mainTitle={section.schools+" "+ section.teachers}
                             subTitle={section.grades+" "+ section.subjects}
                             icon="door-open"
-                            iconTo={"/classrooms/:"+link}
+                            iconTo={"/classrooms/:"+theLink(section)}
                             onClickAdd={onClickAdd}
                             section={section}
                             > 
@@ -146,7 +147,7 @@ export default function Classrooms({ newSection, onClickAssignment, showNewPost 
                                     : null
                                 }
                                 <ClassAssignments 
-                                    section={section} link={link(section)} onClickAdd={onClickAdd} onClickHideForm={onClickHideForm}
+                                    section={section} link={theLink(section)} onClickAdd={onClickAdd} onClickHideForm={onClickHideForm}
                                 />
                         </ContentCard>
                         </Grid>
