@@ -7,6 +7,7 @@ import ClassAssignments from './ClassAssignments.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import NewAssignments from './NewAssignments.js';
 import AddLesson from '../Forms/AddLesson.js';
+import FollowSomething from '../Components/FollowSomething.js';
 
 const initialShowForm = {
     teachers: '',
@@ -24,13 +25,12 @@ const useStyles = makeStyles(() => ({
     }
   }));
 
-export default function Classrooms({ newSection, onClickAssignment, showNewPost }) {
+export default function Classrooms({ newSection, showNewSection, onClickAssignment, showNewPost, newPost }) {
     const classes = useStyles();
     const [state, setState] = useContext(Context);
+    const {following} = state;
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const [showForm, setShowForm] = useState(initialShowForm);
-    const [newPost, setNewPost] = useState('');
-    const [localSections, setLocalSections] = useState([]);
 
     const onClickAdd = (section) => {
         setShowForm(section);
@@ -59,18 +59,18 @@ export default function Classrooms({ newSection, onClickAssignment, showNewPost 
         }
         return true;
     }
-
+    
+    console.log(state.following);
+    
 /**
  *  the rendering of the components
  * */    
-    if(state.sections.length < 1){
+    if(following.length < 1){
 
-        return null;
+        return <FollowSomething></FollowSomething>;
 
     } else {
-        
         return (
-            
                 <Grid
                     container
                     wrap="wrap"
@@ -120,7 +120,8 @@ export default function Classrooms({ newSection, onClickAssignment, showNewPost 
                     : null
                 
                 }   
-            { state.sections.map( (section, index) => {
+            { following.map( (follow, index) => {
+                    let section = follow.section;
                     return (
                         <Grid key={"grid-item-"+index} item xs={12} sm={6} md={4}>
                             <ContentCard

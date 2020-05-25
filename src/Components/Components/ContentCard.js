@@ -29,13 +29,12 @@ export default function ContentCard( {mainTitle, subTitle, children, icon, iconT
                         <h2 className="entry-title">{mainTitle}</h2>
                         <h3 className="entry-subtitle">{subTitle}</h3>
                     </div> 
-                        {(icon) 
-                            ? <Button href={iconTo} >
-                                <FontAwesomeIcon icon={icon} style={{fontSize: '2em'}}></FontAwesomeIcon>
-                              </Button>
-                            : null}
-                        
-                    
+                    {/** this is the door icon on the classroom in the feed view */}
+                    {(icon) 
+                        ? <Button href={iconTo} >
+                            <FontAwesomeIcon icon={icon} style={{fontSize: '2em'}}></FontAwesomeIcon>
+                            </Button>
+                        : null}
                 </div> 
                 <div className="entry-content" >
                     {children}

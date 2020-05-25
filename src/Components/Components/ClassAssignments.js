@@ -36,7 +36,7 @@ export default function ClassAssignments( { section, link, onClickAdd, onCLickHi
                 teachers: section.teachers,
                 grades: section.grades,
                 subjects: section.subjects,
-                number: "-1"
+                number: "3"
             }
             let formdata = new FormData();
             for (const property in body) {

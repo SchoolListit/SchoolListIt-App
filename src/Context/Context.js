@@ -26,6 +26,7 @@ export function ContextController({children}){
         subjects: [],
         assignments: [],
         sections: [],
+        following: [],
         currentAssignment: '',
      }
 
@@ -37,6 +38,7 @@ export function ContextController({children}){
             if (localStorage.getItem('scholistit_profile')) {
                 profile =  JSON.parse(localStorage.getItem('scholistit_profile'));
             }
+        let userID = profile.wpUserObj.user.ID;    
         
         //go out to the api
         const promises = [];
@@ -45,6 +47,8 @@ export function ContextController({children}){
         promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/wp/v2/grades'));
         promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/wp/v2/subjects'));
         promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/parent-checklist/v2/lesson-plans'));
+        promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/parent-checklist/v2/follows?userID='+userID));
+
         //promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/wp/v2/assignments'));
         /*if(formdata !== 'undefined') {
             promises.push(axios.post('http://localhost:8888/parentchecklist/wp-json/parent-checklist-rest/v2/user_data', formdata))
@@ -57,6 +61,7 @@ export function ContextController({children}){
             let grades =  res[2].data
             let subjects =  res[3].data
             let sections = Object.values(res[4].data.sections);
+            let following = res[5].data;
             //let assignments = res[5].data;
             //let initialChecked = res[6].data;
 
@@ -83,6 +88,7 @@ export function ContextController({children}){
                 profileUserName: '',
                 profileStudents: profileStudents,
                 profile: profile,
+                following: following
             })
 
         });

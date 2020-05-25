@@ -51,9 +51,9 @@ export default function AddLesson( props ) {
                 subjects: document.getElementById('subjects').value
             }
         }
-            document.getElementById("AddLessonForm").reset();
+        document.getElementById("AddLessonForm").reset();
+        onClickHideForm();
 
-        
          //create post
          axios.get(url, body)
          .then( (res) => {
@@ -76,12 +76,12 @@ export default function AddLesson( props ) {
              .then( (res) => {
                 let post = res.data.post;
                 post.complete = [];
-                post.avatar = profile.photo;
+                post.author_avatar = profile.photo;
                 post.section = section;
                 showNewPost(post);
                 if(showNewSection !== false){
                     showNewSection(body.newSection);
-                    onClickHideForm()
+                    
                 }
              })
          });

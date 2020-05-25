@@ -29,7 +29,7 @@ export default function TheComment( {comment, isNew, profile}) {
     return (
         <ListItem>
             <ListItemAvatar>
-                <Avatar alt={commentorName(comment.author_name)} src={comment.author_avatar.photoUrl} />
+                <Avatar alt={commentorName(comment.author_name)} src={comment.author_avatar} />
 </ListItemAvatar>
             <ListItemText>
             <Typography variant="subtitle2" style={{textTransform: 'capitalize'}}>

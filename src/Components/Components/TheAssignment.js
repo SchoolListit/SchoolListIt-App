@@ -34,17 +34,28 @@ export default function TheAssignment( {post, userID, section }) {
     const [isOpen, setIsOpen] = useState(false);
     const [singlePostID, setSinglePostID] = useState('');
     const [editItem, setEditItem] = useState(false);
+    const [thePost, setThePost] = useState(post);
 
 
     const openEditItem = (postID, section) => {
         setEditItem(!editItem);
     }  
     
-    const closeEditItem = (postID) => {
-        console.log(postID);
+    const closeEditItem = () => {
         setEditItem(!editItem);
     }
 
+    const onChanged = (result) => {
+        console.log(result);
+        if (result.deleted == 'true'){
+            let post = 'undefined';
+            setThePost(post);
+        } else {
+            let changedPost = result.post;
+            setThePost(changedPost);
+        }
+        
+    }
 
     const toggleIsOpen = () => {
         setIsOpen(!isOpen);
@@ -54,46 +65,47 @@ export default function TheAssignment( {post, userID, section }) {
     }
 
     const onDialogClose = (e, PostID) => {
-        console.log(PostID)
+       //console.log(PostID)
     }
 
     const Transition = React.forwardRef(function Transition(props, ref) {
         return <Slide direction="up" ref={ref} {...props} />;
       });
     
-    if(post === 'undefined'){
+    if(thePost === 'undefined'){
         return null
     } else {
         return (
-            <React.Fragment key={"post_"+post.ID}>
-            <ListItem key={"post-"+post.ID} className={classes.listItemRoot} button >
+            <React.Fragment key={"post_"+thePost.ID}>
+            <ListItem key={"post-"+thePost.ID} className={classes.listItemRoot} button >
                 {/** due date, edit and title */}
                 <Grid container alignItems="flex-start" justify="space-between">
                     <Grid item xs={10}>
                         <Typography variant="subtitle2" style={{fontWeight: '700'}}>
                         
-                        {moment(post.assigned_date).format('MM-DD dddd ')+" "} 
-                        {(post.mandatory === 'false')
-                            ? <span style={{color: '#00c853'}}>Optional</span>
-                            : null}
-                        {(post.mandatory === 'true')
+                        {moment(thePost.assigned_date).format('MM-DD dddd ')+" "} 
+                        {(thePost.mandatory === 'true')
                             ? <React.Fragment>
-                                due on {moment(post.due_date).format('MM-DD')}
+                                due on {moment(thePost.due_date).format('MM-DD')}
                             </React.Fragment> 
-                            : null
+                            : <span style={{color: '#00c853'}}>Optional</span>
                         }   
                         </Typography> 
                         <Typography variant="body1" style={{textTransform: 'capitalize'}} >
-                            {post.post_title}
+                            {thePost.post_title}
                         </Typography>
                     </Grid>
-                    <Grid item xs={1} >
-                            <FontAwesomeIcon icon="ellipsis-h" onClick={() => openEditItem(post.ID, section)} style={{color: "#bdbdbd"}}></FontAwesomeIcon>
-                            <Dialog open={editItem} onClose={() => closeEditItem()}>
-                                <MyDialogTitle title="Edit This Assignment" onClose={closeEditItem} icon={false}></MyDialogTitle>
-                                <EditListItem post={post} userID={userID} section={section} showNewPost={false} showNewSection={false} onClickHideForm={false} closeEditItem={closeEditItem}></EditListItem>
-                            </Dialog>
-                    </Grid>
+                    {(thePost.post_author == userID)
+                        ? <Grid item xs={1} >
+                                    <FontAwesomeIcon icon="ellipsis-h" onClick={() => openEditItem(thePost.ID, section)} style={{color: "#bdbdbd"}}></FontAwesomeIcon>
+                                    <Dialog open={editItem} onClose={() => closeEditItem()}>
+                                        <MyDialogTitle title="Edit This Assignment" onClose={closeEditItem} icon={false}></MyDialogTitle>
+                                        <EditListItem post={thePost} userID={userID} section={section} onChanged={onChanged} closeEditItem={closeEditItem}></EditListItem>
+                                    </Dialog>
+                            </Grid>
+                        : null
+                    }
+                    
                 </Grid>
                 
 
@@ -102,7 +114,7 @@ export default function TheAssignment( {post, userID, section }) {
                    
                     {/* AVATAR AND EXCERPT */}
                     <Grid item xs={2} >
-                         <Avatar alt="Posted By" src={post.author_avatar} onClick={() => toggleIsOpen()}></Avatar>
+                         <Avatar alt="Posted By" src={thePost.author_avatar} onClick={() => toggleIsOpen()}></Avatar>
                     </Grid>
                     <Grid item xs={7}>
                         <ListItemText onClick={() => toggleIsOpen()}>
@@ -116,9 +128,9 @@ export default function TheAssignment( {post, userID, section }) {
                         <ListItemSecondaryAction >
                         {(userID !== 'undefined' )
                         ? <MyCheckbox
-                            postID = {post.ID}
+                            postID = {thePost.ID}
                             userID={userID}
-                            initialChecked = {post.complete}
+                            initialChecked = {thePost.complete}
                             ></MyCheckbox>
                         : null
                         }
@@ -130,10 +142,8 @@ export default function TheAssignment( {post, userID, section }) {
             </ListItem>
             {/* CLOSE LIST ITEM */}
 
-
-
-            <Dialog key={"dialog-"+post.ID} fullScreen open={isOpen} onClose={e => onDialogClose(e, post.ID)} disablePortal={true}>
-                <SingleAssignment postID={post.ID} toggleIsOpen={toggleIsOpen}></SingleAssignment>
+            <Dialog key={"dialog-"+thePost.ID} fullScreen open={isOpen} onClose={e => onDialogClose(e, thePost.ID)} disablePortal={true}>
+                <SingleAssignment postID={thePost.ID} toggleIsOpen={toggleIsOpen}></SingleAssignment>
             </Dialog>
             </React.Fragment>
         )

@@ -21,7 +21,7 @@ export default function EditListItem( props ) {
     const [deleteOpen, setDeleteOpen] = useState(false);
 
 
-    const { userID, post, section, showNewPost, showNewSection, closeEditItem } = props;
+    const { post, section, onChanged, closeEditItem } = props;
     
 
     const openDelete = () => {
@@ -37,7 +37,7 @@ export default function EditListItem( props ) {
             post_id: props.post.ID,
             changed_fields: changedFields,
             due_date: document.getElementById('due_date').value,
-            post_date: document.getElementById('post_date').value,
+            assigned_date: document.getElementById('assigned_date').value,
             post_title: document.getElementById('post_title').value,
             post_excerpt: document.getElementById('post_excerpt').value,
             grades: document.getElementById('grades').value,
@@ -78,13 +78,8 @@ export default function EditListItem( props ) {
              //make 2nd call
              axios.post(url, formdata, {headers: headers})
              .then( (res) => {
-                if(res.data.deleted == 'true'){
-                    console.log('deleted');
-                }
-                if(res.data.edit == 'true'){
-                    console.log('edited');
-                }
-                
+                onChanged(res.data);
+                closeEditItem();
              })
          });
     }
@@ -119,7 +114,7 @@ export default function EditListItem( props ) {
                     <TextField
                         fullWidth={true}
                         required
-                        id="post_date"
+                        id="assigned_date"
                         label="Assignment Date"
                         type="Date"
                         defaultValue={post.assigned_date}

@@ -9,8 +9,11 @@ export default function Feed( {showGlobalForm, onCloseGlobalForm} ) {
     const [state, setState] = useContext(Context);
     const [newPost, setNewPost] = useState('');
     const [newSection, setNewSection] = useState("undefined");
+    //const [following, setFollowing] = useState([]);
+
 
     
+
     const showNewPost = (newPost) => {
         setNewPost(newPost);
     }
@@ -21,7 +24,7 @@ export default function Feed( {showGlobalForm, onCloseGlobalForm} ) {
 
     return (
         <React.Fragment>
-            <Classrooms  newPost={newPost} newSection={newSection} showNewPost={showNewPost} ></Classrooms> 
+            <Classrooms newPost={newPost} newSection={newSection} showNewPost={showNewPost} ></Classrooms> 
             <Dialog open={showGlobalForm} onClose={(e) => onCloseGlobalForm()} disablePortal={true}>
                 <AddLesson section={false} onClickHideForm={onCloseGlobalForm} showNewPost={showNewPost} showNewSection={showNewSection}></AddLesson>
             </Dialog> 
