@@ -4,7 +4,6 @@ import ContentCard from './ContentCard.js';
 import { Container, Grid, } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ClassAssignments from './ClassAssignments.js';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import NewAssignments from './NewAssignments.js';
 import AddLesson from '../Forms/AddLesson.js';
 import FollowSomething from '../Components/FollowSomething.js';

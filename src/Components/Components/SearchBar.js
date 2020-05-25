@@ -28,12 +28,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function GoogleMaps() {
+export default function GoogleMaps( {width, background}) {
   const classes = useStyles();
   const [value, setValue] = React.useState(null);
   const [inputValue, setInputValue] = React.useState('');
   const [options, setOptions] = React.useState([]);
   const loaded = React.useRef(false);
+  const inputWidth = (width === 'undefined') ? '300px' : width ;
+  const backgroundColor = (background === 'undefined') ? 'transparent' : background ;
+
 
   if (typeof window !== 'undefined' && !loaded.current) {
     if (!document.querySelector('#google-maps')) {
@@ -94,7 +97,7 @@ export default function GoogleMaps() {
   return (
     <Autocomplete
       id="google-map-demo"
-      style={{ width: 300 }}
+      style={{ width: inputWidth, background: backgroundColor }}
       getOptionLabel={(option) => (typeof option === 'string' ? option : option.description)}
       filterOptions={(x) => x}
       options={options}
