@@ -56,9 +56,12 @@ import SearchBar from './SearchBar.js';
                     <Grid item xs={12} md={3} >
                         <Typography style={{ color: '#424242', fontWeight: '700', textAlign: 'center'}} variant="h6" component="h1">SchooListIt</Typography>
                     </Grid>
-                    <Grid item xs={12} md={3} >
+                    {/**
+                     * <Grid item xs={12} md={3} >
                         <SearchBar></SearchBar>
-                    </Grid>
+                         </Grid>
+                     */}
+                    
                     <Grid container item xs={12} md={3} justify="flex-end" className="primary-menu-icons" >
                             <Grid item xs={3} className={classes.menuIcon}>
                                 <FontAwesomeIcon icon="home" onClick={() => goHere("/")}></FontAwesomeIcon>

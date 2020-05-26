@@ -24,7 +24,7 @@ const useStyles = makeStyles(() => ({
     }
   }));
 
-export default function Classrooms({ newSection, showNewSection, onClickAssignment, showNewPost, newPost }) {
+export default function Classrooms({ newSection, showNewSection, onClickAssignment, showNewPost, newPost, openGlobalForm,  onCloseGlobalForm }) {
     const classes = useStyles();
     const [state, setState] = useContext(Context);
     const {following} = state;
@@ -59,15 +59,14 @@ export default function Classrooms({ newSection, showNewSection, onClickAssignme
         return true;
     }
     
-    console.log(state.following);
-    
 /**
  *  the rendering of the components
  * */    
     if(following.length < 1){
-
-        return <FollowSomething></FollowSomething>;
-
+        return (
+            <FollowSomething 
+                openGlobalForm={openGlobalForm}
+            ></FollowSomething>);
     } else {
         return (
                 <Grid

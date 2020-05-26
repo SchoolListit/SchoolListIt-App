@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function GoogleMaps( {width, background}) {
+export default function GoogleMaps( {width, background, helperText, chooseSchool}) {
   const classes = useStyles();
   const [value, setValue] = React.useState(null);
   const [inputValue, setInputValue] = React.useState('');
@@ -96,13 +96,16 @@ export default function GoogleMaps( {width, background}) {
 
   return (
     <Autocomplete
-      id="google-map-demo"
-      style={{ width: inputWidth, background: backgroundColor }}
+      id="google-maps-school-search"
+      style={{ width: inputWidth }}
       getOptionLabel={(option) => (typeof option === 'string' ? option : option.description)}
       filterOptions={(x) => x}
       options={options}
       autoComplete
       includeInputInList
+      selectOnFocus
+      clearOnBlur
+      freeSolo
       filterSelectedOptions
       value={value}
       onChange={(event, newValue) => {
@@ -111,9 +114,10 @@ export default function GoogleMaps( {width, background}) {
       }}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
+        chooseSchool(newInputValue);
       }}
       renderInput={(params) => (
-        <TextField {...params} label="Find A School" variant="outlined" fullWidth />
+        <TextField {...params} id="find-your-school" helperText={helperText} label="Find Your School" variant="outlined" fullWidth />
       )}
       renderOption={(option) => {
         const matches = option.structured_formatting.main_text_matched_substrings;

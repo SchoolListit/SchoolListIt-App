@@ -21,7 +21,7 @@ export default function Timeline() {
             <Header profile={profile} openGlobalForm={openGlobalForm}></Header>
             {(profile)
              
-                ? <Feed showGlobalForm={showGlobalForm} onCloseGlobalForm={onCloseGlobalForm}></Feed>
+                ? <Feed showGlobalForm={showGlobalForm} onCloseGlobalForm={onCloseGlobalForm} openGlobalForm={openGlobalForm}></Feed>
                 : <Redirect to="/sign-in" exact />
             }
         </React.Fragment>

@@ -17,9 +17,8 @@ const useStyles = makeStyles(() => ({
 export default function ContentCard( {mainTitle, subTitle, children, icon, iconTo, section} ) {
     const classes = useStyles();
     const profile = JSON.parse(localStorage.getItem("scholistic_profile"));
-
-//<Avatar alt={profile.name} src={profile.photo} style={{marginRight: '10px'}}></Avatar>
-
+    const [state, setState] = useContext(Context);
+    const {following} = state;
 
     return (
         <React.Fragment>
@@ -40,7 +39,7 @@ export default function ContentCard( {mainTitle, subTitle, children, icon, iconT
                     {children}
                 </div> 
                 
-                <ListActions section={section} profile={profile} shareLink={iconTo}></ListActions>
+                <ListActions following={following} section={section} profile={profile} shareLink={iconTo}></ListActions>
             </Paper>     
         </React.Fragment>
     )

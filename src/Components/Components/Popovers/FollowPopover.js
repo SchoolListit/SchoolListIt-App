@@ -14,6 +14,7 @@ export default function FollowPopover( { anchorEl, open, profile, object, onClos
             user_id: profile.wpUserObj.user.ID,
             student: studentName
         }
+        
         let url = "http://localhost:8888/parentchecklist/wp-json/parent-checklist-rest/v2/follow"
         //create post
         axios.get(url, body)

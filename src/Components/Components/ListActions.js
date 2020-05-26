@@ -20,13 +20,16 @@ const useStyles = makeStyles(() => ({
 
 
 
-export default function ListActions( {section, shareLink} ) {
+export default function ListActions( {section, shareLink, following} ) {
     const classes = useStyles();
     const [openFollow, setOpenFollow] = useState(false);
     const [openComment, setOpenComment] = useState(false);
     const [openShare, setOpenShare] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const profile = JSON.parse(localStorage.getItem("scholistit_profile"))
+
+    const isFollowed = following.filter( followed => followed.section === section);
+    console.log(isFollowed)
 
     const clickFollow = (event) => {
         setAnchorEl(event.currentTarget);
@@ -80,6 +83,7 @@ export default function ListActions( {section, shareLink} ) {
             
             <Grid item xs={4}>
                 <Button key={"follow-"+sectionID} id={"followButton-"+sectionID} onClick={(e) => clickFollow(e)}>
+                    {/**here we will decide if already followed */}
                     <Typography><FontAwesomeIcon icon="thumbs-up"></FontAwesomeIcon> Follow</Typography>
                     <FollowPopover anchorEl={anchorEl} id={sectionID} profile={profile} object={sectionID} open={openFollow} onClose={toggleFollow}></FollowPopover>
                 </Button>
