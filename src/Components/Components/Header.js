@@ -27,9 +27,7 @@ import TermSearch from './TermSearch.js';
         
     }));
 
-    const goHere = (location) => {
-        console.log(location)
-    }  
+      
 
   
 
@@ -39,6 +37,10 @@ import TermSearch from './TermSearch.js';
     const { schools, teachers, subjects } = state;
     let history = useHistory();
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
+
+    const goHere = (location) => {
+        history.push(location);
+    }
 
 
     const options = [];
@@ -68,6 +70,7 @@ import TermSearch from './TermSearch.js';
 
     const profileClick = () => {
         localStorage.removeItem('scholistit_profile');
+        localStorage.removeItem('scholistit-profileStudents');
         let profile;
         state.profile = profile;
         setState(state);
@@ -81,13 +84,8 @@ import TermSearch from './TermSearch.js';
         return (
                 <Grid container className={classes.root} justify="space-between" alignItems="center" alignContent="flex-start">
                     <Grid item xs={12} md={3} >
-                        <Typography style={{ color: '#424242', fontWeight: '700', textAlign: 'center'}} variant="h6" component="h1">SchooListIt</Typography>
+                        <Typography style={{ color: '#424242', fontWeight: '700', textAlign: 'center'}} variant="h6" component="h1" onClick={ () => goHere('/')}>SchooListIt</Typography>
                     </Grid>
-                    {/**
-                     * <Grid item xs={12} md={3} >
-                        <SearchBar></SearchBar>
-                         </Grid>
-                     */}
                      <Grid item xs={12} md={3}>
                          <TermSearch data= {options} getSearchResults={getSearchResults}></TermSearch>
                      </Grid>

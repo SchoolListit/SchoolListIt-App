@@ -33,7 +33,7 @@ export default function SetUpForm () {
         localStudents.push({name: "", grade: ""})
         setLocalStudents(localStudents)
         localStorage.setItem('scholistit_userType', event.target.value)
-        localStorage.setItem('scholistit_profileStudents', JSON.stringify(localStudents))
+        localStorage.setItem('scholistit-profileStudents', JSON.stringify(localStudents))
 
       }; 
 

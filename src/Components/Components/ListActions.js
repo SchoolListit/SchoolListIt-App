@@ -63,8 +63,7 @@ export default function ListActions( { section, shareLink } ) {
     const sectionID = (theSection) => {
         if(!emptyArray(theSection)){
             return (
-                console.log(following.isArray)
-                //theSection[0].replace(" ", "-")+"_"+theSection[1].replace(" ", "-")+"_"+theSection[2].replace(" ", "-")+"_"+theSection[3].replace(" ", "-")
+                theSection.schools.replace(" ", "-")+"_"+theSection.teachers.replace(" ", "-")+"_"+theSection.grades.replace(" ", "-")+"_"+theSection.subjects.replace(" ", "-")
             )
         } else {
             return null
@@ -99,7 +98,6 @@ export default function ListActions( { section, shareLink } ) {
             <Grid className={classes.root} container justify="space-between" alignItems="flex-start">
                 
                 <Grid item xs={4}>
-                    {console.log(typeof state.following)}
                     {(isFollowed(state.following, section))
                         ?<Button key={"follow-"+sectionID(section)} id={"followButton-"+sectionID(section)} >
                             <Typography><FontAwesomeIcon icon="check"></FontAwesomeIcon> following</Typography>

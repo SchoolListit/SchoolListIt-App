@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default function ClassAssignments( { section, link, onClickAdd, onCLickHideForm } ) {
     const [ lessons, setLessonPlans ] = useState([]);
     const [ changed, setChanged ] = useState([]);
-
+    const [count, setCount] = useState(3);
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const {userID} = profile;
     
@@ -36,7 +36,7 @@ export default function ClassAssignments( { section, link, onClickAdd, onCLickHi
                 teachers: section.teachers,
                 grades: section.grades,
                 subjects: section.subjects,
-                number: "3"
+                number: count
             }
             let formdata = new FormData();
             for (const property in body) {
@@ -48,7 +48,15 @@ export default function ClassAssignments( { section, link, onClickAdd, onCLickHi
 
         fetchData();
         return () => { ignore = true; }
-    }, [section.teachers, section.grades, section.subjects]);
+    }, [section.teachers, section.grades, section.subjects, count, setCount]);
+
+
+    const showMore = () => {
+        setCount(count + 3);
+    }
+
+
+
 /**
  * Under here is the render.
  */
@@ -83,7 +91,7 @@ export default function ClassAssignments( { section, link, onClickAdd, onCLickHi
                     </Grid>
                 {(morePosts() !== false)
                     ? <Grid item>
-                        <Button href={"/classrooms/:"+link} variant="outlined" size="small" color="primary">
+                        <Button onClick={() => showMore()} variant="outlined" size="small" color="primary">
                             <Typography >
                                 {morePosts()+" more"}
                             </Typography>

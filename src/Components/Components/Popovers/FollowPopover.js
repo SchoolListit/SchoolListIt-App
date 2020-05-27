@@ -39,7 +39,8 @@ export default function FollowPopover( { following, setFollowing, anchorEl, open
             axios.post(url, formdata, {headers: headers})
             .then( (res) => {
                 state.following = res.data;
-                //setState(state);
+                setState(state);
+                onClose();
             })
         });
     }
@@ -62,12 +63,12 @@ export default function FollowPopover( { following, setFollowing, anchorEl, open
             >
                 <Container>
                     <p key={profile.name+"-follows"}>
-                        <Button key={profile.name+"-follow"} section={object} onClick={() => followSection(profile, 'no')}>{profile.user.display_name}</Button>
+                        <Button key={profile.name+"-follow"} section={object} onClick={() => followSection(profile, 'no')}>{profile.user.display_name.replace("_", ' ')}</Button>
                     </p>
                     {students.map( student => {
                         return (
                             <p key={"student-"+student.name}>
-                                <Button key={"student-"+student.name} onClick={() => followSection(profile, student.name)}>{student.name}</Button>
+                                <Button key={"student-"+student.name} onClick={() => followSection(profile, student.name)}>{student.name.replace("_", ' ')}</Button>
                             </p>
                         )
                     })}
