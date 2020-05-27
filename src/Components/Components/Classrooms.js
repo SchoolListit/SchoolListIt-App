@@ -1,12 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Context } from '../../Context/Context.js';
 import ContentCard from './ContentCard.js';
-import { Container, Grid, } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ClassAssignments from './ClassAssignments.js';
 import NewAssignments from './NewAssignments.js';
 import AddLesson from '../Forms/AddLesson.js';
-import FollowSomething from '../Components/FollowSomething.js';
+import { emptyArray } from '../../Context/functions.js';
 
 const initialShowForm = {
     teachers: '',
@@ -17,17 +17,14 @@ const initialShowForm = {
 
 const useStyles = makeStyles(() => ({
     root: {
-        height: '200vh',
-        maxHeight: '200vh',
         width: '100%',
         padding: '30px'
     }
   }));
 
-export default function Classrooms({ newSection, showNewSection, onClickAssignment, showNewPost, newPost, openGlobalForm,  onCloseGlobalForm }) {
+export default function Classrooms({ sections, newSection, showNewSection, onClickAssignment, showNewPost, newPost, openGlobalForm,  onCloseGlobalForm }) {
     const classes = useStyles();
     const [state, setState] = useContext(Context);
-    const {following} = state;
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const [showForm, setShowForm] = useState(initialShowForm);
 
@@ -62,12 +59,9 @@ export default function Classrooms({ newSection, showNewSection, onClickAssignme
 /**
  *  the rendering of the components
  * */    
-    if(following.length < 1){
-        return (
-            <FollowSomething 
-                openGlobalForm={openGlobalForm}
-            ></FollowSomething>);
-    } else {
+    if(sections === 'undefined'){
+        return null;
+    } else { 
         return (
                 <Grid
                     container
@@ -117,9 +111,9 @@ export default function Classrooms({ newSection, showNewSection, onClickAssignme
                         </Grid>
                     : null
                 
-                }   
-            { following.map( (follow, index) => {
-                    let section = follow.section;
+                } 
+        
+            { sections.map( (section, index) => {
                     return (
                         <Grid key={"grid-item-"+index} item xs={12} sm={6} md={4}>
                             <ContentCard
@@ -153,9 +147,11 @@ export default function Classrooms({ newSection, showNewSection, onClickAssignme
                         
                     )
                 })
-                }
-                </Grid>
-            )
+            }
+        
+        </Grid>
+    )
+ }//if sections are defined
 
-    }  // ends the if else render null  
+      
 } //ends the rfc

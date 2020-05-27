@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Redirect, useHistory } from 'react-router-dom';
 import SearchBar from './SearchBar.js';
+import TermSearch from './TermSearch.js';
+
 
 
 
@@ -31,11 +33,36 @@ import SearchBar from './SearchBar.js';
 
   
 
-  export default function Header( {openGlobalForm} ) {
+  export default function Header( {openGlobalForm, getSearchResults} ) {
     const classes = useStyles();
     const [state, setState] = useContext(Context);
+    const { schools, teachers, subjects } = state;
     let history = useHistory();
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
+
+
+    const options = [];
+    schools.map( school => {
+        let option = {
+            label: (school.description !== '') ? school.description : school.name,
+            value: school.name
+        }
+        options.push(option);
+    })
+    teachers.map( teacher => {
+        let option = {
+            label: teacher.name,
+            value: teacher.name
+        }
+        options.push(option);
+    })
+    subjects.map( subject =>{
+        let option = {
+            label: subject.name,
+            value: subject.name
+        }
+        options.push(option);
+    })
 
     
 
@@ -61,6 +88,9 @@ import SearchBar from './SearchBar.js';
                         <SearchBar></SearchBar>
                          </Grid>
                      */}
+                     <Grid item xs={12} md={3}>
+                         <TermSearch data= {options} getSearchResults={getSearchResults}></TermSearch>
+                     </Grid>
                     
                     <Grid container item xs={12} md={3} justify="flex-end" className="primary-menu-icons" >
                             <Grid item xs={3} className={classes.menuIcon}>

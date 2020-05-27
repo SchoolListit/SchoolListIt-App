@@ -9,7 +9,7 @@ import SchoolClasses from './SchoolClasses.js';
 
 
 
-export default function FollowSomething( {openGlobalForm, onCloseGlobalForm, theLink, onClickAdd, onClickHideForm} ) {
+export default function FollowSomething( {searchResults, setSearchResults, openGlobalForm, onCloseGlobalForm, theLink, onClickAdd, onClickHideForm} ) {
     const [state, setState] = useContext(Context);
     const [terms, setTerms] = useState();
     const {sections} = state;
@@ -36,14 +36,11 @@ export default function FollowSomething( {openGlobalForm, onCloseGlobalForm, the
         let  theSchool = terms.filter( term => schoolDescription === term.description);
         theSchool = theSchool[0].name;
         let reducedSections = sections.filter( section => theSchool === section.schools);
-        window.scrollTo({top: 800, behavior: 'smooth'});
-        setSchoolSections(reducedSections);
-        
+        setSearchResults(reducedSections);
     }
 
     let showMeEverything = () => {
-        setTimeout(window.scrollTo({top: 800, behavior: 'smooth'}), 3000);
-        setSchoolSections(sections);
+        setSearchResults(sections);
     }
 
     return (
@@ -54,6 +51,7 @@ export default function FollowSomething( {openGlobalForm, onCloseGlobalForm, the
                     <Typography variant="overline">the easiest way to track schoolwork on the planet</Typography>
                     <Typography variant="h5">Public education should be public. Easy access to homework and schoolwork is just the beginning. </Typography>
                 </Grid>
+                
                 <Grid spacing={5} container justify="center" alignItems="center" alignContent="center" item xs={12}>
                     <Grid item xs={12} md={4} >
                     <Card style={{textAlign: 'center', padding: '30px', minHeight: '350px'}}>
@@ -102,44 +100,16 @@ export default function FollowSomething( {openGlobalForm, onCloseGlobalForm, the
                         </Card>
                     </Grid>
                 </Grid>
+                </Grid>
+                <Container>
+                        <Grid container justify="center" alignItems="center" alignContent="center" spacing={5}>
+                            <Grid item xs={12} style={{textAlign: 'center', maxWidth: '500px', padding: '50px  0'}}>
+                                    <Typography variant="h5" style={{textAlign: 'center'}}>Welcome To SchooListIt</Typography>
+                                    <Typography >This is your home feed. Use the tools above to find more classes to follow. When you follow a class it shows up in your home feed. </Typography>
+                            </Grid>
+                        </Grid>
+                    </Container>
                 
-                {/** so this is the end of the grid which contains the  */}
-                </Grid>
-                <Grid 
-                    container
-                    justify="center" 
-                    alignItems="center" 
-                    alignContent="center" 
-                    spacing={3}
-                    style={{padding: '50px'}}
-                >
-                    {/** this is the floating emoji that should be at the end of the classes that come in */}
-                    <Grid 
-                        item xs={10} 
-                        container 
-                        justify="center" 
-                        alignItems="center" 
-                        alignContent="center" 
-                        spacing={2}
-                        >
-                        <Grid item xs={2}>
-                            <Typography variant="h2" style={{textAlign: 'right'}}>
-                                <FontAwesomeIcon icon="grin-beam-sweat"></FontAwesomeIcon>
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={7} >
-                            <Typography variant="h6"> We build schools on the fly </Typography>
-                            <Typography>Adding a school is a simple as typing the name. Try adding a lesson. You'll see.</Typography>
-                        </Grid>
-                    </Grid> 
-                    <SchoolClasses 
-                    sections = {schoolSections}
-                    theLink = {theLink}
-                    onClickAdd = {onClickAdd}
-                    onClickHideForm = {onClickHideForm}
-                    ></SchoolClasses>
-                      
-                </Grid>
         </Container>
     )
 }

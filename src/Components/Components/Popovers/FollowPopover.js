@@ -1,17 +1,21 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Popover, Container, Button, Typography } from '@material-ui/core';
 import axios from 'axios';
+import {Context} from '../../../Context/Context.js';
 
 
 
-export default function FollowPopover( { anchorEl, open, profile, object, onClose }) {
-    const students = JSON.parse(localStorage.getItem('scholistit-profileStudents'))
+export default function FollowPopover( { following, setFollowing, anchorEl, open, profile, object, onClose }) {
+    const { userID, students }= profile;
+    const [state, setState] = useContext(Context);
+    
+    
     
     const followSection = (profile, studentName) => {
         let body = {
             type: 'section',
-            object: object,
-            user_id: profile.wpUserObj.user.ID,
+            object: JSON.stringify(object),
+            user_id: userID,
             student: studentName
         }
         
@@ -34,7 +38,8 @@ export default function FollowPopover( { anchorEl, open, profile, object, onClos
             //make 2nd call
             axios.post(url, formdata, {headers: headers})
             .then( (res) => {
-               console.log(res.data);
+                state.following = res.data;
+                //setState(state);
             })
         });
     }
@@ -57,7 +62,7 @@ export default function FollowPopover( { anchorEl, open, profile, object, onClos
             >
                 <Container>
                     <p key={profile.name+"-follows"}>
-                        <Button key={profile.name+"-follow"} section={object} onClick={() => followSection(profile, 'no')}>{profile.name}</Button>
+                        <Button key={profile.name+"-follow"} section={object} onClick={() => followSection(profile, 'no')}>{profile.user.display_name}</Button>
                     </p>
                     {students.map( student => {
                         return (

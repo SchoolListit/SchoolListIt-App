@@ -5,8 +5,7 @@ import TheAssignment from '../Components/TheAssignment.js';
 export default function NewAssignments( props ) {
 
     const { post, onClickAssignment, profile, section } = props;
-    const {user} = profile.wpUserObj
-    let userID = user.ID
+    const { userID } = JSON.parse(localStorage.getItem('scholistit_profile'));
 
 
     const objsEqual = (a, b) => {

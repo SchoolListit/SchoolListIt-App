@@ -2,15 +2,16 @@ import React, { useContext, useState, useEffect }  from 'react';
 import { FormControl, Typography } from '@material-ui/core';
 import { Context } from '../../../Context/Context.js';
 import GoogleLogin from 'react-google-login';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 
 
 export default function MyGoogleLogin() {
-    const [state, setState, profileIsSaved, wpUserObj] = useContext(Context);
+    const [state, setState] = useContext(Context);
     const [authenticated, setAuthenticated] = useState(false);
     const [loginError, setLoginError] = useState(false);
+    let history = useHistory();
 
 
     const googleFail = (response) => {
@@ -19,26 +20,24 @@ export default function MyGoogleLogin() {
       }
     
     const googleSuccess = (response) => {
-        let userName = response.profileObj.givenName+ ' '+response.profileObj.familyName;
+        let userName = response.profileObj.givenName+'_'+response.profileObj.familyName;
+        let students = JSON.parse(localStorage.getItem('scholistit-profileStudents'));
+        let userType = localStorage.getItem('scholistit_userType');
         const profile = {
             name: userName,
             email: response.profileObj.email,
             photo: response.profileObj.imageUrl,
             loginService: 'google',
             wp_creds: {
-                username: userName.replace(' ', '_'),
+                username: userName,
                 email: response.profileObj.email,
                 password: response.tokenObj.access_token,
-                photoUrl: response.profileObj.imageUrl
-            }
+                photo: response.profileObj.imageUrl,
+                students: JSON.stringify(students),
+                userType: userType
+            },
+            students: students
         }
-        //context
-        state.profileUserName = profile.name;
-        state.profileUserEmail = profile.email;
-        state.profileUserPhoto = profile.photo;
-        state.profile = profile;
-        state.loginVerified = true;
-        setState(state);
         localStorage.setItem('scholistit_profile', JSON.stringify(profile));
     
         const url = 'http://localhost:8888/parentchecklist/wp-json/parent-checklist-rest/v2/registration';
@@ -63,20 +62,24 @@ export default function MyGoogleLogin() {
                 //make 2nd call
                 axios.post(url, formdata, {headers: headers})
                 .then( (res) => {
-                    state.wpUserObj = res.data.user;
-                    profile.wpUserObj = res.data;
+                    localStorage.setItem('scholistit_profile', JSON.stringify(res.data));
+                    console.log(res.data)
+                    state.profile = res.data;
                     setState(state);
-                    //end the whole call to wp for user
-                    localStorage.setItem('scholistit_profile', JSON.stringify(profile));
-                    setAuthenticated(true);
+                    console.log('authenticated - should redirect and reinitialize');
+                    history.push('/');
                 })
             });
      } 
 
+     const sendToLogin = () => {
+         history.push('/sign-in/');
+     }
+
 
     return (
         <FormControl margin="normal" fullWidth={true}>
-            { (authenticated === true) ? <Redirect exact to="/" /> : null }
+            { (authenticated === true) ? <React.Fragment>{sendToLogin()}</React.Fragment> : null }
             <GoogleLogin
                 clientId="988354227304-sejkrfpe009ppkkm8qpefdq7ldoude0g.apps.googleusercontent.com"
                 onSuccess={googleSuccess}

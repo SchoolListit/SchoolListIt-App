@@ -11,7 +11,7 @@ export default function ClassAssignments( { section, link, onClickAdd, onCLickHi
     const [ changed, setChanged ] = useState([]);
 
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
-    const userID = profile.wpUserObj.wp_user.ID
+    const {userID} = profile;
     
     const onClickAssignment = () => {
         
