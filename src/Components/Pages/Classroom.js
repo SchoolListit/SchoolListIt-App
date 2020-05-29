@@ -1,15 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import moment from 'moment';
 import { useParams, useLocation } from 'react-router-dom';
-import { Container, Grid, } from '@material-ui/core';
+import { Container, Grid, Typography, Dialog } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Context } from '../../Context/Context.js';
 import Header from '../Components/Header.js';
-import ContentCard from '../Components/ContentCard';
-import ClassPosts from '../Components/ClassPosts.js';
-import NewAssignments from '../Components/NewAssignments.js';
-import PostLesson from '../Forms/PostLesson.js';
-import SingleAssignment from '../Components/SingleAssignment.js';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import DailyWork from './../Components/DailyWork.js';
+import AddLesson from './../Forms/AddLesson.js';
 
 
 function useQuery() {
@@ -19,9 +17,8 @@ function useQuery() {
 const useStyles = makeStyles(() => ({
     root: {
         margin: '0',
-        padding: '0',
-        display: 'flex',
-        overflow: 'auto'
+        padding: '30px',
+        
     },
   })); 
 
@@ -32,20 +29,39 @@ const useStyles = makeStyles(() => ({
     subjects: ''
 }   
 
+
+
 export default function Classroom() {
     const classes = useStyles();
+    const history = useHistory();
     const { classArgs } = useParams();
     const [state, setState] = useContext(Context);
     const { assignments, currentAssignment, loggedIn } = state; 
+    const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
+    const {userID} = profile;
+    const [showGlobalForm, setShowGlobalForm] = useState(false);
     const [singlePostID, setSinglePostID] = useState('');
     const [newPost, setNewPost] = useState('');
-    const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const [showForm, setShowForm] = useState(initialShowForm);
+    const [newSection, setNewSection] = useState("undefined");
 
     
-    
-    let query = useQuery();
-    //console.log(query.get("pageID"));
+
+    const showNewPost = (newPost) => {
+        setNewPost(newPost);
+    }
+
+    const showNewSection = (section) => {
+        setNewSection(section);
+    }
+
+    const openGlobalForm = () => {
+        setShowGlobalForm(true);
+    }
+
+    const onCloseGlobalForm = () => {
+        setShowGlobalForm(false);
+    }    
     
     let theClass = decodeURIComponent(classArgs).replace(":", "").split("-");
     
@@ -57,62 +73,55 @@ export default function Classroom() {
         key: theClass,
     }
 
-    const showNewSection = (newPost) => {
-        //do nothing
+    const weekTitle = (stringDate) => {
+        const theMoment = moment(stringDate);
+        const theDate = moment(stringDate).format("MM-DD-YYYY")
+        const weekNumber = moment(stringDate).format('ww');
+        const startDate = moment(stringDate).startOf('week').format('dddd MM-DD-YYYY');
+        const endDate = moment(stringDate).endOf('week').format('dddd MM-DD-YYYY');
+        return (
+            <React.Fragment>
+                <Typography variant="h6">Week {weekNumber}: {theDate}</Typography>
+                <Typography >{startDate+" - "+endDate}</Typography>
+            </React.Fragment>
+        )
     }
 
-    const showNewPost = (newPost) => {
-        setNewPost(newPost);
-    }
-
-    const onClickAdd = (section) => {
-        console.log(section)
-        setShowForm(section);
-    }
+    const increments = [1, 2, 3, 4, 5];  
 
 
-    const onClickAssignment = (postID) => {
-        console.log(postID);
-        //setSinglePostID(postID);
-    }
-
-    const onAddNew = (postBody) => {
-        console.log(postBody);
-    }
-
-    
-        
     return (
         <React.Fragment>
-            <Header></Header>
-            <Container 
-            maxWidth={false}
-            style={{padding: '30px 20px'}}
-            >
-            {(!profile)
-                ?   <Redirect to="/sign-in" exact />
-                : null }    
-            <Grid container >
-                <Grid item xs={12} md={4}>
-                    <ContentCard
-                        key={classArgs}
-                        mainTitle={section.schools+" "+ section.teachers}
-                        subTitle={section.grades+" "+ section.subjects}
-                        onClickAdd={onClickAdd}
-                        section={section}
-                        >
-                        <NewAssignments style={{listStyle: 'none'}} post={newPost} onClickAssignment={onClickAssignment} profile={profile}></NewAssignments>
-                        <ClassPosts
-                            section={section} 
-                            onClickAssignment={onClickAssignment} 
-                            profile={profile}
-                            showForm={showForm}
-                            onClickAdd = {onClickAdd}
-                        />
-                    </ContentCard>
-                </Grid>    
-            </Grid>
-        </Container> 
+            <Header profile={profile} openGlobalForm={openGlobalForm} ></Header>
+            <Container className={classes.root}>
+                <Grid container style={{border: "1px solid #bdbdbd"}}>
+                    <Grid key="section-header-row" item xs={12} container justify="space-between" className="entry-header">
+                        <Grid key="not sure but hole cow" item xs={8} >
+                        <Typography variant="h6">{section.schools+" "+ section.teachers}</Typography>
+                        <Typography variant="h6">{section.grades+" "+ section.subjects}</Typography>
+                        </Grid>
+                        <Grid key="weektitle" item xs={4} style={{textAlign: 'right'}}>
+                            {weekTitle('2020-05-15')}
+                        </Grid>
+                    </Grid>
+                    <Grid key="assignment-table" item container xs={12} spacing={1} justify="space-between" >
+                            {increments.map( increment => {
+                                let theQueryDate = moment('2020-05-15').startOf('week').add(increment, 'days').format('YYYY-MM-DD');
+                                let colTitle = moment('2020-05-15').startOf('week').add(increment, 'days').format("ddd MM-DD-YYYY");
+                                return (
+                                    <Grid item xs={2} key={"dailyAssignments-"+colTitle}>
+                                        <Typography key={"theTitle-"+moment('2020-05-15').format('ww')} variant="subtitle1">{colTitle}</Typography>                                       
+                                        <DailyWork key={"dailyWork-"+moment('2020-05-15').add(increment, 'days').format('YYYY-MM-DD')}  userID={userID} date={theQueryDate} section={section}></DailyWork>
+                                    </Grid> 
+                                )
+                            })}
+                    </Grid>
+                </Grid>
+                
+            </Container>
+            <Dialog open={showGlobalForm} onClose={(e) => onCloseGlobalForm()} disablePortal={true}>
+                <AddLesson section={false} onClickHideForm={onCloseGlobalForm} showNewPost={showNewPost} showNewSection={showNewSection}></AddLesson>
+            </Dialog>
         </React.Fragment>
         
     );

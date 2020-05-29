@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
  * Render starts here
  * 
  */
-export default function TheAssignment( {post, userID, section }) {
+export default function TheAssignment( {post, userID, section, classView }) {
     const classes = useStyles();
     const assignmentRequired = (post.mandatory === true) ? "requiredAssignment" : "optionalAssignment" ;
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
@@ -68,6 +68,8 @@ export default function TheAssignment( {post, userID, section }) {
        //console.log(PostID)
     }
 
+    const itemPadding = (classView === true) ? "0": "5px 10px 10px 10px";
+
     const Transition = React.forwardRef(function Transition(props, ref) {
         return <Slide direction="up" ref={ref} {...props} />;
       });
@@ -77,16 +79,19 @@ export default function TheAssignment( {post, userID, section }) {
     } else {
         return (
             <React.Fragment key={"post_"+thePost.ID}>
-            <ListItem key={"post-"+thePost.ID} className={classes.listItemRoot} button >
+            <ListItem key={"post-"+thePost.ID} className={classes.listItemRoot} style={{padding: itemPadding}} button >
                 {/** due date, edit and title */}
                 <Grid container alignItems="flex-start" justify="space-between">
                     <Grid item xs={10}>
                         <Typography variant="subtitle2" style={{fontWeight: '700'}}>
                         
-                        {moment(thePost.assigned_date).format('MM-DD dddd ')+" "} 
+                        {(classView === true)
+                            ? null
+                            : moment(thePost.assigned_date).format('MM-DD ddd ')+" "
+                        } 
                         {(thePost.mandatory === 'true')
                             ? <React.Fragment>
-                                due on {moment(thePost.due_date).format('MM-DD')}
+                                Due on {moment(thePost.due_date).format('MM-DD')}
                             </React.Fragment> 
                             : <span style={{color: '#00c853'}}>Optional</span>
                         }   
@@ -108,17 +113,20 @@ export default function TheAssignment( {post, userID, section }) {
                     
                 </Grid>
                 
-
-                
                 <Grid container justify="space-between" flexwrap="nowrap" alignItems="flex-start" spacing={2}>
                    
                     {/* AVATAR AND EXCERPT */}
-                    <Grid item xs={2} >
-                         <Avatar alt="Posted By" src={thePost.author_avatar} onClick={() => toggleIsOpen()}></Avatar>
-                    </Grid>
+                    {(classView === true)
+                        ? null
+                        : <Grid item xs={2} >
+                            <Avatar alt="Posted By" src={thePost.author_avatar} onClick={() => toggleIsOpen()}></Avatar>
+                            </Grid>
+                        
+                    }
                     <Grid item xs={7}>
                         <ListItemText onClick={() => toggleIsOpen()}>
                             <Typography variant="body2"  >{post.post_excerpt}</Typography>
+                            <Typography variant="overline">Posted By: {thePost.post_author}</Typography>
                         </ListItemText>
                     </Grid>
                     
@@ -150,3 +158,4 @@ export default function TheAssignment( {post, userID, section }) {
     }
     
 }
+

@@ -46,7 +46,7 @@ export default function MyCheckBox( {userID, postID, initialChecked} ) {
         })
     }
 
-    if(initialChecked === 'undefined' ){
+    if(Array.isArray(initialChecked) === false || userID === 'undefined'){
         return null
     } else {
         return (
