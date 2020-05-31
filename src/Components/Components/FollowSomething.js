@@ -5,18 +5,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Context } from '../../Context/Context.js';
 import SearchBar from './SearchBar.js';
 import SchoolClasses from './SchoolClasses.js';
+import { Redirect, useHistory } from 'react-router-dom';
 
 
 
 
-export default function FollowSomething( {searchResults, setSearchResults, openGlobalForm, onCloseGlobalForm, theLink, onClickAdd, onClickHideForm} ) {
+
+export default function FollowSomething( {setShowFollow, context, changeContext, searchResults, setSearchResults, openGlobalForm, onCloseGlobalForm, theLink, onClickAdd, onClickHideForm} ) {
     const [state, setState] = useContext(Context);
+    //const { profile } = state;
     const [terms, setTerms] = useState();
     const {sections} = state;
     const [schoolSections, setSchoolSections] = useState([]);
     const [gMapValue, setGMapValue] = useState(null);
+    let history = useHistory();
 
-    
+
+    const goHere = (location) => {
+        history.push(location);
+    }
     
 
     const chooseSchool = (value) => {
@@ -41,6 +48,14 @@ export default function FollowSomething( {searchResults, setSearchResults, openG
 
     let showMeEverything = () => {
         setSearchResults(sections);
+    }
+
+    const doneWithSetUp = () => {
+        if(context.profile !== 'undefined' && context.profile.first_time == 'true'){
+            context.profile.first_time = false;
+            changeContext(context);
+        }
+        setShowFollow(false);
     }
 
     return (
@@ -104,8 +119,9 @@ export default function FollowSomething( {searchResults, setSearchResults, openG
                 <Container>
                         <Grid container justify="center" alignItems="center" alignContent="center" spacing={5}>
                             <Grid item xs={12} style={{textAlign: 'center', maxWidth: '500px', padding: '50px  0'}}>
-                                    <Typography variant="h5" style={{textAlign: 'center'}}>Welcome To SchooListIt</Typography>
-                                    <Typography >This is your home feed. Use the tools above to find more classes to follow. When you follow a class it shows up in your home feed. </Typography>
+                                    <Typography paragraph variant="h5" style={{textAlign: 'center'}}>Welcome To SchooListIt</Typography>
+                                    <Typography paragraph >Use the tools above to find or create some classes. Your class feed shows you all the classes you follow.</Typography>
+                                    <Button variant="outlined" color="primary" onClick={() => doneWithSetUp()}>Take Me Home</Button>
                             </Grid>
                         </Grid>
                     </Container>

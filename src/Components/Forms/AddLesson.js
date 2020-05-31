@@ -78,6 +78,8 @@ export default function AddLesson( props ) {
                 post.complete = [];
                 post.author_avatar = profile.photo;
                 post.section = section;
+                post.assigned_date = body.post_date;
+                post.mandatory = mandatory;
                 showNewPost(post);
                 if(showNewSection !== false){
                     showNewSection(body.newSection);

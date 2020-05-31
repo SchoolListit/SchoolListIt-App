@@ -4,7 +4,7 @@ import { Typography } from '@material-ui/core';
 import { emptyArray } from '../../Context/functions.js';
 import TheAssignment from './TheAssignment';
 
-export default function DailyWork( {date, section, userID} ) {
+export default function DailyWork( {date, section, userID, newPost} ) {
     const [count, setCount] = useState(10);
     const [lessons, setLessonPlans] = useState([]);
 
@@ -32,21 +32,17 @@ export default function DailyWork( {date, section, userID} ) {
 
         fetchData();
         return () => { ignore = true; }
-    }, [section.teachers, section.grades, section.subjects]);
+    }, [section.teachers, section.grades, section.subjects, newPost]);
 
-    if(lessons === 'undefined'  ){
+    if(lessons === 'undefined' || lessons.length === 0 ){
         return null;
     } else {
-        if(lessons.length === 0){
-            return null
-        } else {
-            const { posts } = lessons.assignments;
-            return (posts.map( post => {
-                return (
-                    <TheAssignment key={"assignment"+post.ID} post={post} userID={userID} section={section} classView={true}></TheAssignment>
-                )
-            }) )
-        }  
+        const { posts } = lessons.assignments;
+        return (posts.map( post => {
+            return (
+                <TheAssignment key={"assignment"+post.ID} post={post} userID={userID} section={section} classView={true}></TheAssignment>
+            )
+        }) )
     } 
     
 }

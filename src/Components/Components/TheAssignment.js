@@ -126,7 +126,7 @@ export default function TheAssignment( {post, userID, section, classView }) {
                     <Grid item xs={7}>
                         <ListItemText onClick={() => toggleIsOpen()}>
                             <Typography variant="body2"  >{post.post_excerpt}</Typography>
-                            <Typography variant="overline">Posted By: {thePost.post_author}</Typography>
+                            <Typography variant="caption">Posted By: {thePost.author_name.replace("-", ' ')}</Typography>
                         </ListItemText>
                     </Grid>
                     

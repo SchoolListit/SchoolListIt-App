@@ -13,6 +13,7 @@ export default function TermSearch( {data, getSearchResults} ) {
                 <Grid container justify="center" alignItems="center" alignContent="center">
                     <Grid item xs={10}>
                         <Autocomplete
+                            margin="none"
                             fullWidth={true}
                             id="term-search"
                             freeSolo

@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Context } from '../../Context/Context.js';
 import Header from '../Components/Header.js';
 import { useHistory } from 'react-router-dom';
-import DailyWork from './../Components/DailyWork.js';
+import ClassWeek from './../Components/ClassWeek.js';
 import AddLesson from './../Forms/AddLesson.js';
 
 
@@ -44,8 +44,13 @@ export default function Classroom() {
     const [newPost, setNewPost] = useState('');
     const [showForm, setShowForm] = useState(initialShowForm);
     const [newSection, setNewSection] = useState("undefined");
+    const [thisWeek, setThisWeek] = useState(moment().format("YYYY-MM-DD"));
 
-    
+
+    const changeTheDate = (date) => {
+        //console.log(e.target.value)
+        setThisWeek(date);
+    }
 
     const showNewPost = (newPost) => {
         setNewPost(newPost);
@@ -94,36 +99,12 @@ export default function Classroom() {
         <React.Fragment>
             <Header profile={profile} openGlobalForm={openGlobalForm} ></Header>
             <Container className={classes.root}>
-                <Grid container style={{border: "1px solid #bdbdbd"}}>
-                    <Grid key="section-header-row" item xs={12} container justify="space-between" className="entry-header">
-                        <Grid key="not sure but hole cow" item xs={8} >
-                        <Typography variant="h6">{section.schools+" "+ section.teachers}</Typography>
-                        <Typography variant="h6">{section.grades+" "+ section.subjects}</Typography>
-                        </Grid>
-                        <Grid key="weektitle" item xs={4} style={{textAlign: 'right'}}>
-                            {weekTitle('2020-05-15')}
-                        </Grid>
-                    </Grid>
-                    <Grid key="assignment-table" item container xs={12} spacing={1} justify="space-between" >
-                            {increments.map( increment => {
-                                let theQueryDate = moment('2020-05-15').startOf('week').add(increment, 'days').format('YYYY-MM-DD');
-                                let colTitle = moment('2020-05-15').startOf('week').add(increment, 'days').format("ddd MM-DD-YYYY");
-                                return (
-                                    <Grid item xs={2} key={"dailyAssignments-"+colTitle}>
-                                        <Typography key={"theTitle-"+moment('2020-05-15').format('ww')} variant="subtitle1">{colTitle}</Typography>                                       
-                                        <DailyWork key={"dailyWork-"+moment('2020-05-15').add(increment, 'days').format('YYYY-MM-DD')}  userID={userID} date={theQueryDate} section={section}></DailyWork>
-                                    </Grid> 
-                                )
-                            })}
-                    </Grid>
-                </Grid>
-                
+                <ClassWeek newPost={newPost} section={section} week={thisWeek} userID={profile.userID} profile={profile} changeTheDate={changeTheDate} ></ClassWeek>
             </Container>
             <Dialog open={showGlobalForm} onClose={(e) => onCloseGlobalForm()} disablePortal={true}>
-                <AddLesson section={false} onClickHideForm={onCloseGlobalForm} showNewPost={showNewPost} showNewSection={showNewSection}></AddLesson>
+                <AddLesson section={section} onClickHideForm={onCloseGlobalForm} showNewPost={showNewPost} showNewSection={showNewSection}></AddLesson>
             </Dialog>
         </React.Fragment>
-        
     );
     
 }

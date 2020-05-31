@@ -17,8 +17,7 @@ const initialShowForm = {
 
 const useStyles = makeStyles(() => ({
     root: {
-        width: '100%',
-        padding: '30px'
+        width: '100%'
     }
   }));
 
@@ -55,6 +54,8 @@ export default function Classrooms({ sections, newSection, showNewSection, onCli
         }
         return true;
     }
+
+    
     
 /**
  *  the rendering of the components
@@ -62,7 +63,14 @@ export default function Classrooms({ sections, newSection, showNewSection, onCli
     if(sections === 'undefined'){
         return null;
     } else { 
+        const styles={}
+        if(sections.length == 0){
+            styles.padding = '12px'
+        } else {
+           styles.padding = '30px'
+        }
         return (
+                
                 <Grid
                     container
                     wrap="wrap"
@@ -71,6 +79,7 @@ export default function Classrooms({ sections, newSection, showNewSection, onCli
                     justify="flex-start"
                     alignItems="flex-start"
                     alignContent="flex-start"
+                    style={styles}
                 >
                 {(newSection !== 'undefined')
                     ? <Grid key={"grid-item-newSection"} item xs={12} sm={6} md={4}>

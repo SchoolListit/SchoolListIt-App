@@ -17,7 +17,6 @@ import TermSearch from './TermSearch.js';
             position: 'fixed',
             position: '0',
             backgroundColor: '#ffca28',
-            overflow: 'hidden',
             padding: '5px 30px',
 
         },

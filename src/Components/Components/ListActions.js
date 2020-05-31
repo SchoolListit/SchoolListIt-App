@@ -1,4 +1,5 @@
 import React, {useState, useContext} from 'react';
+import moment from 'moment';
 import { isFollowed } from '../../Context/functions.js';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography, Button, Dialog } from '@material-ui/core';
@@ -23,7 +24,7 @@ const useStyles = makeStyles(() => ({
 
 
 
-export default function ListActions( { section, shareLink } ) {
+export default function ListActions( { section, shareLink, classView, date, profile } ) {
     const classes = useStyles();
     const [state] = useContext(Context);
     const { following } = state;
@@ -31,7 +32,7 @@ export default function ListActions( { section, shareLink } ) {
     const [openComment, setOpenComment] = useState(false);
     const [openShare, setOpenShare] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
-    const profile = JSON.parse(localStorage.getItem("scholistit_profile"))    
+    //const profile = JSON.parse(localStorage.getItem("scholistit_profile"))    
     
 
     const clickFollow = (event) => {
@@ -58,6 +59,16 @@ export default function ListActions( { section, shareLink } ) {
         return (
             'Follow '+section.teachers+" "+section.grades+" grade "+section.subjects+' class on SchooListIt, the easiest way to track schoolwork on the planet!'
         )
+    }
+
+    const dates = (date) => {
+        let theDates = [];
+        let start = moment(date).startOf('week').format("YYYY-MM-DD");
+        for ( let i = 0; i <= 6; i++){
+            let newDate = moment(start).add(i, 'day').format("YYYY-MM-DD");
+            theDates.push(newDate);
+        }
+        return theDates;
     }
 
     const sectionID = (theSection) => {
@@ -91,14 +102,14 @@ export default function ListActions( { section, shareLink } ) {
     };
     
 
-    if(section === 'undefined'){
+    if(section === 'undefined' || Array.isArray(following) === false){
         return null
     } else {
         return (
             <Grid className={classes.root} container justify="space-between" alignItems="flex-start">
                 
                 <Grid item xs={4}>
-                    {(isFollowed(state.following, section))
+                    {(isFollowed(following, section))
                         ?<Button key={"follow-"+sectionID(section)} id={"followButton-"+sectionID(section)} >
                             <Typography><FontAwesomeIcon icon="check"></FontAwesomeIcon> following</Typography>
                         </Button>
@@ -108,15 +119,15 @@ export default function ListActions( { section, shareLink } ) {
                     }
                     <FollowPopover anchorEl={anchorEl} id={sectionID(section)} profile={profile} object={section} open={openFollow} onClose={toggleFollow}></FollowPopover>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={4} style={{textAlign: 'center'}}>
                     <Button key={"comment-"+sectionID(section)} id={"commentButton-"+sectionID(section)} onClick={(e) => clickComment(e)}>
                         <Typography><FontAwesomeIcon icon="comment-alt"></FontAwesomeIcon> Comment</Typography>
                     </Button>
                     <Dialog open={openComment} onClose={() =>toggleComment()}>
-                        <CommentPopover section={section} onClose={toggleComment}></CommentPopover>
+                        <CommentPopover section={section} onClose={toggleComment} classView={classView} dates={dates(date)}></CommentPopover>
                     </Dialog>
                 </Grid>
-                <Grid item xs={3} >
+                <Grid item xs={3} style={{textAlign: 'right'}} >
                     <Button key={"share-"+sectionID(section)} id={"shareButton-"+sectionID(section)} onClick={(e) => clickShare(e, sectionID(section))}>
                         <Typography><FontAwesomeIcon icon="share"></FontAwesomeIcon> Share</Typography>
                         <SharePopover anchorEl={anchorEl} id={sectionID(section)} profile={profile} object={section} open={openShare} onClose={toggleShare} shareLink={shareLink}></SharePopover>

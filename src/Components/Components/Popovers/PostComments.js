@@ -5,11 +5,11 @@ import MyDialogTitle from '../MyDialogTitle';
 import TheComment from '../TheComment.js'
 
 
-export default function PostComments( {post, section} ) {
+export default function PostComments( {post, section } ) {
     const [newComment, setNewComment] = useState("");
     const [comments, setComments] = useState("");
     const profile = JSON.parse(localStorage.getItem("scholistit_profile"));
-    const userID = profile.wpUserObj.user.data.ID;
+    const {userID} = profile;
 
     /* Make API Call */
     useEffect(() => {

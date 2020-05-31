@@ -39,6 +39,7 @@ export default function FollowPopover( { following, setFollowing, anchorEl, open
             axios.post(url, formdata, {headers: headers})
             .then( (res) => {
                 state.following = res.data;
+                state.profile.first_time = false;
                 setState(state);
                 onClose();
             })
