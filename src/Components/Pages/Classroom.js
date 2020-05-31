@@ -1,10 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 import moment from 'moment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useParams, useLocation } from 'react-router-dom';
-import { Container, Grid, Typography, Dialog } from '@material-ui/core';
+import { Container, Grid, Typography, Dialog, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Context } from '../../Context/Context.js';
+import { searchSections } from '../../Context/functions.js';
 import Header from '../Components/Header.js';
+import Classrooms from '../Components/Classrooms.js'
 import { useHistory } from 'react-router-dom';
 import ClassWeek from './../Components/ClassWeek.js';
 import AddLesson from './../Forms/AddLesson.js';
@@ -14,11 +17,12 @@ function useQuery() {
     return new URLSearchParams(useLocation().search);
   }
 
+ 
+
 const useStyles = makeStyles(() => ({
     root: {
         margin: '0',
-        padding: '30px',
-        
+        padding: '0'
     },
   })); 
 
@@ -45,6 +49,25 @@ export default function Classroom() {
     const [showForm, setShowForm] = useState(initialShowForm);
     const [newSection, setNewSection] = useState("undefined");
     const [thisWeek, setThisWeek] = useState(moment().format("YYYY-MM-DD"));
+    const [searchResults, setSearchResults] = useState([]);
+
+
+    const clearSearch = () =>{
+        console.log('clearsearch');
+        setSearchResults([]);
+    } 
+
+
+    const getSearchResults = (searchTerm) => {
+
+        if(state.sections.length === 0){
+            console.warn('the sections context is not yet propogated');
+        } else {
+            let results = searchSections(state.sections, searchTerm);
+            setSearchResults(results);
+        }
+        
+    }
 
 
     const changeTheDate = (date) => {
@@ -97,8 +120,21 @@ export default function Classroom() {
 
     return (
         <React.Fragment>
-            <Header profile={profile} openGlobalForm={openGlobalForm} ></Header>
+            <Header profile={profile} openGlobalForm={openGlobalForm} getSearchResults={getSearchResults} ></Header>
             <Container className={classes.root}>
+                {(searchResults.length > 0)
+                    ? <Grid container justify="space-between" style={{padding: '0 30px', background: '#eeeeee'}} >
+                        <Grid item xs={10} >
+                            <Typography variant="h5" >Search Results</Typography>
+                        </Grid>
+                        <Grid item xs={2} style={{textAlign: 'right'}}>
+                            <Button onClick={() => clearSearch()}><FontAwesomeIcon icon="window-close"></FontAwesomeIcon></Button>
+                        </Grid>
+                        </Grid>
+                    : null
+                }
+                <Classrooms  sections={searchResults} newPost={newPost} newSection={newSection} showNewPost={showNewPost} openGlobalForm={openGlobalForm} onCloseGlobalForm={onCloseGlobalForm}></Classrooms> 
+                <Typography variant="h5" style={{padding: '0 30px', background: '#eeeeee'}}>Weekly Class Schedule</Typography>
                 <ClassWeek newPost={newPost} section={section} week={thisWeek} userID={profile.userID} profile={profile} changeTheDate={changeTheDate} ></ClassWeek>
             </Container>
             <Dialog open={showGlobalForm} onClose={(e) => onCloseGlobalForm()} disablePortal={true}>

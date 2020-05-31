@@ -82,7 +82,7 @@ export default function CommentDialog( { open, posts_per_page, profile, section,
                                 
                                     <ListItem key={"comment-on-post-"+post.ID} button onClick={() => openComments()}>
                                         <ListItemText>
-                                            <Typography variant="h6">{post.post_title+" "}
+                                            <Typography variant="h6">{post.post_title+" "+post.assigned_date+" "}
                                                 <Typography variant="overline">( {post.comment_count+" comments"})</Typography>
                                             </Typography>
                                             <PostComments post={post} profile={profile} section={section}></PostComments>

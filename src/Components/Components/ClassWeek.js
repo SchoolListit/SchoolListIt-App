@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import moment from 'moment';
-import { Grid, Typography, TextField } from '@material-ui/core';
+import { Grid, Typography, TextField, Container } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Context } from '../../Context/Context.js';
 import DailyWork from './../Components/DailyWork.js';
@@ -63,7 +63,7 @@ export default function ClassWeek( {section, week, changeTheDate, newPost} ) {
     
     
     return (
-    
+    <Container style={{padding: '30px'}}>
     <Grid container style={{border: "1px solid #bdbdbd"}}>
         <Grid key="section-header-row" item xs={12} container justify="space-around" className="entry-header">
             <Grid item xs={8} >
@@ -99,7 +99,7 @@ export default function ClassWeek( {section, week, changeTheDate, newPost} ) {
         }
         
     </Grid>
-    
+    </Container>
     )
              
 }
