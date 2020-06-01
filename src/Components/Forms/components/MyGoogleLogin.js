@@ -40,7 +40,7 @@ export default function MyGoogleLogin() {
         }
         localStorage.setItem('scholistit_profile', JSON.stringify(profile));
     
-        const url = 'http://localhost:8888/parentchecklist/wp-json/parent-checklist-rest/v2/registration';
+        const url = 'http://schoolistit.com/wp-json/schoolistit-rest/v2/registration';
         //create user
         axios.get(url)
             .then( (res) => {

@@ -1,7 +1,6 @@
 import React, { useContext, useState }  from 'react';
-import { Grid, FormControl, TextField, Card, Button, Typography, MenuItem, Select  } from '@material-ui/core';
+import { Grid, FormControl, TextField, Button, Typography, MenuItem, Select  } from '@material-ui/core';
 import { Context } from '../../Context/Context.js';
-import ContentCard from '../Components/ContentCard.js';
 import SectionSubForm from './components/SectionSubForm.js'
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,7 +12,7 @@ export default function AddLesson( props ) {
     const [userLat, setUserLat] = useState('');
     const [userLng, setUserLng] = useState('');
     const [mandatory, setMandatory] = useState(true);
-    const url = 'http://localhost:8888/parentchecklist/wp-json/parent-checklist-rest/v2/assignments';
+    const url = 'http://schoolistit.com/wp-json/schoolistit-rest/v2/assignments';
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const [state] = useContext(Context);
     const [newPost, setNewPost] = useState("");
@@ -71,7 +70,9 @@ export default function AddLesson( props ) {
              for (const property in body) {
                  formdata.append(property, body[property]);
              }
+             console.log(formdata);
              //make 2nd call
+             /*
              axios.post(url, formdata, {headers: headers})
              .then( (res) => {
                 let post = res.data.post;
@@ -83,9 +84,8 @@ export default function AddLesson( props ) {
                 showNewPost(post);
                 if(showNewSection !== false){
                     showNewSection(body.newSection);
-                    
                 }
-             })
+             })*/
          });
     }
 

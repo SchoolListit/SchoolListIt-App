@@ -88,7 +88,7 @@ export default function ListActions( { section, shareLink, classView, date, prof
             navigator.share({
                 title: 'SchooListIt Classroom',
                 text: shareText,
-                url: 'http://localhost:3000/'+shareLink
+                url: 'http://schoolistit.com/'+shareLink
               }).then(() => {
                 console.log('Thanks for sharing!');
               })

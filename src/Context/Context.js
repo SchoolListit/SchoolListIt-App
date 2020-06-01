@@ -62,24 +62,24 @@ export function ContextController({children}){
             order: 'desc'
         }
         //MEGDO: need to loop through paginated results as this thing grows...here we are only getting the first page. which is BAD
-        promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/wp/v2/teachers', {params: params}));
-        promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/wp/v2/schools', {params: params}));
-        promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/wp/v2/grades', {params: params}));
-        promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/wp/v2/subjects', {params: params}));
-        promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/parent-checklist/v2/lesson-plans'));
+        promises.push(axios.get('http://schoolistit.com/wp-json/wp/v2/teachers', {params: params}));
+        promises.push(axios.get('http://schoolistit.com/wp-json/wp/v2/schools', {params: params}));
+        promises.push(axios.get('http://schoolistit.com/wp-json/wp/v2/grades', {params: params}));
+        promises.push(axios.get('http://schoolistit.com/wp-json/wp/v2/subjects', {params: params}));
+        promises.push(axios.get('http://schoolistit.com/wp-json/schoolistit/v2/lesson-plans'));
         let localProfile;
         if(localStorage.getItem('scholistit_profile')){
             localProfile = JSON.parse(localStorage.getItem('scholistit_profile'));
             const {userID} = localProfile;
             if(userID !== 'undefined'){
-                promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/parent-checklist/v2/follows?userID='+userID));
+                promises.push(axios.get('http://schoolistit.com/wp-json/schoolistit/v2/follows?userID='+userID));
             }
         }
-        //promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/parent-checklist/v2/follows?userID='+userID));
+        //promises.push(axios.get('http://schoolistit.com/wp-json/schoolistit/v2/follows?userID='+userID));
 
-        //promises.push(axios.get('http://localhost:8888/parentchecklist/wp-json/wp/v2/assignments'));
+        //promises.push(axios.get('http://schoolistit.com/wp-json/wp/v2/assignments'));
         /*if(formdata !== 'undefined') {
-            promises.push(axios.post('http://localhost:8888/parentchecklist/wp-json/parent-checklist-rest/v2/user_data', formdata))
+            promises.push(axios.post('http://schoolistit.com/wp-json/schoolistit-rest/v2/user_data', formdata))
         }*/
     
         Promise.all(promises).then( res => {

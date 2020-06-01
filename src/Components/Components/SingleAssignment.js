@@ -36,7 +36,7 @@ export default function SingleAssignment( {postID, toggleIsOpen} ) {
     
     useEffect ( () => {
         if(postID){
-            let url = 'http://localhost:8888/parentchecklist/wp-json/wp/v2/assignments/'+postID;
+            let url = 'http://schoolistit.com/wp-json/wp/v2/assignments/'+postID;
             axios.get(url)
                 .then( res => {
                     setPost(res.data);

@@ -19,7 +19,7 @@ export default function FollowPopover( { following, setFollowing, anchorEl, open
             student: studentName
         }
         
-        let url = "http://localhost:8888/parentchecklist/wp-json/parent-checklist-rest/v2/follow"
+        let url = "http://schoolistit.com/wp-json/schoolistit-rest/v2/follow"
         //create post
         axios.get(url, body)
         .then( (res) => {

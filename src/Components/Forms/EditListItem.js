@@ -13,7 +13,7 @@ export default function EditListItem( props ) {
     const [userLat, setUserLat] = useState('');
     const [userLng, setUserLng] = useState('');
     const [mandatory, setMandatory] = useState(true);
-    const url = 'http://localhost:8888/parentchecklist/wp-json/parent-checklist-rest/v2/assignments';
+    const url = 'http://schoolistit.com/wp-json/schoolistit-rest/v2/assignments';
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const [state] = useContext(Context);
     const [newPost, setNewPost] = useState("");
