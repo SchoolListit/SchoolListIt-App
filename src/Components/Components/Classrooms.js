@@ -1,8 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Context } from '../../Context/Context.js';
 import ContentCard from './ContentCard.js';
-import { Grid } from '@material-ui/core';
+import { Grid, Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import ClassAssignments from './ClassAssignments.js';
 import NewAssignments from './NewAssignments.js';
 import AddLesson from '../Forms/AddLesson.js';
@@ -38,6 +40,10 @@ export default function Classrooms({ sections, newSection, showNewSection, onCli
     let theLink = ( theSection ) => {
         let link = encodeURI(theSection.schools+'-'+theSection.teachers+'-'+theSection.subjects+'-'+theSection.grades)
         return link;
+    }
+
+    let clearNewSection = () =>{
+        showNewSection("undefined");
     }
 
     const objsEqual = (a, b) => {
@@ -82,7 +88,17 @@ export default function Classrooms({ sections, newSection, showNewSection, onCli
                     style={styles}
                 >
                 {(newSection !== 'undefined')
-                    ? <Grid key={"grid-item-newSection"} item xs={12} sm={6} md={4}>
+
+                    ? <React.Fragment>
+                        <Grid container justify="space-between" style={{padding: '0 30px', background: '#eeeeee'}} >
+                    <Grid item xs={10} >
+                        <Typography variant="h5" >New Classroom Created</Typography>
+                    </Grid>
+                    <Grid item xs={2} style={{textAlign: 'right'}}>
+                        <Button onClick={() => clearNewSection()}><FontAwesomeIcon icon="window-close"></FontAwesomeIcon></Button>
+                    </Grid>
+                    </Grid>
+                        <Grid key={"grid-item-newSection"} item xs={12} sm={6} md={4}>
                             <ContentCard
                             key={"content-card-newSection"}
                             mainTitle={newSection.schools+" "+ newSection.teachers}
@@ -118,6 +134,7 @@ export default function Classrooms({ sections, newSection, showNewSection, onCli
                                 
                         </ContentCard>
                         </Grid>
+                        </React.Fragment>
                     : null
                 
                 } 

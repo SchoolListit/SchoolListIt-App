@@ -37,12 +37,11 @@ const useStyles = makeStyles(() => ({
 
 export default function Classroom() {
     const classes = useStyles();
-    const history = useHistory();
     const { classArgs } = useParams();
     const [state, setState] = useContext(Context);
-    const { assignments, currentAssignment, loggedIn } = state; 
-    const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
-    const {userID} = profile;
+    //const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
+    const { profile } = state;
+    const { userID } = profile;
     const [showGlobalForm, setShowGlobalForm] = useState(false);
     const [singlePostID, setSinglePostID] = useState('');
     const [newPost, setNewPost] = useState('');
@@ -71,7 +70,6 @@ export default function Classroom() {
 
 
     const changeTheDate = (date) => {
-        //console.log(e.target.value)
         setThisWeek(date);
     }
 
@@ -101,47 +99,36 @@ export default function Classroom() {
         key: theClass,
     }
 
-    const weekTitle = (stringDate) => {
-        const theMoment = moment(stringDate);
-        const theDate = moment(stringDate).format("MM-DD-YYYY")
-        const weekNumber = moment(stringDate).format('ww');
-        const startDate = moment(stringDate).startOf('week').format('dddd MM-DD-YYYY');
-        const endDate = moment(stringDate).endOf('week').format('dddd MM-DD-YYYY');
+    if(typeof userID === 'undefined' || userID === ''){
+        console.log(userID);
+        return null;
+    } else {
         return (
             <React.Fragment>
-                <Typography variant="h6">Week {weekNumber}: {theDate}</Typography>
-                <Typography >{startDate+" - "+endDate}</Typography>
+                <Header profile={profile} openGlobalForm={openGlobalForm} getSearchResults={getSearchResults} ></Header>
+                <Container className={classes.root}>
+                    {(searchResults.length > 0)
+                        ? <Grid container justify="space-between" style={{padding: '0 30px', background: '#eeeeee'}} >
+                            <Grid item xs={10} >
+                                <Typography variant="h5" >Search Results</Typography>
+                            </Grid>
+                            <Grid item xs={2} style={{textAlign: 'right'}}>
+                                <Button onClick={() => clearSearch()}><FontAwesomeIcon icon="window-close"></FontAwesomeIcon></Button>
+                            </Grid>
+                            </Grid>
+                        : null
+                    }
+                    <Classrooms  sections={searchResults} newPost={newPost} newSection={newSection} showNewPost={showNewPost} openGlobalForm={openGlobalForm} onCloseGlobalForm={onCloseGlobalForm}></Classrooms>
+                    <Typography variant="h5" style={{padding: '0 30px', background: '#eeeeee'}}>Weekly Class Schedule</Typography>
+                    <ClassWeek newPost={newPost} section={section} week={thisWeek} userID={state.profile.userID} profile={profile} changeTheDate={changeTheDate} ></ClassWeek>
+                </Container>
+                <Dialog open={showGlobalForm} onClose={(e) => onCloseGlobalForm()} disablePortal={true}>
+                    <AddLesson section={section} onClickHideForm={onCloseGlobalForm} showNewPost={showNewPost} showNewSection={showNewSection}></AddLesson>
+                </Dialog>
             </React.Fragment>
-        )
+        );
     }
-
-    const increments = [1, 2, 3, 4, 5];  
-
-
-    return (
-        <React.Fragment>
-            <Header profile={profile} openGlobalForm={openGlobalForm} getSearchResults={getSearchResults} ></Header>
-            <Container className={classes.root}>
-                {(searchResults.length > 0)
-                    ? <Grid container justify="space-between" style={{padding: '0 30px', background: '#eeeeee'}} >
-                        <Grid item xs={10} >
-                            <Typography variant="h5" >Search Results</Typography>
-                        </Grid>
-                        <Grid item xs={2} style={{textAlign: 'right'}}>
-                            <Button onClick={() => clearSearch()}><FontAwesomeIcon icon="window-close"></FontAwesomeIcon></Button>
-                        </Grid>
-                        </Grid>
-                    : null
-                }
-                <Classrooms  sections={searchResults} newPost={newPost} newSection={newSection} showNewPost={showNewPost} openGlobalForm={openGlobalForm} onCloseGlobalForm={onCloseGlobalForm}></Classrooms> 
-                <Typography variant="h5" style={{padding: '0 30px', background: '#eeeeee'}}>Weekly Class Schedule</Typography>
-                <ClassWeek newPost={newPost} section={section} week={thisWeek} userID={profile.userID} profile={profile} changeTheDate={changeTheDate} ></ClassWeek>
-            </Container>
-            <Dialog open={showGlobalForm} onClose={(e) => onCloseGlobalForm()} disablePortal={true}>
-                <AddLesson section={section} onClickHideForm={onCloseGlobalForm} showNewPost={showNewPost} showNewSection={showNewSection}></AddLesson>
-            </Dialog>
-        </React.Fragment>
-    );
+    
     
 }
     

@@ -19,6 +19,7 @@ export default function MyCheckBox( {userID, postID, initialChecked} ) {
 
     const handleCheck = (value) => {
         let url = 'http://schoolistit.com/wp-json/schoolistit-rest/v2/mark_complete';
+        setIsChecked(!value);
         //make 2nd call
         axios.post(url)
         .then( (res) => {
@@ -40,7 +41,8 @@ export default function MyCheckBox( {userID, postID, initialChecked} ) {
             }    
             axios.post(url, formdata, {headers: headers})
             .then( res => {
-                setIsChecked(!value);
+                //setIsChecked(!value);
+                console.log('check-success');
             })
 
         })

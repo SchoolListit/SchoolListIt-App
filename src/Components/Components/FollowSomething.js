@@ -11,7 +11,7 @@ import { Redirect, useHistory } from 'react-router-dom';
 
 
 
-export default function FollowSomething( {setShowFollow, context, changeContext, searchResults, setSearchResults, openGlobalForm, onCloseGlobalForm, theLink, onClickAdd, onClickHideForm} ) {
+export default function FollowSomething( {clearSetUp, setShowFollow, context, changeContext, searchResults, setSearchResults, openGlobalForm, onCloseGlobalForm, theLink, onClickAdd, onClickHideForm} ) {
     const [state, setState] = useContext(Context);
     //const { profile } = state;
     const [terms, setTerms] = useState();
@@ -100,7 +100,7 @@ export default function FollowSomething( {setShowFollow, context, changeContext,
                             <Button variant="contained" color="primary" style={{minWidth: '90%'}} onClick={ () => openGlobalForm()}>Add A Lesson</Button>
                         </Card>
                     </Grid>
-                    <Grid item xs={4} style={{textAlign: 'center'}}>
+                    <Grid item xs={12} md={4} style={{textAlign: 'center'}}>
                     <Card style={{textAlign: 'center', padding: '30px', minHeight: '350px'}}>
                         <Typography variant="h2" style={{color: '#9e9e9e'}}><FontAwesomeIcon icon="heart"></FontAwesomeIcon></Typography>
                             <Typography variant="h6">I'm in a browsey</Typography>
@@ -121,7 +121,7 @@ export default function FollowSomething( {setShowFollow, context, changeContext,
                             <Grid item xs={12} style={{textAlign: 'center', maxWidth: '500px', padding: '50px  0'}}>
                                     <Typography paragraph variant="h5" style={{textAlign: 'center'}}>Welcome To SchooListIt</Typography>
                                     <Typography paragraph >Use the tools above to find or create some classes. Your class feed shows you all the classes you follow.</Typography>
-                                    <Button variant="outlined" color="primary" onClick={() => doneWithSetUp()}>Take Me Home</Button>
+                                    <Button variant="outlined" color="primary" onClick={() => clearSetUp()}>Take Me Home</Button>
                             </Grid>
                         </Grid>
                     </Container>

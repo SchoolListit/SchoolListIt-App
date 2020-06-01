@@ -26,6 +26,14 @@ import TermSearch from './TermSearch.js';
         
     }));
 
+    const goToSite = () => {
+        window.location.href = 'http://schoolistit.com/about/';
+    }
+
+    const goToIssues = () => {
+        window.location.href = 'https://github.com/megphillips91/SchooListIt-Issues/issues';
+    }
+
       
 
   
@@ -89,7 +97,7 @@ import TermSearch from './TermSearch.js';
                          <TermSearch data= {options} getSearchResults={getSearchResults}></TermSearch>
                      </Grid>
                     
-                    <Grid container item xs={12} md={3} justify="flex-end" className="primary-menu-icons" >
+                    <Grid container wrap="nowrap" item xs={12} md={3} justify="flex-end" className="primary-menu-icons" style={{textAlign: 'center'}}>
                             <Grid item xs={3} className={classes.menuIcon}>
                                 <FontAwesomeIcon icon="home" onClick={() => goHere("/")}></FontAwesomeIcon>
                             </Grid >
@@ -97,7 +105,10 @@ import TermSearch from './TermSearch.js';
                                 <FontAwesomeIcon icon="plus-square" onClick={ () => openGlobalForm()}></FontAwesomeIcon>
                             </Grid>
                             <Grid item  xs={3} className={classes.menuIcon}>
-                                <FontAwesomeIcon icon="question-circle" ></FontAwesomeIcon>
+                                <FontAwesomeIcon icon="life-ring" onClick={() => goToIssues()}></FontAwesomeIcon>
+                            </Grid>
+                            <Grid item  xs={3} className={classes.menuIcon}>
+                                <FontAwesomeIcon icon="question-circle" onClick={() => goToSite()}></FontAwesomeIcon>
                             </Grid>
                             <Grid item xs={3} className={classes.menuIcon}>
                                 <Avatar onClick={ () => profileClick()} alt={profile.name} src={profile.photo}></Avatar>

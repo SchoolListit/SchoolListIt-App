@@ -72,12 +72,12 @@ export default function AddLesson( props ) {
              }
              console.log(formdata);
              //make 2nd call
-             /*
              axios.post(url, formdata, {headers: headers})
              .then( (res) => {
                 let post = res.data.post;
                 post.complete = [];
                 post.author_avatar = profile.photo;
+                post.author_name = profile.name;
                 post.section = section;
                 post.assigned_date = body.post_date;
                 post.mandatory = mandatory;
@@ -85,7 +85,7 @@ export default function AddLesson( props ) {
                 if(showNewSection !== false){
                     showNewSection(body.newSection);
                 }
-             })*/
+             })
          });
     }
 
@@ -168,6 +168,19 @@ export default function AddLesson( props ) {
                             }}
                     ></TextField>
                 </FormControl>
+
+                <FormControl margin="normal" fullWidth={true}>
+                    <TextField
+                        fullWidth={true}
+                        type="url"
+                        id="post_link"
+                        label="Link"
+                        onChange={(e) => setFormValues(e)}
+                        InputLabelProps={{
+                            shrink: true,
+                            }}
+                    ></TextField>
+                </FormControl>
                 
                 <FormControl margin="normal" fullWidth={true}>
                     <TextField
@@ -179,6 +192,7 @@ export default function AddLesson( props ) {
                         onChange={(e) => setFormValues(e)}
                     ></TextField>
                 </FormControl>
+
 
                 <FormControl margin="normal" fullWidth={true}>
                     <TextField

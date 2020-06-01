@@ -59,6 +59,9 @@ export default function PostComments( {post, section } ) {
                 console.log(newComment);
                 setNewComment(newComment);
              })
+             .catch( error => {
+                 console.log(error)
+             })
          });
          
     }
