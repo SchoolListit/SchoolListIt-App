@@ -12,7 +12,6 @@ export default function EditListItem( props ) {
     
     const [userLat, setUserLat] = useState('');
     const [userLng, setUserLng] = useState('');
-    const [mandatory, setMandatory] = useState(true);
     const url = 'http://schoolistit.com/wp-json/schoolistit-rest/v2/assignments';
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const [state] = useContext(Context);
@@ -22,6 +21,8 @@ export default function EditListItem( props ) {
 
 
     const { post, section, onChanged, closeEditItem } = props;
+    const [mandatory, setMandatory] = useState(post.mandatory);
+
     
 
     const openDelete = () => {
@@ -39,6 +40,7 @@ export default function EditListItem( props ) {
             due_date: document.getElementById('due_date').value,
             assigned_date: document.getElementById('assigned_date').value,
             post_title: document.getElementById('post_title').value,
+            post_link: document.getElementById('post_link').value,
             post_excerpt: document.getElementById('post_excerpt').value,
             grades: document.getElementById('grades').value,
             schools: document.getElementById('schools').value,
@@ -78,6 +80,14 @@ export default function EditListItem( props ) {
              //make 2nd call
              axios.post(url, formdata, {headers: headers})
              .then( (res) => {
+                let post = res.data.post;
+                post.author_avatar = profile.photo;
+                post.author_name = profile.name;
+                post.section = section;
+                post.assigned_date = body.post_date;
+                post.mandatory = mandatory;
+                post.post_link = body.post_link;
+                res.data.post = post;
                 onChanged(res.data);
                 closeEditItem();
              })
@@ -149,17 +159,10 @@ export default function EditListItem( props ) {
                         label="Mandatory"
                         id="mandatory"
                         onChange={(e) => changeMandatory(e)}
-                        value={mandatory}
+                        defaultValue={mandatory}
                         >
-                            {(post.mandatory === true)
-                                ?<MenuItem selected value={true}>Mandatory</MenuItem>
-                                : <MenuItem value={true}>Mandatory</MenuItem>
-                            }
-                            {(post.mandatory === false)
-                                ?<MenuItem selected value={true}>Optional</MenuItem>
-                                : <MenuItem value={true}>Optional</MenuItem>
-                            }
-                        
+                        <MenuItem value={true}>Mandatory</MenuItem>
+                        <MenuItem value={false}>Optional</MenuItem> 
                     </Select>
                 </FormControl>
                 
@@ -171,6 +174,20 @@ export default function EditListItem( props ) {
                         id="post_title"
                         label="Title"
                         defaultValue={post.post_title}
+                        onChange={(e) => setFormValues(e)}
+                        InputLabelProps={{
+                            shrink: true,
+                            }}
+                    ></TextField>
+                </FormControl>
+
+                <FormControl margin="normal" fullWidth={true}>
+                    <TextField
+                        fullWidth={true}
+                        required
+                        id="post_link"
+                        label="Link"
+                        defaultValue={post.post_link}
                         onChange={(e) => setFormValues(e)}
                         InputLabelProps={{
                             shrink: true,
