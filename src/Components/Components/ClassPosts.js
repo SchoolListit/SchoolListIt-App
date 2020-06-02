@@ -14,9 +14,7 @@ export default function ClassPosts( { section, onClickAssignment, showForm, show
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const { userID } = profile;
 
-    const showMore = () => {
-        console.log('sow more')
-    }
+    
 
     const link = {
 

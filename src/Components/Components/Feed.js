@@ -42,12 +42,10 @@ export default function Feed( {searchResults, setSearchResults, openGlobalForm, 
     }
 
     const clearSearch = () =>{
-        console.log('clearsearch');
         setSearchResults([]);
     }
 
     const clearSetUp = () =>{
-        console.log('clearsetup');
         setShowFollow(false);
         profile.first_time = false;
         setState(state);
@@ -59,7 +57,7 @@ export default function Feed( {searchResults, setSearchResults, openGlobalForm, 
     } else {
         return (
             <React.Fragment>
-                {(showFollow === true)
+                {(showFollow === true && profile.first_time === true)
                     ? <React.Fragment>
                     <Grid container justify="space-between" style={{padding: '0 30px', background: '#eeeeee'}} >
                         <Grid item xs={10} >

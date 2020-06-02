@@ -46,15 +46,14 @@ export default function TheAssignment( {post, userID, section, classView }) {
     }
 
     const onChanged = (result) => {
-        console.log(result);
+        //console.log(result);
         if (result.deleted == 'true'){
             let post = 'undefined';
             setThePost(post);
         } else {
-            let changedPost = result.post;
-            setThePost(changedPost);
-        }
-        
+            console.log(result.post);
+            setThePost(result.post);
+        } 
     }
 
     const toggleIsOpen = () => {
@@ -68,18 +67,34 @@ export default function TheAssignment( {post, userID, section, classView }) {
        //console.log(PostID)
     }
 
+    const onClickTheAssignemnt = (e, postLink) => {
+        if(postLink === '' || postLink === null || postLink === 'undefined'){
+            return false;
+        } else {
+            window.open(postLink);
+        } 
+    }
+
     const itemPadding = (classView === true) ? "0": "5px 10px 10px 10px";
 
     const Transition = React.forwardRef(function Transition(props, ref) {
         return <Slide direction="up" ref={ref} {...props} />;
       });
     
+    const buttonTrue = (postLink) => {
+        if(postLink === '' || postLink === 'undefined' || typeof postLink === 'undefined'){
+           return false;
+        } else {
+            return true;
+        }
+    }
+    
     if(thePost === 'undefined'){
         return null
     } else {
         return (
             <React.Fragment key={"post_"+thePost.ID}>
-            <ListItem key={"post-"+thePost.ID} className={classes.listItemRoot} style={{padding: itemPadding}} button >
+            <ListItem key={"post-"+thePost.ID} className={classes.listItemRoot} style={{padding: itemPadding}} button={buttonTrue(thePost.post_link)} >
                 {/** due date, edit and title */}
                 <Grid container alignItems="flex-start" justify="space-between">
                     <Grid item xs={10}>
@@ -124,8 +139,8 @@ export default function TheAssignment( {post, userID, section, classView }) {
                         
                     }
                     <Grid item xs={7}>
-                        <ListItemText onClick={() => toggleIsOpen()}>
-                            <Typography variant="body2"  >{post.post_excerpt}</Typography>
+                        <ListItemText onClick={(e) => onClickTheAssignemnt(e, thePost.post_link)}>
+                            <Typography variant="body2"  >{thePost.post_excerpt}</Typography>
                             <Typography variant="caption">Posted By: {thePost.author_name.replace("-", ' ')}</Typography>
                         </ListItemText>
                     </Grid>
@@ -150,7 +165,7 @@ export default function TheAssignment( {post, userID, section, classView }) {
             </ListItem>
             {/* CLOSE LIST ITEM */}
 
-            <Dialog key={"dialog-"+thePost.ID} fullScreen open={isOpen} onClose={e => onDialogClose(e, thePost.ID)} disablePortal={true}>
+            <Dialog key={"dialog-"+thePost.ID} fullScreen open={false} onClose={e => onDialogClose(e, thePost.ID)} disablePortal={true}>
                 <SingleAssignment postID={thePost.ID} toggleIsOpen={toggleIsOpen}></SingleAssignment>
             </Dialog>
             </React.Fragment>

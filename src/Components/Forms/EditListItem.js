@@ -57,7 +57,7 @@ export default function EditListItem( props ) {
                 subjects: document.getElementById('subjects').value
             }
         }   
-        document.getElementById("AddLessonForm").reset();
+        document.getElementById("EditLessonForm").reset();
 
         
          //create post
@@ -87,6 +87,8 @@ export default function EditListItem( props ) {
                 post.assigned_date = body.post_date;
                 post.mandatory = mandatory;
                 post.post_link = body.post_link;
+                post.post_title = body.post_title;
+                post.post_excerpt = body.post_excerpt;
                 res.data.post = post;
                 onChanged(res.data);
                 closeEditItem();
@@ -119,7 +121,7 @@ export default function EditListItem( props ) {
 
             <React.Fragment >
                 <Container style={{padding: '30px'}}>
-                <form id="AddLessonForm" onSubmit={(e) => onSubmit(e)} >
+                <form id="EditLessonForm" onSubmit={(e) => onSubmit(e)} >
                 <FormControl margin="normal" fullWidth={true}>
                     <TextField
                         fullWidth={true}
