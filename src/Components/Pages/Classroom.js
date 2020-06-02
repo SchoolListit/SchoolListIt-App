@@ -106,7 +106,7 @@ export default function Classroom() {
         return (
             <React.Fragment>
                 <Header profile={profile} openGlobalForm={openGlobalForm} getSearchResults={getSearchResults} ></Header>
-                <Container className={classes.root}>
+                <Container maxWidth={false} className={classes.root}>
                     {(searchResults.length > 0)
                         ? <Grid container justify="space-between" style={{padding: '0 30px', background: '#eeeeee'}} >
                             <Grid item xs={10} >

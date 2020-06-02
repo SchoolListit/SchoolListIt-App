@@ -57,7 +57,7 @@ export default function Feed( {searchResults, setSearchResults, openGlobalForm, 
     } else {
         return (
             <React.Fragment>
-                {(showFollow === true && profile.first_time === true)
+                {(showFollow !== false && profile.first_time !== false)
                     ? <React.Fragment>
                     <Grid container justify="space-between" style={{padding: '0 30px', background: '#eeeeee'}} >
                         <Grid item xs={10} >

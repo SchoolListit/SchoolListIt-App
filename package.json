@@ -1,6 +1,7 @@
 {
   "name": "schoolistit",
-  "version": "0.1.0",
+  "homepage": "http://app.schoolistit.com/",
+  "version": "0.1.2",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",

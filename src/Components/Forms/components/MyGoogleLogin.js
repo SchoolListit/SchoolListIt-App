@@ -81,7 +81,7 @@ export default function MyGoogleLogin() {
         <FormControl margin="normal" fullWidth={true}>
             { (authenticated === true) ? <React.Fragment>{sendToLogin()}</React.Fragment> : null }
             <GoogleLogin
-                clientId="988354227304-sejkrfpe009ppkkm8qpefdq7ldoude0g.apps.googleusercontent.com"
+                clientId="488169268087-678v3m5p50kpfnu4sr83ip4usdr6s14g.apps.googleusercontent.com"
                 onSuccess={googleSuccess}
                 onFailure={googleFail}
             />

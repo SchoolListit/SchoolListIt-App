@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import moment from 'moment';
-import { Grid, Typography, TextField, Container } from '@material-ui/core';
+import { Grid, Typography, TextField, Container, Button } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Context } from '../../Context/Context.js';
 import DailyWork from './../Components/DailyWork.js';
@@ -12,14 +12,12 @@ import ListActions from '../Components/ListActions.js';
 
 
 export default function ClassWeek( {section, week, changeTheDate, newPost} ) {
-    const [changeDate, toggleChangeDate] = useState(false);
     const [state, setState] = useContext(Context);
     const { profile, following } = state;
 
 
     const changeTheWeek = (e) => {
         changeTheDate(e.target.value);
-        toggleChangeDate(false);
     }
 
     let theLink = ( theSection ) => {
@@ -40,21 +38,19 @@ export default function ClassWeek( {section, week, changeTheDate, newPost} ) {
         const endDate = moment(stringDate).endOf('week').format('ddd MM-DD-YYYY');
         return (
             <React.Fragment>
-                {(changeDate === true)
-                    ?  <TextField
-                    style={{background: "#ffffff"}}
+            
+                <TextField
                     required
                     id="the_date"
                     label="Change Week"
                     type="Date"
                     onChange={(e) => changeTheWeek(e)}
+                    defaultValue={theDate}
                     InputLabelProps={{
                         shrink: true,
                         }}
-                ></TextField>
-                    : <Typography variant="h6">Week {weekNumber}: {theDate} <FontAwesomeIcon icon="arrows-alt-v" onClick={() =>toggleChangeDate(true)}></FontAwesomeIcon></Typography>
-                }
-                <Typography >{startDate+" - "+endDate}</Typography>
+                    ></TextField>
+            <Typography >{startDate+" - "+endDate}</Typography>
             </React.Fragment>
         )
     }
@@ -63,14 +59,14 @@ export default function ClassWeek( {section, week, changeTheDate, newPost} ) {
     
     
     return (
-    <Container style={{padding: '30px'}}>
+    <Container maxWidth={false} style={{padding: '30px'}}>
     <Grid container style={{border: "1px solid #bdbdbd"}}>
         <Grid key="section-header-row" item xs={12} container justify="space-around" className="entry-header">
-            <Grid item xs={8} >
+            <Grid item xs={9} >
             <Typography variant="h6">{section.schools+" "+ section.teachers}</Typography>
             <Typography variant="h6">{section.grades+" "+ section.subjects}</Typography>
             </Grid>
-            <Grid key="weektitle" item xs={4} style={{textAlign: 'right'}}>
+            <Grid key="weektitle" item xs={3} style={{textAlign: 'right'}}>
                 {weekTitle(week)}
             </Grid>
         </Grid>
