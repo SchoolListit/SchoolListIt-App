@@ -71,7 +71,6 @@ export default function AddLesson( props ) {
              for (const property in body) {
                  formdata.append(property, body[property]);
              }
-             console.log(formdata);
              //make 2nd call
              axios.post(url, formdata, {headers: headers})
              .then( (res) => {
@@ -83,11 +82,15 @@ export default function AddLesson( props ) {
                 post.assigned_date = body.post_date;
                 post.mandatory = mandatory;
                 post.post_link = body.post_link;
+                post.post_excerpt = body.post_excerpt;
                 showNewPost(post);
                 if(showNewSection !== false){
                     showNewSection(body.newSection);
                 }
              })
+             .catch( error => {
+                console.log(error)
+            })
          });
     }
 
