@@ -1,12 +1,14 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Context } from '../../Context/Context.js';
 import ContentCard from './ContentCard.js';
-import { Container, Grid, } from '@material-ui/core';
+import { Grid, Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import ClassAssignments from './ClassAssignments.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import ClassAssignments from './ClassAssignments.js';
 import NewAssignments from './NewAssignments.js';
 import AddLesson from '../Forms/AddLesson.js';
+import { emptyArray } from '../../Context/functions.js';
 
 const initialShowForm = {
     teachers: '',
@@ -17,20 +19,15 @@ const initialShowForm = {
 
 const useStyles = makeStyles(() => ({
     root: {
-        height: '200vh',
-        maxHeight: '200vh',
-        width: '100%',
-        padding: '30px'
+        width: '100%'
     }
   }));
 
-export default function Classrooms({ newSection, onClickAssignment, showNewPost }) {
+export default function Classrooms({ sections, newSection, showNewSection, onClickAssignment, showNewPost, newPost, openGlobalForm,  onCloseGlobalForm }) {
     const classes = useStyles();
     const [state, setState] = useContext(Context);
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const [showForm, setShowForm] = useState(initialShowForm);
-    const [newPost, setNewPost] = useState('');
-    const [localSections, setLocalSections] = useState([]);
 
     const onClickAdd = (section) => {
         setShowForm(section);
@@ -40,8 +37,13 @@ export default function Classrooms({ newSection, onClickAssignment, showNewPost 
         setShowForm(initialShowForm);
     }
 
-    const link = (theSection) => {
-        return encodeURI(theSection.schools+'-'+theSection.teachers+'-'+theSection.subjects+'-'+theSection.grades);
+    let theLink = ( theSection ) => {
+        let link = encodeURI(theSection.schools+'-'+theSection.teachers+'-'+theSection.subjects+'-'+theSection.grades)
+        return link;
+    }
+
+    let clearNewSection = () =>{
+        showNewSection("undefined");
     }
 
     const objsEqual = (a, b) => {
@@ -59,17 +61,22 @@ export default function Classrooms({ newSection, onClickAssignment, showNewPost 
         return true;
     }
 
+    
+    
 /**
  *  the rendering of the components
  * */    
-    if(state.sections.length < 1){
-
+    if(sections === 'undefined'){
         return null;
-
-    } else {
-        
+    } else { 
+        const styles={}
+        if(sections.length == 0){
+            styles.padding = '12px'
+        } else {
+           styles.padding = '30px'
+        }
         return (
-            
+                
                 <Grid
                     container
                     wrap="wrap"
@@ -78,15 +85,26 @@ export default function Classrooms({ newSection, onClickAssignment, showNewPost 
                     justify="flex-start"
                     alignItems="flex-start"
                     alignContent="flex-start"
+                    style={styles}
                 >
                 {(newSection !== 'undefined')
-                    ? <Grid key={"grid-item-newSection"} item xs={12} sm={6} md={4}>
+
+                    ? <React.Fragment>
+                        <Grid container justify="space-between" style={{padding: '0 30px', background: '#eeeeee'}} >
+                    <Grid item xs={10} >
+                        <Typography variant="h5" >New Classroom Created</Typography>
+                    </Grid>
+                    <Grid item xs={2} style={{textAlign: 'right'}}>
+                        <Button onClick={() => clearNewSection()}><FontAwesomeIcon icon="window-close"></FontAwesomeIcon></Button>
+                    </Grid>
+                    </Grid>
+                        <Grid key={"grid-item-newSection"} item xs={12} sm={6} md={4}>
                             <ContentCard
                             key={"content-card-newSection"}
                             mainTitle={newSection.schools+" "+ newSection.teachers}
                             subTitle={newSection.grades+" "+ newSection.subjects}
                             icon="door-open"
-                            iconTo={"/classrooms/:"+link(newSection)}
+                            iconTo={"/classrooms/:"+theLink(newSection)}
                             onClickAdd={onClickAdd}
                             section={newSection}
                             > 
@@ -116,10 +134,12 @@ export default function Classrooms({ newSection, onClickAssignment, showNewPost 
                                 
                         </ContentCard>
                         </Grid>
+                        </React.Fragment>
                     : null
                 
-                }   
-            { state.sections.map( (section, index) => {
+                } 
+        
+            { sections.map( (section, index) => {
                     return (
                         <Grid key={"grid-item-"+index} item xs={12} sm={6} md={4}>
                             <ContentCard
@@ -127,7 +147,7 @@ export default function Classrooms({ newSection, onClickAssignment, showNewPost 
                             mainTitle={section.schools+" "+ section.teachers}
                             subTitle={section.grades+" "+ section.subjects}
                             icon="door-open"
-                            iconTo={"/classrooms/:"+link}
+                            iconTo={"/classrooms/:"+theLink(section)}
                             onClickAdd={onClickAdd}
                             section={section}
                             > 
@@ -146,16 +166,18 @@ export default function Classrooms({ newSection, onClickAssignment, showNewPost 
                                     : null
                                 }
                                 <ClassAssignments 
-                                    section={section} link={link(section)} onClickAdd={onClickAdd} onClickHideForm={onClickHideForm}
+                                    section={section} link={theLink(section)} onClickAdd={onClickAdd} onClickHideForm={onClickHideForm}
                                 />
                         </ContentCard>
                         </Grid>
                         
                     )
                 })
-                }
-                </Grid>
-            )
+            }
+        
+        </Grid>
+    )
+ }//if sections are defined
 
-    }  // ends the if else render null  
+      
 } //ends the rfc

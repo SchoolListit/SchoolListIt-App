@@ -119,6 +119,14 @@ header .primary-menu-icons > * {
   font-size: 2em;
 }
 
+@media (max-width: 480px) {     
+.primary-menu-icons {
+    padding: 10px 0 0 0 !important;
+  }
+
+}                        
+
+
 
 
 

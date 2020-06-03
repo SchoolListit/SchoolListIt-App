@@ -14,7 +14,10 @@ const useStyles = makeStyles(() => ({
   }));
 
 
-
+/**
+ * 
+ * this is Deprecated and not in circulation as far as I know.
+ */
 export default function ListItemAssignment( {post, onClickAssignment, userID }) {
     const classes = useStyles();
     const assignmentRequired = (post.mandatory === true) ? "requiredAssignment" : "optionalAssignment" ;
@@ -50,7 +53,7 @@ export default function ListItemAssignment( {post, onClickAssignment, userID }) 
                     ? <MyCheckbox
                     postID = {post.ID}
                     userID={userID}
-                    initialChecked = {post.complete}
+                    initialChecked = {post.completed}
                 ></MyCheckbox>
                         
                     : null

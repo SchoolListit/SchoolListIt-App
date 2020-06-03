@@ -12,11 +12,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default function ClassPosts( { section, onClickAssignment, showForm, showNewPost, onClickAdd} ) {
     const [ lessons, setLessonPlans ] = useState([]);
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
-    const userID = profile.wpUserObj.wp_user.ID
+    const { userID } = profile;
 
-    const showMore = () => {
-        console.log('sow more')
-    }
+    
 
     const link = {
 
@@ -56,13 +54,13 @@ export default function ClassPosts( { section, onClickAssignment, showForm, show
         //console.log(body);
 
         async function fetchData() {
-            let url = 'http://localhost:8888/parentchecklist/wp-json/parent-checklist/v2/lesson-plans';
+            let url = 'http://schoolistit.com/wp-json/schoolistit/v2/lesson-plans';
             let body = {
                 show_assignments: true,
                 teachers: section.teachers,
                 grades: section.grades,
                 subjects: section.subjects,
-                number: '10'
+                number: "-1"
             }
             let formdata = new FormData();
             for (const property in body) {
@@ -105,7 +103,7 @@ export default function ClassPosts( { section, onClickAssignment, showForm, show
                 { 
                     posts.map( (post, index) => {
                     return (
-                        <TheAssignment key={post.ID} post={post} userID={userID} onClickAssignment={onClickAssignment}></TheAssignment>
+                        <TheAssignment key={post.ID} section={section} post={post} userID={userID} onClickAssignment={onClickAssignment}></TheAssignment>
                     )
                  })
                 }

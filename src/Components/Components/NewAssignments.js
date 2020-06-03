@@ -5,8 +5,7 @@ import TheAssignment from '../Components/TheAssignment.js';
 export default function NewAssignments( props ) {
 
     const { post, onClickAssignment, profile, section } = props;
-    const {user} = profile.wpUserObj
-    let userID = user.ID
+    const { userID } = JSON.parse(localStorage.getItem('scholistit_profile'));
 
 
     const objsEqual = (a, b) => {
@@ -43,7 +42,7 @@ export default function NewAssignments( props ) {
     } else {
         return (
             <React.Fragment key={"fragment"+post.ID}>
-                <TheAssignment key={post.ID} post={post} userID={userID} onClickAssignment={onClickAssignment}></TheAssignment>
+                <TheAssignment key={post.ID} section={section} post={post} userID={userID} onClickAssignment={onClickAssignment}></TheAssignment>
             </React.Fragment>
         )
     }

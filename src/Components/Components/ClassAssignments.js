@@ -8,9 +8,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function ClassAssignments( { section, link, onClickAdd, onCLickHideForm } ) {
     const [ lessons, setLessonPlans ] = useState([]);
+    const [ changed, setChanged ] = useState([]);
+    const [count, setCount] = useState(3);
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
-    const userID = profile.wpUserObj.wp_user.ID
-
+    const {userID} = profile;
+    
     const onClickAssignment = () => {
         
     }
@@ -28,13 +30,13 @@ export default function ClassAssignments( { section, link, onClickAdd, onCLickHi
     useEffect(() => {
         let ignore = false;
         async function fetchData() {
-            let url = 'http://localhost:8888/parentchecklist/wp-json/parent-checklist/v2/lesson-plans';
+            let url = 'http://schoolistit.com/wp-json/schoolistit/v2/lesson-plans';
             let body = {
                 show_assignments: true,
                 teachers: section.teachers,
                 grades: section.grades,
                 subjects: section.subjects,
-                number: "2"
+                number: count
             }
             let formdata = new FormData();
             for (const property in body) {
@@ -46,7 +48,15 @@ export default function ClassAssignments( { section, link, onClickAdd, onCLickHi
 
         fetchData();
         return () => { ignore = true; }
-    }, [section.teachers, section.grades, section.subjects]);
+    }, [section.teachers, section.grades, section.subjects, count, setCount]);
+
+
+    const showMore = () => {
+        setCount(count + 3);
+    }
+
+
+
 /**
  * Under here is the render.
  */
@@ -65,7 +75,7 @@ export default function ClassAssignments( { section, link, onClickAdd, onCLickHi
                 <List style={{paddingTop: '0px'}}>
                     {posts.map( (post, index) => {
                         return (
-                            <TheAssignment key={post.ID} post={post} userID={userID}></TheAssignment>
+                            <TheAssignment key={post.ID} post={post} userID={userID} section={section}></TheAssignment>
                             )
                         })
                     }
@@ -81,7 +91,7 @@ export default function ClassAssignments( { section, link, onClickAdd, onCLickHi
                     </Grid>
                 {(morePosts() !== false)
                     ? <Grid item>
-                        <Button href={"/classrooms/:"+link} variant="outlined" size="small" color="primary">
+                        <Button onClick={() => showMore()} variant="outlined" size="small" color="primary">
                             <Typography >
                                 {morePosts()+" more"}
                             </Typography>

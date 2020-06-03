@@ -28,12 +28,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function GoogleMaps() {
+export default function GoogleMaps( {width, background, helperText, chooseSchool}) {
   const classes = useStyles();
   const [value, setValue] = React.useState(null);
   const [inputValue, setInputValue] = React.useState('');
   const [options, setOptions] = React.useState([]);
   const loaded = React.useRef(false);
+  const inputWidth = (width === 'undefined') ? '300px' : width ;
+  const backgroundColor = (background === 'undefined') ? 'transparent' : background ;
+
 
   if (typeof window !== 'undefined' && !loaded.current) {
     if (!document.querySelector('#google-maps')) {
@@ -93,13 +96,16 @@ export default function GoogleMaps() {
 
   return (
     <Autocomplete
-      id="google-map-demo"
-      style={{ width: 300 }}
+      id="google-maps-school-search"
+      style={{ width: inputWidth }}
       getOptionLabel={(option) => (typeof option === 'string' ? option : option.description)}
       filterOptions={(x) => x}
       options={options}
       autoComplete
       includeInputInList
+      selectOnFocus
+      clearOnBlur
+      freeSolo
       filterSelectedOptions
       value={value}
       onChange={(event, newValue) => {
@@ -108,9 +114,10 @@ export default function GoogleMaps() {
       }}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
+        chooseSchool(newInputValue);
       }}
       renderInput={(params) => (
-        <TextField {...params} label="Find A School" variant="outlined" fullWidth />
+        <TextField {...params} id="find-your-school" helperText={helperText} label="Find Your School" variant="outlined" fullWidth />
       )}
       renderOption={(option) => {
         const matches = option.structured_formatting.main_text_matched_substrings;
