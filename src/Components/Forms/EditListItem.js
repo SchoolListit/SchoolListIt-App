@@ -3,8 +3,10 @@ import { Dialog, Grid, FormControl, TextField, Button, Typography, MenuItem, Sel
 import { Context } from '../../Context/Context.js';
 import MyDialogTitle from '../Components/MyDialogTitle.js';
 import SectionSubForm from './components/SectionSubForm.js';
+import LessonBlockEditor from './LessonBlockEditor.js';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 
 //here is  the component
@@ -116,6 +118,10 @@ export default function EditListItem( props ) {
         changedFields.filter( onlyUnique );
         setChangedFields(changedFields);
         onSubmit(e);
+    }
+
+    const updateContent = (blocks) => {
+        console.log(blocks);
     }
 
     const onlyUnique = (value, index, self) => {
@@ -236,6 +242,7 @@ export default function EditListItem( props ) {
                 </Button>
                 <Dialog fullScreen open={createOpen} onClose={openCreate}>
                     <MyDialogTitle onClose={openCreate} icon={false} title={post.post_title} subtitle={post.post_excerpt}></MyDialogTitle>
+                    <LessonBlockEditor updateContent={updateContent}></LessonBlockEditor>
                 </Dialog>    
                 <Button onClick={() => openDelete(post.ID)} variant="contained">
                     <FontAwesomeIcon icon="trash-alt" style={{marginRight: '10px'}}></FontAwesomeIcon> Delete?

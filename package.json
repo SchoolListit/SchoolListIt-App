@@ -16,6 +16,7 @@
     "autosuggest-highlight": "^3.1.1",
     "axios": "^0.19.2",
     "hookrouter": "^1.2.3",
+    "megadraft": "^0.7.2",
     "moment": "^2.25.3",
     "moment-range": "^4.0.2",
     "node-sass": "^4.14.1",
