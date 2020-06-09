@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 
-export default function MyDialogTitle( {title, onClose, icon}) {
+export default function MyDialogTitle( {title, onClose, icon, subtitle}) {
     return (
         <Grid container justify="space-between" alignItems="center" style={{backgroundColor: '#ffca28', padding: '0 30px'}}>
             <Grid item>
@@ -17,6 +17,12 @@ export default function MyDialogTitle( {title, onClose, icon}) {
                         : null
                     }
                     {title}</Typography>
+                    {(subtitle !== undefined && subtitle != '')
+                        ? <Typography variant="subtitle1">
+                            {subtitle}
+                        </Typography>
+                        : null
+                    }  
             </Grid>
             <Grid item>
                 <FontAwesomeIcon icon="window-close" onClick={onClose}></FontAwesomeIcon>

@@ -18,6 +18,7 @@ export default function EditListItem( props ) {
     const [newPost, setNewPost] = useState("");
     const [changedFields, setChangedFields] = useState([]);
     const [deleteOpen, setDeleteOpen] = useState(false);
+    const [createOpen, setCreateOpen] = useState(false);
 
 
     const { post, section, onChanged, closeEditItem } = props;
@@ -27,6 +28,10 @@ export default function EditListItem( props ) {
 
     const openDelete = () => {
         setDeleteOpen(!deleteOpen);
+    }
+
+    const openCreate = () => {
+        setCreateOpen(!createOpen);
     }
 
     //submit the form
@@ -226,6 +231,12 @@ export default function EditListItem( props ) {
                     <FontAwesomeIcon icon="save" style={{marginRight: '10px'}}></FontAwesomeIcon>
                     {" Submit"}
                 </Button>
+                <Button onClick={() => openCreate(post.ID)} variant="contained">
+                    <FontAwesomeIcon icon="magic" style={{marginRight: '10px'}}></FontAwesomeIcon> Create
+                </Button>
+                <Dialog fullScreen open={createOpen} onClose={openCreate}>
+                    <MyDialogTitle onClose={openCreate} icon={false} title={post.post_title} subtitle={post.post_excerpt}></MyDialogTitle>
+                </Dialog>    
                 <Button onClick={() => openDelete(post.ID)} variant="contained">
                     <FontAwesomeIcon icon="trash-alt" style={{marginRight: '10px'}}></FontAwesomeIcon> Delete?
                 </Button>
