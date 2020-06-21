@@ -82,7 +82,7 @@ export default function ClassAssignments( { section, link, onClickAdd, onCLickHi
                 </List>
                 <Grid container justify="space-between" style={{padding: '10px'}}>
                     <Grid item>
-                        <Button onClick={() => onClickAdd(section)} variant="outlined" size="small" color="primary">
+                        <Button onClick={() => onClickAdd(section)} variant="outlined" size="small" >
                             <Typography>
                                 <FontAwesomeIcon icon="plus-square"></FontAwesomeIcon>
                                 {" Add"}
@@ -91,7 +91,7 @@ export default function ClassAssignments( { section, link, onClickAdd, onCLickHi
                     </Grid>
                 {(morePosts() !== false)
                     ? <Grid item>
-                        <Button onClick={() => showMore()} variant="outlined" size="small" color="primary">
+                        <Button onClick={() => showMore()} variant="outlined" size="small" >
                             <Typography >
                                 {morePosts()+" more"}
                             </Typography>

@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios';
 
 export const objsEqual = (a, b) => {
 
@@ -49,3 +50,49 @@ export const emptyArray = ((theArray) => {
         }
     }
 })
+
+/**
+ * Send content to WP, get back response
+ */
+
+ export const postContent = (postID, JSON_blocks) => {
+    let  url = "http://schoolistit.com/wp-json/schoolistit-rest/v2/post-content";
+    let body = {
+        post_id: postID,
+        blocks: JSON_blocks
+    }
+    console.log(body);
+    /*
+     //create post
+     axios.get(url, body)
+     .then( (res) => {
+         const salt = res.data['salt'];
+         const key = 'aVdG#D.KRFXw)dr!37}BrpkxdQM8N4';
+         //const authHeader = btoa(salt+"_"+key);
+         const authHeader = salt+"_"+key;
+         //now we have to set up the formdata and send headers, etc
+         //set up form data
+         let formdata = new FormData();                     
+         const headers = {
+             "X-Scholistit-Auth": authHeader,
+             "Content-Type": "multipart/form-data"
+         }
+         for (const property in body) {
+             formdata.append(property, body[property]);
+         }
+         //make 2nd call
+         axios.post(url, formdata, {headers: headers})
+         .then( (res) => {
+            console.log(res.data);
+         })
+     });
+    */
+ }
+
+ export const translateGutenBlocks = (postID) => {
+    
+ }
+
+
+
+

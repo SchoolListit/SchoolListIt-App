@@ -29,7 +29,7 @@ export default function FollowSomething( {clearSetUp, setShowFollow, context, ch
     const chooseSchool = (value) => {
         setGMapValue(value);
     }
-
+/*
     useEffect( () => {
         let url = "http://schoolistit.com/wp-json/wp/v2/schools";
         axios.get(url).then( (res) => {
@@ -37,6 +37,7 @@ export default function FollowSomething( {clearSetUp, setShowFollow, context, ch
             setTerms(terms);
         })  
     }, [])
+    */
 
     const onClickFindSchool = () => {
         let schoolDescription = gMapValue;
@@ -57,7 +58,9 @@ export default function FollowSomething( {clearSetUp, setShowFollow, context, ch
         }
         setShowFollow(false);
     }
-
+    if(state.profile.first_time == "false"){
+        return null;
+    }
     return (
         <Container>
             <Grid container justify="center" alignItems="center" alignContent="center" spacing={5}>

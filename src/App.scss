@@ -15,7 +15,7 @@ body: #666
   font-family: 'Quicksand', sans-serif;
   margin: 0;
   padding: 0;
-  color: #333;
+  
   box-sizing: border-box;
 }
 
@@ -252,3 +252,17 @@ header .primary-menu-icons > * {
 
 }
 
+.megadraft-block figure {
+  max-width: 80% !important;
+}
+
+.schoolistit-lesson-creator {
+  border-right: 1px solid #f1f1f1;
+  border-bottom: 1px solid #f1f1f1;
+  border-left: 1px solid #f1f1f1;
+  padding: 20px
+}
+.rdw-editor-toolbar {
+  margin-bottom: 0px;
+  border-bottom: none;
+}

@@ -1,11 +1,12 @@
 import React, { useContext, useState }  from 'react';
 import { Dialog, Grid, FormControl, TextField, Button, Typography, MenuItem, Select, Container  } from '@material-ui/core';
 import { Context } from '../../Context/Context.js';
+import { postContent } from '../../Context/functions.js';
 import MyDialogTitle from '../Components/MyDialogTitle.js';
 import SectionSubForm from './components/SectionSubForm.js';
-import LessonBlockEditor from './LessonBlockEditor.js';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import BlockEditor from './BlockEditor.js';
 
 
 
@@ -120,8 +121,12 @@ export default function EditListItem( props ) {
         onSubmit(e);
     }
 
-    const updateContent = (blocks) => {
-        console.log(blocks);
+    const updateContent = (jsonState) => {
+        let editorState = JSON.parse(jsonState);
+        console.log(jsonState);
+        let rawBlocks = editorState.blocks;
+        let json_blocks = rawBlocks.map( block => JSON.stringify(block));
+        postContent(post.ID, json_blocks);
     }
 
     const onlyUnique = (value, index, self) => {
@@ -237,12 +242,12 @@ export default function EditListItem( props ) {
                     <FontAwesomeIcon icon="save" style={{marginRight: '10px'}}></FontAwesomeIcon>
                     {" Submit"}
                 </Button>
-                <Button onClick={() => openCreate(post.ID)} variant="contained">
+                <Button onClick={() => openCreate(post.ID)} variant="contained" style={{marginRight: '15px'}}>
                     <FontAwesomeIcon icon="magic" style={{marginRight: '10px'}}></FontAwesomeIcon> Create
                 </Button>
                 <Dialog fullScreen open={createOpen} onClose={openCreate}>
                     <MyDialogTitle onClose={openCreate} icon={false} title={post.post_title} subtitle={post.post_excerpt}></MyDialogTitle>
-                    <LessonBlockEditor updateContent={updateContent}></LessonBlockEditor>
+                    <BlockEditor postID={post.ID} postContent={post.draft_js_content} postBlocks={post.megadraft}></BlockEditor>
                 </Dialog>    
                 <Button onClick={() => openDelete(post.ID)} variant="contained">
                     <FontAwesomeIcon icon="trash-alt" style={{marginRight: '10px'}}></FontAwesomeIcon> Delete?
