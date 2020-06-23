@@ -16,6 +16,8 @@ export default function AddLesson( props ) {
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const [state] = useContext(Context);
     const [newPost, setNewPost] = useState("");
+    const [linkExternal, setLinkExternal] = useState(false);
+
     const { showNewPost, showNewSection, section, onClickHideForm } = props;
 
     const onFocusInput = () => {
@@ -42,6 +44,7 @@ export default function AddLesson( props ) {
             subjects: document.getElementById('subjects').value,
             keywords: document.getElementById('keywords').value,
             mandatory: mandatory,
+            linkExternal: linkExternal,
             post_author: profile.email,
             author_avatar: profile.photo,
             newSection: {
@@ -102,6 +105,10 @@ export default function AddLesson( props ) {
         //do nothing
     }
 
+    const changeLinkExternal = (e) => {
+        setLinkExternal(!linkExternal);
+    }
+
     
     
         return (
@@ -147,18 +154,35 @@ export default function AddLesson( props ) {
                 
                 <TextField type="hidden" value={userLat} id="userLat"></TextField>
                 <TextField type="hidden" value={userLng} id="userLng"></TextField>
-
-                <FormControl margin="normal" fullWidth={true}>
-                    <Select
-                        label="Mandatory"
-                        id="mandatory"
-                        onChange={(e) => changeMandatory(e)}
-                        value={mandatory}
-                        >
-                        <MenuItem selected value={true}>Mandatory</MenuItem>
-                        <MenuItem value={false}>Optional</MenuItem>
-                    </Select>
-                </FormControl>
+                    <Grid container spacing={3}>
+                        <Grid item>
+                        <FormControl margin="normal" fullWidth={true}>
+                            <Select
+                                label="Mandatory"
+                                id="mandatory"
+                                onChange={(e) => changeMandatory(e)}
+                                value={mandatory}
+                                >
+                                <MenuItem selected value={true}>Mandatory</MenuItem>
+                                <MenuItem value={false}>Optional</MenuItem>
+                            </Select>
+                        </FormControl>
+                        </Grid>
+                        <Grid item>
+                        <FormControl margin="normal" fullWidth={true}>
+                            <Select
+                                label="Link To"
+                                id="external-link"
+                                onChange={(e) => changeLinkExternal(e)}
+                                value={linkExternal}
+                                >
+                                <MenuItem selected value={true}>Link to external page</MenuItem>
+                                <MenuItem value={false}>Link opens assignment</MenuItem>
+                            </Select>
+                        </FormControl>
+                        </Grid>
+                    </Grid>
+                
                 
 
                 <FormControl margin="normal" fullWidth={true}>
@@ -173,19 +197,23 @@ export default function AddLesson( props ) {
                             }}
                     ></TextField>
                 </FormControl>
-
-                <FormControl margin="normal" fullWidth={true}>
-                    <TextField
-                        fullWidth={true}
-                        type="url"
-                        id="post_link"
-                        label="Link"
-                        onChange={(e) => setFormValues(e)}
-                        InputLabelProps={{
-                            shrink: true,
-                            }}
-                    ></TextField>
+                {(linkExternal === true)
+                    ? <FormControl margin="normal" fullWidth={true}>
+                        <TextField
+                            fullWidth={true}
+                            type="url"
+                            id="post_link"
+                            label="Link"
+                            onChange={(e) => setFormValues(e)}
+                            InputLabelProps={{
+                                shrink: true,
+                                }}
+                        ></TextField>
                 </FormControl>
+                    : null
+                
+                }
+                
                 
                 <FormControl margin="normal" fullWidth={true}>
                     <TextField

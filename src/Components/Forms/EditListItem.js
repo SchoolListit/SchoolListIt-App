@@ -22,10 +22,13 @@ export default function EditListItem( props ) {
     const [changedFields, setChangedFields] = useState([]);
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [createOpen, setCreateOpen] = useState(false);
-
+    const [draftJSContent, setdraftJSContent] = useState('');
 
     const { post, section, onChanged, closeEditItem } = props;
     const [mandatory, setMandatory] = useState(post.mandatory);
+    let initialLinkExternal = (post.linkExternal === "") ? false : post.linkExternal ;
+    const [linkExternal, setLinkExternal] = useState(initialLinkExternal);
+
 
     
 
@@ -34,7 +37,12 @@ export default function EditListItem( props ) {
     }
 
     const openCreate = () => {
-        setCreateOpen(!createOpen);
+        const url = 'http://schoolistit.com/wp-json/wp/v2/assignments/'+post.ID;
+        axios.get(url)
+        .then( res => {
+            setdraftJSContent(res.data);
+            setCreateOpen(!createOpen);
+        })
     }
 
     //submit the form
@@ -56,6 +64,7 @@ export default function EditListItem( props ) {
             subjects: document.getElementById('subjects').value,
             keywords: document.getElementById('keywords').value,
             mandatory: mandatory,
+            linkExternal: linkExternal,
             post_author: profile.email,
             author_avatar: profile.photo,
             newSection: {
@@ -67,7 +76,6 @@ export default function EditListItem( props ) {
         }   
         document.getElementById("EditLessonForm").reset();
 
-        
          //create post
          axios.get(url, body)
          .then( (res) => {
@@ -94,6 +102,7 @@ export default function EditListItem( props ) {
                 post.section = section;
                 post.assigned_date = body.post_date;
                 post.mandatory = mandatory;
+                post.mandatory = linkExternal;
                 post.post_link = body.post_link;
                 post.post_title = body.post_title;
                 post.post_excerpt = body.post_excerpt;
@@ -108,6 +117,10 @@ export default function EditListItem( props ) {
         setMandatory(e.target.value);
     }
 
+    const changeLinkExternal = (e) => {
+        setMandatory(e.target.value);
+    }
+
     const setFormValues = (e) => {
         changedFields.push(e.target.id);
         changedFields.filter( onlyUnique );
@@ -119,14 +132,6 @@ export default function EditListItem( props ) {
         changedFields.filter( onlyUnique );
         setChangedFields(changedFields);
         onSubmit(e);
-    }
-
-    const updateContent = (jsonState) => {
-        let editorState = JSON.parse(jsonState);
-        console.log(jsonState);
-        let rawBlocks = editorState.blocks;
-        let json_blocks = rawBlocks.map( block => JSON.stringify(block));
-        postContent(post.ID, json_blocks);
     }
 
     const onlyUnique = (value, index, self) => {
@@ -171,18 +176,36 @@ export default function EditListItem( props ) {
                 
                 <TextField type="hidden" value={userLat} id="userLat"></TextField>
                 <TextField type="hidden" value={userLng} id="userLng"></TextField>
+                <Grid container spacing={3}>
+                    <Grid item>
+                        <FormControl margin="normal" fullWidth={true}>
+                            <Select
+                                label="Mandatory"
+                                id="mandatory"
+                                onChange={(e) => changeMandatory(e)}
+                                defaultValue={mandatory}
+                                >
+                                <MenuItem value={true}>Mandatory</MenuItem>
+                                <MenuItem value={false}>Optional</MenuItem> 
+                            </Select>
+                        </FormControl>
+                    </Grid>
+                    <Grid item>
+                        <FormControl margin="normal" fullWidth={true}>
+                            <Select
+                                label="Link To"
+                                id="external-link"
+                                onChange={(e) => changeLinkExternal(e)}
+                                defaultValue={linkExternal}
+                                >
+                                <MenuItem value={true}>Link to external page</MenuItem>
+                                <MenuItem value={false}>Link opens assignment</MenuItem> 
+                            </Select>
+                        </FormControl>
+                    </Grid>
+                </Grid>
 
-                <FormControl margin="normal" fullWidth={true}>
-                    <Select
-                        label="Mandatory"
-                        id="mandatory"
-                        onChange={(e) => changeMandatory(e)}
-                        defaultValue={mandatory}
-                        >
-                        <MenuItem value={true}>Mandatory</MenuItem>
-                        <MenuItem value={false}>Optional</MenuItem> 
-                    </Select>
-                </FormControl>
+                
                 
 
                 <FormControl margin="normal" fullWidth={true}>
@@ -198,20 +221,23 @@ export default function EditListItem( props ) {
                             }}
                     ></TextField>
                 </FormControl>
-
-                <FormControl margin="normal" fullWidth={true}>
-                    <TextField
-                        fullWidth={true}
-                        required
-                        id="post_link"
-                        label="Link"
-                        defaultValue={post.post_link}
-                        onChange={(e) => setFormValues(e)}
-                        InputLabelProps={{
-                            shrink: true,
-                            }}
-                    ></TextField>
-                </FormControl>
+                {(linkExternal === true)
+                    ? <FormControl margin="normal" fullWidth={true}>
+                        <TextField
+                            fullWidth={true}
+                            required
+                            id="post_link"
+                            label="Link"
+                            defaultValue={post.post_link}
+                            onChange={(e) => setFormValues(e)}
+                            InputLabelProps={{
+                                shrink: true,
+                                }}
+                        ></TextField>
+                    </FormControl>
+                    : null
+                }
+                
                 
                 <FormControl margin="normal" fullWidth={true}>
                     <TextField
@@ -247,7 +273,7 @@ export default function EditListItem( props ) {
                 </Button>
                 <Dialog fullScreen open={createOpen} onClose={openCreate}>
                     <MyDialogTitle onClose={openCreate} icon={false} title={post.post_title} subtitle={post.post_excerpt}></MyDialogTitle>
-                    <BlockEditor postID={post.ID} postContent={post.draft_js_content} postBlocks={post.megadraft}></BlockEditor>
+                    <BlockEditor postID={post.ID} postContent={draftJSContent} ></BlockEditor>
                 </Dialog>    
                 <Button onClick={() => openDelete(post.ID)} variant="contained">
                     <FontAwesomeIcon icon="trash-alt" style={{marginRight: '10px'}}></FontAwesomeIcon> Delete?
