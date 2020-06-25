@@ -13,15 +13,25 @@ class BlockEditor extends Component {
   constructor(props) {
     super(props);
     let contentState = "";
-    if(this.isJSON(this.props.postContent.draft_js_content)){
-      contentState = convertFromRaw(JSON.parse(this.props.postContent.draft_js_content));
-    }
     console.log(this.isJSON(this.props.postContent.draft_js_content))
+
+    if(this.isJSON(this.props.postContent.draft_js_content)){
+      //contentState = convertFromRaw(JSON.parse(this.props.postContent.draft_js_content));
+    }
     
     this.state = {
-      contentState,
-    }
+        contentState,
+      }
   }
+
+    isJSON = (str) => {
+      try {
+          JSON.parse(str);
+      } catch (e) {
+          return false;
+      }
+      return true;
+    }
 
       prepareContent = (rawContent) => {
         let blocks = rawContent.blocks
@@ -52,14 +62,7 @@ class BlockEditor extends Component {
         return blocks;
       }
 
-      isJSON = (str) => {
-        try {
-            JSON.parse(str);
-        } catch (e) {
-            return false;
-        }
-        return true;
-      }
+      
       onContentStateChange = (contentState) => {
         this.setState({
           contentState,
@@ -148,7 +151,7 @@ class BlockEditor extends Component {
   render() {
     const { contentState } = this.state;
     let initialContentState = ""
-    if(this.isJSON(this.props.postContent.draft_js_content)){
+    if(this.isJSON(this.props.postContent.draft_js_content) && this.props.postContent.draft_js_content !== ''){
       initialContentState = JSON.parse(this.props.postContent.draft_js_content);
     } 
     return (
@@ -171,7 +174,7 @@ class BlockEditor extends Component {
             },
             history: { inDropdown: true },
             embedded: {
-                icon: 'http://localhost:8888/parentchecklist/wp-content/uploads/2020/06/video-icon-02.png',
+                icon: 'http://schoolistit.com/wp-content/uploads/2020/06/video-icon-02.png',
                 embedCallback: this.embedVideoCallBack,
                 defaultSize: {
                     height: '315',
