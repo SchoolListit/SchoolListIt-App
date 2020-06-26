@@ -57,6 +57,33 @@ class BlockEditor extends Component {
         return blocks;
       }
 
+      dontPanic = (post) => {
+       let content = {
+            "blocks": [
+              {
+                "key": "rjbm",
+                "text": "Dont Panic",
+                "type": "header-two",
+                "depth": 0,
+                "inlineStyleRanges": "[]",
+                "entityRanges": "[]",
+                "data": "{}"
+              },
+              {
+                "key": "174b8",
+                "text": "Your content is in the database, but there was an error translating it back into the editor. No Problem. Please contact us and we will do our best to recover it. Sorry for the inconvenience.",
+                "type": "unstyled",
+                "depth": 0,
+                "inlineStyleRanges": "[]",
+                "entityRanges": "[]",
+                "data": "{}"
+              }
+            ],
+            "entityMap": "{}"
+          }
+        return content; 
+      }
+
       
       onContentStateChange = (contentState) => {
         this.setState({
@@ -148,12 +175,20 @@ class BlockEditor extends Component {
     return url;
   }
 
+ 
+
   render() {
     const { contentState } = this.state;
     let initialContentState = "";
-    if(this.isJSON(this.props.postContent.draft_js_content) && this.props.postContent.draft_js_content !== ''){
+    let contentIsJson = this.isJSON(this.props.postContent.draft_js_content);
+    let hasContent = (this.props.postContent.draft_js_content !== '') ? true : false ;
+    if(contentIsJson && hasContent){
       initialContentState = JSON.parse(this.props.postContent.draft_js_content);
     } 
+    if(hasContent && contentIsJson === false){
+      initialContentState = this.dontPanic(this.props.postContent);
+    }
+    let editorWrapperClass = (this.props.isAuthor === true) ? "schoolistit-lesson-creator" : 'editor-disabled';
 
 
     return (
@@ -161,8 +196,9 @@ class BlockEditor extends Component {
           <Editor
           initialContentState={initialContentState}  
           wrapperClassName="schoolistit-creator-wrapper"
-          editorClassName="schoolistit-lesson-creator"
+          editorClassName={editorWrapperClass}
           onContentStateChange={this.onContentStateChange}
+          toolbarHidden={!this.props.isAuthor}
           toolbar={{
             options: ['blockType', 'list', 'link', 'emoji', 'embedded', 'image', 'remove', 'history'] , 
             blockType: {
@@ -193,12 +229,16 @@ class BlockEditor extends Component {
             }
             }
         />
-        <Button onClick={() => this.clickSave()} variant="contained" color="primary" style={{margin: '15px 15px 15px 0'}}>
-          <Typography variant="h6">
-            <FontAwesomeIcon icon="save"></FontAwesomeIcon>
-            {" Save"}
-          </Typography>
-        </Button>
+        {(this.props.isAuthor === true)
+          ? <Button onClick={() => this.clickSave()} variant="contained" color="primary" style={{margin: '15px 15px 15px 0'}}>
+            <Typography variant="h6">
+              <FontAwesomeIcon icon="save"></FontAwesomeIcon>
+              {" Save"}
+            </Typography>
+          </Button>
+          : null
+        }
+        
       </Container>
     );
   }

@@ -37,6 +37,13 @@ export default function TheAssignment( {post, userID, section, classView }) {
     const [editItem, setEditItem] = useState(false);
     const [thePost, setThePost] = useState(post);
 
+    const isAuthor = () => {
+        if(post.author == userID || post.post_author == userID){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     const openEditItem = (postID, section) => {
         setEditItem(!editItem);
@@ -78,7 +85,6 @@ export default function TheAssignment( {post, userID, section, classView }) {
 
     const onClickTheAssignemnt = (post) => {
         setSinglePostID(post.ID);
-        console.log(post);
         if(post.linkExternal === 'true' || post.linkExternal === true ){
             window.open(post.post_link);
         } else {
@@ -87,11 +93,6 @@ export default function TheAssignment( {post, userID, section, classView }) {
     }
 
     const itemPadding = (classView === true) ? "0": "5px 10px 10px 10px";
-
-    const Transition = React.forwardRef(function Transition(props, ref) {
-        return <Slide direction="up" ref={ref} {...props} />;
-      });
-    
     
     if(thePost === 'undefined'){
         return null
@@ -171,7 +172,7 @@ export default function TheAssignment( {post, userID, section, classView }) {
 
             <Dialog key={"dialog-"+thePost.ID} fullScreen open={isOpen} onClose={e => toggleIsOpen('')} disablePortal={true}>
                 <SinglePostHeader post={thePost} toggleIsOpen={toggleIsOpen} classes={classes}></SinglePostHeader>
-                <BlockEditor postID={thePost.ID} postContent={thePost} onChanged={onChanged}></BlockEditor>
+                <BlockEditor postID={thePost.ID} postContent={thePost} onChanged={onChanged} isAuthor={isAuthor()}></BlockEditor>
             </Dialog>
             </React.Fragment>
         )
