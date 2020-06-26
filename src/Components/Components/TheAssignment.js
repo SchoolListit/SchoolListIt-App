@@ -5,11 +5,12 @@ import { Context } from '../../Context/Context.js';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Grid, ListItem, Dialog, ListItemSecondaryAction, Slide, Avatar, Typography, ListItemText} from '@material-ui/core';
 import MyCheckbox from './MyCheckBox.js';
-import SingleAssignment from './SingleAssignment.js';
+import SinglePostHeader from './SinglePostHeader.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AddLesson from '../Forms/AddLesson.js';
 import EditListItem from '../Forms/EditListItem.js';
 import MyDialogTitle from './MyDialogTitle.js';
+import BlockEditor from '../Forms/BlockEditor.js';
 
 const useStyles = makeStyles(() => ({
     listItemRoot: {
@@ -46,33 +47,43 @@ export default function TheAssignment( {post, userID, section, classView }) {
     }
 
     const onChanged = (result) => {
-        //console.log(result);
-        if (result.deleted == 'true'){
-            let post = 'undefined';
-            setThePost(post);
-        } else {
-            console.log(result.post);
-            setThePost(result.post);
-        } 
+       if(result.attribute !== 'undefined'){
+            switch (result.attribute) {
+                case 'draft_js_content' :
+                    post.draft_js_content = result.value;
+                    setThePost(post);
+                    break;
+                case 'post' : 
+                    setThePost(result.post);    
+                default :
+                    //silence
+            }
+       } else {
+            if (result.deleted == 'true'){
+                let post = 'undefined';
+                setThePost(post);
+            } else {
+                console.log(result.post);
+                setThePost(result.post);
+            } 
+       }
     }
 
-    const toggleIsOpen = () => {
+    const toggleIsOpen = (postID) => {
+        setSinglePostID(postID);
         setIsOpen(!isOpen);
-        if(isOpen === false) {
-            setSinglePostID('');
-        }
     }
 
-    const onDialogClose = (e, PostID) => {
-       //console.log(PostID)
-    }
+    
 
-    const onClickTheAssignemnt = (e, postLink) => {
-        if(postLink === '' || postLink === null || postLink === 'undefined'){
-            return false;
+    const onClickTheAssignemnt = (post) => {
+        setSinglePostID(post.ID);
+        console.log(post);
+        if(post.linkExternal === 'true' || post.linkExternal === true ){
+            window.open(post.post_link);
         } else {
-            window.open(postLink);
-        } 
+            toggleIsOpen(post.ID);
+        }
     }
 
     const itemPadding = (classView === true) ? "0": "5px 10px 10px 10px";
@@ -81,20 +92,13 @@ export default function TheAssignment( {post, userID, section, classView }) {
         return <Slide direction="up" ref={ref} {...props} />;
       });
     
-    const buttonTrue = (postLink) => {
-        if(postLink === '' || postLink === 'undefined' || typeof postLink === 'undefined'){
-           return false;
-        } else {
-            return true;
-        }
-    }
     
     if(thePost === 'undefined'){
         return null
     } else {
         return (
             <React.Fragment key={"post_"+thePost.ID}>
-            <ListItem key={"post-"+thePost.ID} className={classes.listItemRoot} style={{padding: itemPadding}} button={buttonTrue(thePost.post_link)} >
+            <ListItem key={"post-"+thePost.ID} className={classes.listItemRoot} style={{padding: itemPadding}} button={true} >
                 {/** due date, edit and title */}
                 <Grid container alignItems="flex-start" justify="space-between">
                     <Grid item xs={10}>
@@ -115,7 +119,7 @@ export default function TheAssignment( {post, userID, section, classView }) {
                             {thePost.post_title}
                         </Typography>
                     </Grid>
-                    {(thePost.post_author == userID)
+                    {(thePost.post_author == userID || thePost.author == userID)
                         ? <Grid item xs={1} >
                                     <FontAwesomeIcon icon="ellipsis-h" onClick={() => openEditItem(thePost.ID, section)} style={{color: "#bdbdbd"}}></FontAwesomeIcon>
                                     <Dialog open={editItem} onClose={() => closeEditItem()}>
@@ -134,12 +138,12 @@ export default function TheAssignment( {post, userID, section, classView }) {
                     {(classView === true)
                         ? null
                         : <Grid item xs={2} >
-                            <Avatar alt="Posted By" src={thePost.author_avatar} onClick={() => toggleIsOpen()}></Avatar>
+                            <Avatar alt="Posted By" src={thePost.author_avatar} onClick={() => onClickTheAssignemnt(thePost)}></Avatar>
                             </Grid>
                         
                     }
                     <Grid item xs={7}>
-                        <ListItemText onClick={(e) => onClickTheAssignemnt(e, thePost.post_link)}>
+                        <ListItemText onClick={() => onClickTheAssignemnt(thePost)}>
                             <Typography variant="body2"  >{thePost.post_excerpt}</Typography>
                             <Typography variant="caption">Posted By: {thePost.author_name.replace("-", ' ')}</Typography>
                         </ListItemText>
@@ -165,8 +169,9 @@ export default function TheAssignment( {post, userID, section, classView }) {
             </ListItem>
             {/* CLOSE LIST ITEM */}
 
-            <Dialog key={"dialog-"+thePost.ID} fullScreen open={false} onClose={e => onDialogClose(e, thePost.ID)} disablePortal={true}>
-                <SingleAssignment postID={thePost.ID} toggleIsOpen={toggleIsOpen}></SingleAssignment>
+            <Dialog key={"dialog-"+thePost.ID} fullScreen open={isOpen} onClose={e => toggleIsOpen('')} disablePortal={true}>
+                <SinglePostHeader post={thePost} toggleIsOpen={toggleIsOpen} classes={classes}></SinglePostHeader>
+                <BlockEditor postID={thePost.ID} postContent={thePost} onChanged={onChanged}></BlockEditor>
             </Dialog>
             </React.Fragment>
         )
