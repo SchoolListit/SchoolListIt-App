@@ -37,7 +37,6 @@ export default function AddLesson( props ) {
             post_date: document.getElementById('post_date').value,
             post_title: document.getElementById('post_title').value,
             post_excerpt: document.getElementById('post_excerpt').value,
-            post_link: document.getElementById('post_link').value,
             grades: document.getElementById('grades').value,
             schools: document.getElementById('schools').value,
             teachers: document.getElementById('teachers').value,
@@ -53,6 +52,9 @@ export default function AddLesson( props ) {
                 teachers: document.getElementById('teachers').value,
                 subjects: document.getElementById('subjects').value
             }
+        }
+        if(linkExternal === true){
+            body.post_link =  document.getElementById('post_link').value
         }
         document.getElementById("AddLessonForm").reset();
         onClickHideForm();

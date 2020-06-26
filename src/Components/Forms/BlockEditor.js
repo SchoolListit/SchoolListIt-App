@@ -13,11 +13,6 @@ class BlockEditor extends Component {
   constructor(props) {
     super(props);
     let contentState = "";
-    console.log(this.isJSON(this.props.postContent.draft_js_content))
-
-    if(this.isJSON(this.props.postContent.draft_js_content)){
-      //contentState = convertFromRaw(JSON.parse(this.props.postContent.draft_js_content));
-    }
     
     this.state = {
         contentState,
@@ -77,6 +72,11 @@ class BlockEditor extends Component {
         let contentBlocks = {
             empty: ""
         }
+        let changed = {
+          attribute: 'draft_js_content',
+          value: JSONContent
+        }
+        this.props.onChanged(changed);
         let post_content = JSON.stringify(contentBlocks);
         const url = 'http://schoolistit.com/wp-json/schoolistit-rest/v2/post-content';
         //create user
@@ -150,10 +150,12 @@ class BlockEditor extends Component {
 
   render() {
     const { contentState } = this.state;
-    let initialContentState = ""
+    let initialContentState = "";
     if(this.isJSON(this.props.postContent.draft_js_content) && this.props.postContent.draft_js_content !== ''){
       initialContentState = JSON.parse(this.props.postContent.draft_js_content);
     } 
+
+
     return (
       <Container style={{padding: '30px'}}>
           <Editor
