@@ -4,6 +4,7 @@ import { Context } from '../../Context/Context.js';
 import { postContent } from '../../Context/functions.js';
 import MyDialogTitle from '../Components/MyDialogTitle.js';
 import SectionSubForm from './components/SectionSubForm.js';
+import MyLoader from '../Components/MyLoader.js';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import BlockEditor from './BlockEditor.js';
@@ -12,22 +13,21 @@ import BlockEditor from './BlockEditor.js';
 
 //here is  the component
 export default function EditListItem( props ) {
-    
-    const [userLat, setUserLat] = useState('');
-    const [userLng, setUserLng] = useState('');
     const url = 'http://schoolistit.com/wp-json/schoolistit-rest/v2/assignments';
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
+    //state vars
     const [state] = useContext(Context);
+    const [userLat, setUserLat] = useState('');
+    const [userLng, setUserLng] = useState('');
     const [newPost, setNewPost] = useState("");
+    const [submitted, setSubmitted] = useState(false);
     const [changedFields, setChangedFields] = useState([]);
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [createOpen, setCreateOpen] = useState(false);
     const [draftJSContent, setdraftJSContent] = useState('');
-
     const { post, section, onChanged, closeEditItem } = props;
     const [mandatory, setMandatory] = useState(post.mandatory);
-    let initialLinkExternal = (post.linkExternal === "") ? false : post.linkExternal ;
-    const [linkExternal, setLinkExternal] = useState(initialLinkExternal);
+    const [linkExternal, setLinkExternal] = useState(post.linkExternal);
 
 
     
@@ -37,12 +37,15 @@ export default function EditListItem( props ) {
     }
 
     const openCreate = () => {
+        setCreateOpen(!createOpen);
+        /*
         const url = 'http://schoolistit.com/wp-json/wp/v2/assignments/'+post.ID;
         axios.get(url)
         .then( res => {
             setdraftJSContent(res.data);
             setCreateOpen(!createOpen);
         })
+        */
     }
 
     //submit the form
@@ -50,13 +53,13 @@ export default function EditListItem( props ) {
        if(typeof(e.preventDefault) === 'function'){
         e.preventDefault()
        } 
+       setSubmitted(true);
         const body = {
             post_id: props.post.ID,
             changed_fields: changedFields,
             due_date: document.getElementById('due_date').value,
             assigned_date: document.getElementById('assigned_date').value,
             post_title: document.getElementById('post_title').value,
-            post_link: document.getElementById('post_link').value,
             post_excerpt: document.getElementById('post_excerpt').value,
             grades: document.getElementById('grades').value,
             schools: document.getElementById('schools').value,
@@ -74,6 +77,9 @@ export default function EditListItem( props ) {
                 subjects: document.getElementById('subjects').value
             }
         }   
+        if(linkExternal === 'true' || linkExternal === true){
+            body.post_link = document.getElementById('post_link').value
+        }
         document.getElementById("EditLessonForm").reset();
 
          //create post
@@ -102,12 +108,15 @@ export default function EditListItem( props ) {
                 post.section = section;
                 post.assigned_date = body.post_date;
                 post.mandatory = mandatory;
-                post.mandatory = linkExternal;
                 post.post_link = body.post_link;
                 post.post_title = body.post_title;
                 post.post_excerpt = body.post_excerpt;
                 res.data.post = post;
-                onChanged(res.data);
+                let change = {
+                    attribute: 'post',
+                    post: post
+                }
+                onChanged(change);
                 closeEditItem();
              })
          });
@@ -118,7 +127,7 @@ export default function EditListItem( props ) {
     }
 
     const changeLinkExternal = (e) => {
-        setMandatory(e.target.value);
+        setLinkExternal(e.target.value);
     }
 
     const setFormValues = (e) => {
@@ -137,9 +146,13 @@ export default function EditListItem( props ) {
     const onlyUnique = (value, index, self) => {
         return self.indexOf(value) === index;
     }
-
+        if(submitted === true){
+            return (
+                <MyLoader></MyLoader>
+            )
+        } else {
         return (
-
+            
             <React.Fragment >
                 <Container style={{padding: '30px'}}>
                 <form id="EditLessonForm" onSubmit={(e) => onSubmit(e)} >
@@ -182,7 +195,7 @@ export default function EditListItem( props ) {
                             <Select
                                 label="Mandatory"
                                 id="mandatory"
-                                onChange={(e) => changeMandatory(e)}
+                                onChange={(e) => setMandatory(e.target.value)}
                                 defaultValue={mandatory}
                                 >
                                 <MenuItem value={true}>Mandatory</MenuItem>
@@ -195,18 +208,15 @@ export default function EditListItem( props ) {
                             <Select
                                 label="Link To"
                                 id="external-link"
-                                onChange={(e) => changeLinkExternal(e)}
+                                onChange={(e) => setLinkExternal(e.target.value)}
                                 defaultValue={linkExternal}
                                 >
-                                <MenuItem value={true}>Link to external page</MenuItem>
-                                <MenuItem value={false}>Link opens assignment</MenuItem> 
+                                <MenuItem value="true">Link to external page</MenuItem>
+                                <MenuItem value="false">Link opens assignment</MenuItem> 
                             </Select>
                         </FormControl>
                     </Grid>
                 </Grid>
-
-                
-                
 
                 <FormControl margin="normal" fullWidth={true}>
                     <TextField
@@ -221,7 +231,7 @@ export default function EditListItem( props ) {
                             }}
                     ></TextField>
                 </FormControl>
-                {(linkExternal === true)
+                {(linkExternal == "true" || linkExternal === true)
                     ? <FormControl margin="normal" fullWidth={true}>
                         <TextField
                             fullWidth={true}
@@ -273,7 +283,7 @@ export default function EditListItem( props ) {
                 </Button>
                 <Dialog fullScreen open={createOpen} onClose={openCreate}>
                     <MyDialogTitle onClose={openCreate} icon={false} title={post.post_title} subtitle={post.post_excerpt}></MyDialogTitle>
-                    <BlockEditor postID={post.ID} postContent={draftJSContent} ></BlockEditor>
+                    <BlockEditor postID={post.ID} postContent={post} onChanged={onChanged}></BlockEditor>
                 </Dialog>    
                 <Button onClick={() => openDelete(post.ID)} variant="contained">
                     <FontAwesomeIcon icon="trash-alt" style={{marginRight: '10px'}}></FontAwesomeIcon> Delete?
@@ -292,6 +302,7 @@ export default function EditListItem( props ) {
                 </Container>
             </React.Fragment>
         )
+        }
     
     
 }
