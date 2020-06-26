@@ -175,7 +175,7 @@ export default function AddLesson( props ) {
                             <Select
                                 label="Link To"
                                 id="external-link"
-                                onChange={(e) => changeLinkExternal(e)}
+                                onChange={(e) => setLinkExternal(e.target.value)}
                                 value={linkExternal}
                                 >
                                 <MenuItem selected value={true}>Link to external page</MenuItem>
