@@ -1,5 +1,3 @@
-*This project is in active development (not production ready)*
-
 # SchlistIt
 
 ## Housekeeping
