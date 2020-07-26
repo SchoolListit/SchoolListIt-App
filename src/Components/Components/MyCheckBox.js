@@ -18,7 +18,7 @@ export default function MyCheckBox( {userID, postID, initialChecked} ) {
     const [isChecked, setIsChecked] = useState(initialCheck);
 
     const handleCheck = (value) => {
-        let url = 'http://schoolistit.com/wp-json/schoolistit-rest/v2/mark_complete';
+        let url = 'https://schoolistit.com/wp-json/schoolistit-rest/v2/mark_complete';
         setIsChecked(!value);
         //make 2nd call
         axios.post(url)

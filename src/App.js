@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFileImage, faMagic, faLifeRing, faArrowsAltV, faCheck, faGrinBeamSweat, faBell, faHeart, faCopy, faEnvelope, faSave, faExclamationTriangle, faTrashAlt, faEllipsisH, faWindowClose, faThumbsUp, faCommentAlt, faShare, faBars, faSearch, faDoorOpen,faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas } from '@fortawesome/free-solid-svg-icons';
 import {faFacebookSquare} from '@fortawesome/free-brands-svg-icons';
@@ -73,6 +72,7 @@ const classes = useStyles();
             <Router>
                 <Switch>
                     <Route exact path="/" component={Timeline} />
+                    <Route exact path="/index.html" component={Timeline} />
                     <Route path="/sign-in" component={LandingPage}/>
                     <Route path="/classrooms/:classArgs" component={Classroom} />
                   </Switch>

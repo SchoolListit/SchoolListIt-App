@@ -16,7 +16,7 @@ export default function PostComments( {post, section } ) {
         let ignore = false;
 
         async function fetchData() {
-            let url = 'http://schoolistit.com/wp-json/wp/v2/comments?post='+post.ID;
+            let url = 'https://schoolistit.com/wp-json/wp/v2/comments?post='+post.ID;
             const result = await axios.get(url )
             if (!ignore) setComments(result.data);
         }
@@ -37,7 +37,7 @@ export default function PostComments( {post, section } ) {
             section: section
         }
         document.getElementById("addComment-"+post.ID).reset();
-        const url = 'http://schoolistit.com/wp-json/schoolistit-rest/v2/comments/post';
+        const url = 'https://schoolistit.com/wp-json/schoolistit-rest/v2/comments/post';
         axios.get(url, body)
          .then( (res) => {
              const salt = res.data['salt'];

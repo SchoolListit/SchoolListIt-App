@@ -27,7 +27,7 @@ import TermSearch from './TermSearch.js';
     }));
 
     const goToSite = () => {
-        window.location.href = 'http://schoolistit.com/about/';
+        window.location.href = 'https://schoolistit.com/about/';
     }
 
     const goToIssues = () => {

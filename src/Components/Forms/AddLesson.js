@@ -12,7 +12,7 @@ export default function AddLesson( props ) {
     const [userLat, setUserLat] = useState('');
     const [userLng, setUserLng] = useState('');
     const [mandatory, setMandatory] = useState(true);
-    const url = 'http://schoolistit.com/wp-json/schoolistit-rest/v2/assignments';
+    const url = 'https://schoolistit.com/wp-json/schoolistit-rest/v2/assignments';
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const [state] = useContext(Context);
     const [newPost, setNewPost] = useState("");

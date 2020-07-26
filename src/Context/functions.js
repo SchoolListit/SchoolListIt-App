@@ -56,7 +56,7 @@ export const emptyArray = ((theArray) => {
  */
 
  export const postContent = (postID, JSON_blocks) => {
-    let  url = "http://schoolistit.com/wp-json/schoolistit-rest/v2/post-content";
+    let  url = "https://schoolistit.com/wp-json/schoolistit-rest/v2/post-content";
     let body = {
         post_id: postID,
         blocks: JSON_blocks

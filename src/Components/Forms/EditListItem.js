@@ -13,7 +13,7 @@ import BlockEditor from './BlockEditor.js';
 
 //here is  the component
 export default function EditListItem( props ) {
-    const url = 'http://schoolistit.com/wp-json/schoolistit-rest/v2/assignments';
+    const url = 'https://schoolistit.com/wp-json/schoolistit-rest/v2/assignments';
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     //state vars
     const [state] = useContext(Context);
@@ -39,7 +39,7 @@ export default function EditListItem( props ) {
     const openCreate = () => {
         setCreateOpen(!createOpen);
         /*
-        const url = 'http://schoolistit.com/wp-json/wp/v2/assignments/'+post.ID;
+        const url = 'https://schoolistit.com/wp-json/wp/v2/assignments/'+post.ID;
         axios.get(url)
         .then( res => {
             setdraftJSContent(res.data);
@@ -283,7 +283,7 @@ export default function EditListItem( props ) {
                 </Button>
                 <Dialog fullScreen open={createOpen} onClose={openCreate}>
                     <MyDialogTitle onClose={openCreate} icon={false} title={post.post_title} subtitle={post.post_excerpt}></MyDialogTitle>
-                    <BlockEditor postID={post.ID} postContent={post} onChanged={onChanged}></BlockEditor>
+                    <BlockEditor postID={post.ID} postContent={post} onChanged={onChanged} isAuthor={true}></BlockEditor>
                 </Dialog>    
                 <Button onClick={() => openDelete(post.ID)} variant="contained">
                     <FontAwesomeIcon icon="trash-alt" style={{marginRight: '10px'}}></FontAwesomeIcon> Delete?

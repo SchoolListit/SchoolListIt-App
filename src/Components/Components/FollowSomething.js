@@ -31,7 +31,7 @@ export default function FollowSomething( {clearSetUp, setShowFollow, context, ch
     }
 /*
     useEffect( () => {
-        let url = "http://schoolistit.com/wp-json/wp/v2/schools";
+        let url = "https://schoolistit.com/wp-json/wp/v2/schools";
         axios.get(url).then( (res) => {
             let terms = res.data;
             setTerms(terms);

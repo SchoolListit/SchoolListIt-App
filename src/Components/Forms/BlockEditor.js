@@ -105,7 +105,7 @@ class BlockEditor extends Component {
         }
         this.props.onChanged(changed);
         let post_content = JSON.stringify(contentBlocks);
-        const url = 'http://schoolistit.com/wp-json/schoolistit-rest/v2/post-content';
+        const url = 'https://schoolistit.com/wp-json/schoolistit-rest/v2/post-content';
         //create user
         axios.get(url)
             .then( (res) => {
@@ -138,7 +138,7 @@ class BlockEditor extends Component {
     
     return new Promise(
       (resolve, reject) => {
-        const url = 'http://schoolistit.com/wp-json/schoolistit-rest/v2/post-image';
+        const url = 'https://schoolistit.com/wp-json/schoolistit-rest/v2/post-image';
     //create user
     axios.get(url)
         .then( (res) => {
@@ -212,7 +212,7 @@ class BlockEditor extends Component {
             },
             history: { inDropdown: true },
             embedded: {
-                icon: 'http://schoolistit.com/wp-content/uploads/2020/06/video-icon-02.png',
+                icon: 'https://schoolistit.com/wp-content/uploads/2020/06/video-icon-02.png',
                 embedCallback: this.embedVideoCallBack,
                 defaultSize: {
                     height: '315',

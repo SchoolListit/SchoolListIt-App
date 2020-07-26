@@ -54,7 +54,7 @@ export default function ClassPosts( { section, onClickAssignment, showForm, show
         //console.log(body);
 
         async function fetchData() {
-            let url = 'http://schoolistit.com/wp-json/schoolistit/v2/lesson-plans';
+            let url = 'https://schoolistit.com/wp-json/schoolistit/v2/lesson-plans';
             let body = {
                 show_assignments: true,
                 teachers: section.teachers,

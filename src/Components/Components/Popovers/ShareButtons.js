@@ -9,13 +9,13 @@ export default function ShareButtons( props) {
     const [hasCopied, setHasCopied] = useState(false)
     const emailLink = () => {
         let link = "mailto:?";
-        link += "subject=Follow Classes on http://schoolistit.com";
-        link += "&body=The easiest way to manage and track your schoolwork http://schoolistit.com/classrooms"+shareLink;
+        link += "subject=Follow Classes on https://schoolistit.com";
+        link += "&body=The easiest way to manage and track your schoolwork https://schoolistit.com/classrooms"+shareLink;
         return encodeURI(link);
     }
 
     const clickShare = () => {
-        const theLink = "http://schoolistit.com/classrooms"+shareLink;
+        const theLink = "https://schoolistit.com/classrooms"+shareLink;
         const el = document.getElementById("theLinkToCopy");
         el.select()
         document.execCommand("copy");
@@ -25,7 +25,7 @@ export default function ShareButtons( props) {
         <React.Fragment>
             <Grid container>
                 <Grid item xs={3}>
-                    <Button target="_blank" href={"https://www.facebook.com/sharer/sharer.php?u=http://schoolistit.com"+shareLink}>
+                    <Button target="_blank" href={"https://www.facebook.com/sharer/sharer.php?u=https://schoolistit.com"+shareLink}>
                         <FontAwesomeIcon icon={['fab', 'facebook-square']}></FontAwesomeIcon>
                     </Button>
                 </Grid>
@@ -38,7 +38,7 @@ export default function ShareButtons( props) {
                     <Button onClick={() => clickShare()}>
                         <FontAwesomeIcon icon="copy"></FontAwesomeIcon>
                     </Button>
-                    <TextField id="theLinkToCopy" defaultValue={"http://schoolistit.com"+shareLink} style={{position: "absolute", top: "-99999px", left: "-9999px", color: "#000"}}></TextField>
+                    <TextField id="theLinkToCopy" defaultValue={"https://schoolistit.com"+shareLink} style={{position: "absolute", top: "-99999px", left: "-9999px", color: "#000"}}></TextField>
                 </Grid>
             </Grid>
         </React.Fragment>
