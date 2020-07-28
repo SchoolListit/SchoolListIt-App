@@ -6,7 +6,7 @@ import axios from 'axios';
 
 
 
-export default function MyGoogleLogin() {
+export default function MyGoogleLogin(  ) {
     //const [state, setState] = useContext(Context);
     const [authenticated, setAuthenticated] = useState(false);
     const [loginError, setLoginError] = useState(false);
@@ -66,6 +66,7 @@ export default function MyGoogleLogin() {
                 .then( (res) => {
                     localStorage.setItem('scholistit_profile', JSON.stringify(res.data));
                     console.log(res.data)
+                    
                     //state.profile = res.data;
                     //setState(state);
                     console.log('authenticated - should redirect and reinitialize');
@@ -80,7 +81,7 @@ export default function MyGoogleLogin() {
 
 
     return (
-        <Container style={{padding: '50px'}}>
+        <Container style={{padding: '50px', textAlign: 'center'}}>
              <FormControl margin="none" >
             <GoogleLogin
                 clientId="488169268087-678v3m5p50kpfnu4sr83ip4usdr6s14g.apps.googleusercontent.com"

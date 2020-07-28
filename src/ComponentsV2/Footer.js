@@ -10,7 +10,6 @@ export default function Footer() {
             container 
             spacing={0}
             justify="space-around"
-            alignContent
             style={{
                 position: "fixed",
                 bottom: '0',

@@ -24,16 +24,16 @@ export default function SignOn() {
             maxWidth={false}
             style={{height: '100vh', padding: '80px 0'}}
             >
-               <Grid container  justify="center" alignContent="center" style={{height: '100%'}}>
-                   <Grid item alignSelf="center" >
+               <Grid container  justify="center" alignContent="center" alignItems="center" style={{height: '100%'}}>
+                   <Grid item  >
                         <SIcon></SIcon>
                         <Typography variant="h2" style={{fontWeight: '700', textAlign: 'center'}}>SchoolListIt</Typography>
                         <Typography variant="h3" style={{textAlign: 'center'}}>what's due and when</Typography>
                         <Typography variant="h5" style={{marginTop: '20px', textAlign: 'center'}}>for any school anywhere</Typography>
-                        <Typography variant="h5" style={{textAlign: 'center'}}>no matter how you school</Typography> 
+                        <Typography variant="h5" style={{textAlign: 'center'}}>no matter how you school</Typography>
+                        <MyGoogleLogin></MyGoogleLogin>
                    </Grid>
                </Grid>
         </Container>
     )
 }
-//<MyGoogleLogin></MyGoogleLogin>
