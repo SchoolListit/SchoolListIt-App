@@ -68,5 +68,5 @@ SchoolListIt is built with your child's security in mind. The names of your chil
 
 Everything else on SchoolListIt is public. If you don't want it shared, don't post it. It you don't want it repeated, don't put it in a comment or assignment on SchoolListit.
 
-SchoolListIt has no access to grades, testing, or test scores. 
+# SchoolListIt has no access to grades, testing, or test scores. 
 
