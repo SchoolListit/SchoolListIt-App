@@ -33,7 +33,7 @@ Any homeschool, public school, private school, or even a karate studio can post 
 SchoolListIt is a web application and installs automatically from the web browser onto a your phone (or computer) on the first visit. From there, it can work offline and sync when your connection restores. 
 
 ### Set Up
-The first time, you are promted to
+The first time you are promted to
 - designate first language
 - choose a role (student, teacher, parent, other helper)
 - outline your challenges (time shortage, disabilities, any reading problems, technology)
@@ -53,8 +53,15 @@ Your class feed shows every class you follow for every student and  yourself - j
 ### Sharing
 If you add the assignments your teacher sent home, you can share SchoolListIt to Facebook, Pinterest, or Twitter so other families dont need to enter and can keep track. If you were ever a room mom before Covid-19 shut down schools, this is a great way to still help out in the "classroom". Kind of like Facebook groups, a SchoolListIt class is a way for all the members to get together and help each other out. 
 
-### Comment
+### Commenting
 Comment on any assignment. This is a great way to get help from a friend or another parent if you're stuck or confused about an assignment. Comments are public like a tweet - it goes out to anyone following that assignment in a class - and thier comments will show up to you. That is really helpful because someone else may have the same question.
+
+### Assignments
+Anyone can create an assignment on SchoolListIt.
+- you can hide any assignment if you know it shouldn't be in your class
+- the class's teacher can become verified and delete or correct assignments 
+- each assignment shows the author's profile photo so you can see who posted every assignment
+- any user can 'report' inappropriate content to the group's moderators for removal
 
 ### What's Public and What's Secure
 SchoolListIt is built with your child's security in mind. The names of your children, and which classes you follow for them is only available to you. 
