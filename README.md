@@ -59,14 +59,14 @@ Comment on any assignment. This is a great way to get help from a friend or anot
 ### Assignments
 Anyone can create an assignment on SchoolListIt.
 - you can hide any assignment if you know it shouldn't be in your class
-- the class's teacher can become verified and delete or correct assignments 
+- you can 'report' inappropriate content to the group
+- the class teacher can become verified and delete or correct assignments 
 - each assignment shows the author's profile photo so you can see who posted every assignment
-- any user can 'report' inappropriate content to the group's moderators for removal
 
 ### What's Public and What's Secure
-SchoolListIt is built with your child's security in mind. The names of your children, and which classes you follow for them is only available to you. 
+SchoolListIt is built with your child's security in mind. The names of your children, and which classes you follow for them is only available to you and the class teacher (if there is a verified teacher). 
 
-Everything else on SchoolListIt is public. If you don't want it shared, don't post it. It you don't want it repeated, don't put it in a comment on SchoolListit.
+Everything else on SchoolListIt is public. If you don't want it shared, don't post it. It you don't want it repeated, don't put it in a comment or assignment on SchoolListit.
 
-SchoolListIt has no access to grades or testing or test scores. 
+SchoolListIt has no access to grades, testing, or test scores. 
 
