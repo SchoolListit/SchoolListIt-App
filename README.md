@@ -1,13 +1,36 @@
 # SchooListIt (SchooL-List-It)
 
 ## Housekeeping
-the active live branch is RestoreEditor. Master is out of date and not a good starting point. 
+There are currently two branches.
+- Master: live on the [demo site](https://app.schoolistit.com/)
+- Welcome: working to implement ux improvements to include a proper set up of new users. If I dont get that merged into the demo, it is worth checking out what I have planned. 
 
-Please branch before contributing. Start from Restore Editor. I will change this message when I get master figured out. (Sorry)
+# SchoolListIt
+## Which schoolwork is due and when for any school, anywhere ...
+## No matter how you school
 
-## Public Education Should Be Public
+School has been a confusing mess since Covid-19. Many parents are facing a new and difficult balance of working from home and also schooling from home with fewer childcare options available. A particularly tough, nearly impossible circumstance for single parent homes, the only choice is to reach out farther into the community for support. However, most school information systems do not allow access to extended family and friends - even those that do have a 'big system' user experience that is unfamiliar and confusing to untrained users. Meanwhile teachers all across the United States are scrambling to teach in multiple formats with very little training or time to prepare. Many schools are still undecided.  
 
-Teachers in Iowa, North Carolina, and Mumbai are all creating learning content lessons on much of the same material. A central repository where teachers can clone and fork learning material  could revolutionize the way we think about education. 
+### A bulletin board in the town square where anyone can share and everyone can benefit
+SchoolListit is the application that pulls it all together in one consistent format no matter how school looks for your family. Think of SchoolListIt as a bulletin board in the town square dedicated to what each class needs to get done each week. Any homeschool, public school, private school, or karate studio can post the "deliverables" for students and then family members can help keep students on track. 
+
+- SchoolListIt can push-pull data from any existing system's REST API
+- Parents can use SchoolListIt to help each other out
+- Even if the api cannot pull data it can quickly be entered and shared
+- Simple lesson creator is included for teachers (video, images, headlines, text, links)
+
+It sounds really simple, and maybe that is what makes SchoolListIt special. SchoolListIt is simple by design. Busy parents only have a few short minutes. In that short amount of time, SchoolListIt is designed to serve the exact right information and nothing else programmatically. 
+
+### Usage
+SchoolListIt is a web application which installs from the web browser onto a user's phone on the first visit. From there, it can work offline and background sync when your connection restores. The user is promted to :
+- designate first language
+- choose a role (student, teacher, parent, other helper)
+- help us understand thier challenges (time shortage, disabilities, any reading prblems, technology learning curve)
+- identify the students they are helping by name, grade
+
+
+
+
 
 ### Closing the education gap
 
