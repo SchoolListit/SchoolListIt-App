@@ -31,7 +31,6 @@ export default function SignOn() {
                         <Typography variant="h3" style={{textAlign: 'center'}}>what's due and when</Typography>
                         <Typography variant="h5" style={{marginTop: '20px', textAlign: 'center'}}>for any school anywhere</Typography>
                         <Typography variant="h5" style={{textAlign: 'center'}}>no matter how you school</Typography>
-                        <MyGoogleLogin></MyGoogleLogin>
                    </Grid>
                </Grid>
         </Container>

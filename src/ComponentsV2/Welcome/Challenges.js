@@ -1,12 +1,11 @@
 import React, {useContext, useState} from 'react';
 import {UserContext} from '../../Context/UserContext.js';
-import { Container, Typography, Grid } from '@material-ui/core';
-import SelectMulti from './SelectMulti.js';
+import { Container, Typography, Grid, Select, MenuItem, FormControl, InputLabel, FormHelperText } from '@material-ui/core';
 
  
 export default function Challenges() {
     const [userState, setUserState] = useContext(UserContext);
-    const [challenges, setChallenges] = useState('');
+    const [challenges, setChallenges] = useState([]);
 
     /**
      * Passed down to the composite SelectSimple
@@ -20,14 +19,9 @@ export default function Challenges() {
     }
 
     const handleChangeMultiple = (event) => {
-        const { options } = event.target;
-        const value = [];
-        for (let i = 0, l = options.length; i < l; i += 1) {
-          if (options[i].selected) {
-            value.push(options[i].value);
-          }
-        }
-        setChallenges(value);
+        let newUserState = userState;
+        userState.userChallenges.push(event.target.value);
+        setUserState(newUserState);
       };
 
     /**
@@ -44,12 +38,12 @@ export default function Challenges() {
             itemDescription: 'English is not my first language'
         },
         {
-            itemValue: 'time',
-            itemDescription: 'Single parent so I need more time'
+            itemValue: 'Single Parent',
+            itemDescription: 'Single parent - need more time to help'
         },
         {
-            itemValue: 'time',
-            itemDescription: 'Dual income so no time to homeschooling'
+            itemValue: 'We both work',
+            itemDescription: 'Dual income - need more time to help'
         },
         {
             itemValue: 'no-internet',
@@ -87,14 +81,23 @@ export default function Challenges() {
                         <Typography variant="h3" style={{textAlign: 'center'}}>how can we help?</Typography>
                         <Typography variant="h5" style={{marginTop: '20px', textAlign: 'center'}}>everyone has challenges</Typography>
                         <Typography variant="h5" style={{textAlign: 'center'}}>tell us how we can help</Typography> 
-                        <SelectMulti
-                            handleChange={handleChange}
-                            selectID="user-challenges"
-                            selectValue={challenges}
-                            label="Any Challenges"
-                            labelID="user-challenge-label"
-                            menuItems={menuItems}
-                        ></SelectMulti>
+                        <FormControl style={{width: '100%', marginTop: '20px', height: '70px'}}>
+                            <Select
+                            multiple
+                            native
+                            variant="outlined"
+                            value={[]}
+                            onChange={handleChangeMultiple}
+                            inputProps={{
+                                id: 'select-challenges',
+                            }}
+                            >
+                            {menuItems.map( (item, key) => {
+                                return (<option style={{marginBottom: '10px'}} key={key} value={item.itemValue} >{item.itemDescription}</option>)
+                            })}
+                            </Select>
+                        <FormHelperText>Select as many as apply</FormHelperText>
+                        </FormControl>
                    </Grid>
                </Grid>
         </Container>
