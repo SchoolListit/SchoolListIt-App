@@ -6,7 +6,7 @@ There are currently two branches.
 - Welcome: working to implement ux improvements to include a proper set up of new users. If I dont get that merged into the demo, it is worth checking out what I have planned. 
 
 # SchoolListIt
-## Schoolwork assignments due and when for any school, anywhere ...
+## What's due and when for any school, anywhere ...
 ## No matter how you school
 
 School has been a confusing mess since Covid-19. Many parents are facing a new and difficult balance of working from home and also schooling from home with fewer childcare options available. A particularly tough, nearly impossible circumstance for single parent homes, the only choice is to reach out farther into the community for support. However, most school information systems do not allow access to extended family and friends - even those that do have a 'big system' user experience that is unfamiliar and confusing to untrained users. Meanwhile teachers all across the United States are scrambling to teach in multiple formats with very little training or time to prepare. Many schools are still undecided.  
