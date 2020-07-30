@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faFileImage, faMagic, faLifeRing, faArrowsAltV, faCheck, faGrinBeamSweat, faBell, faHeart, faCopy, faEnvelope, faSave, faExclamationTriangle, faTrashAlt, faEllipsisH, faWindowClose, faThumbsUp, faCommentAlt, faShare, faBars, faSearch, faDoorOpen,faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas } from '@fortawesome/free-solid-svg-icons';
+import { faVolumeUp, faFileImage, faMagic, faLifeRing, faArrowsAltV, faCheck, faGrinBeamSweat, faBell, faHeart, faCopy, faEnvelope, faSave, faExclamationTriangle, faTrashAlt, faEllipsisH, faWindowClose, faThumbsUp, faCommentAlt, faShare, faBars, faSearch, faDoorOpen,faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas } from '@fortawesome/free-solid-svg-icons';
 import {faFacebookSquare} from '@fortawesome/free-brands-svg-icons';
 import {  ThemeProvider, createMuiTheme, makeStyles, responsiveFontSizes } from '@material-ui/core/styles';
 import { grey, amber} from '@material-ui/core/colors';
@@ -19,7 +19,7 @@ import {  ContextController, Context } from "./Context/Context.js";
 import './App.scss';
 
 
-library.add(faFileImage, faMagic, faLifeRing, faArrowsAltV, faCheck, faGrinBeamSweat, faBell, faHeart, faFacebookSquare, faCopy, faEnvelope, faSave, faExclamationTriangle, faTrashAlt, faEllipsisH, faWindowClose, faThumbsUp, faCommentAlt, faShare, faBars, faSearch, faDoorOpen, faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas);
+library.add(faVolumeUp, faFileImage, faMagic, faLifeRing, faArrowsAltV, faCheck, faGrinBeamSweat, faBell, faHeart, faFacebookSquare, faCopy, faEnvelope, faSave, faExclamationTriangle, faTrashAlt, faEllipsisH, faWindowClose, faThumbsUp, faCommentAlt, faShare, faBars, faSearch, faDoorOpen, faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas);
 
 
 let theme = createMuiTheme({

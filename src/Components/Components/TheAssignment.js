@@ -11,6 +11,7 @@ import AddLesson from '../Forms/AddLesson.js';
 import EditListItem from '../Forms/EditListItem.js';
 import MyDialogTitle from './MyDialogTitle.js';
 import BlockEditor from '../Forms/BlockEditor.js';
+import AssignmentTitle from '../Components/AssignmentTitle.js';
 
 const useStyles = makeStyles(() => ({
     listItemRoot: {
@@ -99,7 +100,7 @@ export default function TheAssignment( {post, userID, section, classView }) {
     } else {
         return (
             <React.Fragment key={"post_"+thePost.ID}>
-            <ListItem key={"post-"+thePost.ID} className={classes.listItemRoot} style={{padding: itemPadding}} button={true} >
+            <ListItem key={"post-"+thePost.ID} className={classes.listItemRoot} style={{padding: itemPadding}}  >
                 {/** due date, edit and title */}
                 <Grid container alignItems="flex-start" justify="space-between">
                     <Grid item xs={10}>
@@ -116,9 +117,7 @@ export default function TheAssignment( {post, userID, section, classView }) {
                             : <span style={{color: '#00c853'}}>Optional</span>
                         }   
                         </Typography> 
-                        <Typography variant="body1" style={{textTransform: 'capitalize'}} >
-                            {thePost.post_title}
-                        </Typography>
+                        <AssignmentTitle postTitle={thePost.post_title} postExcerpt={thePost.post_excerpt}></AssignmentTitle>
                     </Grid>
                     {(thePost.post_author == userID || thePost.author == userID)
                         ? <Grid item xs={1} >
@@ -140,12 +139,13 @@ export default function TheAssignment( {post, userID, section, classView }) {
                         ? null
                         : <Grid item xs={2} >
                             <Avatar alt="Posted By" src={thePost.author_avatar} onClick={() => onClickTheAssignemnt(thePost)}></Avatar>
-                            </Grid>
+                         </Grid>
                         
                     }
                     <Grid item xs={7}>
                         <ListItemText onClick={() => onClickTheAssignemnt(thePost)}>
-                            <Typography variant="body2"  >{thePost.post_excerpt}</Typography>
+                            <Typography variant="body2"  >{thePost.post_excerpt+" "}
+                            </Typography>
                             <Typography variant="caption">Posted By: {thePost.author_name.replace("-", ' ')}</Typography>
                         </ListItemText>
                     </Grid>
