@@ -1,25 +1,19 @@
-import React, { useContext, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React  from 'react';
+//import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faFileImage, faMagic, faLifeRing, faArrowsAltV, faCheck, faGrinBeamSweat, faBell, faHeart, faCopy, faEnvelope, faSave, faExclamationTriangle, faTrashAlt, faEllipsisH, faWindowClose, faThumbsUp, faCommentAlt, faShare, faBars, faSearch, faDoorOpen,faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas } from '@fortawesome/free-solid-svg-icons';
+import {  faPencilAlt, faBook, faFileImage, faMagic, faLifeRing, faArrowsAltV, faCheck, faGrinBeamSweat, faBell, faHeart, faCopy, faEnvelope, faSave, faExclamationTriangle, faTrashAlt, faEllipsisH, faWindowClose, faThumbsUp, faCommentAlt, faShare, faBars, faSearch, faDoorOpen,faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas } from '@fortawesome/free-solid-svg-icons';
 import {faFacebookSquare} from '@fortawesome/free-brands-svg-icons';
-import {  ThemeProvider, createMuiTheme, makeStyles, responsiveFontSizes } from '@material-ui/core/styles';
+import {  ThemeProvider, createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { grey, amber} from '@material-ui/core/colors';
-import { CssBaseline, Container } from '@material-ui/core';
-import Header from './Components/Components/Header.js';
-import Timeline from './Components/Pages/Timeline.js';
-import LandingPage from './Components/Pages/LandingPage.js';
-import About from './Components/Pages/About.js';
-import Classroom from './Components/Pages/Classroom.js';
-import School from './Components/Pages/School.js';
-import PageFourOFour from './Components/Pages/PageFourOFour.js';
-import ScreenOptions from './Components/Components/ScreenOptions.js';
-
-import {  ContextController, Context } from "./Context/Context.js";
+import { CssBaseline } from '@material-ui/core';
 import './App.scss';
+import ContentArea from './ComponentsV2/ContentArea.js';
+import Header from './ComponentsV2/Header.js';
+import FloatAdd from './ComponentsV2/FloatAdd.js';
+import Footer from './ComponentsV2/Footer.js';
+import { UserController } from './Context/UserContext';
 
-
-library.add(faFileImage, faMagic, faLifeRing, faArrowsAltV, faCheck, faGrinBeamSweat, faBell, faHeart, faFacebookSquare, faCopy, faEnvelope, faSave, faExclamationTriangle, faTrashAlt, faEllipsisH, faWindowClose, faThumbsUp, faCommentAlt, faShare, faBars, faSearch, faDoorOpen, faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas);
+library.add( faPencilAlt, faBook, faFileImage, faMagic, faLifeRing, faArrowsAltV, faCheck, faGrinBeamSweat, faBell, faHeart, faFacebookSquare, faCopy, faEnvelope, faSave, faExclamationTriangle, faTrashAlt, faEllipsisH, faWindowClose, faThumbsUp, faCommentAlt, faShare, faBars, faSearch, faDoorOpen, faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas);
 
 
 let theme = createMuiTheme({
@@ -43,44 +37,22 @@ let theme = createMuiTheme({
   
 });
 
+
 theme = responsiveFontSizes(theme);
 
-const useStyles = makeStyles(() => ({
-  root: {
-    backgroundPosition: 'center',
-    backgroundSize: 'cover',
-    //background: "url('https://msp-media.org/wp-content/images/robert-collins-tvc5imO5pXk-unsplash.jpg')",
-    margin: '0',
-    padding: '0',
-  }
-}));
-//localStorage.clear();
-
-////app starts here
 const App = () => {
-const classes = useStyles();
-
 
   return (
-      <ContextController>
+      <UserController>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Container  
-            maxWidth={false}
-            className={classes.root}
-            >
-            <Router>
-                <Switch>
-                    <Route exact path="/" component={Timeline} />
-                    <Route exact path="/index.html" component={Timeline} />
-                    <Route path="/sign-in" component={LandingPage}/>
-                    <Route path="/classrooms/:classArgs" component={Classroom} />
-                  </Switch>
-            </Router>
-            <ScreenOptions></ScreenOptions>
-          </Container>
+              <Header></Header>
+                <FloatAdd></FloatAdd>
+                <ContentArea></ContentArea>
+                <FloatAdd></FloatAdd>
+              <Footer></Footer>
         </ThemeProvider>
-      </ContextController>    
+      </UserController>  
   )
 };
 

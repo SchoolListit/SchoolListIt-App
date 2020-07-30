@@ -51,7 +51,7 @@ export function ContextController({children}){
      //set the initial state into a use State
      const [state, setState] = useState(initialState);
 
-     useEffect ( () => {
+useEffect ( () => {
         
         
         //go out to the api
