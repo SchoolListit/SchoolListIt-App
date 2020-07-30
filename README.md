@@ -1,4 +1,4 @@
-# SchlistIt
+# SchooListIt (SchooL-List-It)
 
 ## Housekeeping
 the active live branch is RestoreEditor. Master is out of date and not a good starting point. 
@@ -11,14 +11,15 @@ Teachers in Iowa, North Carolina, and Mumbai are all creating learning content l
 
 ### Closing the education gap
 
-Parental oversight is a known factor to the success of any student, and on the flip side a factor contributing to the the education gap. However, overseeing your children's education in our current system has an opportunity cost far too high for most working mothers and fathers. It is very difficult to gain access to schoolwork and homework deliverables and far more difficult to gain access to the learning material itself. The system is not designed to facilitate the parental oversight proven to work. SchooListIt is designed to do exactly that!
+Parental oversight is a known factor to the success of any student, and on the flip side a factor contributing to the the education gap. However, overseeing your children's education in our current system has an opportunity cost far too high for most working mothers and fathers. It is very difficult to gain access to schoolwork and homework deliverables and far more difficult to gain access to the learning material itself. 
+#### The system is not designed to facilitate the parental oversight proven to work. SchooListIt is designed to do exactly that!
 
 ### Learning is more than just acess to lessons. 
-Pacing for elementary students is key. Learning materials, Lesson Plans and clear deliverables are all part of that pacing.  SchooListIt goes beyond the lesson and tackles the lesson plan, deliverables, and learning materials with and open source ethos giving parents real time, instant, and easy access via a smart phone in a social feed format. 
+Pacing for elementary students is key. Learning materials, Lesson Plans and clear deliverables are all part of that pacing.  SchooListIt goes beyond the lesson and tackles the lesson plan, deliverables, and learning materials with an open source ethos giving parents real time, instant, and easy access via a smart phone in a social feed format. 
 
 SchooListIt can meet parents where they are and really equip them to oversee and co-educate with teachers.
 
-## Public education should be public
+## Open Source - Open Education
 The concept of Open Source in the software world is producing the fruit predicted by thought leaders such as Larry Ellison who famously said, “Once open source gets good enough, competing with it would be insane.” 
 
 Covid-19 is disruptive to the public education system and will make a lasting mark on primary education. Let's make lemonade out of the lemons thrown our way by Covid-19 and Open Source our public education. Teachers can learn the open source workflow and thought process: create - package - share - clone - iterate - fork. 
@@ -36,12 +37,55 @@ SchooListIt aims to decouple the secure student identifiable data from the pulic
 
 __What if our teachers could focus on the Students rather than content creation?__
 
-1) Avoid Reinventing the Wheel - Use of powerful pre-existing platforms
-2) Communication Consolidation - Log in using your platform of choice: Facebook, Google, Pinterest
-3) Meet People Where they Are - On their channels with the tools they like to use
-4) Grow Virally from the Bottom Up - Easy Teacher and Parent Sharing of Lessons
-5) Device Diversity - Works on Phones, Tablets, Ipad, Iphones, Androids, Roku, Fire, etc.
-6) Notification Effectiveness - Parents Teachers Students and Administration able to contacted numerous ways - phone, text, email, msging,
-7) Security - Utilizes the most advanced security methods already in use with the largest companies
-8) Inclusive/Exclusive - Can be used by just parents, or parents and teachers
-9) Open Source Shareable Lesson Plans - Teachers can access other teachers lesson collateral and adapt to their own classes
+1) Avoid Reinventing the Wheel - Use of powerful pre-existing platforms - learning content can be pulled via API integration from google classroom, the gsuite apps, or any wordpress or wordpress.com installation.
+2) Communication Consolidation - a twilio enabled "channel changer" enabling the teacher to stay in one channel and communicate by meeting the parent on thier nominated channel.
+3) Grow Virally from the Bottom Up - let's open up the data entry and give validated teachers a hand from the PTA Organizations. in 2020-2021 maybe room mom's enter the data into schoolistit instead of volunteer in the classroom.
+7) Security - Decouple public data from secure data
+8) Really inclusive - Really Public: Learning materials and pacing can be accessed by anyone anytime anywhere. 
+
+# Architecture outline
+<img src="https://github.com/megphillips91/schlistit/blob/master/Architecture-02.png" alt="schoolistit architecture" width="100%"/>
+
+## Front End App: 
+React - react router - react dom
+you can scan the package.json file for all the packages used in the dev. 
+user interface is all Material UI
+
+### Data comes from: 
+- user directly via the react app
+- any WP install on WP.com or self hosted wp.org install via the free plugin to be published on repo (have written translation for draft.js to gutenberg) 
+- google classroom via oauth
+
+## BackEnd:
+- Apache
+- php
+- cpanel
+- mysql
+currently hosted at InMotion Hosting on a VPS 2000
+
+## Cloud Integrations:
+### Google Maps: 
+SchooListIt pulls school locations and details are pulled from Google Places. That information is then used in the "verification" of teachers. Once "verified" a teacher then gains control over all content and comments published to his (her) classroom and can then make use of the channel changer functionality to communicate with caregivers.
+
+### Reading Aloud: 
+SchooListIt needs to 'read aloud' any writted text to all kindergartners and children with learning disabilities
+- Watson text to speech
+
+### Channel Changer: 
+Teachers and parents need to stay in one channel and be able to communicate with each other in each's most comfortable channel in order to facilitate easy and effective communicate. 
+- (mailgun for now just because thats my familiar platform) sendgrid
+- twilio voice
+- twilio flex
+- twilio SMS
+
+## Data Science Gains:  
+The gains in data science could be invaluable. SchooListIt needs a separate (very secure) back end into which SchooListIt can push praent, teacher, and student user behavior analytics and collate that data with student ID, testing, and grade information. For security, it makes sense for this to be an isolated system which also pulls from existing data sources including google classroom, wordpress, and SAAS systems like powerschool.
+
+## National & Global Scaling:
+The WordPress community is a global organization and activates quickly around an idea like this with legs.
+
+There is a deep and global network of trainers ready to go in almost every community. They are able to teach teachers how to use WordPress and Gutenberg. Some are paid, some donate their time.  Most are contractors with flexible priorities. In addition, there is a ton of existing online content in addition to the official documentation on WP.org
+
+Layering onto that, any school system that chooses to use the WP integration will benefit from the massive quantity of local WordPress agencies ready to troubleshoot and contribute code to customize and or integrate to any existing workflow. And help maintain the open source project. And the thousands of plugin integrations already built and availbale for school applications.
+
+Furthermore, the WordPress organization maintains a group of well intended and charitable Polyglots ready to 'human' translate which could be used to further train a system like Watson's human speech in multiple languages. But also used to just human translate content for students needing non-english instruction.
