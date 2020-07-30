@@ -28,10 +28,8 @@ Any homeschool, public school, private school, or even a karate studio can post 
 **It sounds really simple, and maybe that is what makes SchoolListIt special.** SchoolListIt is simple by design. Busy parents only have a few short minutes. In that short amount of time, SchoolListIt is designed to serve exactly the right information and nothing else, programmatically. 
 
 ## Usage
-
 ### Installation
 SchoolListIt is a web application and installs automatically from the web browser onto a your phone (or computer) on the first visit. From there, it can work offline and sync when your connection restores. 
-
 ### Set Up
 The first time you are promted to
 - designate first language
@@ -68,5 +66,4 @@ SchoolListIt is built with your child's security in mind. The names of your chil
 
 Everything else on SchoolListIt is public. If you don't want it shared, don't post it. It you don't want it repeated, don't put it in a comment or assignment on SchoolListit.
 
-SchoolListIt has no access to grades, testing, or test scores. 
-
+## SchoolListIt has no access to grades, testing, or test scores. 
