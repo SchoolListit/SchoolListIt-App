@@ -17,7 +17,7 @@ Meanwhile teachers all across the United States are scrambling to teach in multi
 ### Where anyone can share and everyone can benefit
 SchoolListit is the application that pulls it all together in one consistent format no matter how school looks for your family. Think of SchoolListIt as a bulletin board in the town square dedicated to what each class needs to get done each week. 
 
-Any homeschool, public school, private school, or karate studio can post the "deliverables" for students and then family members can help keep students on track. 
+Any homeschool, public school, private school, or karate studio can post the "deliverables" for students. Parents, grandparents, and family friends can help students stay on track. 
 
 - SchoolListIt can push-pull data from any existing system's REST API
 - Parents can use SchoolListIt to help each other out
@@ -25,9 +25,7 @@ Any homeschool, public school, private school, or karate studio can post the "de
 - A lesson creator is included for teachers (video, images, headlines, text, links)
 - assignments can link to another app or within SchoolListIt to a lesson
 
-**It sounds really simple, and maybe that is what makes SchoolListIt special.**
-
-SchoolListIt is simple by design. Busy parents only have a few short minutes. In that short amount of time, SchoolListIt is designed to serve the exact right information and nothing else programmatically. 
+**It sounds really simple, and maybe that is what makes SchoolListIt special.** SchoolListIt is simple by design. Busy parents only have a few short minutes. In that short amount of time, SchoolListIt is designed to serve the exact right information and nothing else programmatically. 
 
 ### Usage
 SchoolListIt is a web application and installs automaticallly from the web browser onto a your phone on the first visit. From there, it can work offline and sync when your connection restores. The first time, you are promted to
