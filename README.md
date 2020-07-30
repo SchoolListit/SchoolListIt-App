@@ -17,25 +17,33 @@ Meanwhile teachers all across the United States are scrambling to teach in multi
 ### Where anyone can share and everyone can benefit
 SchoolListit is the application that pulls it all together in one consistent format no matter how school looks for your family. Think of SchoolListIt as a bulletin board in the town square dedicated to what each class needs to get done each week. 
 
-Any homeschool, public school, private school, or karate studio can post the "deliverables" for students. Parents, grandparents, and family friends can help students stay on track. 
+Any homeschool, public school, private school, or even a karate studio can post the "deliverables" for students. Parents, grandparents, and family friends can help students stay on track. 
 
 - SchoolListIt can push-pull data from any existing system's REST API
 - Parents can use SchoolListIt to help each other out
 - Even if the api cannot pull data it can quickly be entered and shared
-- A lesson creator is included for teachers (video, images, headlines, text, links)
-- assignments can link to another app or within SchoolListIt to a lesson
+- A tool for creating lessons is included for teachers (video, images, headlines, text, links)
+- Assignments can link to another app or within SchoolListIt to a lesson
 
-**It sounds really simple, and maybe that is what makes SchoolListIt special.** SchoolListIt is simple by design. Busy parents only have a few short minutes. In that short amount of time, SchoolListIt is designed to serve the exact right information and nothing else programmatically. 
+**It sounds really simple, and maybe that is what makes SchoolListIt special.** SchoolListIt is simple by design. Busy parents only have a few short minutes. In that short amount of time, SchoolListIt is designed to serve exactly the right information and nothing else, programmatically. 
 
-### Usage
-SchoolListIt is a web application and installs automaticallly from the web browser onto a your phone on the first visit. From there, it can work offline and sync when your connection restores. The first time, you are promted to
+## Usage
+
+### Installation
+SchoolListIt is a web application and installs automatically from the web browser onto a your phone (or computer) on the first visit. From there, it can work offline and sync when your connection restores. 
+
+### Set Up
+The first time, you are promted to
 - designate first language
 - choose a role (student, teacher, parent, other helper)
 - outline your challenges (time shortage, disabilities, any reading problems, technology)
 - identify your students by name, grade
 - select your schools
 
-Set up and installation takes around 30s for an average user. There are no limitations, anyone can join and use SchoolListIt. If your school is not on google, just type in the name. The first time you open the app, your class feed will show every class from your selected schools and you need to "follow" the classes for your students. By following a class, you assign it to one of your students or yourself.
+Set up and installation takes around 30s for an average user. There are no limitations, anyone can join and use SchoolListIt. If your school is not on google, just type your schools' name. 
+
+### Following Classes
+The first time you open the app, your class feed will show every class from your selected schools and you need to "follow" the right classes for your students. By following a class, you assign it to one of your students or yourself.
 
 That's it. SchoolListIt creates a scheduled checklist of what you need to complete for schoolwork for you and each child in your profile. You can follow classes for yourself, each individual student's, or a global 'household' view. 
 
