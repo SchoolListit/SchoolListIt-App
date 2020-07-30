@@ -40,16 +40,26 @@ The first time, you are promted to
 - identify your students by name, grade
 - select your schools
 
-Set up and installation takes around 30s for an average user. There are no limitations, anyone can join and use SchoolListIt. If your school is not on google, just type your schools' name. 
+Set up and installation takes around 30s for an average user. There are no limitations, anyone can join and use SchoolListIt. If your school doesn't show up, just type your schools' name to create it. 
 
 ### Following Classes
-The first time you open the app, your class feed will show every class from your selected schools and you need to "follow" the right classes for your students. By following a class, you assign it to one of your students or yourself. If you don't see the classes you need, you can enter them by creating an assignment.
+The first time you open the app, your class feed will show every class from your schools and you need to "follow" the right classes for your students. By following a class, you assign it to one of your students or yourself. If you don't see the classes you need, you can enter them by creating an assignment.
 
-**And that's it**. SchoolListIt creates a scheduled checklist of what you need to complete for schoolwork for you and each child in your profile. You can follow classes for yourself, each individual student, or your 'household' view. 
+**And that's it**. SchoolListIt creates a scheduled checklist of what you need to complete for you and each child in your profile. You can follow classes for yourself, each individual student, or your 'household' view. 
 
 ### Class Feed
 Your class feed shows every class you follow for every student and  yourself - just 'scroll' through and check what isn't done for today and check off what you have done.
 
+### Sharing
+If you add the assignments your teacher sent home, you can share SchoolListIt to Facebook, Pinterest, or Twitter so other families dont need to enter and can keep track. If you were ever a room mom before Covid-19 shut down schools, this is a great way to still help out in the "classroom". Kind of like Facebook groups, a SchoolListIt class is a way for all the members to get together and help each other out. 
+
 ### Comment
 Comment on any assignment. This is a great way to get help from a friend or another parent if you're stuck or confused about an assignment. Comments are public like a tweet - it goes out to anyone following that assignment in a class - and thier comments will show up to you. That is really helpful because someone else may have the same question.
+
+### What's Public and What's Secure
+SchoolListIt is built with your child's security in mind. The names of your children, and which classes you follow for them is only available to you. 
+
+Everything else on SchoolListIt is public. If you don't want it shared, don't post it. It you don't want it repeated, don't put it in a comment on SchoolListit.
+
+SchoolListIt has no access to grades or testing or test scores. 
 
