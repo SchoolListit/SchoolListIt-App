@@ -10,17 +10,17 @@ export default function CheckSchools( { userState, setUserState, setContentState
     const matches = useMediaQuery('(min-width:780px)')
 
     
-    const addSchool = (school) => {
+    const addSchool = (school, userState) => {
         let newUser = userState;
         newUser.mySchools.push(school);
         setUserState(newUser);
     }
+
     const distinct = (value, index, self) => { 
         return self.indexOf(value) === index;
     }
 
     const gridDirection = (matches) => {
-        console.log(matches);
         if(matches === true){
             return 'column';
         } else {
@@ -35,7 +35,7 @@ export default function CheckSchools( { userState, setUserState, setContentState
                 return(
                         <Grid item key={key} >
                         <FormControlLabel key={key}
-                            control={<Checkbox key={key} onChange={(e) => addSchool(e, key, school)}  />}
+                            control={<Checkbox key={key} onChange={(e) => addSchool(school, userState)}  />}
                             label={school.name}
                             />
                         </Grid>

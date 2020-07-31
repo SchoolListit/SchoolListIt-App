@@ -24,8 +24,6 @@ export default function ChallengeCheckboxes( {setChallenges, challenges} ) {
         return self.indexOf(value) === index;
     }
 
-    
-
     return (
         <React.Fragment>
              <Grid container  direction="column-reverse" justify="flex-end" alignContent="center"  style={{width: '100%', height: '220px', margin: '0 auto'}}>
@@ -40,7 +38,12 @@ export default function ChallengeCheckboxes( {setChallenges, challenges} ) {
                     )
                 })}
             </Grid>
-            <Button variant="contained" color="primary" onClick={(e) => saveUserState(yourChallenges, setChallenges)}>Save Challenges</Button>
+            <Button 
+                style={{marginTop: '50px'}}
+                variant="contained" 
+                color="primary" 
+                onClick={(e) => saveUserState(yourChallenges, setChallenges)}
+                >Save Challenges</Button>
         </React.Fragment>
     )
 }

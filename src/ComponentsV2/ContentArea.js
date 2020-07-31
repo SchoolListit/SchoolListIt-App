@@ -13,7 +13,7 @@ import FindingSchools from './Welcome/FindingSchools.js';
 
 export default function ContentArea() {
     const [userState, setUserState] = useContext(UserContext);
-    const [contentState, setContentState] = useState('signOn');
+    const [contentState, setContentState] = useState('AboutYou');
 
     
         
@@ -40,8 +40,8 @@ export default function ContentArea() {
                 ? <Students userState={userState} setUserState={setUserState} setContentState={setContentState}></Students>
                 : null
             }
-            {(contentState === 'FindingSchools' )
-                ? <FindingSchools
+            {(contentState === 'FindingSchools')
+                ?  <FindingSchools
                     userState={userState} 
                     setUserState={setUserState} 
                     setContentState={setContentState}
@@ -49,6 +49,8 @@ export default function ContentArea() {
                     </FindingSchools>
                 : null
             }
+                
+           
         </Container>
     )
 }

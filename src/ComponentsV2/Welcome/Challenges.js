@@ -74,7 +74,7 @@ export default function Challenges( {userState, setUserState, setContentState}) 
             maxWidth={false}
             style={{height: '100vh', padding: '80px 0'}}
             >
-               <Grid container  justify="center" alignContent="center" alignItems="center"  style={{height: '100%'}}>
+               <Grid container  justify="center"  alignItems="center" >
                    <Grid item  >
                         <Typography variant="h2" style={{fontWeight: '700', textAlign: 'center'}}>Challenges</Typography>
                         <Typography variant="h3" style={{textAlign: 'center'}}>how can we help?</Typography>
