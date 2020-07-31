@@ -1,73 +1,72 @@
 import React, {useContext, useState} from 'react';
 import {UserContext} from '../../Context/UserContext.js';
 import { Container, Typography, Grid, Select, MenuItem, FormControl, InputLabel, FormHelperText } from '@material-ui/core';
-
+import ChallengeCheckboxes from './ChallengeCheckboxes.js'
  
-export default function Challenges() {
-    const [userState, setUserState] = useContext(UserContext);
-    const [challenges, setChallenges] = useState([]);
-
+export default function Challenges( {userState, setUserState, setContentState}) {
     /**
-     * Passed down to the composite SelectSimple
-     * select simple passes back up the new value and we update context
+     * 
+     * TODO: we need to wrap the whole content in the Grid so it
+     * aligns center in the page instead of towards the bottom...
      */
-    const handleChange = (e) =>{
-        setChallenges(e.target.value);
+    const setChallenges = (challenges) => {
         let newUserState = userState;
-        newUserState.userLanguage = e.target.value;
+        newUserState.userChallenges = challenges;
         setUserState(newUserState);
+        setContentState('Students');
     }
-
-    const handleChangeMultiple = (event) => {
-        let newUserState = userState;
-        userState.userChallenges.push(event.target.value);
-        setUserState(newUserState);
-      };
-
     /**
      * TODO: these should be pulling the full discover from IBM Watsom
      * translation options...right now they are hard coded for speed
      */
-    const menuItems = [
+    const challenges = [
         {
-            itemValue: 'reading',
-            itemDescription: 'Reading is hard for me'
+            value: 'reading',
+            description: 'Reading is hard for me',
+            checked: (userState.userChallenges.indexOf('reading') !== -1)
         },
         {
-            itemValue: 'english',
-            itemDescription: 'English is not my first language'
+            value: 'english',
+            description: 'English is not my first language',
+            checked: (userState.userChallenges.indexOf('english') !== -1)
         },
         {
-            itemValue: 'Single Parent',
-            itemDescription: 'Single parent - need more time to help'
+            value: 'single parent',
+            description: 'Single parent - need more time to help',
+            checked: (userState.userChallenges.indexOf('single parent') !== -1)
         },
         {
-            itemValue: 'We both work',
-            itemDescription: 'Dual income - need more time to help'
+            value: 'we both work',
+            description: 'Dual income - need more time to help',
+            checked: (userState.userChallenges.indexOf('we both work') !== -1)
         },
         {
-            itemValue: 'no-internet',
-            itemDescription: 'No internet at home'
+            value: 'no-internet',
+            description: 'No internet at home',
+            checked: (userState.userChallenges.indexOf('no-internet') !== -1)
         },
         {
-            itemValue: 'blind',
-            itemDescription: 'Sight challenges'
+            value: 'other',
+            description: 'Other',
+            checked: (userState.userChallenges.indexOf('other') !== -1)
         },
         {
-            itemValue: 'deaf',
-            itemDescription: 'Hearing challenges'
+            value: 'blind',
+            description: 'Sight challenges',
+            checked: (userState.userChallenges.indexOf('blind') !== -1)
         },
         {
-            itemValue: 'agility',
-            itemDescription: 'I have physical challenges'
+            value: 'deaf',
+            description: 'Hearing challenges',
+            checked: (userState.userChallenges.indexOf('deaf') !== -1)
+        },
+        {
+            value: 'agility',
+            description: 'I have physical challenges',
+            checked: (userState.userChallenges.indexOf('agility') !== -1)
         }, 
-        {
-            itemValue: 'other',
-            itemDescription: 'Other'
-        },
+        
     ];
-
-
 
     return (
         <Container 
@@ -82,21 +81,7 @@ export default function Challenges() {
                         <Typography variant="h5" style={{marginTop: '20px', textAlign: 'center'}}>everyone has challenges</Typography>
                         <Typography variant="h5" style={{textAlign: 'center'}}>tell us how we can help</Typography> 
                         <FormControl style={{width: '100%', marginTop: '20px', height: '70px'}}>
-                            <Select
-                            multiple
-                            native
-                            variant="outlined"
-                            value={[]}
-                            onChange={handleChangeMultiple}
-                            inputProps={{
-                                id: 'select-challenges',
-                            }}
-                            >
-                            {menuItems.map( (item, key) => {
-                                return (<option style={{marginBottom: '10px'}} key={key} value={item.itemValue} >{item.itemDescription}</option>)
-                            })}
-                            </Select>
-                        <FormHelperText>Select as many as apply</FormHelperText>
+                            <ChallengeCheckboxes setChallenges={setChallenges} challenges={challenges}></ChallengeCheckboxes>
                         </FormControl>
                    </Grid>
                </Grid>

@@ -37,7 +37,6 @@ export function UserController({children}){
         lat: '',
         lng: '',
         userID: '',
-        email: '',
         wpUserObj: {},
         userType: '',
         userEmail: '',
@@ -46,9 +45,11 @@ export function UserController({children}){
         userLanguage: '',
         userChallenges: [],
         students: [],
+        mySchools: [],
         nearbySchools: [],
         initialChecked: null,
         gp_key: '',
+        firstTime: 'true'
     };
 
     const [userState, setUserState] = useState(initialUser);

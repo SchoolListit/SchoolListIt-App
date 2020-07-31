@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {UserContext} from '../../Context/UserContext.js';
 import { Container, Typography, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import SIcon from './SIcon.js';
@@ -16,8 +17,9 @@ const useStyles = makeStyles(() => ({
 }));
 
 
-export default function SignOn() {
+export default function SignOn( {userState, setUserState, setContentState} ) {
     const classes = useStyles();
+
     return (
         <Container 
             fixed={true} 
@@ -30,7 +32,8 @@ export default function SignOn() {
                         <Typography variant="h2" style={{fontWeight: '700', textAlign: 'center'}}>SchoolListIt</Typography>
                         <Typography variant="h3" style={{textAlign: 'center'}}>what's due and when</Typography>
                         <Typography variant="h5" style={{marginTop: '20px', textAlign: 'center'}}>for any school anywhere</Typography>
-                        <Typography variant="h5" style={{textAlign: 'center'}}>no matter how you school</Typography>
+                        <Typography variant="h5" style={{textAlign: 'center'}}>no matter how you school</Typography>    
+                        <MyGoogleLogin userState={userState} setUserState={setUserState} setContentState={setContentState}></MyGoogleLogin>
                    </Grid>
                </Grid>
         </Container>

@@ -1,11 +1,10 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import axios from 'axios';
 import {UserContext} from '../../Context/UserContext.js';
 import { Container, Typography, Grid } from '@material-ui/core';
 import SelectSimple from './SelectSimple.js';
 
-export default function Language() {
-    const [userState, setUserState] = useContext(UserContext);
+export default function Language( {userState, setUserState, setContentState, setSchools}) {
     const [language, setLanguage] = useState('');
 
     /**
@@ -19,17 +18,12 @@ export default function Language() {
         setUserState(newUserState);
 
         navigator.geolocation.getCurrentPosition( (position) => {
-            //go out and get nearby schools from our server api
-            const url = 'https://schoolistit.com/wp-json/schoolistit/v2/get_nearby_schools';
-            axios.post(url, {lat: position.coords.latitude, lng: position.coords.longitude})
-                .then( res => {
-                    let newUserState = userState;
-                    newUserState.nearbySchools = res.data;
-                    newUserState.lat = position.coords.latitude;
-                    newUserState.lng = position.coords.longitude;
-                    setUserState(newUserState);
-                });
-            });
+            let newUserState = userState;    
+            newUserState.lat = position.coords.latitude;
+            newUserState.lng = position.coords.longitude;
+            setUserState(newUserState);
+            setContentState('Challenges');
+        });
     }
 
     /**

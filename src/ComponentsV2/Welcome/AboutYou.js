@@ -4,8 +4,7 @@ import { Container, Typography, Grid,  } from '@material-ui/core';
 import SelectSimple from './SelectSimple.js';
 
 
-export default function AboutYou( {setProfileStep}) {
-    const [userState, setUserState] = useContext(UserContext);
+export default function AboutYou( {userState, setUserState, setContentState}) {
     const [userType, setUserType] = useState('');
 
     /**
@@ -17,6 +16,11 @@ export default function AboutYou( {setProfileStep}) {
         let newUserState = userState;
         newUserState.userType = e.target.value;
         setUserState(newUserState);
+        if(userState.firstTime === 'true'){
+            setContentState('Language')
+        } else {
+            setContentState('Home')
+        }
     }
 
     /**

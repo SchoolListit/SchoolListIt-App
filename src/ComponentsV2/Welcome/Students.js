@@ -1,9 +1,10 @@
 import React from 'react';
 import { Container, Typography, Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import AddStudents from './AddStudents.js';
+import SetUpForm from './SetUpForm.js';
 
 
-export default function Students() {
+export default function Students( {userState, setUserState, setContentState}) {
     return (
         <Container 
             fixed={true} 
@@ -16,6 +17,7 @@ export default function Students() {
                         <Typography variant="h3" style={{textAlign: 'center'}}>add your student profiles</Typography>
                         <Typography variant="h5" style={{marginTop: '20px', textAlign: 'center'}}>the names of your students</Typography>
                         <Typography variant="h5" style={{textAlign: 'center'}}>are kept very secure only in your profile</Typography> 
+                        <SetUpForm userState={userState} setUserState={setUserState} setContentState={setContentState}></SetUpForm>
                    </Grid>
                </Grid>
         </Container>
