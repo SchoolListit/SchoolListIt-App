@@ -105,9 +105,6 @@ import TermSearch from './TermSearch.js';
                                 <FontAwesomeIcon icon="plus-square" onClick={ () => openGlobalForm()}></FontAwesomeIcon>
                             </Grid>
                             <Grid item  xs={3} className={classes.menuIcon}>
-                                <FontAwesomeIcon icon="life-ring" onClick={() => goToIssues()}></FontAwesomeIcon>
-                            </Grid>
-                            <Grid item  xs={3} className={classes.menuIcon}>
                                 <FontAwesomeIcon icon="question-circle" onClick={() => goToSite()}></FontAwesomeIcon>
                             </Grid>
                             <Grid item xs={3} className={classes.menuIcon}>

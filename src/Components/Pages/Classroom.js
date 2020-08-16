@@ -119,7 +119,8 @@ export default function Classroom() {
                         : null
                     }
                     <Classrooms  sections={searchResults} newPost={newPost} newSection={newSection} showNewPost={showNewPost} openGlobalForm={openGlobalForm} onCloseGlobalForm={onCloseGlobalForm}></Classrooms>
-                    <Typography variant="h5" style={{padding: '0 30px', background: '#eeeeee'}}>Weekly Class Schedule</Typography>
+                    <Typography variant="h5" style={{padding: '0 30px', background: '#eeeeee'}}>Overdue</Typography>
+                    <Typography variant="h5" style={{padding: '0 30px', background: '#eeeeee'}}>This Week's Assignments</Typography>
                     <ClassWeek newPost={newPost} section={section} week={thisWeek} userID={state.profile.userID} profile={profile} changeTheDate={changeTheDate} ></ClassWeek>
                 </Container>
                 <Dialog open={showGlobalForm} onClose={(e) => onCloseGlobalForm()} disablePortal={true}>

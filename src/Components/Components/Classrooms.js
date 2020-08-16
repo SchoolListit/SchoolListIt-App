@@ -4,7 +4,6 @@ import ContentCard from './ContentCard.js';
 import { Grid, Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import ClassAssignments from './ClassAssignments.js';
 import NewAssignments from './NewAssignments.js';
 import AddLesson from '../Forms/AddLesson.js';
@@ -146,7 +145,7 @@ export default function Classrooms({ sections, newSection, showNewSection, onCli
                             key={"content-card-"+index}
                             mainTitle={section.schools+" "+ section.teachers}
                             subTitle={section.grades+" "+ section.subjects}
-                            icon="door-open"
+                            icon="calendar-week"
                             iconTo={"/classrooms/:"+theLink(section)}
                             onClickAdd={onClickAdd}
                             section={section}

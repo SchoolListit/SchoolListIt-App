@@ -6,7 +6,7 @@ import WilsonSpeak from '../Components/WatsonSpeak.js';
 
 export default function AssignmentTitle( {postTitle, postExcerpt}) {
     return (
-        <Grid container alignItems="center">
+        <Grid container justify="space-between" >
             <Grid item xs={10}>
                 <Typography variant="body1" style={{textTransform: 'capitalize'}} >
                     {postTitle+" "}

@@ -57,8 +57,7 @@ export default function Feed( {searchResults, setSearchResults, openGlobalForm, 
     } else {
         return (
             <React.Fragment>
-                {(showFollow !== false && profile.first_time !== "false")
-                    ? <React.Fragment>
+                <React.Fragment>
                     <Grid container justify="space-between" style={{padding: '0 30px', background: '#eeeeee'}} >
                         <Grid item xs={10} >
                             <Typography variant="h5" >Welcome Wizard</Typography>
@@ -77,8 +76,7 @@ export default function Feed( {searchResults, setSearchResults, openGlobalForm, 
                         clearSetUp ={clearSetUp}
                     ></FollowSomething>
                     </React.Fragment>
-                    : null
-                }
+                    
                 {(searchResults.length > 0)
                     ? <Grid container justify="space-between" style={{padding: '0 30px', background: '#eeeeee'}} >
                         <Grid item xs={10} >

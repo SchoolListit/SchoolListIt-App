@@ -23,7 +23,7 @@ export default function WatsonSpeak( {title, excerpt} ) {
 
     return (
         <React.Fragment>
-            <Typography variant="body2" style={{color: '#bdbdbd'}}>
+            <Typography variant="body2" style={{color: '#bdbdbd', textAlign: 'right'}}>
                 <FontAwesomeIcon icon="volume-up" onClick={(e) => speakToMe(title, excerpt)}>
                 </FontAwesomeIcon>
             </Typography>

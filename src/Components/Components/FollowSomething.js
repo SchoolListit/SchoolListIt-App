@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Context } from '../../Context/Context.js';
 import SearchBar from './SearchBar.js';
 import SchoolClasses from './SchoolClasses.js';
+import OverdueCard from './homepage-cards/OverdueCard.js'
 import { Redirect, useHistory } from 'react-router-dom';
 
 
@@ -58,19 +59,18 @@ export default function FollowSomething( {clearSetUp, setShowFollow, context, ch
         }
         setShowFollow(false);
     }
-    if(state.profile.first_time == "false"){
-        return null;
-    }
+    
     return (
         <Container>
             <Grid container justify="center" alignItems="center" alignContent="center" spacing={5}>
                 <Grid item xs={12} style={{textAlign: 'center', maxWidth: '500px', padding: '50px'}}>
                     <Typography variant="h2" style={{fontWeight: '700'}}>SchooListIt</Typography>
-                    <Typography variant="overline">the easiest way to track schoolwork on the planet</Typography>
-                    <Typography variant="h5">Public education should be public. Easy access to homework and schoolwork is just the beginning. </Typography>
+                    <Typography variant="h5">What's due and when</Typography>
+                    <Typography variant="h5"> for any school, anywhere</Typography>
                 </Grid>
                 
                 <Grid spacing={5} container justify="center" alignItems="center" alignContent="center" item xs={12}>
+                    <OverdueCard></OverdueCard>
                     <Grid item xs={12} md={4} >
                     <Card style={{textAlign: 'center', padding: '30px', minHeight: '350px'}}>
                         <Typography variant="h2" style={{color: '#9e9e9e'}}><FontAwesomeIcon icon="bell"></FontAwesomeIcon></Typography>
@@ -119,15 +119,7 @@ export default function FollowSomething( {clearSetUp, setShowFollow, context, ch
                     </Grid>
                 </Grid>
                 </Grid>
-                <Container>
-                        <Grid container justify="center" alignItems="center" alignContent="center" spacing={5}>
-                            <Grid item xs={12} style={{textAlign: 'center', maxWidth: '500px', padding: '50px  0'}}>
-                                    <Typography paragraph variant="h5" style={{textAlign: 'center'}}>Welcome To SchooListIt</Typography>
-                                    <Typography paragraph >Use the tools above to find or create some classes. Your class feed shows you all the classes you follow.</Typography>
-                                    <Button variant="outlined" color="primary" onClick={() => clearSetUp()}>Take Me Home</Button>
-                            </Grid>
-                        </Grid>
-                    </Container>
+                
                 
         </Container>
     )

@@ -19,6 +19,7 @@ export default function DailyWork( {date, section, userID, newPost} ) {
                 teachers: section.teachers,
                 grades: section.grades,
                 subjects: section.subjects,
+                schools: section.schools,
                 date: date,
                 number: '-1'
             }
