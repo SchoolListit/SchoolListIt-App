@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useParams, useLocation } from 'react-router-dom';
@@ -8,16 +8,8 @@ import { Context } from '../../Context/Context.js';
 import { searchSections } from '../../Context/functions.js';
 import Header from '../Components/Header.js';
 import Classrooms from '../Components/Classrooms.js'
-import { useHistory } from 'react-router-dom';
 import ClassWeek from './../Components/ClassWeek.js';
 import AddLesson from './../Forms/AddLesson.js';
-
-
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-  }
-
- 
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -38,14 +30,12 @@ const useStyles = makeStyles(() => ({
 export default function Classroom() {
     const classes = useStyles();
     const { classArgs } = useParams();
-    const [state, setState] = useContext(Context);
+    const [state] = useContext(Context);
     //const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const { profile } = state;
     const { userID } = profile;
     const [showGlobalForm, setShowGlobalForm] = useState(false);
-    const [singlePostID, setSinglePostID] = useState('');
     const [newPost, setNewPost] = useState('');
-    const [showForm, setShowForm] = useState(initialShowForm);
     const [newSection, setNewSection] = useState("undefined");
     const [thisWeek, setThisWeek] = useState(moment().format("YYYY-MM-DD"));
     const [searchResults, setSearchResults] = useState([]);

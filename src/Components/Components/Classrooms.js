@@ -1,5 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { Context } from '../../Context/Context.js';
+import React, {  useState } from 'react';
 import ContentCard from './ContentCard.js';
 import { Grid, Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ClassAssignments from './ClassAssignments.js';
 import NewAssignments from './NewAssignments.js';
 import AddLesson from '../Forms/AddLesson.js';
-import { emptyArray } from '../../Context/functions.js';
 
 const initialShowForm = {
     teachers: '',
@@ -24,7 +22,6 @@ const useStyles = makeStyles(() => ({
 
 export default function Classrooms({ sections, newSection, showNewSection, onClickAssignment, showNewPost, newPost, openGlobalForm,  onCloseGlobalForm }) {
     const classes = useStyles();
-    const [state, setState] = useContext(Context);
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const [showForm, setShowForm] = useState(initialShowForm);
 

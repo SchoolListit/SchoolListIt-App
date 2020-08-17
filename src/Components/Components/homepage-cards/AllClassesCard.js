@@ -1,14 +1,12 @@
 import React, {useState} from 'react';
-import moment from 'moment';
 import { Grid, Typography, Card, Button  } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
 
 export default function AllClassesCard( {sections, searchSections} ) {
     const [showEverything, setShowEverything] = useState('');
-    const [classes, setClasses] = useState([]);
     const history = useHistory();
 
     const sendToTimeline = () => {

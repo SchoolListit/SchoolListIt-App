@@ -1,7 +1,6 @@
-import React, { useContext, useState }  from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState }  from 'react';
 import { Dialog, Grid, FormControl, TextField, Button, Typography, MenuItem, Select, Container  } from '@material-ui/core';
-import { Context } from '../../Context/Context.js';
-import { postContent } from '../../Context/functions.js';
 import MyDialogTitle from '../Components/MyDialogTitle.js';
 import SectionSubForm from './components/SectionSubForm.js';
 import MyLoader from '../Components/MyLoader.js';
@@ -16,21 +15,15 @@ export default function EditListItem( props ) {
     const url = 'https://schoolistit.com/wp-json/schoolistit-rest/v2/assignments';
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     //state vars
-    const [state] = useContext(Context);
-    const [userLat, setUserLat] = useState('');
-    const [userLng, setUserLng] = useState('');
-    const [newPost, setNewPost] = useState("");
+    const [userLat] = useState('');
+    const [userLng] = useState('');
     const [submitted, setSubmitted] = useState(false);
     const [changedFields, setChangedFields] = useState([]);
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [createOpen, setCreateOpen] = useState(false);
-    const [draftJSContent, setdraftJSContent] = useState('');
     const { post, section, onChanged, closeEditItem } = props;
     const [mandatory, setMandatory] = useState(post.mandatory);
     const [linkExternal, setLinkExternal] = useState(post.linkExternal);
-
-
-    
 
     const openDelete = () => {
         setDeleteOpen(!deleteOpen);
@@ -38,14 +31,6 @@ export default function EditListItem( props ) {
 
     const openCreate = () => {
         setCreateOpen(!createOpen);
-        /*
-        const url = 'https://schoolistit.com/wp-json/wp/v2/assignments/'+post.ID;
-        axios.get(url)
-        .then( res => {
-            setdraftJSContent(res.data);
-            setCreateOpen(!createOpen);
-        })
-        */
     }
 
     //submit the form
@@ -122,6 +107,7 @@ export default function EditListItem( props ) {
          });
     }
 
+    // eslint-disable-next-line no-unused-vars
     const changeMandatory = (e) => {
         setMandatory(e.target.value);
     }

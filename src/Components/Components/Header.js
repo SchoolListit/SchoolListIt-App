@@ -1,23 +1,19 @@
 import React, {useContext } from 'react';
 import { Context } from '../../Context/Context.js';
-import { Grid, Avatar, Typography, Button, IconButton } from '@material-ui/core';
+import { Grid, Avatar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Redirect, useHistory } from 'react-router-dom';
-import SearchBar from './SearchBar.js';
 import TermSearch from './TermSearch.js';
-
-
-
 
 
     const useStyles = makeStyles((theme) => ({
         root: {
             background: 'none',
             position: 'fixed',
-            position: '0',
             backgroundColor: '#ffca28',
             padding: '5px 30px',
+            zIndex: '10000'
 
         },
         menuIcon: {
@@ -101,11 +97,11 @@ import TermSearch from './TermSearch.js';
                             <Grid item xs={3} className={classes.menuIcon}>
                                 <FontAwesomeIcon icon="home" onClick={() => goHere("/")}></FontAwesomeIcon>
                             </Grid >
+                            <Grid item  xs={3} className={classes.menuIcon}>
+                                <FontAwesomeIcon icon="calendar-week" onClick={() => goToSite()}></FontAwesomeIcon>
+                            </Grid>
                             <Grid item xs={3} className={classes.menuIcon}>
                                 <FontAwesomeIcon icon="plus-square" onClick={ () => openGlobalForm()}></FontAwesomeIcon>
-                            </Grid>
-                            <Grid item  xs={3} className={classes.menuIcon}>
-                                <FontAwesomeIcon icon="question-circle" onClick={() => goToSite()}></FontAwesomeIcon>
                             </Grid>
                             <Grid item xs={3} className={classes.menuIcon}>
                                 <Avatar onClick={ () => profileClick()} alt={profile.name} src={profile.photo}></Avatar>

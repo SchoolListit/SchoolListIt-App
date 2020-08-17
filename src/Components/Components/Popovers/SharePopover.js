@@ -5,7 +5,7 @@ import ShareButtons from './ShareButtons.js';
 
 
 export default function SharePopover( { anchorEl, open, profile, object, onClose, shareLink }) {
-    const students = profile;
+    
     
         return (
             <Popover

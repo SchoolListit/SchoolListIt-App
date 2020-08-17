@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React from 'react';
 import TheAssignment from '../Components/TheAssignment.js';
 
 
 export default function NewAssignments( props ) {
 
-    const { post, onClickAssignment, profile, section } = props;
+    const { post, onClickAssignment, section } = props;
     const { userID } = JSON.parse(localStorage.getItem('scholistit_profile'));
 
 

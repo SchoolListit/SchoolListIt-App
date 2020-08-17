@@ -1,10 +1,12 @@
 import React, {useContext} from 'react';
-import { FormControl, TextField, Card, Button, InputLabel, MenuItem, Select  } from '@material-ui/core';
+import {  TextField  } from '@material-ui/core';
 import { Context } from '../../../Context/Context.js';
 import ChooseWPTerm from './ChooseWPTerm.js';
 
 export default function SectionSubForm( props ) {
-    const [state, setState] = useContext(Context);
+    const [state] = useContext(Context);
+    
+    // eslint-disable-next-line no-unused-vars
     const grades = [
        'Pre-K', 'K', '1st', '2nd', '3rd', '4th', 
        '5th', '6th', '7th', '8th', '9th',

@@ -8,14 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function ClassAssignments( { section, link, onClickAdd, onCLickHideForm } ) {
     const [ lessons, setLessonPlans ] = useState([]);
-    const [ changed, setChanged ] = useState([]);
     const [count, setCount] = useState(3);
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const {userID} = profile;
-    
-    const onClickAssignment = () => {
-        
-    }
 
     const morePosts = () => {
         let query = lessons.assignments;

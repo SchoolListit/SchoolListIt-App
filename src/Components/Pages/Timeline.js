@@ -2,7 +2,7 @@ import React, {useContext, useState, useEffect} from 'react';
 import { Context } from '../../Context/Context.js';
 import { searchSections } from '../../Context/functions.js';
 import Feed from '../Components/Feed.js';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Header from '../Components/Header.js';
 
 export default function Timeline() {

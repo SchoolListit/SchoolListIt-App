@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import moment from 'moment';
-import { Context } from '../../Context/Context.js';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Grid, ListItem, Dialog, ListItemSecondaryAction, Slide, Avatar, Typography, ListItemText} from '@material-ui/core';
+import {  Grid, ListItem, Dialog, ListItemSecondaryAction, Slide, Avatar, Typography, ListItemText} from '@material-ui/core';
 import MyCheckbox from './MyCheckBox.js';
 import SinglePostHeader from './SinglePostHeader.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import AddLesson from '../Forms/AddLesson.js';
 import EditListItem from '../Forms/EditListItem.js';
 import MyDialogTitle from './MyDialogTitle.js';
 import BlockEditor from '../Forms/BlockEditor.js';
@@ -31,10 +28,8 @@ const useStyles = makeStyles(() => ({
  */
 export default function TheAssignment( {post, userID, section, classView }) {
     const classes = useStyles();
-    const assignmentRequired = (post.mandatory === true) ? "requiredAssignment" : "optionalAssignment" ;
-    const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const [isOpen, setIsOpen] = useState(false);
-    const [singlePostID, setSinglePostID] = useState('');
+    const [setSinglePostID] = useState('');
     const [editItem, setEditItem] = useState(false);
     const [thePost, setThePost] = useState(post);
 
@@ -62,7 +57,8 @@ export default function TheAssignment( {post, userID, section, classView }) {
                     setThePost(post);
                     break;
                 case 'post' : 
-                    setThePost(result.post);    
+                    setThePost(result.post);  
+                    break;  
                 default :
                     //silence
             }

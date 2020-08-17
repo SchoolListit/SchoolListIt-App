@@ -77,7 +77,7 @@ export default function ClassWeek( {section, week, changeTheDate, newPost} ) {
                     )
                 })}
         </Grid>
-        {(Array.isArray(following) && following.length == 0)
+        {(Array.isArray(following) && following.length === 0)
             ? null
             : <ListActions 
             following={following} 

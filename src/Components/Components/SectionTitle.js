@@ -1,12 +1,6 @@
-import React, { useEffect, useContext, useState, Profiler  } from 'react';
-import axios from 'axios';
-import { Dialog, Typography, Button, Grid } from '@material-ui/core';
+import React from 'react';
+import {  Typography, Button, Grid } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Context } from '../../Context/Context.js';
-import Classrooms from './Classrooms.js';
-import FollowSomething from '../Components/FollowSomething.js';
-import AddLesson from '../Forms/AddLesson.js';
-import { emptyArray } from '../../Context/functions.js';
 
 export default function SectionTitle( {canClose, closeSection, section} ) {
 

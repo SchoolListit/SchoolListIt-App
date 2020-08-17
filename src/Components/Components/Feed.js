@@ -1,21 +1,16 @@
-import React, { useEffect, useContext, useState, Profiler  } from 'react';
-import axios from 'axios';
-import { Dialog, Typography, Button, Grid } from '@material-ui/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, {  useContext, useState  } from 'react';
+import { Dialog } from '@material-ui/core';
 import { Context } from '../../Context/Context.js';
 import Classrooms from './Classrooms.js';
-import FollowSomething from '../Components/FollowSomething.js';
 import AddLesson from '../Forms/AddLesson.js';
-import { emptyArray } from '../../Context/functions.js';
 import SectionTitle from './SectionTitle.js';
 
 
 export default function Feed( {searchResults, setSearchResults, openGlobalForm, onCloseGlobalForm, showGlobalForm} ) {
-    const [state, setState] = useContext(Context);
+    const [state] = useContext(Context);
     const [newPost, setNewPost] = useState('');
     const [newSection, setNewSection] = useState("undefined");
     const {sections, following} = state;
-    const [showFollow, setShowFollow] = useState(true);
     const { profile } = state;
 
     
@@ -26,19 +21,6 @@ export default function Feed( {searchResults, setSearchResults, openGlobalForm, 
 
     const showNewSection = (section) => {
         setNewSection(section);
-    }
-
-    
-    const calcStatus = () => {
-        if(searchResults !== null) {
-            return 'searched'
-        }
-
-        if(following.sections.length > 0 ){
-            return 'followingSomething';
-        }
-
-        
     }
 
     const clearSearchResults = () =>{

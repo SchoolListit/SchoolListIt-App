@@ -1,10 +1,9 @@
-import React, { useContext, useEffect }  from 'react';
+import React, { useContext }  from 'react';
 import { Context } from '../../Context/Context.js';
 import { Paper, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import  ListActions from '../Components/ListActions.js';
-import axios from 'axios';
 
 
 
@@ -17,7 +16,7 @@ const useStyles = makeStyles(() => ({
 
 export default function ContentCard( {following, mainTitle, subTitle, children, icon, iconTo, section} ) {
     const classes = useStyles();
-    const [state, setState] = useContext(Context);
+    const [state] = useContext(Context);
     const { profile } = state;
 
 

@@ -1,6 +1,5 @@
-import React, { useContext, useState }  from 'react';
+import React, { useState }  from 'react';
 import { Grid, FormControl, TextField, Button, Typography, MenuItem, Select  } from '@material-ui/core';
-import { Context } from '../../Context/Context.js';
 import SectionSubForm from './components/SectionSubForm.js'
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,8 +13,6 @@ export default function AddLesson( props ) {
     const [mandatory, setMandatory] = useState(true);
     const url = 'https://schoolistit.com/wp-json/schoolistit-rest/v2/assignments';
     const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
-    const [state] = useContext(Context);
-    const [newPost, setNewPost] = useState("");
     const [linkExternal, setLinkExternal] = useState(false);
 
     const { showNewPost, showNewSection, section, onClickHideForm } = props;
@@ -107,12 +104,6 @@ export default function AddLesson( props ) {
         //do nothing
     }
 
-    const changeLinkExternal = (e) => {
-        setLinkExternal(!linkExternal);
-    }
-
-    
-    
         return (
 
             <div style={{padding: '20px 20px 30px 20px'}} >

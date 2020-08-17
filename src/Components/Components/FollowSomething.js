@@ -1,46 +1,35 @@
-import React, {useState, useContext, useEffect} from 'react';
-import axios from 'axios';
-import { Typography, Grid, Container, Card, Button, Paper } from '@material-ui/core';
+import React, {useState, useContext} from 'react';
+import { Typography, Grid, Container, Card, Button } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Context } from '../../Context/Context.js';
 import { searchSections } from '../../Context/functions.js';
 import SearchBar from './SearchBar.js';
-import SchoolClasses from './SchoolClasses.js';
 import OverdueCard from './homepage-cards/OverdueCard.js';
 import AllClassesCard from './homepage-cards/AllClassesCard.js'
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
 
 
 
 export default function FollowSomething( {clearSetUp, setShowFollow, changeContext, searchResults, setSearchResults, openGlobalForm, onCloseGlobalForm, theLink, onClickAdd, onClickHideForm} ) {
-    const [state, setState] = useContext(Context);
+    const [state] = useContext(Context);
     //const { profile } = state;
-    const [terms, setTerms] = useState();
+    const [terms] = useState();
     const {sections} = state;
-    const [schoolSections, setSchoolSections] = useState([]);
     const [gMapValue, setGMapValue] = useState(null);
     let history = useHistory();
 
-
+/*
     const goHere = (location) => {
         history.push(location);
     }
+    */
     
 
     const chooseSchool = (value) => {
         setGMapValue(value);
     }
-/*
-    useEffect( () => {
-        let url = "https://schoolistit.com/wp-json/wp/v2/schools";
-        axios.get(url).then( (res) => {
-            let terms = res.data;
-            setTerms(terms);
-        })  
-    }, [])
-    */
 
     const onClickFindSchool = () => {
         let schoolDescription = gMapValue;
@@ -50,12 +39,6 @@ export default function FollowSomething( {clearSetUp, setShowFollow, changeConte
         setSearchResults(reducedSections);
     }
 
-    let showMeEverything = () => {
-        setSearchResults(sections);
-    }
-
-   
-    
     return (
         <Container>
             <Grid container justify="center" alignItems="center" alignContent="center" spacing={5}>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faVolumeUp, faFileImage, faMagic, faLifeRing, faArrowsAltV, faCheck, faGrinBeamSweat, faBell, faHeart, faCopy, faEnvelope, faSave, faExclamationTriangle, faTrashAlt, faEllipsisH, faWindowClose, faThumbsUp, faCommentAlt, faShare, faBars, faSearch, faDoorOpen,faEye, faQuestionCircle, faUser, faPlusSquare, faMinusSquare, faCalendarWeek, faCalendarDay, faHouseUser, faSchool, faHome, faSignInAlt, faChalkboard, faGlobeAmericas } from '@fortawesome/free-solid-svg-icons';
@@ -6,17 +6,13 @@ import {faFacebookSquare} from '@fortawesome/free-brands-svg-icons';
 import {  ThemeProvider, createMuiTheme, makeStyles, responsiveFontSizes } from '@material-ui/core/styles';
 import { grey, amber} from '@material-ui/core/colors';
 import { CssBaseline, Container } from '@material-ui/core';
-import Header from './Components/Components/Header.js';
 import Timeline from './Components/Pages/Timeline.js';
 import Home from './Components/Pages/Home.js';
-import LandingPage from './Components/Pages/LandingPage.js';
-import About from './Components/Pages/About.js';
 import Classroom from './Components/Pages/Classroom.js';
 import School from './Components/Pages/School.js';
-import PageFourOFour from './Components/Pages/PageFourOFour.js';
 import ScreenOptions from './Components/Components/ScreenOptions.js';
 
-import {  ContextController, Context } from "./Context/Context.js";
+import {  ContextController } from "./Context/Context.js";
 import './App.scss';
 
 

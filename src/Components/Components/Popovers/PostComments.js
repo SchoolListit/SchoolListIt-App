@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { Typography, Popover, Container, TextField, Button, FormControl, List, ListItem, Checkbox, ListItemText } from '@material-ui/core';
-import MyDialogTitle from '../MyDialogTitle';
+import {  TextField, Button, FormControl, List } from '@material-ui/core';
 import TheComment from '../TheComment.js'
 
 
@@ -23,7 +22,7 @@ export default function PostComments( {post, section } ) {
 
         fetchData();
         return () => { ignore = true; }
-    }, []);
+    }, []); //this is missing dependancy post.ID
 
     /**
      * 
