@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react';
 import { Context } from '../../Context/Context.js';
 import { searchSections } from '../../Context/functions.js';
-import FollowSomething from '../Components/Feed.js';
+import FollowSomething from '../Components/FollowSomething.js';
 import { Redirect, useHistory } from 'react-router-dom';
 import Header from '../Components/Header.js';
 
@@ -46,7 +46,14 @@ export default function Home() {
     return(
         <React.Fragment>
             <Header profile={profile} openGlobalForm={openGlobalForm} getSearchResults={getSearchResults}></Header>
-            <FollowSomething profile={profile}></FollowSomething>
+            <FollowSomething 
+                profile={profile}
+                searchResults={searchResults} 
+                setSearchResults={setSearchResults} 
+                showGlobalForm={showGlobalForm} 
+                onCloseGlobalForm={onCloseGlobalForm} 
+                openGlobalForm={openGlobalForm}
+            ></FollowSomething>
         </React.Fragment>
        
     )

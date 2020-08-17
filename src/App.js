@@ -8,6 +8,7 @@ import { grey, amber} from '@material-ui/core/colors';
 import { CssBaseline, Container } from '@material-ui/core';
 import Header from './Components/Components/Header.js';
 import Timeline from './Components/Pages/Timeline.js';
+import Home from './Components/Pages/Home.js';
 import LandingPage from './Components/Pages/LandingPage.js';
 import About from './Components/Pages/About.js';
 import Classroom from './Components/Pages/Classroom.js';
@@ -71,10 +72,8 @@ const classes = useStyles();
             >
             <Router>
                 <Switch>
-                    <Route exact path="/" component={Timeline} />
-                    <Route exact path="/index.html" component={Timeline} />
-                    <Route path="/sign-in" component={LandingPage}/>
-                    <Route path="/classrooms/:classArgs" component={Classroom} />
+                    <Route exact path="/" component={Home} />
+                    <Route path="/class-feed/" component={Timeline} />
                   </Switch>
             </Router>
             <ScreenOptions></ScreenOptions>

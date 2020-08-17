@@ -3,16 +3,18 @@ import axios from 'axios';
 import { Typography, Grid, Container, Card, Button, Paper } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Context } from '../../Context/Context.js';
+import { searchSections } from '../../Context/functions.js';
 import SearchBar from './SearchBar.js';
 import SchoolClasses from './SchoolClasses.js';
-import OverdueCard from './homepage-cards/OverdueCard.js'
+import OverdueCard from './homepage-cards/OverdueCard.js';
+import AllClassesCard from './homepage-cards/AllClassesCard.js'
 import { Redirect, useHistory } from 'react-router-dom';
 
 
 
 
 
-export default function FollowSomething( {clearSetUp, setShowFollow, context, changeContext, searchResults, setSearchResults, openGlobalForm, onCloseGlobalForm, theLink, onClickAdd, onClickHideForm} ) {
+export default function FollowSomething( {clearSetUp, setShowFollow, changeContext, searchResults, setSearchResults, openGlobalForm, onCloseGlobalForm, theLink, onClickAdd, onClickHideForm} ) {
     const [state, setState] = useContext(Context);
     //const { profile } = state;
     const [terms, setTerms] = useState();
@@ -52,13 +54,7 @@ export default function FollowSomething( {clearSetUp, setShowFollow, context, ch
         setSearchResults(sections);
     }
 
-    const doneWithSetUp = () => {
-        if(context.profile !== 'undefined' && context.profile.first_time == 'true'){
-            context.profile.first_time = false;
-            changeContext(context);
-        }
-        setShowFollow(false);
-    }
+   
     
     return (
         <Container>
@@ -103,24 +99,9 @@ export default function FollowSomething( {clearSetUp, setShowFollow, context, ch
                             <Button variant="contained" color="primary" style={{minWidth: '90%'}} onClick={ () => openGlobalForm()}>Add A Lesson</Button>
                         </Card>
                     </Grid>
-                    <Grid item xs={12} md={4} style={{textAlign: 'center'}}>
-                    <Card style={{textAlign: 'center', padding: '30px', minHeight: '350px'}}>
-                        <Typography variant="h2" style={{color: '#9e9e9e'}}><FontAwesomeIcon icon="heart"></FontAwesomeIcon></Typography>
-                            <Typography variant="h6">I'm in a browsey</Typography>
-                            <Typography paragraph variant="h6"> sorta mood</Typography>
-                            <Grid container justify="center" alignItems="center" alignContent="center" >
-                            <Grid item xs={12} style={{height: '100px'}}>
-                                <Typography >I can't find my school</Typography>
-                                <Typography paragraph> so just show me everything.</Typography>
-                            </Grid>
-                            </Grid>
-                            <Button variant="contained" color="primary" style={{minWidth: '90%'}} onClick={ () => showMeEverything()}>follow classes</Button>
-                        </Card>
-                    </Grid>
+                    <AllClassesCard sections={sections} searchSections={searchSections}></AllClassesCard>
                 </Grid>
                 </Grid>
-                
-                
         </Container>
     )
 }

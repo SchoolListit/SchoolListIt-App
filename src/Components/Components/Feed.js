@@ -7,6 +7,7 @@ import Classrooms from './Classrooms.js';
 import FollowSomething from '../Components/FollowSomething.js';
 import AddLesson from '../Forms/AddLesson.js';
 import { emptyArray } from '../../Context/functions.js';
+import SectionTitle from './SectionTitle.js';
 
 
 export default function Feed( {searchResults, setSearchResults, openGlobalForm, onCloseGlobalForm, showGlobalForm} ) {
@@ -15,7 +16,6 @@ export default function Feed( {searchResults, setSearchResults, openGlobalForm, 
     const [newSection, setNewSection] = useState("undefined");
     const {sections, following} = state;
     const [showFollow, setShowFollow] = useState(true);
-    //const profile = JSON.parse(localStorage.getItem('scholistit_profile'));
     const { profile } = state;
 
     
@@ -41,14 +41,19 @@ export default function Feed( {searchResults, setSearchResults, openGlobalForm, 
         
     }
 
-    const clearSearch = () =>{
+    const clearSearchResults = () =>{
         setSearchResults([]);
     }
 
-    const clearSetUp = () =>{
-        setShowFollow(false);
-        profile.first_time = false;
-        setState(state);
+    const closeSection = (section) =>{
+        //in here we write proper state handling code to close the section
+        switch (section) {
+            case 'Search Results':
+                clearSearchResults();
+            break;
+            default: 
+                console.log("closeSection section not found");    
+        }
     }
 
 
@@ -57,44 +62,16 @@ export default function Feed( {searchResults, setSearchResults, openGlobalForm, 
     } else {
         return (
             <React.Fragment>
-                <React.Fragment>
-                    <Grid container justify="space-between" style={{padding: '0 30px', background: '#eeeeee'}} >
-                        <Grid item xs={10} >
-                            <Typography variant="h5" >Welcome Wizard</Typography>
-                        </Grid>
-                        <Grid item xs={2} style={{textAlign: 'right'}}>
-                            <Button onClick={() => clearSetUp()}><FontAwesomeIcon icon="window-close"></FontAwesomeIcon></Button>
-                        </Grid>
-                        </Grid>    
-                    <FollowSomething
-                        setSearchResults={setSearchResults} 
-                        openGlobalForm={openGlobalForm}
-                        following={following}
-                        changeContext={setState}
-                        context={state}
-                        setShowFollow={setShowFollow}
-                        clearSetUp ={clearSetUp}
-                    ></FollowSomething>
-                    </React.Fragment>
-                    
                 {(searchResults.length > 0)
-                    ? <Grid container justify="space-between" style={{padding: '0 30px', background: '#eeeeee'}} >
-                        <Grid item xs={10} >
-                            <Typography variant="h5" >Search Results</Typography>
-                        </Grid>
-                        <Grid item xs={2} style={{textAlign: 'right'}}>
-                            <Button onClick={() => clearSearch()}><FontAwesomeIcon icon="window-close"></FontAwesomeIcon></Button>
-                        </Grid>
-                        </Grid>
+                    ? <SectionTitle section="Search Results" canClose="yes" closeSection={closeSection}></SectionTitle>
                     : null
                 }
                 <Classrooms  sections={searchResults} newPost={newPost} newSection={newSection} showNewSection={showNewSection} showNewPost={showNewPost} openGlobalForm={openGlobalForm} onCloseGlobalForm={onCloseGlobalForm}></Classrooms> 
-                <Typography variant="h5" style={{padding: '0 30px', background: '#eeeeee'}}>Class Feed</Typography>
+                <SectionTitle section="Class Feed" canClose="no" closeSection={closeSection}></SectionTitle>
                 <Classrooms  sections={following} newPost={newPost} newSection={newSection} showNewPost={showNewPost} openGlobalForm={openGlobalForm} onCloseGlobalForm={onCloseGlobalForm}></Classrooms> 
                 <Dialog open={showGlobalForm} onClose={(e) => onCloseGlobalForm()} disablePortal={true}>
                     <AddLesson section={false} onClickHideForm={onCloseGlobalForm} showNewPost={showNewPost} showNewSection={showNewSection}></AddLesson>
                 </Dialog>
-                
             </React.Fragment>
              
         )
