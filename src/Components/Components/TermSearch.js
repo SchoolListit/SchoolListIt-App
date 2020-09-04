@@ -4,7 +4,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
-export default function TermSearch( {data, getSearchResults} ) {
+export default function TermSearch( {data, getSearchResults, location} ) {
 
         if(data === 'undefined'){
             return null
@@ -15,7 +15,7 @@ export default function TermSearch( {data, getSearchResults} ) {
                         <Autocomplete
                             margin="none"
                             fullWidth={true}
-                            id="term-search"
+                            id={"term-search"+location}
                             freeSolo
                             options={data.map((option) => option.value)}
                             renderInput={(params) => (
@@ -24,7 +24,7 @@ export default function TermSearch( {data, getSearchResults} ) {
                         />
                     </Grid>
                     <Grid item xs={1}>
-                        <Button onClick={() => getSearchResults(document.getElementById("term-search").value)}>
+                        <Button onClick={() => getSearchResults(document.getElementById("term-search"+location).value)}>
                             <Typography variant="h6">
                                 <FontAwesomeIcon icon="search"></FontAwesomeIcon>
                             </Typography>

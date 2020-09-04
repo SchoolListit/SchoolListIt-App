@@ -37,7 +37,7 @@ export default function Classrooms({ sections, newSection, showNewSection, onCli
     }
 
     let theLink = ( theSection ) => {
-        let link = encodeURI(theSection.schools+'-'+theSection.teachers+'-'+theSection.subjects+'-'+theSection.grades)
+        let link = encodeURI(theSection.schools+'_'+theSection.teachers+'_'+theSection.subjects+'_'+theSection.grades)
         return link;
     }
 
@@ -102,7 +102,7 @@ export default function Classrooms({ sections, newSection, showNewSection, onCli
                             key={"content-card-newSection"}
                             mainTitle={newSection.schools+" "+ newSection.teachers}
                             subTitle={newSection.grades+" "+ newSection.subjects}
-                            icon="door-open"
+                            icon="calendar-week"
                             iconTo={"/classrooms/:"+theLink(newSection)}
                             onClickAdd={onClickAdd}
                             section={newSection}

@@ -88,8 +88,8 @@ export default function Classroom() {
     const onCloseGlobalForm = () => {
         setShowGlobalForm(false);
     }    
-    
-    let theClass = decodeURIComponent(classArgs).replace(":", "").split("-");
+    console.log(classArgs);
+    let theClass = decodeURIComponent(classArgs).replace(":", "").split("_");
     
     const section = {
         schools: theClass[0],
@@ -98,7 +98,8 @@ export default function Classroom() {
         grades: theClass[3],
         key: theClass,
     }
-
+    
+   
     if(typeof userID === 'undefined' || userID === ''){
         console.log(userID);
         return null;

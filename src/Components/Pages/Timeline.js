@@ -48,7 +48,9 @@ export default function Timeline() {
             <Header profile={profile} openGlobalForm={openGlobalForm} getSearchResults={getSearchResults}></Header>
             { (profile === null || profile === 'undefined') 
                 ? <React.Fragment>{sendToLogin()}</React.Fragment> 
-                : <React.Fragment><Feed searchResults={searchResults} setSearchResults={setSearchResults} showGlobalForm={showGlobalForm} onCloseGlobalForm={onCloseGlobalForm} openGlobalForm={openGlobalForm}></Feed></React.Fragment>
+                : <React.Fragment>
+                    <Feed searchResults={searchResults} getSearchResults={getSearchResults} setSearchResults={setSearchResults} showGlobalForm={showGlobalForm} onCloseGlobalForm={onCloseGlobalForm} openGlobalForm={openGlobalForm}></Feed>
+                    </React.Fragment>
             }
         </React.Fragment>
        

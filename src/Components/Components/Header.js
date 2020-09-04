@@ -4,7 +4,6 @@ import { Grid, Avatar, Typography, Button, IconButton } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Redirect, useHistory } from 'react-router-dom';
-import SearchBar from './SearchBar.js';
 import TermSearch from './TermSearch.js';
 
 
@@ -94,7 +93,7 @@ import TermSearch from './TermSearch.js';
                         <Typography style={{ color: '#424242', fontWeight: '700', textAlign: 'center'}} variant="h6" component="h1" onClick={ () => goHere('/')}>SchooListIt</Typography>
                     </Grid>
                      <Grid item xs={12} md={3}>
-                         <TermSearch data= {options} getSearchResults={getSearchResults}></TermSearch>
+                         <TermSearch data= {options} getSearchResults={getSearchResults} location="header"></TermSearch>
                      </Grid>
                     
                     <Grid container wrap="nowrap" item xs={12} md={3} justify="flex-end" className="primary-menu-icons" style={{textAlign: 'center'}}>
