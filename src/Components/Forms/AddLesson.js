@@ -30,7 +30,7 @@ export default function AddLesson( props ) {
     
 
     //submit the form
-    const onSubmit = (e) =>{
+    const onSubmit = (e, mandatory) =>{
         e.preventDefault();
         const body = {
             due_date: document.getElementById('due_date').value,
@@ -85,7 +85,7 @@ export default function AddLesson( props ) {
                 post.author_name = profile.name;
                 post.section = section;
                 post.assigned_date = body.post_date;
-                post.mandatory = mandatory;
+                mandatory = body.mandatory;
                 post.post_link = body.post_link;
                 post.post_excerpt = body.post_excerpt;
                 showNewPost(post);
@@ -100,6 +100,7 @@ export default function AddLesson( props ) {
     }
 
     const changeMandatory = (e) => {
+        console.log(e.target.value);
         setMandatory(e.target.value);
     }
 

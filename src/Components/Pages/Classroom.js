@@ -6,6 +6,7 @@ import { Container, Grid, Typography, Dialog, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Context } from '../../Context/Context.js';
 import { searchSections } from '../../Context/functions.js';
+import Alert from '@material-ui/lab/Alert';
 import Header from '../Components/Header.js';
 import Classrooms from '../Components/Classrooms.js'
 import { useHistory } from 'react-router-dom';
@@ -88,7 +89,6 @@ export default function Classroom() {
     const onCloseGlobalForm = () => {
         setShowGlobalForm(false);
     }    
-    console.log(classArgs);
     let theClass = decodeURIComponent(classArgs).replace(":", "").split("_");
     
     const section = {
@@ -101,7 +101,6 @@ export default function Classroom() {
     
    
     if(typeof userID === 'undefined' || userID === ''){
-        console.log(userID);
         return null;
     } else {
         return (

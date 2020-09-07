@@ -33,8 +33,10 @@ export default function Timeline() {
     }, [profile, state, setState])
 
     const getSearchResults = (searchTerm) => {
-
-        if(sections.length === 0){
+        if (searchTerm === 'all'){
+            setSearchResults(sections);
+        }
+         else if(sections.length === 0){
             console.warn('the sections context is not yet propogated');
         } else {
             let results = searchSections(sections, searchTerm);

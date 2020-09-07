@@ -74,7 +74,8 @@ export default function FollowSomething( {clearSetUp, setShowFollow, context, ch
     }
 */
     let showMeEverything = () => {
-       // setSearchResults(sections);
+        //console.log(theState.sections);
+       getSearchResults('all');
     }
 
     const doneWithSetUp = () => {
@@ -123,7 +124,7 @@ export default function FollowSomething( {clearSetUp, setShowFollow, context, ch
                     </Grid>
                     <Grid item xs={12} md={4} style={{textAlign: 'center'}}>
                     <Card style={{textAlign: 'center', padding: '30px', minHeight: '350px'}}>
-                        <Typography variant="h2" style={{color: '#9e9e9e'}}><FontAwesomeIcon icon="heart"></FontAwesomeIcon></Typography>
+                        <Typography variant="h2" style={{color: '#9e9e9e'}}><FontAwesomeIcon icon="globe-americas"></FontAwesomeIcon></Typography>
                             <Typography variant="h6">I'm in a browsey</Typography>
                             <Typography paragraph variant="h6"> sorta mood</Typography>
                             <Grid container justify="center" alignItems="center" alignContent="center" >
@@ -132,7 +133,7 @@ export default function FollowSomething( {clearSetUp, setShowFollow, context, ch
                                 <Typography paragraph> so just show me everything.</Typography>
                             </Grid>
                             </Grid>
-                            <Button variant="contained" color="primary" style={{minWidth: '90%'}} onClick={ () => showMeEverything()}>follow classes</Button>
+                            <Button variant="contained" color="primary" style={{minWidth: '90%'}} onClick={ () => showMeEverything(state, getSearchResults)}>follow classes</Button>
                         </Card>
                     </Grid>
                 </Grid>

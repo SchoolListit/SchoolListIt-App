@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
     },
   }));
 
-export default function ContentCard( {following, mainTitle, subTitle, children, icon, iconTo, section} ) {
+export default function ContentCard( {id, following, mainTitle, subTitle, children, icon, iconTo, section} ) {
     const classes = useStyles();
     const [state, setState] = useContext(Context);
     const { profile } = state;
@@ -35,7 +35,7 @@ export default function ContentCard( {following, mainTitle, subTitle, children, 
             <React.Fragment>
                 <Paper className={classes.root} elevation={3} >
                 <div className="entry-header" style={{display: 'flex', justifyContent: 'space-between' }}>
-                        <div>
+                        <div name={id}>
                             <h2 className="entry-title">{mainTitle}</h2>
                             <h3 className="entry-subtitle">{subTitle}</h3>
                         </div> 

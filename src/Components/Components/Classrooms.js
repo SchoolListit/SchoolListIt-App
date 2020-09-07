@@ -143,6 +143,7 @@ export default function Classrooms({ sections, newSection, showNewSection, onCli
                         <Grid key={"grid-item-"+index} item xs={12} sm={6} md={4}>
                             <ContentCard
                             key={"content-card-"+index}
+                            id={"content-card-"+index}
                             mainTitle={section.schools+" "+ section.teachers}
                             subTitle={section.grades+" "+ section.subjects}
                             icon="calendar-week"

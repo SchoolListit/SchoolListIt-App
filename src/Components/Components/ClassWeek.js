@@ -66,7 +66,7 @@ export default function ClassWeek( {section, week, changeTheDate, newPost} ) {
     <Grid container style={{border: "1px solid #bdbdbd"}} wrap="wrap">
         <Grid key="section-header-row" item xs={12} container justify="space-around" className="entry-header">
             <Grid item xs={12} md={9} >
-            <Typography>{sectionTitle(section)}</Typography>
+            {sectionTitle(section)}
             </Grid>
             <Grid key="weektitle" item md={3} xs={12} >
                 {weekTitle(week)}
