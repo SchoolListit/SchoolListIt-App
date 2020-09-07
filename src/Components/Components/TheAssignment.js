@@ -117,7 +117,7 @@ export default function TheAssignment( {post, userID, section, classView }) {
                             : <span style={{color: '#00c853'}}>Optional</span>
                         }   
                         </Typography> 
-                        <AssignmentTitle postTitle={thePost.post_title} postExcerpt={thePost.post_excerpt}></AssignmentTitle>
+                        <AssignmentTitle onclick={onClickTheAssignemnt} postTitle={thePost.post_title} postExcerpt={thePost.post_excerpt} post={thePost}></AssignmentTitle>
                     </Grid>
                     {(thePost.post_author == userID || thePost.author == userID)
                         ? <Grid item xs={1} >
@@ -143,8 +143,8 @@ export default function TheAssignment( {post, userID, section, classView }) {
                         
                     }
                     <Grid item xs={7}>
-                        <ListItemText onClick={() => onClickTheAssignemnt(thePost)}>
-                            <Typography variant="body2"  >{thePost.post_excerpt+" "}
+                        <ListItemText style={{cursor: 'pointer'}} onClick={() => onClickTheAssignemnt(thePost)}>
+                            <Typography style={{cursor: 'pointer'}} variant="body2"  >{thePost.post_excerpt+" "}
                             </Typography>
                             <Typography variant="caption">Posted By: {thePost.author_name.replace("-", ' ')}</Typography>
                         </ListItemText>

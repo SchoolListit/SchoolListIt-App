@@ -86,7 +86,7 @@ export default function FollowSomething( {clearSetUp, setShowFollow, context, ch
     }
     
     return (
-        <Container>
+        <Container style={{paddingBottom: '40px'}}>
             <Grid container justify="center" alignItems="center" alignContent="center" spacing={5}>
                 <Grid item xs={12} style={{textAlign: 'center', maxWidth: '500px', padding: '50px'}}>
                     <Typography variant="h2" style={{fontWeight: '700'}}>SchooListIt</Typography>

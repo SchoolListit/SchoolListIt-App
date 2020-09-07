@@ -58,37 +58,7 @@ export default function Feed( {searchResults, getSearchResults, setSearchResults
     } else {
         return (
             <React.Fragment>
-                <React.Fragment>
-                {(showFollow === true)
-                    ? <React.Fragment>
-                        <Grid container justify="space-between" style={{padding: '0 30px', background: '#eeeeee'}} >
-                        <Grid item xs={10} >
-                            <Typography variant="h5" >Good Morning :)</Typography>
-                        </Grid>
-                        <Grid item xs={2} style={{textAlign: 'right'}}>
-                            <Button onClick={() => clearSetUp()}><FontAwesomeIcon icon="window-close"></FontAwesomeIcon></Button>
-                        </Grid>
-                        </Grid>
-                    </React.Fragment>
-                    : null
-                    }
-                        {(showFollow === true)
-                            ? <FollowSomething
-                                searchResults={searchResults}
-                                getSearchResults={getSearchResults} 
-                                openGlobalForm={openGlobalForm}
-                                following={following}
-                                changeContext={setState}
-                                context={state}
-                                setShowFollow={setShowFollow}
-                                clearSetUp ={clearSetUp}
-                            ></FollowSomething>
-                            : null
-                        } 
-                    
-                    </React.Fragment>
-                    
-                {(searchResults.length > 0)
+                                {(searchResults.length > 0)
                     ? <Grid container justify="space-between" style={{padding: '0 30px', background: '#eeeeee'}} >
                         <Grid item xs={10} >
                             <Typography variant="h5" >Search Results</Typography>
@@ -100,6 +70,34 @@ export default function Feed( {searchResults, getSearchResults, setSearchResults
                     : null
                 }
                 <Classrooms  sections={searchResults} newPost={newPost} newSection={newSection} showNewSection={showNewSection} showNewPost={showNewPost} openGlobalForm={openGlobalForm} onCloseGlobalForm={onCloseGlobalForm}></Classrooms> 
+                <React.Fragment>
+                {(showFollow === true)
+                    ? <React.Fragment>
+                        <Grid container justify="space-between" style={{padding: '0 30px', background: '#eeeeee'}} >
+                        <Grid item xs={10} >
+                            <Typography variant="h5" >Hello. Welcome to SchoolListit :)</Typography>
+                        </Grid>
+                        <Grid item xs={2} style={{textAlign: 'right'}}>
+                            <Button onClick={() => clearSetUp()}><FontAwesomeIcon icon="window-close"></FontAwesomeIcon></Button>
+                        </Grid>
+                        </Grid>
+                    </React.Fragment>
+                    : null
+                    }
+                    {(showFollow === true)
+                        ? <FollowSomething
+                            searchResults={searchResults}
+                            getSearchResults={getSearchResults} 
+                            openGlobalForm={openGlobalForm}
+                            following={following}
+                            changeContext={setState}
+                            context={state}
+                            setShowFollow={setShowFollow}
+                            clearSetUp ={clearSetUp}
+                        ></FollowSomething>
+                        : null
+                    } 
+                </React.Fragment>
                 <Typography variant="h5" style={{padding: '0 30px', background: '#eeeeee'}}>Class Feed</Typography>
                 <Classrooms  sections={following} newPost={newPost} newSection={newSection} showNewPost={showNewPost} openGlobalForm={openGlobalForm} onCloseGlobalForm={onCloseGlobalForm}></Classrooms> 
                 {(following.length < 1)
