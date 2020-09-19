@@ -24,14 +24,6 @@ export default function Timeline() {
         setShowGlobalForm(false);
     }
 
-    useEffect(() => {
-        if(profile !== null){
-            state.profile = profile;
-            setState(state);
-        }
-        
-    }, [profile, state, setState])
-
     const getSearchResults = (searchTerm) => {
         if (searchTerm === 'all'){
             setSearchResults(sections);
@@ -43,7 +35,19 @@ export default function Timeline() {
             setSearchResults(results);
         }
         
-    }   
+    }  
+    
+    useEffect(() => {
+        if(profile !== null){
+            state.profile = profile;
+            setState(state);
+        }
+        
+    }, [profile, state, setState])
+
+    useEffect(() => {
+        window.scrollTo(0,0);
+    }, [setSearchResults, searchResults])
 
     return(
         <React.Fragment>
