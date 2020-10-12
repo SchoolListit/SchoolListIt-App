@@ -99,24 +99,26 @@ export default function FollowSomething( {clearSetUp, setShowFollow, context, ch
                     <Grid item xs={12} md={4} >
                     <Card style={{textAlign: 'center', padding: '30px', minHeight: '350px'}}>
                         <Typography variant="h2" style={{color: '#9e9e9e'}}><FontAwesomeIcon icon="bell"></FontAwesomeIcon></Typography>
-                            <Typography variant="h6">Find your school</Typography>
-                            <Typography paragraph variant="h6">follow classes</Typography>
+                            <Typography variant="h6">Start out</Typography>
+                            <Typography paragraph variant="h6">eager to learn</Typography>
                             <Grid container justify="center" alignItems="center" alignContent="center" >
-                            <Grid item xs={12} style={{height: '100px'}}>
-                            <TermSearch data= {options} getSearchResults={getSearchResults} location="follow-something"></TermSearch>
+                            <Grid item xs={12} >
+                                <Typography >You can</Typography>
+                                <Typography paragraph>browse by subject</Typography>
                             </Grid>
+                            <TermSearch data= {options} getSearchResults={getSearchResults} location="follow-something"></TermSearch>
                             </Grid>
                         </Card>
                     </Grid>
                     <Grid item xs={12} md={4}>
                         <Card style={{textAlign: 'center', padding: '30px', minHeight: '350px'}}>
                         <Typography variant="h2" style={{color: '#9e9e9e'}}><FontAwesomeIcon icon="heart"></FontAwesomeIcon></Typography>
-                            <Typography variant="h6">Give a teacher</Typography>
-                            <Typography paragraph variant="h6">some love</Typography>
+                            <Typography variant="h6">Help out</Typography>
+                            <Typography paragraph variant="h6">your teachers</Typography>
                             <Grid container justify="center" alignItems="center" alignContent="center" >
                             <Grid item xs={12} style={{height: '100px'}}>
-                                <Typography >Can't find your classroom?</Typography>
-                                <Typography paragraph> Help out by adding lessons.</Typography>
+                                <Typography >You can</Typography>
+                                <Typography paragraph>add assignments</Typography>
                             </Grid>
                             </Grid>
                             <Button variant="contained" color="primary" style={{minWidth: '90%'}} onClick={ () => openGlobalForm()}>Add A Lesson</Button>
@@ -125,12 +127,12 @@ export default function FollowSomething( {clearSetUp, setShowFollow, context, ch
                     <Grid item xs={12} md={4} style={{textAlign: 'center'}}>
                     <Card style={{textAlign: 'center', padding: '30px', minHeight: '350px'}}>
                         <Typography variant="h2" style={{color: '#9e9e9e'}}><FontAwesomeIcon icon="globe-americas"></FontAwesomeIcon></Typography>
-                            <Typography variant="h6">I'm in a browsey</Typography>
-                            <Typography paragraph variant="h6"> sorta mood</Typography>
+                            <Typography variant="h6">Find your school</Typography>
+                            <Typography paragraph variant="h6">and follow classes</Typography>
                             <Grid container justify="center" alignItems="center" alignContent="center" >
                             <Grid item xs={12} style={{height: '100px'}}>
-                                <Typography >I can't find my school</Typography>
-                                <Typography paragraph> so just show me everything.</Typography>
+                                <Typography >You can browse</Typography>
+                                <Typography paragraph>classes and schools</Typography>
                             </Grid>
                             </Grid>
                             <Button variant="contained" color="primary" style={{minWidth: '90%'}} onClick={ () => showMeEverything(state, getSearchResults)}>follow classes</Button>

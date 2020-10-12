@@ -90,7 +90,7 @@ import TermSearch from './TermSearch.js';
         return (
                 <Grid container className={classes.root} justify="space-between" alignItems="center" alignContent="flex-start">
                     <Grid item xs={12} md={3} >
-                        <Typography style={{ color: '#424242', fontWeight: '700', textAlign: 'center'}} variant="h6" component="h1" onClick={ () => goHere('/')}>SchooListIt</Typography>
+                        <Typography style={{ color: '#424242', fontWeight: '700', textAlign: 'center'}} variant="h6" component="h1" onClick={ () => goHere('/')}>School List It</Typography>
                     </Grid>
                      <Grid item xs={12} md={3}>
                          <TermSearch data= {options} getSearchResults={getSearchResults} location="header"></TermSearch>
