@@ -66,7 +66,7 @@ export default function MyGoogleLogin() {
                     console.log(res.data)
                     state.profile = res.data;
                     setState(state);
-                    console.log('authenticated - should redirect and reinitialize');
+                    //console.log('authenticated - should redirect and reinitialize');
                     history.push('/');
                 })
             });

@@ -90,7 +90,7 @@ export default function FollowSomething( {clearSetUp, setShowFollow, context, ch
         <Container style={{paddingBottom: '40px'}}>
             <Grid container justify="center" alignItems="center" alignContent="center" spacing={5}>
                 <Grid item xs={12} style={{textAlign: 'center', maxWidth: '500px', padding: '50px'}}>
-                    <Typography variant="h2" style={{fontWeight: '700'}}>SchooListIt</Typography>
+                    <Typography variant="h2" style={{fontWeight: '700'}}>Schoo <span class="the-brand-blue">List</span> It</Typography>
                     <Typography variant="h5">What's due and when</Typography>
                     <Typography variant="h5"> for any school, anywhere</Typography>
                 </Grid>

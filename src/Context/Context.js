@@ -75,12 +75,7 @@ export function ContextController({children}){
                 promises.push(axios.get('https://schoolistit.com/wp-json/schoolistit/v2/follows?userID='+userID));
             }
         }
-        //promises.push(axios.get('https://schoolistit.com/wp-json/schoolistit/v2/follows?userID='+userID));
-
-        //promises.push(axios.get('https://schoolistit.com/wp-json/wp/v2/assignments'));
-        /*if(formdata !== 'undefined') {
-            promises.push(axios.post('https://schoolistit.com/wp-json/schoolistit-rest/v2/user_data', formdata))
-        }*/
+       
     
         Promise.all(promises).then( res => {
             let dbfollowing = [];

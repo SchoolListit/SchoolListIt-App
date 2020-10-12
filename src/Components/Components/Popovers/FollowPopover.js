@@ -6,7 +6,7 @@ import {Context} from '../../../Context/Context.js';
 
 
 export default function FollowPopover( { following, setFollowing, anchorEl, open, profile, object, onClose }) {
-    const { userID, students }= profile;
+    const { userID, students } = profile;
     const [state, setState] = useContext(Context);
     
     
@@ -46,7 +46,8 @@ export default function FollowPopover( { following, setFollowing, anchorEl, open
         });
     }
 
-    if(students !== 'undefined' && students.length > 0){
+    if(students !== 'undefined' && students !== ''){
+        if(students.length){
         return (
             <Popover
                 id={object}
@@ -76,7 +77,8 @@ export default function FollowPopover( { following, setFollowing, anchorEl, open
                 </Container>
             
             </Popover>
-        )
+            ); //return
+        }
     } else {
         return (
             <Popover
