@@ -75,7 +75,7 @@ export default function Feed( {searchResults, getSearchResults, setSearchResults
                     ? <React.Fragment>
                         <Grid container justify="space-between" style={{padding: '0 30px', background: '#eeeeee'}} >
                         <Grid item xs={10} >
-                            <Typography variant="h5" >Hello. Welcome to SchoolListit :)</Typography>
+                            <Typography variant="h5" >Hello. Welcome to School List it :)</Typography>
                         </Grid>
                         <Grid item xs={2} style={{textAlign: 'right'}}>
                             <Button onClick={() => clearSetUp()}><FontAwesomeIcon icon="window-close"></FontAwesomeIcon></Button>

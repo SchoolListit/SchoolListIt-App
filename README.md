@@ -2,7 +2,7 @@
 
 ## Housekeeping
 There are currently two branches.
-- Master: live on the [demo site](https://app.schoolistit.com/)
+- Master: live on the [demo site](https://app.schoolistit.com/) 0.2.6
 - Welcome: working to implement ux improvements to include a proper set up of new users. If I dont get that merged into the demo, it is worth checking out what I have planned. 
 
 # SchoolListIt
